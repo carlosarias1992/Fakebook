@@ -1,22 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configureStore from './store/store';
+import Root from './components/root';
 
 //*** TESTING  ***/
 import * as ApiUtil from './util/session_api_util';
-import configureStore from './store/store';
 //*** TESTING  ***/
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
+
+    let savedSession;
+    if (window.currentUser) {
+        savedSession = {
+            entities: {
+                users: { [window.currentUser.id]: window.currentUser }
+            },
+            session: { current_user_id: window.currentUser.id }
+        };
+    } else {
+        savedSession = {};
+    }
+
+    const store = configureStore(savedSession);
     
     //*** TESTING  ***/
-    const store = configureStore();
     window.getState = store.getState;
-    window.dipatch = store.dispatch;
+    window.dispatch = store.dispatch;
     window.signup = ApiUtil.signup;
     window.login = ApiUtil.login;
     window.logout = ApiUtil.logout;
     //*** TESTING  ***/
 
-    ReactDOM.render(<h1>Welcome to fakebook</h1>, root);
+    ReactDOM.render(<Root store={store} />, root);
 });

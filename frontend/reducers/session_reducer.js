@@ -5,7 +5,7 @@ import {
 } from '../actions/session_actions';
 
 const _nullSession = {
-    currentUserId: null
+    current_user_id: null
 };
 
 export default (state = _nullSession, action) => {
@@ -15,7 +15,7 @@ export default (state = _nullSession, action) => {
 
     switch(action.type) {
         case RECEIVE_CURRENT_USER: 
-            newState = { currentUserId: user.id };
+            newState = { current_user_id: user.id };
             return merge({}, oldState, newState);
         case LOGOUT_CURRENT_USER:
             newState = _nullSession;
