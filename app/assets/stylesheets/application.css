@@ -14,7 +14,7 @@
  *= require_tree .
  */
 
- html, body, div, span, h1, h2, h3, h4, 
+html, body, div, span, h1, h2, h3, h4, 
 h5, h6, p, img, ul, li, form, label,
 article, aside {
     margin:0;
@@ -49,5 +49,11 @@ hr {
 }
 
 input {
+    font-family: inherit;
     outline: none;
+    border: 1px solid black;
+}
+
+select {
+    appearance: none;
 }

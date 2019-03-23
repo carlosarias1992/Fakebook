@@ -1,7 +1,21 @@
 body {
-    background-color: #edf0f5; 
+    background-color: white; 
     font-family: "Helvetica Neue", Arial, sans-serif;
     min-width: 980px;
+}
+
+a {
+    text-decoration: none;
+    color: #385c97;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    margin-bottom: 15px;
+    border: 0.5px solid #dddfe2;
 }
 
 .main-header {
@@ -15,6 +29,16 @@ body {
 
 .container {
     width: 980px;
+}
+
+.outer-login-body {
+    background-color: #edf0f5;
+    height: 600px;
+}
+
+.login-body {
+    color: #666;
+    font-family: 'Freight Sans', Helvetica, Arial, sans-serif;
 }
 
 .flex-space-between {
@@ -54,7 +78,6 @@ body {
 }
 
 .login-form input[type="submit"] {
-    color: white;
     background-color: #4267b2;
     border-color: #29487d;
     font-size: 12px;
@@ -92,8 +115,6 @@ body {
 
 .about {
     width: 100%;
-    font-family: 'Freight Sans', Helvetica, Arial, sans-serif;
-    color: #666;
     font-size: 16px;
 }
 
@@ -112,38 +133,200 @@ body {
     margin-right: 6px;
 }
 
-.signup {
-    width: 100%;
-}
-
 .icon {
     display: inline-block;
     width: 54px;
     height: 54px;
     margin-right: 20px;
+    background-repeat: no-repeat;
 }
 
 .whats_new {
     background-image: url(image-path('whats_new.png'));
-    background-repeat: no-repeat;
 }
 
 .updates {
     background-image: url(image-path('updates.png'));
-    background-repeat: no-repeat;
 }
 
 .find_more {
     background-image: url(image-path('find_more.png'));
-    background-repeat: no-repeat;
 }
 
 .icons {
-    margin-top: 40px;
+    margin-top: 41px;
 }
 
 .icons > li {
     display: flex;
     align-items: center;
     margin-top: 24px;
+}
+
+.signup {
+    width: 78%;
+    color: #333333;
+}
+
+.signup h1 {
+    font-size: 41px;
+    margin-top: 19px;
+    font-weight: bold;
+}
+
+.signup h3 {
+    font-weight: lighter;
+    font-size: 21px;
+    margin-top: 2px;
+    margin-bottom: 9px;
+}
+
+.signup input {
+    margin-top: 11px;
+    width: 100%;
+    padding: 7.5px 9px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px #bec8d7 solid;
+}
+
+.signup input::placeholder {
+    color: #999;
+}
+
+.signup .name-input {
+    width: 48.5%;
+}
+
+.signup .name-input:first-of-type {
+    margin-right: 12px;
+}
+
+.birthday {
+    display: block;
+    margin-top: 21px;
+    font-size: 20px;
+}
+
+.birthday select {
+    margin-top: 5px;
+    font-size: 13.5px;
+    height: 31px;
+}
+
+.birthday option {
+    padding: 19px;
+    margin: 19px;
+}
+
+.why-birthday {
+    width: 150px;
+    position: absolute;
+    top: 381px;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+    color: #385c97;
+}
+
+.why-birthday:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.gender {
+    margin: 15px 0;
+    font-size: 20px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+
+.signup input[type="radio"] {
+    margin: 0 5px;
+    padding: 0;
+    width: 14px;
+    height: 14px;
+}
+
+.signup input[type="radio"]:last-of-type {
+    margin-left: 22px;
+}
+
+.gender label {
+    display: flex;
+    align-items: center;
+}
+
+.fineprint {
+    margin-top: 2px;
+    font-size: 13px;
+    color: #7a7a7a;
+    width: 303px;
+}
+
+.fineprint a {
+    text-decoration: none;
+    color: #385c97;
+}
+
+.fineprint a:hover {
+    text-decoration: underline;
+}
+
+.signup input[type="submit"] {
+    margin-top: 20px;
+    width: 193px;
+    background-image: linear-gradient(#67ae55, #578843);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px #486824 solid;
+    box-shadow: inset 0 1px 1px #98e278;
+    text-shadow: 0 1px 2px rgba(0,0,0,.8);
+}
+
+.signup input[type="submit"]:hover {
+    background-image: linear-gradient(#73bb61, #578843);
+    cursor: pointer;
+}
+
+.signup-footer {
+    margin-top: 20px;
+    color: #666666;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.main-footer {
+    height: 150px;
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: #737373;
+}
+
+.main-footer a {
+    margin-left: 8px;
+}
+
+.main-footer hr {
+    margin: 9px 0;
+}
+
+.sub-footer {
+    margin-top: 5px;
+}
+
+.sub-footer a:first-of-type {
+    margin-left: 0;
+}
+
+.sub-footer a {
+    margin-left: 15px;
+}
+
+.copyright {
+    display: inline-block;
+    margin-top: 21.5px;
+    font-size: 11px;
 }
