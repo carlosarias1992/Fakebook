@@ -43,7 +43,7 @@ export default (props) => {
 
                 <input type="submit" value="Sign Up" />
 
-                <footer class="signup-footer">
+                <footer className="signup-footer">
                     <hr />
                     <p>
                         <Link to="/">Create a Page </Link>

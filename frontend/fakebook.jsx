@@ -5,6 +5,7 @@ import Root from './components/root';
 
 //*** TESTING  ***/
 import * as ApiUtil from './util/session_api_util';
+import * as Actions from './actions/session_actions';
 //*** TESTING  ***/
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,9 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //*** TESTING  ***/
     window.getState = store.getState;
     window.dispatch = store.dispatch;
-    window.signup = ApiUtil.signup;
-    window.login = ApiUtil.login;
-    window.logout = ApiUtil.logout;
+    window.signupUser = ApiUtil.signupUser;
+    window.loginUser = ApiUtil.loginUser;
+    window.logoutUser = ApiUtil.logoutUser;
+    window.logout = Actions.logout;
+    window.login = Actions.login;
     //*** TESTING  ***/
 
     ReactDOM.render(<Root store={store} />, root);

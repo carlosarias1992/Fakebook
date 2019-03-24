@@ -26,7 +26,7 @@ const receiveErrors = (errors) => {
 
 export const login = user => dispatch => {
     return ApiUtil
-        .login(user)
+        .loginUser(user)
         .then(currentUser => { 
             dispatch(receiveCurrentUser(currentUser));
         }, errors => {
@@ -36,8 +36,8 @@ export const login = user => dispatch => {
 
 export const logout = () => dispatch => {
     return ApiUtil
-        .logout()
-        .then(currentUser => {
+        .logoutUser()
+        .then(() => {
             dispatch(logoutCurrentUser());
         }, errors => {
             dispatch(receiveErrors(errors));
@@ -46,7 +46,7 @@ export const logout = () => dispatch => {
 
 export const signup = user => dispatch => {
     return ApiUtil
-        .signup(user)
+        .signupUser(user)
         .then(currentUser => {
             dispatch(receiveCurrentUser(currentUser));
         }, errors => {

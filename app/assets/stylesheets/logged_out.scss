@@ -67,14 +67,15 @@ hr {
 
 .login-form {
     display: flex;
-    margin-top: 17px;
+    margin-top: 15px;
 }
 
-.login-form input[type="text"] {
+.login-form input {
     margin-top: 5px;
     border: 0.5px solid black;
-    font-size: 17px;
+    font-size: 13px;
     width: 150px;
+    padding: 4px;
 }
 
 .login-form input[type="submit"] {
@@ -85,6 +86,7 @@ hr {
     height: 24px;
     margin-top: 19px;
     color: #fcfdfe;
+    width: fit-content;
 }
 
 .login-form input[type="submit"]:hover {
@@ -102,10 +104,9 @@ hr {
 .forgot-account {
     position: absolute;
     top: 63px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 350;
     color: #9db4d5;
-    overflow-wrap: none;
     width: 100px;
 }
 

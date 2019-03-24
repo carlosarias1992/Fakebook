@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Login from '../login/login';
+import LoginContainer from '../login/login_container';
 
 export default (props) => {
     return (
@@ -9,7 +9,7 @@ export default (props) => {
                 <Link to="/">
                     <div className="logo"></div>
                 </Link>
-                <Login />
+                <LoginContainer />
             </section>
         </header>
     );

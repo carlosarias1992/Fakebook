@@ -1,1 +1,1 @@
-render "user", user: @user
+json.extract! @user, :id, :username
