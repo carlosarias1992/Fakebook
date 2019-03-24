@@ -36,8 +36,8 @@ export default (props) => {
 
                 <p className="fineprint">
                     By clicking Sign Up, you agree to our 
-                    <Link to="/"> Terms</Link>, <Link to="/"> Data Policy</Link> and 
-                    <Link to="/"> Cookies Policy.</Link> You may receive 
+                    <Link to="/">Terms</Link>, <Link to="/">Data Policy</Link> and 
+                    <Link to="/">Cookies Policy.</Link> You may receive 
                     SMS Notifications from us and can opt out any time.
                 </p>
 

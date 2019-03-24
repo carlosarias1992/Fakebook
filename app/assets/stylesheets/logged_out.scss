@@ -269,6 +269,7 @@ hr {
 .fineprint a {
     text-decoration: none;
     color: #385c97;
+    margin-left: 3px;
 }
 
 .fineprint a:hover {
@@ -307,7 +308,7 @@ hr {
 }
 
 .main-footer a {
-    margin-left: 8px;
+    margin-left: 11px;
 }
 
 .main-footer hr {
@@ -323,11 +324,15 @@ hr {
 }
 
 .sub-footer a {
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 .copyright {
     display: inline-block;
     margin-top: 21.5px;
     font-size: 11px;
+}
+
+.copyright .social-media {
+    margin-left: 3px;
 }
