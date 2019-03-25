@@ -56,4 +56,9 @@ input {
 
 select {
     appearance: none;
+    outline: none;
+}
+
+button {
+    outline: none;
 }

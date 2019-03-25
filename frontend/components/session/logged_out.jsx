@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header/header';
-import Signup from './signup/signup';
+import SignupContainer from './signup/signup_container';
 import { Link } from 'react-router-dom';
 
 export default (props) => {
@@ -27,7 +27,7 @@ export default (props) => {
                             </li>
                         </ul>
                     </article>
-                    <Signup />
+                    <SignupContainer />
                 </section>
             </section>
             <footer className="flex-center main-footer">
