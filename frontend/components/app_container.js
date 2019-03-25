@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import App from './App';
+import App from './app';
 
 const mapStateToProps = (state) => ({
     currentUser: state.session.current_user_id
