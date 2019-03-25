@@ -9,7 +9,7 @@ const initialState = {
     last_name: '',
     username: '',
     password: '',
-    month: today.getMonth() + 1,
+    month: today.getMonth(),
     day: today.getDate(),
     year: today.getFullYear(),
     gender: '',

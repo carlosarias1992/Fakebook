@@ -18,7 +18,7 @@ export const monthOptions = () => {
     ];
 
     const options = months.map((month, idx) => {
-        return <option value={idx} key={idx}>{month}</option>;
+        return <option value={idx - 1} key={idx}>{month}</option>;
     });
 
     return options;
