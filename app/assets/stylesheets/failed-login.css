@@ -1,0 +1,101 @@
+.flex-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer-login-form {
+    background-color: white;
+    height: 340px;
+    width: 558px;
+    padding: 36px 141px;
+    box-sizing: border-box;
+}
+
+.outer-login-form h4 {
+    font-weight: normal;
+    color: #1c2028;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.failed-login-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.failed-login-form input {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding: 6px;
+    border: 1px #dddfe2 solid;
+    border-radius: 1px;
+}
+
+.failed-login-form input::placeholder{
+    color: #9a949c;
+}
+
+.failed-login-form input[type="submit"] {
+    background-color: #4267b2;
+    border-color: #4267b2;
+    color: white;
+    transition: 0.2s;
+    border-radius: 2px;
+    font-size: 14.5px;
+    padding: 10.5px 0;
+}
+
+.failed-login-form input[type="submit"]:hover {
+    background-color: #32569f; 
+    cursor: pointer;
+}
+
+.create-account {
+    background-color: #42b72a;
+    border-color: #42b72a;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
+    padding: 12px 25px;
+    font-size: 14.5px;
+    border-radius: 2px;
+    transition: 0.2s;
+}
+
+.create-account:hover {
+    text-decoration: none;
+    background-color: #329b1d;
+}
+
+.or-container {
+    display: flex; 
+    align-items: center;
+    font-size: 13px;
+    margin-top: 27px;
+    margin-bottom: 10.5px;
+}
+
+.failed-forgot-account {
+    position: absolute;
+    top: 135px;
+    left: 98px;
+    font-size: 12.5px;
+    color: #9a949c;
+}
+
+.small {
+    position: absolute;
+    font-size: 11px;
+    top: 34px;
+    left: 165px;
+    padding: 7.5px 11px;
+}
+

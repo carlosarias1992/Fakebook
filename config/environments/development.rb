@@ -27,6 +27,11 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  Rails.application.configure do
+    # Automatically inject JavaScript needed for LiveReload
+    config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
+  end
+
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon_dev
 

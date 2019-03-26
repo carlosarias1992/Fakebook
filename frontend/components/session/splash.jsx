@@ -61,9 +61,9 @@ export default (props) => {
                         <Link to="/">Games</Link>
                         <Link to="/">Locations</Link>
                         <Link to="/">Marketplace</Link>
+                        <Link to="/">Groups</Link>
                     </section>
                     <section className="sub-footer">
-                        <Link to="/">Groups</Link>
                         <Link to="/">Instagram</Link>
                         <Link to="/">Local</Link>
                         <Link to="/">Fundraisers</Link>
@@ -76,9 +76,9 @@ export default (props) => {
                         <Link to="/">Cookies</Link>
                         <Link to="/">Ad Choices</Link>
                         <Link to="/">Terms</Link>
+                        <Link to="/">Account Security</Link>
                     </section>
                     <section className="sub-footer">
-                        <Link to="/">Account Security</Link>
                         <Link to="/">Login Help</Link>
                         <Link to="/">Help</Link>
                     </section>
