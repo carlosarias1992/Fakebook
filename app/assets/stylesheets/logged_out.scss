@@ -185,7 +185,7 @@ hr {
 
 .signup input {
     margin-top: 11px;
-    width: 100%;
+    width: 428px;
     padding: 7.5px 9px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -198,11 +198,7 @@ hr {
 }
 
 .signup .name-input {
-    width: 48.5%;
-}
-
-.signup .name-input:first-of-type {
-    margin-right: 12px;
+    width: 208px;
 }
 
 .birthday {
@@ -231,6 +227,7 @@ hr {
     margin-left: 10px;
     font-size: 13px;
     color: #385c97;
+    z-index: 1;
 }
 
 .why-birthday:hover {
@@ -243,6 +240,7 @@ hr {
     font-size: 20px;
     line-height: 18px;
     vertical-align: middle;
+    position: relative;
 }
 
 .signup input[type="radio"] {
@@ -436,4 +434,74 @@ hr {
     line-height: 18px;
     top: -15px;
     right: 148px;
+}
+
+.signup .input-error {
+    border: 1px #ed4630 solid;
+}
+
+.error-icon {
+    background: url(image-path('icons.png')) 0px 44px;
+    width: 22px;
+    height: 22px;
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 19px;
+    right: 10px;
+}
+
+.signup .position-relative {
+    position: relative;
+    width: fit-content;
+    display: inline-block;
+}
+
+.input:first-of-type {
+    margin-right: 12px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.error-display {
+    background-color: #be4b49;
+    border: 1px #9b433d solid;
+    border-radius: 3px;
+    color: white;
+    font-size: 14px;
+    padding: 13px;
+    box-shadow: 0 1px 4px 0.5px rgb(203, 203, 203);
+    width: fit-content;
+    position: absolute;
+    top: 7px;
+    right: 105%;
+    z-index: 1;
+    max-width: 330px;
+}
+
+.error-display::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 14px;
+    right: -6px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 15px;
+    background-color: #be4b49;
+    color: #be4b49;
+    border-radius: 2px;
+    border: 0 0 1px 1px #9b433d solid;
+}
+
+.radio-error {
+    position: absolute;
+    top: -2px;
+    right: 10px;
 }

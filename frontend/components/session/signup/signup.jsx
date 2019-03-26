@@ -13,7 +13,11 @@ const initialState = {
     day: today.getDate(),
     year: today.getFullYear(),
     gender: '',
-    modal: false
+    modal: false,
+    firstNameModal: false,
+    lastNameModal: false,
+    usernameModal: false,
+    passwordModal: false
 };
 
 class Signup extends React.Component {
@@ -34,7 +38,58 @@ class Signup extends React.Component {
     }
 
     handleInput(type) {
-        return (e) => this.setState({ [type]: e.target.value });
+        return (e) => {
+            const element = e.target;
+            const value = element.value;
+            
+            if (value === "") {
+                this.addSignupErrorClass(element);
+            } else {
+                if (type !== "gender") {
+                    this.toggleErrorDisplay(element.parentElement, "hide");
+                }
+                this.removeSignupErrorClass(element);
+            } 
+
+            this.setState({ [type]: value });
+        };
+    }
+
+    toggleErrorDisplay(parentElement, displayProperty) {
+        const display = parentElement.children[0];
+        const displayClass = display.className.split(" ");
+
+        display.className = displayClass[0] + " " + displayProperty;
+    }
+
+    errorModal(displayValue) {
+        return (e) => {
+            const element = e.target;
+
+            if (element.value === "") {
+                this.toggleErrorDisplay(element.parentElement, displayValue);
+            }
+        };
+    }
+
+    addSignupErrorClass(element) {
+        const parentElement = element.parentElement;
+        const inputElement = parentElement.children[1];
+        const icon = parentElement.children[2];
+        
+        inputElement.className += " input-error";
+        icon.className += " error-icon";
+    }
+
+    removeSignupErrorClass(element) {
+        const parentElement = element.parentElement;
+        const inputElement = parentElement.children[1];
+        const icon = parentElement.children[2];
+
+        const inputClass = inputElement.className.split(" ")[0];
+        inputElement.className = inputClass;
+
+        icon.className = "";
     }
 
     handleSubmit(e) {
@@ -55,8 +110,36 @@ class Signup extends React.Component {
             birth_date
         };
 
-        this.props.signup({ user })
-            .then(null, () => this.setState({ password: '' }));
+        const allInputs = Array.from(e.target.querySelectorAll("input"));
+        let validSignup = true;
+
+        for(let i = 0; i < allInputs.length - 3; i++) {
+            const element = allInputs[i];
+
+            if (element.value === "" && validSignup) {
+                validSignup = false;
+                element.click();
+            } 
+
+            if (element.value === "") {
+                this.addSignupErrorClass(element);
+            }
+        }
+
+        if (this.state.gender === "") {
+            this.addSignupErrorClass(allInputs[4]);
+            validSignup = false;
+        }
+
+        if (this.state.password.length < 6) {
+            this.addSignupErrorClass(allInputs[3]);
+            validSignup = false;
+        }
+
+        if (validSignup) {
+            this.props.signup({ user })
+                .then(null, () => this.setState({ password: '' }));
+        }
     }
 
     render () {
@@ -82,7 +165,7 @@ class Signup extends React.Component {
                         right Fakebook experience for your age. If you want
                         to change who sees this, go to the About section of
                         your profile. For more details, please visit our
-                    <Link to="/">Data Policy</Link>.
+                        <Link to="/">Data Policy</Link>.
                     </p>
                     <hr />
                     <button onClick={this.hideModal()}>Okay</button>
@@ -98,33 +181,63 @@ class Signup extends React.Component {
                 <h3>It's free and always will be.</h3>
 
                 <form className="signup-form" onSubmit={this.handleSubmit}>
-                    <input 
-                        type="text" 
-                        className="name-input" 
-                        placeholder="First name" 
-                        value={first_name}
-                        onChange={this.handleInput("first_name")}
+                    <div className="position-relative input">
+                        <div className="error-display hide">
+                            What's your name?
+                        </div>
+                        <input
+                            type="text"
+                            className="name-input"
+                            placeholder="First name"
+                            value={first_name}
+                            onChange={this.handleInput("first_name")}
+                            onClick={this.errorModal("show")}
                         />
-                    <input 
-                        type="text" 
-                        className="name-input" 
-                        placeholder="Last name" 
-                        value={last_name}
-                        onChange={this.handleInput("last_name")}
-                        />
-                    <input 
-                        type="text" 
-                        placeholder="Mobile number or email" 
-                        value={username}
-                        onChange={this.handleInput("username")}
-                        />
-                    <input 
-                        type="password" 
-                        placeholder="New password" 
-                        value={password}
-                        onChange={this.handleInput("password")}
-                        />
-
+                        <i className=""></i>
+                    </div>
+                    <div className="position-relative input">
+                        <div className="error-display hide">
+                            What's your name?
+                        </div>
+                        <input 
+                            type="text" 
+                            className="name-input" 
+                            placeholder="Last name" 
+                            value={last_name}
+                            onChange={this.handleInput("last_name")}
+                            onClick={this.errorModal("show")}
+                            />
+                        <i className=""></i>
+                    </div>
+                    <div className="position-relative">
+                        <div className="error-display hide">
+                            You'll use this when you log in and if you ever 
+                            need to reset your password.
+                        </div>
+                        <input 
+                            className=""
+                            type="text" 
+                            placeholder="Mobile number or email" 
+                            value={username}
+                            onChange={this.handleInput("username")}
+                            onClick={this.errorModal("show")}
+                            />
+                        <i className=""></i>
+                    </div>
+                    <div className="position-relative input">
+                        <div className="error-display hide">
+                            Enter a combination of at least six numbers,
+                            letters and punctuation marks (like ! and &).
+                        </div>
+                        <input 
+                            type="password" 
+                            placeholder="New password" 
+                            value={password}
+                            onChange={this.handleInput("password")}
+                            onClick={this.errorModal("show")}
+                            />
+                        <i className=""></i>
+                    </div>
                     <label className="birthday">Birthday<br />
                         <select 
                             value={month} 
@@ -157,18 +270,19 @@ class Signup extends React.Component {
                     </label>
 
                     <div className="gender">
-                        <input 
-                            type="radio" 
+                        <input
+                            type="radio"
                             onChange={this.handleInput("gender")}
                             value="F"
                             checked={femaleChecked}
                             />Female
-                        <input 
-                            type="radio" 
+                        <input
+                            type="radio"
                             onChange={this.handleInput("gender")}
                             value="M"
                             checked={maleChecked}
-                            />Male
+                        />Male
+                        <i className="radio-error"></i>
                     </div>
 
                     <p className="fineprint">
