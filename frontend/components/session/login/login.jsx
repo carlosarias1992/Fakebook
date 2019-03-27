@@ -75,7 +75,7 @@ class Login extends React.Component {
             login({ user: this.state })
                 .then(
                     null, 
-                    () => this.handleLoginError(usernameInput, true)
+                    () => this.setState({ password: '', failedLogin: true })
                 );
         }
     }
