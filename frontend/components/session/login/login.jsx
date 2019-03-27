@@ -31,13 +31,15 @@ class Login extends React.Component {
             const element = e.target;
             const value = element.value;
 
-            if (value === "") {
-                addSignupErrorClass(element);
-            } else {
-                if (type !== "gender") {
-                    toggleErrorDisplay(element.parentElement, "hide");
+            if (this.props.showErrors) {
+                if (value === "") {
+                    addSignupErrorClass(element);
+                } else {
+                    if (type !== "gender") {
+                        toggleErrorDisplay(element.parentElement, "hide");
+                    }
+                    removeSignupErrorClass(element);
                 }
-                removeSignupErrorClass(element);
             }
 
             this.setState({ [type]: value });
