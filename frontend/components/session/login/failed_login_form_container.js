@@ -4,7 +4,8 @@ import Login from './login';
 
 const mapStateToProps = state => {
     return {
-        className: "failed-login-form"
+        className: "failed-login-form",
+        showErrors: true
     };
 };
 

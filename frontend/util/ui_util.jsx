@@ -44,3 +44,40 @@ export const yearOptions = () => {
 
     return options;
 };
+
+export const addSignupErrorClass = element => {
+    const parentElement = element.parentElement;
+    const inputElement = parentElement.children[1];
+    const icon = parentElement.children[2];
+
+    inputElement.className += " input-error";
+    icon.className += " error-icon";
+}
+
+export const removeSignupErrorClass = element => {
+    const parentElement = element.parentElement;
+    const inputElement = parentElement.children[1];
+    const icon = parentElement.children[2];
+
+    const inputClass = inputElement.className.split(" ")[0];
+    inputElement.className = inputClass;
+
+    icon.className = "";
+}
+
+export const toggleErrorDisplay = (parentElement, displayProperty) => {
+    const display = parentElement.children[0];
+    const displayClass = display.className.split(" ");
+
+    display.className = displayClass[0] + " " + displayProperty;
+}
+
+export const errorModal = displayValue => {
+    return (e) => {
+        const element = e.target;
+
+        if (element.value === "") {
+            toggleErrorDisplay(element.parentElement, displayValue);
+        }
+    };
+}

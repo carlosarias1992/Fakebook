@@ -508,6 +508,16 @@ hr {
     border: 0 0 1px 1px #9b433d solid;
 }
 
+.error-display a {
+    color: white;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+.error-display a:hover {
+    text-decoration: underline;
+}
+
 .radio-error {
     position: absolute;
     top: -2px;

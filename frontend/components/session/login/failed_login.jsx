@@ -4,10 +4,6 @@ import LoginFormContainer from './failed_login_form_container';
 import Footer from '../../footer';
 
 class FailedLogin extends React.Component {
-    handleErrors() {
-        
-    }
-
     render() {
         return (
             <main>

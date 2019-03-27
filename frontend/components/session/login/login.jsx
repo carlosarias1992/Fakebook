@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { 
+    addSignupErrorClass,
+    removeSignupErrorClass,
+    toggleErrorDisplay,
+    errorModal
+} from '../../../util/ui_util';
 
 class Login extends React.Component {
     constructor(props) {
@@ -10,7 +16,19 @@ class Login extends React.Component {
 
     handleInput(type) {
         return (e) => {
-            this.setState({ [type]: e.target.value });
+            const element = e.target;
+            const value = element.value;
+
+            if (value === "") {
+                addSignupErrorClass(element);
+            } else {
+                if (type !== "gender") {
+                    toggleErrorDisplay(element.parentElement, "hide");
+                }
+                removeSignupErrorClass(element);
+            }
+
+            this.setState({ [type]: value });
         };
     }
 
@@ -53,13 +71,22 @@ class Login extends React.Component {
                 {this.state.failedLogin ? <Redirect to="/login" redirect="true"/> : null}
                 <form className={this.props.className} onSubmit={this.handleSubmit}>
                     <label>{usernameLabel}
-                        <input 
-                            type="text" 
-                            name="user[username]" 
-                            value={username}
-                            placeholder={usernamePlaceholder}
-                            onChange={this.handleInput("username")}
-                        />
+                        <div className="position-relative input">
+                            <div className="error-display hide">
+                                The email or phone number you've entered 
+                                doesn't match any account. 
+                                <Link to="/signup">Sign up for an account</Link>
+                            </div>
+                            <input
+                                type="text"
+                                name="user[username]"
+                                value={username}
+                                placeholder={usernamePlaceholder}
+                                onChange={this.handleInput("username")}
+                                onClick={errorModal("show")}
+                            />
+                            <i className=""></i>
+                        </div>
                     </label>
                     <label>{passwordLabel}
                         <input 

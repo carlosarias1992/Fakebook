@@ -43,53 +43,16 @@ class Signup extends React.Component {
             const value = element.value;
             
             if (value === "") {
-                this.addSignupErrorClass(element);
+                UiUtil.addSignupErrorClass(element);
             } else {
                 if (type !== "gender") {
-                    this.toggleErrorDisplay(element.parentElement, "hide");
+                    UiUtil.toggleErrorDisplay(element.parentElement, "hide");
                 }
-                this.removeSignupErrorClass(element);
+                UiUtil.removeSignupErrorClass(element);
             } 
 
             this.setState({ [type]: value });
         };
-    }
-
-    toggleErrorDisplay(parentElement, displayProperty) {
-        const display = parentElement.children[0];
-        const displayClass = display.className.split(" ");
-
-        display.className = displayClass[0] + " " + displayProperty;
-    }
-
-    errorModal(displayValue) {
-        return (e) => {
-            const element = e.target;
-
-            if (element.value === "") {
-                this.toggleErrorDisplay(element.parentElement, displayValue);
-            }
-        };
-    }
-
-    addSignupErrorClass(element) {
-        const parentElement = element.parentElement;
-        const inputElement = parentElement.children[1];
-        const icon = parentElement.children[2];
-        
-        inputElement.className += " input-error";
-        icon.className += " error-icon";
-    }
-
-    removeSignupErrorClass(element) {
-        const parentElement = element.parentElement;
-        const inputElement = parentElement.children[1];
-        const icon = parentElement.children[2];
-
-        const inputClass = inputElement.className.split(" ")[0];
-        inputElement.className = inputClass;
-
-        icon.className = "";
     }
 
     handleSubmit(e) {
@@ -122,17 +85,17 @@ class Signup extends React.Component {
             } 
 
             if (element.value === "") {
-                this.addSignupErrorClass(element);
+                UiUtil.addSignupErrorClass(element);
             }
         }
 
         if (this.state.gender === "") {
-            this.addSignupErrorClass(allInputs[4]);
+            UiUtil.addSignupErrorClass(allInputs[4]);
             validSignup = false;
         }
 
         if (this.state.password.length < 6) {
-            this.addSignupErrorClass(allInputs[3]);
+            UiUtil.addSignupErrorClass(allInputs[3]);
             validSignup = false;
         }
 
@@ -161,10 +124,10 @@ class Signup extends React.Component {
             <div className="outer-modal" key="modal">
                 <section className="signup-modal">
                     <p>
-                        <strong>Providing your birthday</strong> helps make sure you get the
-                        right Fakebook experience for your age. If you want
-                        to change who sees this, go to the About section of
-                        your profile. For more details, please visit our
+                        <strong>Providing your birthday</strong> helps make sure 
+                        you get the right Fakebook experience for your age. If 
+                        you want to change who sees this, go to the About section 
+                        of your profile. For more details, please visit our
                         <Link to="/">Data Policy</Link>.
                     </p>
                     <hr />
@@ -200,7 +163,7 @@ class Signup extends React.Component {
                             placeholder="First name"
                             value={first_name}
                             onChange={this.handleInput("first_name")}
-                            onClick={this.errorModal("show")}
+                            onClick={UiUtil.errorModal("show")}
                         />
                         <i className=""></i>
                     </div>
@@ -214,7 +177,7 @@ class Signup extends React.Component {
                             placeholder="Last name" 
                             value={last_name}
                             onChange={this.handleInput("last_name")}
-                            onClick={this.errorModal("show")}
+                            onClick={UiUtil.errorModal("show")}
                             />
                         <i className=""></i>
                     </div>
@@ -229,7 +192,7 @@ class Signup extends React.Component {
                             placeholder="Mobile number or email" 
                             value={username}
                             onChange={this.handleInput("username")}
-                            onClick={this.errorModal("show")}
+                            onClick={UiUtil.errorModal("show")}
                             />
                         <i className=""></i>
                     </div>
@@ -243,7 +206,7 @@ class Signup extends React.Component {
                             placeholder="New password" 
                             value={password}
                             onChange={this.handleInput("password")}
-                            onClick={this.errorModal("show")}
+                            onClick={UiUtil.errorModal("show")}
                             />
                         <i className=""></i>
                     </div>
@@ -296,8 +259,8 @@ class Signup extends React.Component {
 
                     <p className="fineprint">
                         By clicking Sign Up, you agree to our
-                        <Link to="/">Terms</Link>, <Link to="/">Data Policy</Link> and
-                        <Link to="/">Cookies Policy.</Link> You may receive
+                        <Link to="/">Terms</Link>, <Link to="/">Data Policy</Link> 
+                        and <Link to="/">Cookies Policy.</Link> You may receive
                         SMS Notifications from us and can opt out any time.
                     </p>
 

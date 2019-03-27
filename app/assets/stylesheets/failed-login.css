@@ -112,3 +112,31 @@
     width: 44% !important;
 }
 
+.failed-signup-login-button {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: -86px;
+}
+
+.failed-login-form .input:first-of-type {
+    margin-right: 0;
+}
+
+.failed-login-form .input-error {
+    border: 1px #ed4630 solid;
+}
+
+.failed-login-form .error-display {
+    top: -2px;
+}
+
+.failed-login-form  .error-icon {
+    top: 8px;
+    right: 8px;
+}
+
+.container .failed-signup-login-button input[type="submit"] {
+    font-size: 13.5px;
+}
+
