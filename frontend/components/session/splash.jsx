@@ -2,9 +2,10 @@ import React from 'react';
 import Header from './header/header';
 import SignupContainer from './signup/signup_container';
 import Footer from '../footer';
-import { Link } from 'react-router-dom';
 
 export default (props) => {
+    if (props.currentUser) props.history.push("/feed");
+    
     return (
         <main>
             <Header />

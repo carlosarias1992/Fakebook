@@ -14,10 +14,7 @@ const initialState = {
     year: today.getFullYear(),
     gender: '',
     modal: false,
-    firstNameModal: false,
-    lastNameModal: false,
-    usernameModal: false,
-    passwordModal: false
+    emailModalMsg: 'You\'ll use this when you log in and if you ever need to reset your password.'
 };
 
 class Signup extends React.Component {
@@ -27,6 +24,7 @@ class Signup extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.revealModal = this.revealModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.handleLoginError = this.handleLoginError.bind(this);
     }
 
     revealModal() {
@@ -35,6 +33,12 @@ class Signup extends React.Component {
 
     hideModal() {
         return (e) => this.setState({ modal: false });
+    }
+
+    handleLoginError(element) {
+        this.setState({ password: '', emailModalMsg: 'Email has already been taken.' });
+        UiUtil.addSignupErrorClass(element);
+        UiUtil.toggleErrorDisplay(element.parentElement, "show");
     }
 
     handleInput(type) {
@@ -74,6 +78,7 @@ class Signup extends React.Component {
         };
 
         const allInputs = Array.from(e.target.querySelectorAll("input"));
+        const emailInput = allInputs[2];
         let validSignup = true;
 
         for(let i = 0; i < allInputs.length - 3; i++) {
@@ -101,7 +106,10 @@ class Signup extends React.Component {
 
         if (validSignup) {
             this.props.signup({ user })
-                .then(null, () => this.setState({ password: '' }));
+                .then(
+                    null, 
+                    () => this.handleLoginError(emailInput)
+                );
         }
     }
 
@@ -114,7 +122,8 @@ class Signup extends React.Component {
             month, 
             day, 
             year, 
-            gender
+            gender,
+            emailModalMsg
         } = this.state;
 
         const femaleChecked = gender === "F" ? true : false;
@@ -163,7 +172,8 @@ class Signup extends React.Component {
                             placeholder="First name"
                             value={first_name}
                             onChange={this.handleInput("first_name")}
-                            onClick={UiUtil.errorModal("show")}
+                            onFocus={UiUtil.errorModal("show")}
+                            onBlur={UiUtil.errorModal("hide")}
                         />
                         <i className=""></i>
                     </div>
@@ -177,14 +187,14 @@ class Signup extends React.Component {
                             placeholder="Last name" 
                             value={last_name}
                             onChange={this.handleInput("last_name")}
-                            onClick={UiUtil.errorModal("show")}
+                            onFocus={UiUtil.errorModal("show")}
+                            onBlur={UiUtil.errorModal("hide")}
                             />
                         <i className=""></i>
                     </div>
                     <div className="position-relative">
                         <div className="error-display hide">
-                            You'll use this when you log in and if you ever 
-                            need to reset your password.
+                            {emailModalMsg}
                         </div>
                         <input 
                             className=""
@@ -192,7 +202,8 @@ class Signup extends React.Component {
                             placeholder="Mobile number or email" 
                             value={username}
                             onChange={this.handleInput("username")}
-                            onClick={UiUtil.errorModal("show")}
+                            onFocus={UiUtil.errorModal("show")}
+                            onBlur={UiUtil.errorModal("hide")}
                             />
                         <i className=""></i>
                     </div>
@@ -206,7 +217,8 @@ class Signup extends React.Component {
                             placeholder="New password" 
                             value={password}
                             onChange={this.handleInput("password")}
-                            onClick={UiUtil.errorModal("show")}
+                            onFocus={UiUtil.errorModal("show")}
+                            onBlur={UiUtil.errorModal("hide")}
                             />
                         <i className=""></i>
                     </div>

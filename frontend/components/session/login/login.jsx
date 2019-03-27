@@ -12,6 +12,18 @@ class Login extends React.Component {
         super(props);
         this.state = { username: '', password: '', failedLogin: false };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLoginError = this.handleLoginError.bind(this);
+    }
+
+    componentDidMount() {
+        const usernameInput = document.querySelector("input");
+        usernameInput.focus();
+    }
+
+    handleLoginError(element, boolean) {
+        this.setState({ password: '', failedLogin: boolean });
+        addSignupErrorClass(element);
+        toggleErrorDisplay(element.parentElement, "show");
     }
 
     handleInput(type) {
@@ -35,24 +47,36 @@ class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const { login } = this.props;
+        const { username, password } = this.state;
 
         if (this.props.showErrors) {
-            let validLogin;
-            const usernameInput = document.querySelector("input");
-
-            if (this.state.username === "") {
+            let validLogin = true;
+            const usernameInput = document.querySelector('input[type="text"]');
+            const passwordInput = document.querySelector('input[type="password"]');
+            
+            if (username === "") {
                 validLogin = false;
                 addSignupErrorClass(usernameInput);
-                usernameInput.click();
+                usernameInput.focus();
+            } else if(password === "") {
+                validLogin = false;
+                addSignupErrorClass(passwordInput);
+                passwordInput.focus();
             }
 
             if (validLogin) {
-                login({ user })
-                    .then(null, () => this.setState({ password: '' }));
+                login({ user: this.state })
+                    .then(
+                        null, 
+                        () => this.handleLoginError(usernameInput, false)
+                    );
             }
         } else {
             login({ user: this.state })
-                .then(null, () => this.setState({ password: '', failedLogin: true}));
+                .then(
+                    null, 
+                    () => this.handleLoginError(usernameInput, true)
+                );
         }
     }
 
@@ -61,11 +85,14 @@ class Login extends React.Component {
         const { username, password } = this.state;
         let usernamePlaceholder, passwordPlaceholder;
         let usernameLabel, passwordLabel, footer, forgotAccountClass;
+        let onBlurCallback, onFocusCallback;
 
         if (className === "failed-login-form") {
             usernamePlaceholder = "Email or Phone Number";
             passwordPlaceholder = "Password";
             forgotAccountClass = "failed-forgot-account";
+            onFocusCallback = errorModal("show");
+            onBlurCallback = errorModal("hide");
 
             footer = <footer>
                         <div className="or-container">
@@ -90,9 +117,7 @@ class Login extends React.Component {
                     <label>{usernameLabel}
                         <div className="position-relative input">
                             <div className="error-display hide">
-                                The email or phone number you've entered 
-                                doesn't match any account. 
-                                <Link to="/signup">Sign up for an account</Link>
+                                The credentials you've entered are not valid. 
                             </div>
                             <input
                                 type="text"
@@ -100,19 +125,28 @@ class Login extends React.Component {
                                 value={username}
                                 placeholder={usernamePlaceholder}
                                 onChange={this.handleInput("username")}
-                                onClick={errorModal("show")}
+                                onFocus={onFocusCallback}
+                                onBlur={onBlurCallback}
                             />
                             <i className=""></i>
                         </div>
                     </label>
                     <label>{passwordLabel}
-                        <input 
-                            type="password" 
-                            name="user[password]" 
-                            value={password}
-                            placeholder={passwordPlaceholder}
-                            onChange={this.handleInput("password")}
-                        />
+                        <div className="position-relative input">
+                            <div className="error-display hide">
+                                Enter your password.
+                            </div>
+                            <input 
+                                type="password" 
+                                name="user[password]" 
+                                value={password}
+                                placeholder={passwordPlaceholder}
+                                onChange={this.handleInput("password")}
+                                onFocus={onFocusCallback}
+                                onBlur={onBlurCallback}
+                            />
+                            <i className=""></i>
+                        </div>
                         <Link to="/forgot-account">
                             <span className={forgotAccountClass}>Forgot account?</span>
                         </Link>

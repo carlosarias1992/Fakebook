@@ -136,7 +136,14 @@
     right: 8px;
 }
 
+.failed-login-form .position-relative {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
 .container .failed-signup-login-button input[type="submit"] {
     font-size: 13.5px;
 }
+
 

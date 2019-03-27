@@ -78,6 +78,12 @@ export const errorModal = displayValue => {
 
         if (element.value === "") {
             toggleErrorDisplay(element.parentElement, displayValue);
+
+            if (displayValue === "show") {
+                removeSignupErrorClass(element);
+            } else {
+                addSignupErrorClass(element);
+            }
         }
     };
 }
