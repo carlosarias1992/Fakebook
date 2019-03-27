@@ -175,9 +175,18 @@ class Signup extends React.Component {
 
         signupModal = this.state.modal ? signupModal : null
 
+        let formTitle, formClass;
+        if (this.props.failedSignup) {
+            formTitle = "Create a New Account";
+            formClass = "signup failed-signup";
+        } else {
+            formTitle = "Sign Up";
+            formClass = "signup";
+        }
+
         return (
-            <section className="signup">
-                <h1>Sign Up</h1>
+            <section className={formClass}>
+                <h1>{formTitle}</h1>
                 <h3>It's free and always will be.</h3>
 
                 <form className="signup-form" onSubmit={this.handleSubmit}>
@@ -296,19 +305,21 @@ class Signup extends React.Component {
                         <input type="submit" value="Sign Up" />
                     </div>
 
+                    {this.props.failedSignup ? null :
                     <footer className="signup-footer">
                         <hr />
                         <p>
                             <Link to="/">Create a Page</Link>
                             for a celebrity, band or business.
                         </p>
-                    </footer>
+                    </footer>}
                 </form>
 
+                {this.props.failedSignup ? null :
                 <button
                     onClick={this.props.demoLogin}
                     className="demo-button"
-                >Demo Login</button>
+                >Demo Login</button>}
             </section>
         );
     }

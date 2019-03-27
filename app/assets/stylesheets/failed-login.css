@@ -80,7 +80,12 @@
     align-items: center;
     font-size: 13px;
     margin-top: 27px;
-    margin-bottom: 10.5px;
+    margin-bottom: 5.5px;
+}
+
+.or-container hr {
+    height: 10px;
+    width: 100px;
 }
 
 .failed-forgot-account {
@@ -97,5 +102,9 @@
     top: 34px;
     left: 165px;
     padding: 7.5px 11px;
+}
+
+.failed-signup {
+    width: 50% !important;
 }
 
