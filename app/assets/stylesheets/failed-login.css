@@ -7,8 +7,8 @@
 .outer-login-form {
     background-color: white;
     height: 340px;
-    width: 558px;
-    padding: 36px 141px;
+    width: 610px;
+    padding: 38px 152px 330px 152px;
     box-sizing: border-box;
 }
 
@@ -16,8 +16,8 @@
     font-weight: normal;
     color: #1c2028;
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 18px;
+    margin-bottom: 22px;
+    font-size: 20px;
 }
 
 .failed-login-form {
@@ -31,8 +31,8 @@
     width: 100%;
     margin-top: 2px;
     margin-bottom: 10px;
-    font-size: 14px;
-    padding: 6px;
+    font-size: 16px;
+    padding: 7px;
     border: 1px #dddfe2 solid;
     border-radius: 1px;
 }
@@ -47,8 +47,8 @@
     color: white;
     transition: 0.2s;
     border-radius: 2px;
-    font-size: 14.5px;
-    padding: 10.5px 0;
+    font-size: 16.5px;
+    padding: 11.5px 0;
 }
 
 .failed-login-form input[type="submit"]:hover {
@@ -78,33 +78,37 @@
 .or-container {
     display: flex; 
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 27px;
-    margin-bottom: 5.5px;
+    margin-bottom: 10.5px;
 }
 
 .or-container hr {
-    height: 10px;
-    width: 100px;
+    margin-bottom: 5px;
+    width: 40%;
 }
 
 .failed-forgot-account {
     position: absolute;
-    top: 135px;
-    left: 98px;
-    font-size: 12.5px;
+    top: 60%;
+    left: 36%;
+    font-size: 13.5px;
     color: #9a949c;
+}
+
+.failed-forgot-account:hover {
+    text-decoration: underline;
 }
 
 .small {
     position: absolute;
-    font-size: 11px;
-    top: 34px;
-    left: 165px;
-    padding: 7.5px 11px;
+    font-size: 12px;
+    top: 37px;
+    left: 177px;
+    padding: 8.5px 11px;
 }
 
 .failed-signup {
-    width: 50% !important;
+    width: 44% !important;
 }
 
