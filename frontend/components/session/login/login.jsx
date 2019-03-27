@@ -34,9 +34,25 @@ class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const { login } = this.props;
 
-        this.props.login({ user: this.state })
-            .then(null, () => this.setState({ password: '', failedLogin: true}));
+        if (this.props.showErrors) {
+            let validLogin;
+            const usernameInput = document.querySelector("input");
+
+            if (this.state.username === "") {
+                validLogin = false;
+                usernameInput.click();
+            }
+
+            if (validLogin) {
+                login({ user })
+                    .then(null, () => this.setState({ password: '' }));
+            }
+        } else {
+            login({ user: this.state })
+                .then(null, () => this.setState({ password: '', failedLogin: true}));
+        }
     }
 
     render() {
