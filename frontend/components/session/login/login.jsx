@@ -42,6 +42,7 @@ class Login extends React.Component {
 
             if (this.state.username === "") {
                 validLogin = false;
+                addSignupErrorClass(usernameInput);
                 usernameInput.click();
             }
 
