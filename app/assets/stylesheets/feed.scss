@@ -1,0 +1,67 @@
+.feed header {
+    margin-bottom: 10px;
+}
+
+.feed {
+    font-size: 13px;
+}
+
+.feed-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feed aside {
+    width: 180px;
+}
+
+.feed aside img {
+    width: 19px;
+}
+
+.feed aside a {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    height: 30px;
+}
+
+.feed aside a:hover {
+    background-color: #f5f6f7;
+    border: 1px #dddfe2 solid;
+}
+
+.feed aside li:first-of-type {
+    margin-bottom: 10px;
+}
+
+.feed .active {
+    background-color: #f5f6f7;
+    border: 1px #dddfe2 solid;
+    font-weight: bold;
+}
+
+.news-feed-icon {
+    background: url(image-path('feed-icons.png')) 0px -759px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 19px;
+}
+
+.feed aside i {
+    margin-right: 5px;
+}
+
+.right-col {
+    width: 310px;
+}
+
+.center-col {
+    width: 500px;
+}
+

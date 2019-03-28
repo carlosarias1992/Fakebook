@@ -2,8 +2,8 @@ import React from 'react';
 
 export default props => {
     return (
-        <div>
+        <section>
             People You May Know
-        </div>
+        </section>
     );
 };
