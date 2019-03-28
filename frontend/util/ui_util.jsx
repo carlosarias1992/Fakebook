@@ -87,3 +87,7 @@ export const errorModal = displayValue => {
         }
     };
 }
+
+export const validEmail = email => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/.test(email)
+}

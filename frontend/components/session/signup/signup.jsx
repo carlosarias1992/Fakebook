@@ -15,7 +15,8 @@ const initialState = {
     year: today.getFullYear(),
     gender: '',
     modal: false,
-    usernameValidationDisplay: false
+    usernameValidationDisplay: false,
+    usernameValidationModalMsg: 'Please re-enter your email address.'
 };
 
 class Signup extends React.Component {
@@ -26,6 +27,7 @@ class Signup extends React.Component {
         this.revealModal = this.revealModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.handleLoginError = this.handleLoginError.bind(this);
+        this.toggleValidationModal = this.toggleValidationModal.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +40,42 @@ class Signup extends React.Component {
 
     hideModal() {
         this.setState({ modal: false });
+    }
+
+    toggleValidationModal(element, displayValue, modalMessage) {
+        if (element.value !== "") {
+            this.setState({
+                usernameValidationModalMsg: modalMessage
+            });
+        }
+
+        UiUtil.toggleErrorDisplay(element.parentElement, displayValue);
+
+        if (displayValue === "show") {
+            UiUtil.removeSignupErrorClass(element);
+        } else {
+            UiUtil.addSignupErrorClass(element);
+        }
+    }
+
+    validationModal(displayValue) {
+        return (e) => {
+            const element = e.target;
+    
+            if (!UiUtil.validEmail(element.value)) {
+                this.toggleValidationModal(
+                    element, 
+                    displayValue, 
+                    'Please enter a valid email.'
+                );
+            } else if (this.state.username !== this.state.usernameValidation) {
+                this.toggleValidationModal(
+                    element, 
+                    displayValue, 
+                    'Your emails do not match. Please try again.'
+                );
+            }
+        };
     }
 
     handleLoginError(elements) {
@@ -67,6 +105,17 @@ class Signup extends React.Component {
                 UiUtil.removeSignupErrorClass(element);
             }
 
+            if (type === "username") {
+                if (UiUtil.validEmail(value)) {
+                    this.setState({ usernameValidationDisplay: true });
+                } else {
+                    this.setState({ 
+                        usernameValidation: '',
+                        usernameValidationDisplay: false
+                    });
+                }
+            } 
+
             this.setState({ [type]: value });
         };
     }
@@ -80,12 +129,22 @@ class Signup extends React.Component {
             this.state.day
         );
 
+        const {
+            usernameValidationDisplay,
+            gender,
+            username,
+            usernameValidation,
+            first_name,
+            last_name,
+            password,
+        } = this.state;
+
         const user = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            username: this.state.username,
-            password: this.state.password,
-            gender: this.state.gender,
+            first_name: first_name,
+            last_name: last_name,
+            username: username,
+            password: password,
+            gender: gender,
             birth_date
         };
 
@@ -105,8 +164,13 @@ class Signup extends React.Component {
             }
         }
 
-        if (this.state.gender === "") {
+        if (gender === "") {
             UiUtil.addSignupErrorClass(allInputs[5]);
+            validSignup = false;
+        }
+
+        if (usernameValidationDisplay && username !== usernameValidation) {
+            UiUtil.addSignupErrorClass(allInputs[3]);
             validSignup = false;
         }
 
@@ -133,7 +197,8 @@ class Signup extends React.Component {
             gender,
             errors,
             usernameValidationDisplay,
-            usernameValidation
+            usernameValidation,
+            usernameValidationModalMsg
         } = this.state;
 
         const femaleChecked = gender === "F" ? true : false;
@@ -227,7 +292,7 @@ class Signup extends React.Component {
                     {usernameValidationDisplay ? 
                     <div className="position-relative">
                         <div className="error-display hide">
-                            Please re-enter your email address.
+                            {usernameValidationModalMsg}
                         </div>
                         <input
                             className=""
@@ -235,8 +300,8 @@ class Signup extends React.Component {
                             placeholder="Re-enter email"
                             value={usernameValidation}
                             onChange={this.handleInput("usernameValidation")}
-                            onFocus={UiUtil.errorModal("show")}
-                            onBlur={UiUtil.errorModal("hide")}
+                            onFocus={this.validationModal("show")}
+                            onBlur={this.validationModal("hide")}
                         />
                         <i className=""></i>
                     </div> : null}
