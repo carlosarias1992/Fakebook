@@ -4,7 +4,8 @@ import { signup } from '../../../actions/session_actions';
 
 const mapStateToProps = state => {
     return {
-        failedSignup: true
+        failedSignup: true,
+        errors: state.errors.session.errors
     };
 };
 

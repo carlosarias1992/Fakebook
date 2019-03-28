@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as UiUtil from '../../../util/ui_util';
+import { merge } from 'lodash';
 
 const today = new Date();
 
@@ -14,17 +14,20 @@ const initialState = {
     year: today.getFullYear(),
     gender: '',
     modal: false,
-    emailModalMsg: 'You\'ll use this when you log in and if you ever need to reset your password.'
 };
 
 class Signup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = initialState;
+        this.state = merge(initialState, { errors: props.errors });
         this.handleSubmit = this.handleSubmit.bind(this);
         this.revealModal = this.revealModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.handleLoginError = this.handleLoginError.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ errors: [] });
     }
 
     revealModal() {
@@ -35,17 +38,24 @@ class Signup extends React.Component {
         return (e) => this.setState({ modal: false });
     }
 
-    handleLoginError(element) {
-        this.setState({ password: '', emailModalMsg: 'Email has already been taken.' });
-        UiUtil.addSignupErrorClass(element);
-        UiUtil.toggleErrorDisplay(element.parentElement, "show");
+    handleLoginError(elements) {
+        if (this.props.errors.length === 2) {
+            UiUtil.addSignupErrorClass(elements[0]);
+            UiUtil.addSignupErrorClass(elements[1]);
+        } else if (this.props.errors[0].includes("Username")) {
+            UiUtil.addSignupErrorClass(elements[0]);
+        } else {
+            UiUtil.addSignupErrorClass(elements[1]);
+        }
+
+        this.setState({ errors: this.props.errors });
     }
 
     handleInput(type) {
         return (e) => {
             const element = e.target;
             const value = element.value;
-            
+
             if (value === "") {
                 UiUtil.addSignupErrorClass(element);
             } else {
@@ -53,7 +63,7 @@ class Signup extends React.Component {
                     UiUtil.toggleErrorDisplay(element.parentElement, "hide");
                 }
                 UiUtil.removeSignupErrorClass(element);
-            } 
+            }
 
             this.setState({ [type]: value });
         };
@@ -64,7 +74,7 @@ class Signup extends React.Component {
 
         const birth_date = new Date(
             this.state.year,
-            this.state.month, 
+            this.state.month,
             this.state.day
         );
 
@@ -78,16 +88,15 @@ class Signup extends React.Component {
         };
 
         const allInputs = Array.from(e.target.querySelectorAll("input"));
-        const emailInput = allInputs[2];
         let validSignup = true;
 
-        for(let i = 0; i < allInputs.length - 3; i++) {
+        for (let i = 0; i < allInputs.length - 3; i++) {
             const element = allInputs[i];
 
             if (element.value === "" && validSignup) {
                 validSignup = false;
                 element.click();
-            } 
+            }
 
             if (element.value === "") {
                 UiUtil.addSignupErrorClass(element);
@@ -99,31 +108,26 @@ class Signup extends React.Component {
             validSignup = false;
         }
 
-        if (this.state.password.length < 6) {
-            UiUtil.addSignupErrorClass(allInputs[3]);
-            validSignup = false;
-        }
-
         if (validSignup) {
             this.props.signup({ user })
                 .then(
-                    null, 
-                    () => this.handleLoginError(emailInput)
+                    null,
+                    () => this.handleLoginError(allInputs.slice(2, 4))
                 );
         }
     }
 
-    render () {
-        const { 
+    render() {
+        const {
             first_name,
             last_name,
             username,
             password,
-            month, 
-            day, 
-            year, 
+            month,
+            day,
+            year,
             gender,
-            emailModalMsg
+            errors
         } = this.state;
 
         const femaleChecked = gender === "F" ? true : false;
@@ -133,11 +137,11 @@ class Signup extends React.Component {
             <div className="outer-modal" key="modal">
                 <section className="signup-modal">
                     <p>
-                        <strong>Providing your birthday</strong> helps make sure 
-                        you get the right Fakebook experience for your age. If 
-                        you want to change who sees this, go to the About section 
-                        of your profile. For more details, please visit our
-                        <Link to="/">Data Policy</Link>.
+                        <strong>Providing your birthday</strong> helps make sure
+                        you get the right Fakebook experience for your age. If
+                        you want to change who sees this, go to the About section
+                        of your profile. For more details, please visit our &nbsp;
+                        <strong>Data Policy</strong>.
                     </p>
                     <hr />
                     <button onClick={this.hideModal()}>Okay</button>
@@ -161,6 +165,8 @@ class Signup extends React.Component {
                 <h1>{formTitle}</h1>
                 <h3>It's free and always will be.</h3>
 
+                <div>{errors}</div>
+
                 <form className="signup-form" onSubmit={this.handleSubmit}>
                     <div className="position-relative input">
                         <div className="error-display hide">
@@ -181,30 +187,31 @@ class Signup extends React.Component {
                         <div className="error-display hide">
                             What's your name?
                         </div>
-                        <input 
-                            type="text" 
-                            className="name-input" 
-                            placeholder="Last name" 
+                        <input
+                            type="text"
+                            className="name-input"
+                            placeholder="Last name"
                             value={last_name}
                             onChange={this.handleInput("last_name")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                            />
+                        />
                         <i className=""></i>
                     </div>
                     <div className="position-relative">
                         <div className="error-display hide">
-                            {emailModalMsg}
+                            You'll use this when you log in and if you ever
+                            need to reset your password.
                         </div>
-                        <input 
+                        <input
                             className=""
-                            type="text" 
-                            placeholder="Mobile number or email" 
+                            type="text"
+                            placeholder="Mobile number or email"
                             value={username}
                             onChange={this.handleInput("username")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                            />
+                        />
                         <i className=""></i>
                     </div>
                     <div className="position-relative input">
@@ -212,41 +219,41 @@ class Signup extends React.Component {
                             Enter a combination of at least six numbers,
                             letters and punctuation marks (like ! and &).
                         </div>
-                        <input 
-                            type="password" 
-                            placeholder="New password" 
+                        <input
+                            type="password"
+                            placeholder="New password"
                             value={password}
                             onChange={this.handleInput("password")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                            />
+                        />
                         <i className=""></i>
                     </div>
                     <label className="birthday">Birthday<br />
-                        <select 
-                            value={month} 
+                        <select
+                            value={month}
                             onChange={this.handleInput("month")}
-                            >
-                            {<UiUtil.monthOptions/>}
+                        >
+                            {<UiUtil.monthOptions />}
                         </select>
-                        <select 
-                            value={day} 
+                        <select
+                            value={day}
                             onChange={this.handleInput("day")}
-                            >
+                        >
                             {<UiUtil.dayOptions />}
                         </select>
-                        <select 
-                            value={year - 25} 
+                        <select
+                            value={year - 25}
                             onChange={this.handleInput("year")}
-                            >
+                        >
                             {<UiUtil.yearOptions />}
                         </select>
 
-                        <span 
+                        <span
                             className="why-birthday"
                             onMouseEnter={this.revealModal()}
                             onMouseLeave={this.hideModal()}
-                            >
+                        >
                             Why do I need to provide my birthday?
                             {signupModal}
                         </span>
@@ -259,7 +266,7 @@ class Signup extends React.Component {
                             onChange={this.handleInput("gender")}
                             value="F"
                             checked={femaleChecked}
-                            />Female
+                        />Female
                         <input
                             type="radio"
                             onChange={this.handleInput("gender")}
@@ -270,31 +277,22 @@ class Signup extends React.Component {
                     </div>
 
                     <p className="fineprint">
-                        By clicking Sign Up, you agree to our
-                        <Link to="/">Terms</Link>, <Link to="/">Data Policy</Link> 
-                        and <Link to="/">Cookies Policy.</Link> You may receive
+                        By clicking Sign Up, you agree to our &nbsp;
+                        <strong>Terms</strong>,&nbsp;<strong>Data Policy</strong>
+                        &nbsp; and <strong>Cookies Policy.</strong>&nbsp; You may receive
                         SMS Notifications from us and can opt out any time.
                     </p>
 
                     <div className="signup-buttons">
                         <input type="submit" value="Sign Up" />
                     </div>
-
-                    {this.props.failedSignup ? null :
-                    <footer className="signup-footer">
-                        <hr />
-                        <p>
-                            <Link to="/">Create a Page</Link>
-                            for a celebrity, band or business.
-                        </p>
-                    </footer>}
                 </form>
 
                 {this.props.failedSignup ? null :
-                <button
-                    onClick={this.props.demoLogin}
-                    className="demo-button"
-                >Demo Login</button>}
+                    <button
+                        onClick={this.props.demoLogin}
+                        className="demo-button"
+                    >Demo Login</button>}
             </section>
         );
     }

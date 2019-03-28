@@ -7,53 +7,8 @@ export default (props) => {
             <section className="container">
                 <section className="top-footer">
                     <span>English (US)</span>
-                    <Link to="/">Español</Link>
-                    <Link to="/">Français (France)</Link>
-                    <Link to="/">中文(简体)</Link>
-                    <Link to="/">العربية</Link>
-                    <Link to="/">Português (Brasil)</Link>
-                    <Link to="/">Italiano</Link>
-                    <Link to="/">한국어</Link>
-                    <Link to="/">Deutsch</Link>
-                    <Link to="/">हिन्दी</Link>
-                    <Link to="/">日本語</Link>
                 </section>
                 <hr />
-                <section className="sub-footer">
-                    <Link to="/">Sign Up</Link>
-                    <Link to="/">Log In</Link>
-                    <Link to="/">Messenger</Link>
-                    <Link to="/">Facebook Lite</Link>
-                    <Link to="/">Find</Link>
-                    <Link to="/">Friends</Link>
-                    <Link to="/">People</Link>
-                    <Link to="/">Profiles</Link>
-                    <Link to="/">Pages</Link>
-                    <Link to="/">Places</Link>
-                    <Link to="/">Games</Link>
-                    <Link to="/">Locations</Link>
-                    <Link to="/">Marketplace</Link>
-                    <Link to="/">Groups</Link>
-                </section>
-                <section className="sub-footer">
-                    <Link to="/">Instagram</Link>
-                    <Link to="/">Local</Link>
-                    <Link to="/">Fundraisers</Link>
-                    <Link to="/">About</Link>
-                    <Link to="/">Create Page</Link>
-                    <Link to="/">Create Ad</Link>
-                    <Link to="/">Developers</Link>
-                    <Link to="/">Careers</Link>
-                    <Link to="/">Privacy</Link>
-                    <Link to="/">Cookies</Link>
-                    <Link to="/">Ad Choices</Link>
-                    <Link to="/">Terms</Link>
-                    <Link to="/">Account Security</Link>
-                </section>
-                <section className="sub-footer">
-                    <Link to="/">Login Help</Link>
-                    <Link to="/">Help</Link>
-                </section>
                 <span className="copyright">
                     Fakebook by Carlos Arias-Miranda 2019. Inspired by
                     Facebook. Connect with me on

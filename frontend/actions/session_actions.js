@@ -17,17 +17,17 @@ const logoutCurrentUser = () => {
     };
 };
 
-const receiveErrors = (errors) => {
+const receiveErrors = (response) => {
     return {
         type: RECEIVE_ERRORS,
-        errors: errors.responseJSON
+        errors: response.responseJSON.errors
     };
 };
 
 export const login = user => dispatch => {
     return ApiUtil
         .loginUser(user)
-        .then(currentUser => { 
+        .then(currentUser => {
             dispatch(receiveCurrentUser(currentUser));
         }, errors => {
             dispatch(receiveErrors(errors));

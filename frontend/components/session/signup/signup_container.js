@@ -2,8 +2,14 @@ import { connect } from 'react-redux';
 import Signup from './signup';
 import { signup, login } from '../../../actions/session_actions';
 
-const demoUser ={
+const demoUser = {
     user: { username: 'test', password: 'starwars' }
+};
+
+const mapStateToProps = state => {
+    return {
+        errors: state.errors.session.errors
+    };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -13,4 +19,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
