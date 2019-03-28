@@ -30,7 +30,7 @@ class FailedSignup extends React.Component {
             <main>
                 {header}
                 <section className="flex-center outer-login-body">
-                    <section className="container flex-middle login-body">
+                    <section className="container flex-center login-body">
                         {loginForm}
                         <SignupFormContainer />
                     </section>

@@ -1,7 +1,8 @@
 import { merge } from 'lodash';
 import {
     RECEIVE_ERRORS,
-    RECEIVE_CURRENT_USER
+    RECEIVE_CURRENT_USER,
+    REMOVE_ERRORS
 } from '../actions/session_actions';
 
 export default (state = {}, action) => {
@@ -10,12 +11,15 @@ export default (state = {}, action) => {
     let newState;
 
     switch (action.type) {
+        case REMOVE_ERRORS: 
+            newState = { errors: [] };
+            return newState;
         case RECEIVE_ERRORS:
             newState = { errors };
             return merge({}, oldState, newState);
         case RECEIVE_CURRENT_USER:
             newState = { errors: [] };
-            return merge({}, oldState, newState);
+            return newState;
         default:
             return state;
     }

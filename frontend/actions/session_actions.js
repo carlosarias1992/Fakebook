@@ -3,6 +3,7 @@ import * as ApiUtil from '../util/session_api_util';
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const REMOVE_ERRORS = "REMOVE_ERRORS";
 
 const receiveCurrentUser = user => {
     return {
@@ -21,6 +22,12 @@ const receiveErrors = (response) => {
     return {
         type: RECEIVE_ERRORS,
         errors: response.responseJSON.errors
+    };
+};
+
+export const removeErrors = () => {
+    return {
+        type: REMOVE_ERRORS,
     };
 };
 
