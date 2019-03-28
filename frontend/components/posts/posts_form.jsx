@@ -4,12 +4,18 @@ import Avatar from '../avatar';
 class PostsForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { body: '' };
+        this.state = { body: '', modal: false };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.revealModal = this.revealModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
     }
 
     revealModal() {
+        this.setState({ modal: true });
+    }
 
+    hideModal() {
+        this.setState({ modal: false });
     }
 
     handleSubmit(e) {
@@ -41,10 +47,12 @@ class PostsForm extends React.Component {
                     <div className="posts-form-buttons">
                         <button>
                             <i className="photos-icon"></i> Photo/Video
-                        </button>
+                    </button>
                     </div>
                 </div>
-                <input type="submit" value="Share" className="hide"/>
+                <div className="card-footer">
+                    <input type="submit" value="Share" disabled={true} />
+                </div>
             </form>
         );
     }

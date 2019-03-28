@@ -20,6 +20,14 @@
     color: #4b4f56;
 }
 
+.card-footer {
+    font-weight: bold;
+    background-color: #f5f6f7;
+    border-top: 1px solid #dddfe2;
+    padding: 9px 7px;
+    color: #4b4f56;
+}
+
 .card-body {
     padding: 15px 15px 8px 15px;
 }
@@ -32,6 +40,7 @@
 .posts-form input[type="text"] {
     border: none;
     font-size: 14px;
+    transition: 0.2s;
 }
 
 .posts-form input[type="text"]::placeholder {
@@ -76,4 +85,29 @@
     background-repeat: no-repeat;
     width: 24px;
     height: 22px;
+}
+
+.posts-form input[type="submit"] {
+    font-size: 12px;
+    padding: 7px;
+    background-color: #4169b5;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.posts-form input[type="submit"]:hover {
+    background-color: #3257a1;
+    cursor: pointer;
+}
+
+.posts-form input[type="submit"][disabled=disabled], 
+.posts-form input[type="submit"]:disabled {
+    background-color: #9cb5da;
+}
+
+.posts-form input[type="submit"][disabled=disabled]:hover, 
+.posts-form input[type="submit"]:disabled:hover {
+    cursor: auto;
 }
