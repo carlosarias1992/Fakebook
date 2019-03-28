@@ -1,5 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import Header from './header/header';
+import PostsForm from './posts/posts_form';
+import PeopleYouMayKnow from './people_you_may_know/people_you_may_know';
 
 class Feed extends React.Component {
     constructor(props) {
@@ -13,11 +15,16 @@ class Feed extends React.Component {
     }
 
     render() {
+        const { currentUser } = this.props;
+
         return (
-            <div>
-                You are logged in
+            <main className="feed">
+                <Header />
+                {currentUser.first_name}, {currentUser.last_name}
                 <button onClick={this.logout}>Log out</button>
-            </div>
+                <PostsForm />
+                <PeopleYouMayKnow />
+            </main>
         );
     }
 }
