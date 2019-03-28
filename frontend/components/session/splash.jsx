@@ -7,7 +7,7 @@ export default (props) => {
     if (props.currentUser) props.history.push("/feed");
     
     return (
-        <main>
+        <main className="white-background">
             <Header />
             <section className="flex-center outer-login-body">
                 <section className="container flex-space-between login-body">

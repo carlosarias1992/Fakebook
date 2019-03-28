@@ -1,10 +1,10 @@
 import React from 'react';
+import ProfileNavbarContainer from '../../profile_navbar_container';
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = { search: '' };
-        this.logout = this.logout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -19,11 +19,6 @@ class Header extends React.Component {
         };
     } 
 
-    logout() {
-        this.props.logout();
-        this.props.history.push("/");
-    }
-
     render() {
         return (
             <header className="flex-center">
@@ -37,13 +32,12 @@ class Header extends React.Component {
                                 placeholder="Search"
                                 onChange={this.handleInput("search")}
                             />
-                            <input type="submit" name="" />
+                            <div className="submit-button">
+                                <input type="submit" value="" className="search-icon center" />
+                            </div>
                         </form>
                     </div>
-                    <div>
-                        {currentUser.first_name}, {currentUser.last_name}
-                        <button onClick={this.logout}>Log out</button>
-                    </div>
+                    <ProfileNavbarContainer />
                 </div>
             </header>
         );

@@ -34,6 +34,10 @@ nav ul {
     list-style:none;
 }
 
+ul {
+    list-style: none;
+}
+
 a {
     margin:0;
     padding:0;

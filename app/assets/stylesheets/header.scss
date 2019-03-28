@@ -5,7 +5,7 @@ main {
 
 header {
     height: 42px;
-    background-image: linear-gradient(#4169b5, #406bb8);
+    background-color: #4267b2;
     border-bottom: 1px #29497f solid;
     color: white;
     display: flex;
@@ -14,7 +14,7 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    margin: 0 7px;
+    margin: 0 7px 0 0;
 }
 
 .white-logo-icon {
@@ -26,6 +26,14 @@ header {
     height: 24px;
     margin-right: 7px;
 }
+
+.search-icon {
+    background: url(image-path('header-icons.png')) 0 -1445px;
+    background-repeat: no-repeat;
+    width: 4px;
+    height: 14px;
+}
+
 
 .search-bar form {
     overflow: hidden;
@@ -50,14 +58,94 @@ header {
     color: #a5a9b3;
 }
 
-.search-bar input[type="submit"] {
+.search-bar .submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f5f6f7;
     transition: 0.2s;
+    width: 55px;
 }
 
-.search-bar input[type="submit"]:hover {
+.search-bar .submit-button:hover {
     background-color: #eeeeee;
     cursor: pointer;
+}
+
+.profile-navbar {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.main-navbar {
+    display: flex;
+    align-items: center;
+    color: #fbfcfe;
+    height: 30px;
+}
+
+.main-navbar li {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    border-right: 1px solid #315597;
+}
+
+.main-navbar .avatar-link {
+    padding-left: 2px;
+}
+
+.main-navbar a {
+    display: flex;
+    align-items: center;
+    color: #fbfcfe;
+    padding: 0 13px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+.main-navbar a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #3a5b9e;
+}
+
+.main-navbar .menu-button {
+    padding: 0 13px;
+    border-right: none;
+}
+
+.main-navbar .menu-button:hover {
+    cursor: pointer;
+}
+
+.menu-icon {
+    background: url(image-path('header-icons.png')) -1px -1329px;    
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 9px;
+}
+
+.main-navbar .notifications-button {
+    padding: 0 13px;
+}
+
+.main-navbar .notifications-button:hover {
+    cursor: pointer;
+}
+
+.notifications-icon {
+    background: url(image-path('header-icons.png')) 0px -793px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
 }
 
 

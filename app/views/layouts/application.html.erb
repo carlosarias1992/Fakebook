@@ -7,6 +7,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+    <script>
+      window.maleAvatar = "<%= image_url('male_avatar.png') %>";
+      window.femaleAvatar = "<%= image_url('female_avatar.png') %>";
+    </script>
   </head>
 
   <body>
