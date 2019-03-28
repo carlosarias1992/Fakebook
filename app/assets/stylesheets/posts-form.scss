@@ -1,0 +1,79 @@
+.posts-form {
+    background-color: white;
+    border: 1px solid #dddfe2;
+    font-size: 13px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.posts-form img {
+    width: 40px;
+    border: 1px solid #b9bec3;
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: #f5f6f7;
+    border-bottom: 1px solid #dddfe2;
+    padding: 9px 7px;
+    color: #4b4f56;
+}
+
+.card-body {
+    padding: 15px 15px 8px 15px;
+}
+
+.body-input {
+    display: flex;
+    align-items: center;
+}
+
+.posts-form input[type="text"] {
+    border: none;
+    font-size: 14px;
+}
+
+.posts-form input[type="text"]::placeholder {
+    color: #a0a3aa;
+}
+
+.posts-form input {
+    width: 100%;
+}
+
+.posts-form hr {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    height: 0.5px;
+}
+
+.posts-form-buttons {
+    display: flex;
+}
+
+.posts-form-buttons button {
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 5px 13px;
+    background-color: #f5f6f7;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: #4b4f56;
+}
+
+.posts-form-buttons button:hover {
+    background-color: #ebebeb;
+    cursor: pointer;
+}
+
+.photos-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('feed-icons.png')) 0px -883px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}

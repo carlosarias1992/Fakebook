@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderContainer from './header/header_container';
-import PostsForm from '../posts/posts_form';
+import PostsFormContainer from '../posts/posts_form_container';
 import PeopleYouMayKnow from './people_you_may_know/people_you_may_know';
 import Avatar from '../avatar';
 import { NavLink } from 'react-router-dom';
@@ -29,7 +29,7 @@ export default props => {
                         </ul>
                     </aside>
                     <div className="center-col">
-                        <PostsForm />
+                        <PostsFormContainer />
                         <div className="horizontal-people">
                             <PeopleYouMayKnow />
                         </div>
