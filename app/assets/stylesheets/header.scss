@@ -1,0 +1,64 @@
+main {
+    background-color: #e9ebee;
+    min-height: 100vh;
+}
+
+header {
+    height: 42px;
+    background-image: linear-gradient(#4169b5, #406bb8);
+    border-bottom: 1px #29497f solid;
+    color: white;
+    display: flex;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: 0 7px;
+}
+
+.white-logo-icon {
+    display: inline-block;
+    background: url(image-path('header-icons.png')) 0 0;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+}
+
+.search-bar form {
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px #3b5a99 solid;
+    min-width: 445px;
+    display: flex;
+}
+
+.search-bar input {
+    margin: 0;
+    padding: 4px 7px;
+    font-size: 14px;
+    border: none;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+}
+
+.search-bar input::placeholder {
+    color: #a5a9b3;
+}
+
+.search-bar input[type="submit"] {
+    background-color: #f5f6f7;
+    transition: 0.2s;
+}
+
+.search-bar input[type="submit"]:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+
+
