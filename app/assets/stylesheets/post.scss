@@ -55,7 +55,7 @@
     width: 100%;
     background: none;
     border: none;
-    padding: 10px 0;
+    padding: 10px 0 4px 0;
     font-weight: bold;
     font-size: 13px;
     color: #606787;
@@ -82,4 +82,28 @@
     background-repeat: no-repeat;
     width: 20px;
     height: 20px;
+}
+
+.post .card-footer {
+    border-top: 1px #eaebec solid;
+}
+
+.post .card-footer img {
+    width: 32px;
+    margin-left: 7px;
+}
+
+.post .card-footer textarea {
+    resize: none;
+    font-size: 12px;
+    border: 1px #ccd0d5 solid;
+    border-radius: 20px;
+    padding: 7px 12px;
+    height: 15px;
+    width: 400px;
+    outline: none;
+}
+
+.post .card-footer textarea::placeholder {
+    color: #90949c;
 }

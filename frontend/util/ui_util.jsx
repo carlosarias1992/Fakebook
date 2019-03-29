@@ -126,13 +126,17 @@ export const getMonthName = monthNumber => {
 
 export const getTime = date => {
     let hours = date.getHours();
-    const minutes = date.getMinutes();
+    let minutes = date.getMinutes();
     let timeOfDay = "AM";
 
     if (hours > 12) {
         hours = hours - 12;
         timeOfDay = "PM";
     } 
+
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
 
     return `${hours}:${minutes} ${timeOfDay}`;
 }

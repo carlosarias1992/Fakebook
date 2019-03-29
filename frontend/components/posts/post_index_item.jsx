@@ -35,7 +35,7 @@ export default props => {
                     </> :
                     null}
                 </div>
-                <p className={props.post.content.length < 80 ? "large-font" : ""}>
+                <p className={props.post.content.length < 95 ? "large-font" : ""}>
                     {props.post.content}
                 </p>
                 <hr />
@@ -47,6 +47,12 @@ export default props => {
                         <i className="comment-icon"></i> Comment
                     </button>
                 </div>
+            </div>
+            <div className="card-footer">
+                <AvatarContainer userId={props.author.id} />
+                <textarea
+                    placeholder="Write a comment..."
+                />
             </div>
         </div>
     );
