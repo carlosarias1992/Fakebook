@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import { 
     RECEIVE_POST,
     REMOVE_POST,
@@ -9,6 +10,11 @@ export default (state = {}, action) => {
     let newState;
 
     switch(action.type) {
+        case RECEIVE_POSTS:
+            return action.posts;
+        case RECEIVE_POST:
+            newState = { [action.post.id]: action.post };
+            return merge({}, oldState, newState);
         default: 
             return oldState;
     }

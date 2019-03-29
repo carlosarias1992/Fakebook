@@ -23,7 +23,8 @@ class PostsForm extends React.Component {
         e.preventDefault();
 
         if (this.state.content !== "") {
-
+            this.props.createPost({ post: { content: this.state.content } })
+                .then(() => this.setState({ content: '' }));
         }
     }
 
@@ -56,7 +57,7 @@ class PostsForm extends React.Component {
                             type="text"
                             value={this.state.content}
                             placeholder={"What's on your mind, " + this.props.currentUser.first_name + "?"}
-                            onChange={this.handleInput("body")}
+                            onChange={this.handleInput("content")}
                             onFocus={this.revealModal}
                         />
                     </div>
