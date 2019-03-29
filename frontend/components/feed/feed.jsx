@@ -7,6 +7,10 @@ import { NavLink } from 'react-router-dom';
 import PostIndexContainer from '../posts/post_index_container';
 
 class Feed extends React.Component {
+    componentWillMount() {
+        this.props.fetchUsers();
+    }
+
     componentDidMount() {
         this.props.fetchPosts();
     }

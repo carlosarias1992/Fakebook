@@ -110,3 +110,7 @@ export const errorModal = displayValue => {
 export const validEmail = email => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,5})+$/.test(email)
 }
+
+export const toggleClass = (className) => {
+    return () => document.getElementByClassName("dropdown").classList.toggle(className);
+}

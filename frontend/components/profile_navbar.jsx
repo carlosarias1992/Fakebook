@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarContainer from './avatar_container';
+import { toggleClass } from '../util/ui_util';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
@@ -28,12 +29,12 @@ class ProfileNavbar extends React.Component {
                     <li className="notifications-button">
                         <i className="notifications-icon"></i>
                     </li>
-                    <li className="menu-button">
+                    <li className="menu-button" onClick={toggleClass("hide")}>
                         <i className="menu-icon"></i>
                     </li>
                 </ul>
-                
-                <ul className="dropdown">
+
+                <ul className="dropdown hide">
                     <li onClick={this.logout}>Log Out</li>
                 </ul>
             </section>

@@ -7,6 +7,7 @@ import Root from './components/root';
 import * as SessionApiUtil from './util/session_api_util';
 import * as Actions from './actions/session_actions';
 import * as PostsApiUtil from './util/posts_api_util';
+import * as UserApiUtil from './util/user_api_util';
 //*** TESTING  ***/
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.createPost = PostsApiUtil.createPost;
     window.updatePost = PostsApiUtil.updatePost;
     window.deletePost = PostsApiUtil.deletePost;
+    window.fetchUsers = UserApiUtil.fetchUsers;
+    window.fetchUser = UserApiUtil.fetchUser;
     //*** TESTING  ***/
 
     ReactDOM.render(<Root store={store} />, root);

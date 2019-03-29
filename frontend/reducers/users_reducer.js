@@ -1,7 +1,9 @@
 import { merge } from 'lodash';
+import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import {
-    RECEIVE_CURRENT_USER
-} from '../actions/session_actions';
+    RECEIVE_USERS,
+    RECEIVE_USER
+} from '../actions/user_actions';
 
 export default (state = {}, action) => {
     const { user } = action;
@@ -10,6 +12,12 @@ export default (state = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
+            newState = { [user.id]: user };
+            return merge({}, oldState, newState);
+        case RECEIVE_USERS:
+            newState = action.users;
+            return merge({}, oldState, newState);
+        case RECEIVE_USER:
             newState = { [user.id]: user };
             return merge({}, oldState, newState);
         default: 
