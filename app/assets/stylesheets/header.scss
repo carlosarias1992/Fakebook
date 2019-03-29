@@ -76,6 +76,7 @@ header {
     display: flex;
     align-items: center;
     font-size: 12px;
+    position: relative;
 }
 
 .avatar {
@@ -146,6 +147,31 @@ header {
     background-repeat: no-repeat;
     width: 24px;
     height: 22px;
+}
+
+.dropdown {
+    background-color: white;
+    color: #1e222a;
+    width: 238px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: 1;
+    border: 1px #bdbebf solid;
+    border-radius: 3.5px;
+    padding: 5px 0;
+    box-shadow: 0 2px 4px 2px #a6a6a65a;
+}
+
+.dropdown li {
+    border: none;
+    padding: 5px 27px;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    color: white;
+    background-color: #3b5a99;
 }
 
 

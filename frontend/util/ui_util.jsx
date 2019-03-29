@@ -112,5 +112,5 @@ export const validEmail = email => {
 }
 
 export const toggleClass = (className) => {
-    return () => document.getElementByClassName("dropdown").classList.toggle(className);
+    return () => document.querySelector(".dropdown").classList.toggle(className);
 }
