@@ -33,7 +33,7 @@ class PostsForm extends React.Component {
             const element = e.target;
             const footer = document.querySelector(".card-footer");
             const submitButton = footer.children[0];
-
+            
             if (element.value !== "") {
                 removeClass(footer, "hide");
                 submitButton.disabled = false;
@@ -53,7 +53,7 @@ class PostsForm extends React.Component {
                 <div className="card-body">
                     <div className="body-input">
                         <AvatarContainer />
-                        <input
+                        <textarea
                             type="text"
                             value={this.state.content}
                             placeholder={"What's on your mind, " + this.props.currentUser.first_name + "?"}

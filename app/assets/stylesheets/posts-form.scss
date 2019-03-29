@@ -38,13 +38,19 @@
     align-items: center;
 }
 
-.posts-form input[type="text"] {
+.posts-form textarea {
     border: none;
     font-size: 14px;
     transition: 0.2s;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-.posts-form input[type="text"]::placeholder {
+.posts-form textarea::placeholder {
     color: #a0a3aa;
 }
 

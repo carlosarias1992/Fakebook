@@ -2,3 +2,31 @@
     margin-bottom: 10px;
     border: 1px solid #dddfe2;
 }
+
+.post hr {
+    margin: 0;
+    height: 7px;
+}
+
+.post p {
+    margin-bottom: 7px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.post-header a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.post-header img {
+    width: 37px;
+}
+
+.large-font {
+    font-size: 20px;
+}
