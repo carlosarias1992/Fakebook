@@ -4,7 +4,7 @@ import PostsFormContainer from '../posts/posts_form_container';
 import PeopleYouMayKnow from './people_you_may_know/people_you_may_know';
 import AvatarContainer from '../avatar_container';
 import { NavLink } from 'react-router-dom';
-import PostIndex from '../posts/post_index';
+import PostIndexContainer from '../posts/post_index_container';
 
 class Feed extends React.Component {
     componentDidMount() {
@@ -39,7 +39,7 @@ class Feed extends React.Component {
                             <PostsFormContainer />
 
                             {allPosts.length !== 0 ? 
-                                <PostIndex /> 
+                                <PostIndexContainer /> 
                                 :
                                 <div className="horizontal-people">
                                     <PeopleYouMayKnow />
