@@ -7,6 +7,6 @@ export default props => {
     });
 
     return (
-        <div>{allPosts}</div>
+        <div className="allPosts">{allPosts}</div>
     )
 }

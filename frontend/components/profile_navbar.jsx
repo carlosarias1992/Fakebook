@@ -26,8 +26,15 @@ class ProfileNavbar extends React.Component {
                         </Link>
                     </li>
                     <li><Link to="/feed">Home</Link></li>
-                    <li className="notifications-button">
-                        <i className="notifications-icon"></i>
+                    <li>
+                        <ul className="notifications-menu">
+                            <li className="notifications-button">
+                                <i className="friend-requests-icon"></i>
+                            </li>
+                            <li className="notifications-button">
+                                <i className="notifications-icon"></i>
+                            </li>
+                        </ul>
                     </li>
                     <li className="menu-button" onClick={toggleClass("hide")}>
                         <i className="menu-icon"></i>

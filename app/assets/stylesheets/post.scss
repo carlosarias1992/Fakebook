@@ -1,0 +1,85 @@
+.post {
+    margin-bottom: 10px;
+    border: 1px solid #dddfe2;
+}
+
+.post hr {
+    margin: 0;
+    height: 7px;
+}
+
+.post small {
+    margin: 5px 0;
+    font-size: 12px;
+    display: block;
+    color: #616770;
+}
+
+.post p {
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.post {
+    overflow: hidden;
+    border-radius: 5px 5px 3px 3px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.post-header a {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.post-header img {
+    width: 37px;
+}
+
+.post .large-font {
+    font-size: 20px;
+}
+
+.post-icons {
+    display: flex;
+}
+
+.post-icons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 13px;
+    color: #606787;
+    cursor: pointer;
+}
+
+.post-icons i {
+    margin-right: 5px;
+}
+
+.like-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons.png')) 0px -417px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.comment-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -18px -354px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}

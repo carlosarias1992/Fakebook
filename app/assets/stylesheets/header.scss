@@ -174,5 +174,20 @@ header {
     background-color: #3b5a99;
 }
 
+.notifications-menu {
+    display: flex;
+}
+
+.notifications-menu li {
+    border: none;
+}
+
+.friend-requests-icon {
+    background: url(image-path('header-icons.png')) 0px -892px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
 
 

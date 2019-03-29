@@ -16,24 +16,38 @@ export default props => {
     dateEnding = postYear === presentYear ? ` at ${time}` : `, ${postYear}`;
 
     return (
-        <div className="card-body post">
-            <div className="post-header">
-                <AvatarContainer userId={props.author.id} />
-                <div>
-                    <Link to={"users/" + props.author.id}>
-                        {props.author.first_name + " " + props.author.last_name}
-                    </Link>
-                    <small>
-                        {
-                            getMonthName(month) + " " + day + dateEnding
-                        }
-                    </small>
+        <div className="post">
+            <div className="card-body">
+                <div className="post-header">
+                    {props.author ? 
+                    <>
+                        <AvatarContainer userId={props.author.id} />
+                        <div>
+                            <Link to={"users/" + props.author.id}>
+                                {props.author.first_name + " " + props.author.last_name}
+                            </Link>
+                            <small>
+                                {
+                                    getMonthName(month) + " " + day + dateEnding
+                                }
+                            </small>
+                        </div>
+                    </> :
+                    null}
+                </div>
+                <p className={props.post.content.length < 80 ? "large-font" : ""}>
+                    {props.post.content}
+                </p>
+                <hr />
+                <div className="post-icons">
+                    <button>
+                        <i className="like-icon"></i> Like
+                    </button>
+                    <button>
+                        <i className="comment-icon"></i> Comment
+                    </button>
                 </div>
             </div>
-            <p className={props.post.content.length < 80 ? "large-font" : ""}>
-                {props.post.content}
-            </p>
-            <hr />
         </div>
     );
 };
