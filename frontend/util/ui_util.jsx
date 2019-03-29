@@ -3,18 +3,18 @@ import React from 'react';
 export const monthOptions = () => {
     const months = [
         "Month", 
-        "January", 
-        "February", 
-        "March",
-        "April",
+        "Jan", 
+        "Feb", 
+        "Mar",
+        "Apr",
         "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
     ];
 
     const options = months.map((month, idx) => {
@@ -113,4 +113,26 @@ export const validEmail = email => {
 
 export const toggleClass = (className) => {
     return () => document.querySelector(".dropdown").classList.toggle(className);
+}
+
+export const getMonthName = monthNumber => {
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    return months[monthNumber];
+}
+
+export const getTime = date => {
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    let timeOfDay = "AM";
+
+    if (hours > 12) {
+        hours = hours - 12;
+        timeOfDay = "PM";
+    } 
+
+    return `${hours}:${minutes} ${timeOfDay}`;
 }

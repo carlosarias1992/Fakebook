@@ -8,8 +8,16 @@
     height: 7px;
 }
 
+.post small {
+    margin: 5px 0;
+    font-size: 12px;
+    display: block;
+    color: #616770;
+}
+
 .post p {
     margin-bottom: 7px;
+    font-size: 14px;
 }
 
 .post-header {
@@ -27,6 +35,6 @@
     width: 37px;
 }
 
-.large-font {
+.post .large-font {
     font-size: 20px;
 }
