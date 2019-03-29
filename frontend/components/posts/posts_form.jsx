@@ -5,7 +5,7 @@ import { removeClass, addClass } from '../../util/ui_util';
 class PostsForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { body: '', modal: false };
+        this.state = { content: '', modal: false };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.revealModal = this.revealModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -22,8 +22,8 @@ class PostsForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        if (this.state.body !== "") {
-            
+        if (this.state.content !== "") {
+
         }
     }
 
@@ -54,7 +54,7 @@ class PostsForm extends React.Component {
                         <AvatarContainer />
                         <input
                             type="text"
-                            value={this.state.body}
+                            value={this.state.content}
                             placeholder={"What's on your mind, " + this.props.currentUser.first_name + "?"}
                             onChange={this.handleInput("body")}
                             onFocus={this.revealModal}

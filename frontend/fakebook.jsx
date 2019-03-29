@@ -4,8 +4,9 @@ import configureStore from './store/store';
 import Root from './components/root';
 
 //*** TESTING  ***/
-import * as ApiUtil from './util/session_api_util';
+import * as SessionApiUtil from './util/session_api_util';
 import * as Actions from './actions/session_actions';
+import * as PostsApiUtil from './util/posts_api_util';
 //*** TESTING  ***/
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,11 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
     //*** TESTING  ***/
     window.getState = store.getState;
     window.dispatch = store.dispatch;
-    window.signupUser = ApiUtil.signupUser;
-    window.loginUser = ApiUtil.loginUser;
-    window.logoutUser = ApiUtil.logoutUser;
+    window.signupUser = SessionApiUtil.signupUser;
+    window.loginUser = SessionApiUtil.loginUser;
+    window.logoutUser = SessionApiUtil.logoutUser;
     window.logout = Actions.logout;
     window.login = Actions.login;
+    window.fetchPosts = PostsApiUtil.fetchPosts;
+    window.fetchPost = PostsApiUtil.fetchPost;
+    window.createPost = PostsApiUtil.createPost;
+    window.updatePost = PostsApiUtil.updatePost;
+    window.deletePost = PostsApiUtil.deletePost;
     //*** TESTING  ***/
 
     ReactDOM.render(<Root store={store} />, root);

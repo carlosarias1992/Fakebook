@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
     has_one_attached :avatar
 
+    has_many :posts, foreign_key: :author_id, class_name: :Post, dependent: :destroy
+
     after_initialize :ensure_session_token 
 
     def self.find_by_credentials(username, password)
