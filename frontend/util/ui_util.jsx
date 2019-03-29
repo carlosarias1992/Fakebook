@@ -72,6 +72,25 @@ export const toggleErrorDisplay = (parentElement, displayProperty) => {
     display.className = displayClass[0] + " " + displayProperty;
 }
 
+export const removeClass = (element, className) => {
+    const prevClass = element.className.split(" ");
+    const newClass = [];
+
+    for (let i = 0; i < prevClass.length; i++) {
+        if (className !== prevClass[i]) {
+            newClass.push(prevClass[i]);
+        }
+    }
+
+    element.className = newClass.join(" ");
+}
+
+export const addClass = (element, className) => {
+    const allClasses = element.className.split(" ");
+    allClasses.push(className);
+    element.className = allClasses.join(" ");
+}
+
 export const errorModal = displayValue => {
     return (e) => {
         const element = e.target;
