@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderContainer from './header/header_container';
 import PostsFormContainer from '../posts/posts_form_container';
 import PeopleYouMayKnow from './people_you_may_know/people_you_may_know';
-import Avatar from '../avatar';
+import AvatarContainer from '../avatar_container';
 import { NavLink } from 'react-router-dom';
 
 export default props => {
@@ -17,7 +17,7 @@ export default props => {
                         <ul>
                             <li>
                                 <NavLink to="/user/2">
-                                    <Avatar /> 
+                                    <AvatarContainer /> 
                                     {currentUser.first_name} {currentUser.last_name}
                                 </NavLink>
                             </li>

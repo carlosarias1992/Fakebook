@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Avatar from './avatar';
+import AvatarContainer from './avatar_container';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class ProfileNavbar extends React.Component {
                 <ul className="main-navbar">
                     <li>
                         <Link to="/" className="avatar-link">
-                            <Avatar />{currentUser.first_name}
+                            <AvatarContainer />{currentUser.first_name}
                         </Link>
                     </li>
                     <li><Link to="/feed">Home</Link></li>
@@ -33,7 +33,7 @@ class ProfileNavbar extends React.Component {
                     </li>
                 </ul>
                 
-                <ul className="dropdown hide">
+                <ul className="dropdown">
                     <li onClick={this.logout}>Log Out</li>
                 </ul>
             </section>

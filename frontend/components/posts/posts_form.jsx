@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../avatar';
+import AvatarContainer from '../avatar_container';
 
 class PostsForm extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class PostsForm extends React.Component {
                 <div className="card-header">Create Post</div>
                 <div className="card-body">
                     <div className="body-input">
-                        <Avatar />
+                        <AvatarContainer />
                         <input
                             type="text"
                             value={this.state.body}
