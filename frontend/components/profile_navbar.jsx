@@ -36,7 +36,7 @@ class ProfileNavbar extends React.Component {
                             </li>
                         </ul>
                     </li>
-                    <li className="menu-button" onClick={toggleClass("hide")}>
+                    <li className="menu-button" onClick={toggleClass(".dropdown", "hide")}>
                         <i className="menu-icon"></i>
                     </li>
                     <ul className="dropdown hide">

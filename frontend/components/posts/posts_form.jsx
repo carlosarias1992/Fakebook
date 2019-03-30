@@ -21,10 +21,15 @@ class PostsForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const footer = document.querySelector(".card-footer");
+        const submitButton = footer.children[0];
 
         if (this.state.content !== "") {
             this.props.createPost({ post: { content: this.state.content } })
                 .then(() => this.setState({ content: '' }));
+
+            submitButton.disabled = true;
+            addClass(footer, "hide");
         }
     }
 

@@ -111,11 +111,11 @@ export const validEmail = email => {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,5})+$/.test(email)
 }
 
-export const toggleClass = (className) => {
-    return () => document.querySelector(".dropdown").classList.toggle(className);
+export const toggleClass = (selector, className) => {
+    return () => document.querySelector(selector).classList.toggle(className);
 }
 
-export const getMonthName = monthNumber => {
+const getMonthName = monthNumber => {
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -124,7 +124,7 @@ export const getMonthName = monthNumber => {
     return months[monthNumber];
 }
 
-export const getTime = date => {
+const getTime = date => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
     let timeOfDay = "AM";
@@ -139,4 +139,16 @@ export const getTime = date => {
     }
 
     return `${hours}:${minutes} ${timeOfDay}`;
+}
+
+export const getTimeString = created_at => {
+    const month = created_at.getMonth();
+    const day = created_at.getDate();
+    const time = getTime(created_at);
+    const presentYear = new Date().getFullYear();
+    let postYear = created_at.getFullYear();
+    let dateEnding;
+
+    dateEnding = postYear === presentYear ? ` at ${time}` : `, ${postYear}`;
+    return getMonthName(month) + " " + day + dateEnding
 }
