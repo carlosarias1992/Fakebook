@@ -66,3 +66,13 @@ select {
 button {
     outline: none;
 }
+
+@keyframes reveal-modal {
+    from { height: 0%; }
+    to { height: 100%; }
+}
+
+.animateModal {
+    animation-name: reveal-modal;
+    animation-duration: 5s;
+}
