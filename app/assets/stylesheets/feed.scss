@@ -61,7 +61,12 @@
     width: 275px;
 }
 
-.right-col .languages {
+.copyright {
+    width: 100%;
+    margin-top: 0 !important;
+}
+
+.copyright .languages {
     background-color: white;
     padding: 10px;
     border-radius: 3px;
@@ -69,7 +74,7 @@
     color: #90949b;
 }
 
-.right-col footer {
+.copyright footer {
     padding: 10px;
     color: #606770;
 }

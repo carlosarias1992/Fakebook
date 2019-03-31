@@ -1,0 +1,16 @@
+.profile-body {
+    width: 854px;
+    margin: 12px auto;
+}
+
+.profile-body aside {
+    width: 320px;
+}
+
+.profile-body .center-col {
+    margin-right: 0;
+}
+
+.profile-body .copyright {
+    font-size: 13px;
+}

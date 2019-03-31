@@ -1,10 +1,10 @@
 import React from 'react';
 import HeaderContainer from './header/header_container';
 import PostsFormContainer from '../posts/posts_form_container';
-import PeopleYouMayKnow from './people_you_may_know/people_you_may_know';
 import AvatarContainer from '../avatar_container';
 import { NavLink } from 'react-router-dom';
 import PostIndexContainer from '../posts/post_index_container';
+import Copyright from '../copyright';
 
 class Feed extends React.Component {
     componentWillMount() {
@@ -53,10 +53,7 @@ class Feed extends React.Component {
                             }
                         </div>
                         <div className="right-col">
-                            <div className="languages">
-                                English (US)
-                            </div>
-                            <footer>Fakebook 2019</footer>
+                            <Copyright />
                         </div>
                     </div>
                 </section>
