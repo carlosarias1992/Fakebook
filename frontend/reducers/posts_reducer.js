@@ -15,6 +15,17 @@ export default (state = {}, action) => {
         case RECEIVE_POST:
             newState = { [action.post.id]: action.post };
             return merge({}, oldState, newState);
+        case REMOVE_POST:
+            const stateKeys = Object.keys(oldState);
+            newState = {};
+
+            for(let i = 0; i < stateKeys.length; i++) {
+                if (parseInt(stateKeys[i]) !== action.postId) {
+                    newState = merge(newState, { [stateKeys[i]]: state[stateKeys[i]] });
+                }
+            }
+
+            return newState;
         default: 
             return oldState;
     }

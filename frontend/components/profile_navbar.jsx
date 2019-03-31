@@ -36,11 +36,16 @@ class ProfileNavbar extends React.Component {
                             </li>
                         </ul>
                     </li>
-                    <li className="menu-button" onClick={toggleClass(".dropdown", "hide")}>
-                        <i className="menu-icon"></i>
-                    </li>
+                    <button
+                        onFocus={toggleClass(".dropdown", "hide")}
+                        onBlur={toggleClass(".dropdown", "hide")}
+                    >
+                        <li className="menu-button">
+                            <i className="menu-icon"></i>
+                        </li>
+                    </button>
                     <ul className="dropdown hide">
-                        <li onClick={this.logout}>Log Out</li>
+                        <li onMouseDown={this.logout}>Log Out</li>
                     </ul>
                 </ul>
             </section>

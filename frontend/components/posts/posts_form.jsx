@@ -1,6 +1,6 @@
 import React from 'react';
 import AvatarContainer from '../avatar_container';
-import { removeClass, addClass } from '../../util/ui_util';
+import { removeClass, addClass, autoGrow } from '../../util/ui_util';
 
 class PostsForm extends React.Component {
     constructor(props) {
@@ -56,14 +56,15 @@ class PostsForm extends React.Component {
             <form className="posts-form" onSubmit={this.handleSubmit}>
                 <div className="card-header">Create Post</div>
                 <div className="card-body">
+                    <AvatarContainer />
                     <div className="body-input">
-                        <AvatarContainer />
                         <textarea
                             type="text"
                             value={this.state.content}
                             placeholder={"What's on your mind, " + this.props.currentUser.first_name + "?"}
                             onChange={this.handleInput("content")}
                             onFocus={this.revealModal}
+                            onKeyUp={autoGrow}
                         />
                     </div>
                     <hr />

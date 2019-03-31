@@ -92,6 +92,15 @@ header {
     height: 30px;
 }
 
+.main-navbar button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    cursor: pointer;
+}
+
 .main-navbar li {
     display: flex;
     align-items: center;
@@ -134,8 +143,12 @@ header {
     height: 9px;
 }
 
+.main-navbar .notifications-button:first-of-type {
+    padding-left: 13px;
+}
+
 .main-navbar .notifications-button {
-    padding: 0 13px;
+    padding: 0 13px 0 0;
 }
 
 .main-navbar .notifications-button:hover {

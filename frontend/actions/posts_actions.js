@@ -18,9 +18,10 @@ const receivePosts = (posts) => {
     };
 };
 
-const removePost = () => {
+const removePost = id => {
     return {
-        type: REMOVE_POST
+        type: REMOVE_POST,
+        postId: id
     };
 };
 
@@ -46,6 +47,6 @@ export const updatePost = post => dispatch => {
 
 export const deletePost = id => dispatch => {
     return PostsApiUtil.deletePost(id)
-        .then(() => dispatch(removePost()));
+        .then(() => dispatch(removePost(id)));
 };
 

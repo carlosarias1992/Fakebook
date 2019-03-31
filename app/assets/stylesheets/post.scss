@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .post-header a {
@@ -106,4 +107,36 @@
 
 .post .card-footer textarea::placeholder {
     color: #90949c;
+}
+
+.post-header .dropdown {
+    width: fit-content;
+    top: 13px;
+    right: -10px;
+}
+
+.post-header .dropdown li {
+    padding: 5px 13px;
+}
+
+.post-menu-button {
+    background: none;
+    border: none;
+    position: absolute;
+    right: -14px;
+    top: -8px;
+    cursor: pointer;
+}
+
+.post-menu-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -23px -287px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.post-menu-icon:hover {
+    background: url(image-path('post-icons-2.png')) 0 -310px; 
 }
