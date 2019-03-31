@@ -7,7 +7,9 @@ const mapStateToProps = (state, ownProps) => {
     const currentUser = users[currentUserId] || {};
 
     return {
-        currentUser
+        currentUser,
+        message: ownProps.message,
+        className: ownProps.className
     };
 };
 

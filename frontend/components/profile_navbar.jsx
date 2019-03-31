@@ -21,9 +21,7 @@ class ProfileNavbar extends React.Component {
             <section className="profile-navbar">
                 <ul className="main-navbar">
                     <li>
-                        <Link to="/" className="avatar-link">
-                            <AvatarContainer />{currentUser.first_name}
-                        </Link>
+                        <AvatarContainer message={currentUser.first_name} className="avatar-link"/>
                     </li>
                     <li><Link to="/feed">Home</Link></li>
                     <li>

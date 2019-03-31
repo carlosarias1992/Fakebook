@@ -18,6 +18,7 @@ class Feed extends React.Component {
     render() {
         const { currentUser, posts } = this.props;
         const allPosts = Object.keys(posts);
+        const linkTitle = `${currentUser.first_name} ${currentUser.last_name}`;
 
         return (
             <main className="feed">
@@ -27,10 +28,7 @@ class Feed extends React.Component {
                         <aside>
                             <ul>
                                 <li>
-                                    <NavLink to="/user/2">
-                                        <AvatarContainer />
-                                        {currentUser.first_name} {currentUser.last_name}
-                                    </NavLink>
+                                    <AvatarContainer message={linkTitle}/>
                                 </li>
                                 <li>
                                     <NavLink to="/feed" activeClassName="active">
