@@ -96,6 +96,11 @@ class PostsForm extends React.Component {
             <form className="posts-form" onSubmit={this.handleSubmit}>
                 <div className="card-header">
                     {this.props.formType === "Create" ? "Create Post" : "Edit Post"}
+                    {this.props.formType === "Edit" ?
+                        <button onClick={() => this.props.hideEditModal(this.props.post.id)}>
+                            <i className="close-icon"></i>
+                        </button> : null
+                    }
                 </div>
                 <div className="card-body">
                     <AvatarContainer />

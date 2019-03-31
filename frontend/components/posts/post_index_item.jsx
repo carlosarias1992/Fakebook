@@ -72,9 +72,6 @@ class PostIndexItem extends React.Component {
                     <div className="modal">
                         <div className="modal-content">
                             <EditFormContainer post={this.props.post}/>
-                            <button onClick={() => this.props.hideEditModal(this.props.post.id)}>
-                                <i className="close-icon"></i>
-                            </button>
                         </div>    
                     </div> : null
                 }

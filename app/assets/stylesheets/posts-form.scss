@@ -21,6 +21,7 @@
     padding: 9px 7px;
     color: #4b4f56;
     border-radius: 5px 5px 0 0;
+    position: relative;
 }
 
 .card-footer {
@@ -145,10 +146,10 @@
     width: 500px;
 }
 
-.modal-content > button {
+.card-header button {
     position: absolute;
     top: 10px;
-    right: 290px;
+    right: 0;
     background: none;
     border: none;
     cursor: pointer;

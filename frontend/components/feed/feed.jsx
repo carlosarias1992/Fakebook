@@ -45,13 +45,20 @@ class Feed extends React.Component {
                             {allPosts.length !== 0 ? 
                                 <PostIndexContainer /> 
                                 :
-                                <div className="horizontal-people">
-                                    <PeopleYouMayKnow />
+                                <div className="welcome">
+                                    <h1>Welcome to Fakebook</h1>
+                                    <h2>
+                                        Get started by adding friends. You'll 
+                                        see their videos, photos and posts here.
+                                    </h2>
                                 </div>
                             }
                         </div>
-                        <div className="right-col vertical-people">
-                            <PeopleYouMayKnow />
+                        <div className="right-col">
+                            <div className="languages">
+                                English (US)
+                            </div>
+                            <footer>Fakebook 2019</footer>
                         </div>
                     </div>
                 </section>
