@@ -5,15 +5,18 @@ import { createPost } from '../../actions/posts_actions';
 const mapStateToProps = state => {
     const currentUserId = state.session.current_user_id;
     const currentUser = state.entities.users[currentUserId];
-
+    
     return {
-        currentUser
+        content: '',
+        className: '',
+        currentUser,
+        formType: "Create"
     };
 };
 
 const mapDispatchtoProps = dispatch => {
     return {
-        createPost: post => dispatch(createPost(post))
+        action: post => dispatch(createPost(post))
     };
 };
 

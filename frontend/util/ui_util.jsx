@@ -158,3 +158,9 @@ export const autoGrow = e => {
     element.style.cssText = 'height:auto';
     element.style.cssText = 'height:' + element.scrollHeight + 'px';
 }
+
+export const autoGrowSelector = selector => {
+    const element = document.querySelector(selector);
+    element.style.cssText = 'height:auto';
+    element.style.cssText = 'height:' + element.scrollHeight + 'px';
+}
