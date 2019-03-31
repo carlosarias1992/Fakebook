@@ -5,6 +5,15 @@ import { getTimeString, toggleClass } from '../../util/ui_util';
 import EditFormContainer from './edit_form_container';
 
 class PostIndexItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.showModal = this.showModal.bind(this);
+    }
+
+    showModal() {
+        this.props.showEditModal(this.props.post.id);
+    }
+
     render() {
         const created_at = new Date(this.props.post.created_at);
         
@@ -35,7 +44,7 @@ class PostIndexItem extends React.Component {
                                                 </button>
 
                                                 <ul className={"dropdown post-" + this.props.post.id + " hide"}>
-                                                    <li onMouseDown={() => this.props.showEditModal(this.props.post.id)}>
+                                                    <li onMouseDown={this.showModal}>
                                                         Edit Post
                                                     </li>
                                                     <li onMouseDown={() => this.props.deletePost(this.props.post.id)}>

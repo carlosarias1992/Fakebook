@@ -91,9 +91,10 @@ class PostsForm extends React.Component {
 
     render() {
         const formPlaceholder = this.props.currentUser ? `What's on your mind, ${this.props.currentUser.first_name}?` : "";
-        
+        const formClass = this.props.formType === "Create" ? "posts-form" : "posts-form animateModal";
+
         return (
-            <form className="posts-form" onSubmit={this.handleSubmit}>
+            <form className={formClass} onSubmit={this.handleSubmit}>
                 <div className="card-header">
                     {this.props.formType === "Create" ? "Create Post" : "Edit Post"}
                     {this.props.formType === "Edit" ?
