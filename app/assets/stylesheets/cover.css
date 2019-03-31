@@ -1,0 +1,87 @@
+.cover {
+    background-color: #1d2129;
+    min-height: 248px;
+    max-height: 357px;
+    position: relative;
+    border: 1px #d3d6db solid;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+}
+
+.cover .profile-picture {
+    color: white;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
+.profile-picture img {
+    width: 156px;
+    border: 4px white solid;
+}
+
+.profile-picture .name {
+    color: white;
+    text-decoration: none;
+    position: absolute;
+    bottom: 40px;
+    left: 180px;
+    font-weight: normal;
+    font-size: 20px;   
+    white-space: nowrap;
+}
+
+.cover-navbar {
+    display: flex;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 43px;
+}
+
+.cover-navbar li:first-of-type {
+    margin-left: 193px;
+    border-left: 1px #e9eaed solid;
+}
+
+.cover-navbar li {
+    display: flex;
+    align-items: center;
+    color: #365898;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 20px;
+    border-right: 1px #e9eaed solid;
+    cursor: pointer;
+}
+
+.cover-navbar li:hover {
+    background-color: #e7e9eb7b;
+}
+
+.avatar-holder {
+    background-color: #727477;
+    width: 164px;
+    height: 164px;
+    border-radius: 50%;
+}
+
+.cover-buttons button {
+    border: 1px #201212 solid;
+    background-color: #f5f6f7;
+    color: #595d63;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 2px;
+    position: absolute;
+    right: 13px;
+    bottom: 59px;
+    cursor: pointer;
+}
+
+.cover-buttons button:hover {
+    background-color: #ebedf0;
+}

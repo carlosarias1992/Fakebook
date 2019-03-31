@@ -51,6 +51,7 @@
 
 .post-icons {
     display: flex;
+    margin-top: 3px;
 }
 
 .post-icons button {
@@ -60,11 +61,15 @@
     width: 100%;
     background: none;
     border: none;
-    padding: 10px 0 4px 0;
+    padding: 7px 0 7px 0;
     font-weight: bold;
     font-size: 13px;
     color: #606787;
     cursor: pointer;
+}
+
+.post-icons button:hover {
+    background-color: rgba(242, 242, 242, 0.5);
 }
 
 .post-icons i {
