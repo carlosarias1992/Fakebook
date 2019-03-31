@@ -60,12 +60,15 @@ class PostIndexItem extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <div className="card-footer">
-                        <AvatarContainer userId={this.props.author.id} />
-                        <textarea
-                            placeholder="Write a comment..."
-                        />
-                    </div>
+                    {
+                        this.props.author ?
+                        <div className="card-footer">
+                            <AvatarContainer userId={this.props.author.id} />
+                            <textarea
+                                placeholder="Write a comment..."
+                            />
+                        </div> : null 
+                    }
                 </div>
                 {
                     this.props.editModal && this.props.editModal[this.props.post.id] ? 
