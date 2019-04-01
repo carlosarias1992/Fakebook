@@ -7,16 +7,8 @@ import EventsIndexItemContainer from './events_index_item_container';
 import Copyright from '../copyright';
 
 class Profile extends React.Component {
-    componentWillMount() {
-        this.props.fetchUsers();
-    }
-
-    componentDidMount() {
-        this.props.fetchPosts();
-    }
-
     render() {
-        const { user } = this.props;
+        const { user, friends, currentUser } = this.props;
 
         return (
             <main>
@@ -41,7 +33,10 @@ class Profile extends React.Component {
                         <Copyright />
                     </aside>
                     <div className="center-col">
-                        <PostsFormContainer receiver={user}/>
+                        {
+                            friends || user.id === currentUser.id ?
+                                <PostsFormContainer receiver={user} /> : null
+                        }
                         <ProfilePostsIndexContainer user={user}/>
                         <EventsIndexItemContainer user={user} />
                     </div>

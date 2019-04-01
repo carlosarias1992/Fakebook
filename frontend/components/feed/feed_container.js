@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
-import { fetchPosts } from '../../actions/posts_actions';
-import { fetchUsers } from '../../actions/user_actions';
 
 const mapStateToProps = state => {
     const currentUserId = state.session.current_user_id;
@@ -13,11 +11,4 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchPosts: () => dispatch(fetchPosts()),
-        fetchUsers: () => dispatch(fetchUsers())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default connect(mapStateToProps)(Feed);

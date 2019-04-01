@@ -62,16 +62,19 @@ class PostIndexItem extends React.Component {
                                     </> : null
                             }
                         </div>
-                        <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                            {this.props.event ? 
-                                <span className="event">
-                                    <div className="birthday-wrapper">
-                                        <i className="birthday-icon"></i>
-                                    </div>
+                        {this.props.event ? 
+                            <span className="event">
+                                <div className="birthday-wrapper">
+                                    <i className="birthday-icon"></i>
+                                </div>
+                                <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
                                     {this.props.post.content}
-                                </span> : this.props.post.content
-                            }
-                        </p> 
+                                </p>
+                            </span> : 
+                            <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
+                                {this.props.post.content}
+                            </p>
+                        }
                         <hr />
                         <div className="post-icons">
                             <button>

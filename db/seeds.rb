@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-birth_date = Date.new(1992,1,9)
+birth_date = Date.new(1992,1,10)
 
 User.create({
   username: "test", 

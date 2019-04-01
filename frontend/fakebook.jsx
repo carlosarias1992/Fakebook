@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.fetchUsers = UserApiUtil.fetchUsers;
     window.fetchUser = UserApiUtil.fetchUser;
     window.fetchFriendRequests = FriendRequestApiUtil.fetchFriendRequests;
+    window.sendFriendRequest = FriendRequestApiUtil.sendFriendRequest;
+    window.acceptFriendRequest = FriendRequestApiUtil.acceptFriendRequest;
+    window.denyFriendRequest = FriendRequestApiUtil.denyFriendRequest;
     //*** TESTING  ***/
 
     ReactDOM.render(<Root store={store} />, root);

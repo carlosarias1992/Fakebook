@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileNavbarContainer from '../../profile_navbar_container';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
     constructor(props) {
@@ -24,7 +25,9 @@ class Header extends React.Component {
             <header className="flex-center">
                 <div className="large-container flex-space-between">
                     <div className="search-bar">
-                        <span className="white-logo-icon"></span>
+                        <Link to="/">
+                            <span className="white-logo-icon"></span>
+                        </Link>
                         <form onSubmit={this.handleSubmit}>
                             <input
                                 type="text"

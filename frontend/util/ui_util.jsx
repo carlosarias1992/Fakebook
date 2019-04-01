@@ -164,3 +164,15 @@ export const autoGrowSelector = selector => {
     element.style.cssText = 'height:auto';
     element.style.cssText = 'height:' + element.scrollHeight + 'px';
 }
+
+export const findFriendRequestByUserId = (id, friendRequests) => {
+    const keys = Object.keys(friendRequests);
+
+    for(let i = 0; i < keys.length; i++) {
+        if (parseInt(friendRequests[keys[i]].sender_id) === id) {
+            return friendRequests[keys[i]];
+        } else if (parseInt(friendRequests[keys[i]].receiver_id) === id) {
+            return friendRequests[keys[i]];
+        }
+    }
+}

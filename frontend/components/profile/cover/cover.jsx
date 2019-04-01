@@ -1,5 +1,6 @@
 import React from 'react';
 import AvatarContainer from '../../avatar_container';
+import FriendRequestContainer from '../friend_request/friend_request_container';
 import { Link } from 'react-router-dom';
 
 export default props => {
@@ -24,13 +25,12 @@ export default props => {
                     </Link>
                 </div>
                 <div className="cover-buttons">
-                    {user.id === currentUser.id ? 
+                    {
+                        props.user.id === props.currentUser.id ?
                         <button>
                             <i className="edit-icon"></i> Edit Profile
-                        </button> : 
-                        <button>
-                            <i className="add-friend-icon"></i> Add Friend
-                        </button>
+                        </button> :
+                        <FriendRequestContainer user={user} />
                     }
                 </div>
             </div>

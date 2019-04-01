@@ -28,6 +28,7 @@ header {
 }
 
 .search-icon {
+    cursor: pointer;
     background: url(image-path('header-icons.png')) 0 -1445px;
     background-repeat: no-repeat;
     width: 4px;

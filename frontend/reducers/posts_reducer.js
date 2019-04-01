@@ -4,6 +4,7 @@ import {
     REMOVE_POST,
     RECEIVE_POSTS
 } from '../actions/posts_actions';
+import { removeObject } from '../util/reducer_util';
 
 export default (state = {}, action) => {
     const oldState = Object.freeze(state);
@@ -16,16 +17,7 @@ export default (state = {}, action) => {
             newState = { [action.post.id]: action.post };
             return merge({}, oldState, newState);
         case REMOVE_POST:
-            const stateKeys = Object.keys(oldState);
-            newState = {};
-
-            for(let i = 0; i < stateKeys.length; i++) {
-                if (parseInt(stateKeys[i]) !== action.postId) {
-                    newState = merge(newState, { [stateKeys[i]]: state[stateKeys[i]] });
-                }
-            }
-
-            return newState;
+            return removeObject(action.postId, oldState);
         default: 
             return oldState;
     }

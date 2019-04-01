@@ -10,7 +10,6 @@
     border: 1px #d3d6db solid;
     border-top: none;
     border-radius: 0 0 3px 3px;
-    overflow: hidden;
 }
 
 .cover .profile-picture {
@@ -113,4 +112,49 @@
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
+}
+
+.friends-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-3.png')) -448px -48px;    
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+}
+
+.cover-dropdown {
+    background-color: white;
+    position: absolute;
+    top: 200px;
+    right: 13px;
+    width: 200px;
+    box-shadow: 0 2px 4px 2px #a6a6a65a;
+    border: 1px #bdbebf solid;
+    padding: 5px 0;
+    font-size: 12.5px;
+}
+
+.cover-dropdown::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -9px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+.cover-dropdown li {
+    border: none;
+    padding: 5px 27px;
+    cursor: pointer;
+}
+
+.cover-dropdown li:hover {
+    color: white;
+    background-color: #3b5a99;
 }
