@@ -3,6 +3,7 @@ import HeaderContainer from '../feed/header/header_container';
 import CoverContainer from './cover/cover_container';
 import ProfilePostsIndexContainer from './profile_posts_index_container';
 import PostsFormContainer from '../posts/posts_form_container';
+import EventsIndexItemContainer from './events_index_item_container';
 import Copyright from '../copyright';
 
 class Profile extends React.Component {
@@ -42,6 +43,7 @@ class Profile extends React.Component {
                     <div className="center-col">
                         <PostsFormContainer receiver={user}/>
                         <ProfilePostsIndexContainer user={user}/>
+                        <EventsIndexItemContainer user={user} />
                     </div>
                 </section>
             </main>

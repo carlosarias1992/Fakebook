@@ -150,3 +150,31 @@
 .post-menu-icon:hover {
     background: url(image-path('post-icons-2.png')) 0 -310px; 
 }
+
+.post .event {
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.birthday-wrapper {
+    background-color: #3578e5;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.birthday-icon {
+    content: '';
+    display: block;
+    background: url(image-path('event-icons.png')) 0 -37px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}

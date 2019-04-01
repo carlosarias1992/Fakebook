@@ -33,7 +33,7 @@ class PostIndexItem extends React.Component {
                                     <>
                                         <AvatarContainer userId={this.props.author.id} />
                                         <div>
-                                            <Link to={"users/" + this.props.author.id}>
+                                            <Link to={"/users/" + this.props.author.id}>
                                                 {this.props.author.first_name + " " + this.props.author.last_name}
                                             </Link>
                                             <small>{getTimeString(created_at)}</small>
@@ -63,7 +63,14 @@ class PostIndexItem extends React.Component {
                             }
                         </div>
                         <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                            {this.props.post.content}
+                            {this.props.event ? 
+                                <span className="event">
+                                    <div className="birthday-wrapper">
+                                        <i className="birthday-icon"></i>
+                                    </div>
+                                    {this.props.post.content}
+                                </span> : this.props.post.content
+                            }
                         </p> 
                         <hr />
                         <div className="post-icons">
