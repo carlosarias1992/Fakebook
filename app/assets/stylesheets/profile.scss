@@ -1,0 +1,54 @@
+.profile-body {
+    width: 854px;
+    margin: 12px auto;
+}
+
+.profile-body aside {
+    width: 320px;
+}
+
+.profile-body .center-col {
+    margin-right: 0;
+}
+
+.profile-body .copyright {
+    font-size: 13px;
+}
+
+.profile-box {
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #dddfe2;
+    margin-bottom: 10px;
+}
+
+.profile-box-header {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+}
+
+.profile-box i {
+    margin-right: 8px;
+}
+
+.friends-box-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('friends-icon.png')) 0 0;    
+    background-repeat: no-repeat;
+    background-size: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.photos-box-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-2.png')) 0 0;    
+    background-repeat: no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+}

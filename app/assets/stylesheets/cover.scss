@@ -73,12 +73,14 @@
 }
 
 .cover-buttons button {
+    display: flex;
+    align-items: center;
     border: 1px #201212 solid;
     background-color: #f5f6f7;
     color: #595d63;
     padding: 5px 10px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 2px;
     position: absolute;
     right: 13px;
@@ -86,6 +88,29 @@
     cursor: pointer;
 }
 
+.cover-buttons i {
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
 .cover-buttons button:hover {
     background-color: #ebedf0;
+}
+
+.edit-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons.png')) -115px -504px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+}
+
+.add-friend-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-3.png')) -35px -152px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
 }

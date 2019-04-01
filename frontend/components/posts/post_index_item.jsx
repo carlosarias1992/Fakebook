@@ -1,13 +1,19 @@
 import React from 'react';
 import AvatarContainer from '../avatar_container';
 import { Link } from 'react-router-dom';
-import { getTimeString, toggleClass } from '../../util/ui_util';
+import { getTimeString, toggleClass, addClass } from '../../util/ui_util';
 import EditFormContainer from './edit_form_container';
 
 class PostIndexItem extends React.Component {
     constructor(props) {
         super(props);
         this.showModal = this.showModal.bind(this);
+        this.hideDropdown = this.hideDropdown.bind(this);
+    }
+    
+    hideDropdown() {
+        const dropdownElement = document.querySelector(`.post-${this.props.post.id}`);
+        addClass(dropdownElement, "hide");
     }
 
     showModal() {
@@ -37,8 +43,8 @@ class PostIndexItem extends React.Component {
                                             <>
                                                 <button
                                                     className="post-menu-button"
-                                                    onFocus={toggleClass(`.post-${this.props.post.id}`, "hide")}
-                                                    onBlur={toggleClass(`.post-${this.props.post.id}`, "hide")}
+                                                    onClick={toggleClass(`.post-${this.props.post.id}`, "hide")}
+                                                    onBlur={this.hideDropdown}
                                                 >
                                                     <i className="post-menu-icon"></i>
                                                 </button>

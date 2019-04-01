@@ -4,7 +4,8 @@ import Avatar from './avatar';
 const mapStateToProps = (state, ownProps) => {
     const { users } = state.entities;
     const currentUserId = ownProps.userId ? ownProps.userId : state.session.current_user_id;
-    const currentUser = users[currentUserId] || {};
+    let currentUser = ownProps.user;
+    currentUser = currentUser || users[currentUserId];
 
     return {
         currentUser,

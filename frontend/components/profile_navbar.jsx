@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarContainer from './avatar_container';
-import { toggleClass } from '../util/ui_util';
+import { toggleClass, addClass } from '../util/ui_util';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class ProfileNavbar extends React.Component {
 
     render() {
         const { currentUser } = this.props;
+        const dropdownElement = document.querySelector(".dropdown");
 
         return (
             <section className="profile-navbar">
@@ -35,8 +36,8 @@ class ProfileNavbar extends React.Component {
                         </ul>
                     </li>
                     <button
-                        onFocus={toggleClass(".dropdown", "hide")}
-                        onBlur={toggleClass(".dropdown", "hide")}
+                        onClick={toggleClass(".dropdown", "hide")}
+                        onBlur={() => addClass(dropdownElement, "hide")}
                     >
                         <li className="menu-button">
                             <i className="menu-icon"></i>

@@ -90,14 +90,25 @@ class PostsForm extends React.Component {
     }
 
     render() {
-        const formPlaceholder = this.props.currentUser ? `What's on your mind, ${this.props.currentUser.first_name}?` : "";
-        const formClass = this.props.formType === "Create" ? "posts-form" : "posts-form animateModal";
+        const { 
+            currentUser, 
+            receiver,
+            formType 
+        } = this.props;
+
+        const { 
+            content,
+            className
+        } = this.state;
+
+        const formPlaceholder = currentUser.id === receiver.id ? `What's on your mind, ${currentUser.first_name}?` : `Write something to ${receiver.first_name}...`;
+        const formClass = formType === "Create" ? "posts-form" : "posts-form animateModal";
 
         return (
             <form className={formClass} onSubmit={this.handleSubmit}>
                 <div className="card-header">
-                    {this.props.formType === "Create" ? "Create Post" : "Edit Post"}
-                    {this.props.formType === "Edit" ?
+                    {formType === "Create" ? "Create Post" : "Edit Post"}
+                    {formType === "Edit" ?
                         <button onClick={() => this.props.hideEditModal(this.props.post.id)}>
                             <i className="close-icon"></i>
                         </button> : null
@@ -108,8 +119,8 @@ class PostsForm extends React.Component {
                     <div className="body-input">
                         <textarea
                             type="text"
-                            value={this.state.content}
-                            className={this.state.className}
+                            value={content}
+                            className={className}
                             placeholder={formPlaceholder}
                             onChange={this.handleInput("content")}
                             onKeyUp={autoGrow}
@@ -123,7 +134,7 @@ class PostsForm extends React.Component {
                     </button>
                     </div>
                 </div>
-                {this.props.formType === "Create" ?
+                {formType === "Create" ?
                     <div className="card-footer hide Create">
                         <input type="submit" value="Share" disabled={true} />
                     </div> : 

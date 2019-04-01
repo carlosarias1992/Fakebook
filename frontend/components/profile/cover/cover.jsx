@@ -1,10 +1,10 @@
 import React from 'react';
 import AvatarContainer from '../../avatar_container';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default props => {
-    const { currentUser } = props;
-
+    const { user } = props;
+    
     return (
         <div className="flex-center">
             <div className="cover container">
@@ -14,17 +14,24 @@ export default props => {
                     <li>Photos</li>
                 </ul>
                 <div className="profile-picture">
-                    <div className="avatar-holder">
-                        <AvatarContainer />
-                    </div>
-                    <Link to={"/users/" + currentUser.id} className="name">
-                        {currentUser.first_name} {currentUser.last_name}
+                    { user.id ? 
+                        <div className="avatar-holder">
+                            <AvatarContainer user={user}/>
+                        </div> : null 
+                    }
+                    <Link to={"/users/" + user.id} className="name">
+                        {user.first_name} {user.last_name}
                     </Link>
                 </div>
                 <div className="cover-buttons">
-                    <button>
-                        Edit Profile
-                    </button>
+                    {user.id === currentUser.id ? 
+                        <button>
+                            <i className="edit-icon"></i> Edit Profile
+                        </button> : 
+                        <button>
+                            <i className="add-friend-icon"></i> Add Friend
+                        </button>
+                    }
                 </div>
             </div>
         </div>
