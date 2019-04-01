@@ -7,8 +7,17 @@ class User < ApplicationRecord
     attr_reader :password 
 
     has_one_attached :avatar
-
     has_many :posts, foreign_key: :author_id, class_name: :Post, dependent: :destroy
+
+    has_many :sent_friend_requests,
+        primary_key: :id, 
+        foreign_key: :sender_id, 
+        class_name: :FriendRequest
+
+    has_many :received_friend_requests, 
+        primary_key: :id, 
+        foreign_key: :receiver_id, 
+        class_name: :FriendRequest
 
     after_initialize :ensure_session_token 
 
