@@ -9,10 +9,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
+    const currentUser = window.currentUser || {};
+
     return {
         fetchPosts: () => dispatch(fetchPosts()),
         fetchUsers: () => dispatch(fetchUsers()),
-        fetchFriendRequests: () => dispatch(fetchFriendRequests(window.currentUser.id))
+        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id))
     };
 };
  
