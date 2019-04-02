@@ -3,30 +3,22 @@ import React from 'react';
 class FriendRequest extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { dropdown: false };
     }
 
     render() {
         const { friendRequest, user, currentUser } = this.props;
-        const { dropdown } = this.state;
         let coverButton;
 
         const requestSent = [
             <div key={0}>
-                <button
-                    onClick={() => this.setState({ dropdown: true })}
-                    onBlur={() => this.setState({ dropdown: false })}
-                >
+                <button>
                     <i className="add-friend-icon"></i> Friend Request Sent
                 </button>
-                {
-                    dropdown ? 
-                        <ul className="cover-dropdown">
-                            <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
-                                Cancel Request
-                            </li>
-                        </ul> : null
-                }
+                <ul className="cover-dropdown">
+                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                        Cancel Request
+                    </li>
+                </ul>
             </div>
         ];
 
@@ -38,42 +30,30 @@ class FriendRequest extends React.Component {
 
         const answerRequest = [
             <div key={2}>
-                <button
-                    onClick={() => this.setState({ dropdown: true })}
-                    onBlur={() => this.setState({ dropdown: false })}
-                >
+                <button>
                     <i className="add-friend-icon"></i> Respond to Friend Request
                 </button>
-                {
-                    dropdown ? 
-                        <ul className="cover-dropdown">
-                            <li onMouseDown={() => this.props.acceptFriendRequest(friendRequest.id)}>
-                                Confirm
-                            </li>
-                            <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
-                                Delete Request
-                            </li>
-                        </ul> : null 
-                }
+                <ul className="cover-dropdown">
+                    <li onMouseDown={() => this.props.acceptFriendRequest(friendRequest.id)}>
+                        Confirm
+                    </li>
+                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                        Delete Request
+                    </li>
+                </ul>
             </div>
         ];
 
         const friends = [
             <div key={3}>
-                <button 
-                    onClick={() => this.setState({ dropdown: true })}
-                    onBlur={() => this.setState({ dropdown: false })}
-                >
+                <button>
                     <i className="friends-icon"></i> Friends
                 </button>
-                {
-                    dropdown ? 
-                        <ul className="cover-dropdown">
-                            <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
-                                Unfriend
-                            </li>
-                        </ul> : null 
-                }
+                <ul className="cover-dropdown">
+                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                        Unfriend
+                    </li>
+                </ul>
             </div>
         ];
 

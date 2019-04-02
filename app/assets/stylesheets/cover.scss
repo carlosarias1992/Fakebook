@@ -126,6 +126,7 @@
 }
 
 .cover-dropdown {
+    display: none;
     background-color: white;
     position: absolute;
     top: 200px;
@@ -135,6 +136,16 @@
     border: 1px #bdbebf solid;
     padding: 5px 0;
     font-size: 12.5px;
+}
+
+.cover-dropdown::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    height: 13px;
+    top: -13px;
 }
 
 .cover-dropdown::before {
@@ -159,6 +170,14 @@
 .cover-dropdown li:hover {
     color: white;
     background-color: #3b5a99;
+}
+
+.cover-buttons button:hover ~ .cover-dropdown {
+    display: block;
+}
+
+.cover-dropdown:hover {
+    display: block;
 }
 
 .avatar-holder:hover .update-overlay {

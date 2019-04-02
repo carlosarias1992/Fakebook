@@ -7,6 +7,12 @@ class ProfileNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
+        this.state = { dropdownElement: '' };
+    }
+
+    componentDidMount() {
+        const dropdownElement = document.querySelector(".dropdown");
+        this.setState({ dropdownElement });
     }
 
     logout() {
@@ -16,8 +22,7 @@ class ProfileNavbar extends React.Component {
 
     render() {
         const { currentUser } = this.props;
-        const dropdownElement = document.querySelector(".dropdown");
-
+        
         return (
             <section className="profile-navbar">
                 <ul className="main-navbar">
@@ -37,7 +42,7 @@ class ProfileNavbar extends React.Component {
                     </li>
                     <button
                         onClick={toggleClass(".dropdown", "hide")}
-                        onBlur={() => addClass(dropdownElement, "hide")}
+                        onBlur={() => addClass(this.state.dropdownElement, "hide")}
                     >
                         <li className="menu-button">
                             <i className="menu-icon"></i>
