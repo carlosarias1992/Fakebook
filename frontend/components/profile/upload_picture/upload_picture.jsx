@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 class UploadPicture extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { loaded: false, imageUrl: null };
+        this.state = { loaded: false, imageUrl: props.currentUser.avatar };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
