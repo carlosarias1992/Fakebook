@@ -10,7 +10,7 @@ const receiveUsers = users => {
     };
 };
 
-const receiveUser = user => {
+export const receiveUser = user => {
     return {
         type: RECEIVE_USER,
         user
@@ -25,4 +25,9 @@ export const fetchUsers = () => dispatch => {
 export const fetchUser = id => dispatch => {
     return UserApiUtil.fetchUser(id)
         .then(user => dispatch(receiveUser(user)));
+};
+
+export const updateUser = user => dispatch => {
+    return UserApiUtil.updateUser(user)
+        .then(editedUser => dispatch(receiveUser(editedUser)));
 };

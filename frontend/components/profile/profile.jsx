@@ -33,7 +33,13 @@ class Profile extends React.Component {
                         <div className="profile-box">
                             <div className="profile-box-header">
                                 <i className="friends-box-icon"></i>
-                                Friends · <span>{numberOfFriends}</span>
+                                Friends &nbsp;
+                                { 
+                                    numberOfFriends > 0 ? 
+                                    <>
+                                        · <span>{numberOfFriends}</span> 
+                                    </> : null 
+                                }
                             </div>
                             <FriendsIndexContainer user={user} friends={friends}/>
                         </div>

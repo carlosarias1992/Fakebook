@@ -2,9 +2,10 @@ import React from 'react';
 import AvatarContainer from '../../avatar_container';
 import FriendRequestContainer from '../friend_request/friend_request_container';
 import { Link } from 'react-router-dom';
+import UploadPictureContainer from '../upload_picture/upload_picture_container';
 
 export default props => {
-    const { user } = props;
+    const { user, currentUser } = props;
     
     return (
         <div className="flex-center">
@@ -18,10 +19,10 @@ export default props => {
                     { user.id ? 
                         <div className="avatar-holder">
                             <AvatarContainer user={user}/>
-                            <div className="update-overlay">
-                                <i className="camera-icon"></i>
-                                Update
-                            </div>
+                            {
+                                user.id === currentUser.id ?
+                                    <UploadPictureContainer /> : null
+                            }
                         </div> : null 
                     }
                     <Link to={"/users/" + user.id} className="name">

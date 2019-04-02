@@ -12,12 +12,14 @@ class User < ApplicationRecord
     has_many :sent_friend_requests,
         primary_key: :id, 
         foreign_key: :sender_id, 
-        class_name: :FriendRequest
+        class_name: :FriendRequest,
+        dependent: :destroy
 
     has_many :received_friend_requests, 
         primary_key: :id, 
         foreign_key: :receiver_id, 
-        class_name: :FriendRequest
+        class_name: :FriendRequest,
+        dependent: :destroy
 
     after_initialize :ensure_session_token 
 

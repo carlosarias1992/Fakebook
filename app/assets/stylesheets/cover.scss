@@ -21,6 +21,7 @@
 
 .profile-picture img {
     width: 156px;
+    height: 156px;
     border: 4px white solid;
 }
 
@@ -169,11 +170,6 @@
 }
 
 .update-overlay {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     background-color: rgba(0, 0, 0, 0.78);
     height: 77px;
     width: 156px;
@@ -198,4 +194,19 @@
     width: 19px;
     height: 16px;
     opacity: 0.8;
+}
+
+.update-overlay label {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.update-overlay form {
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
