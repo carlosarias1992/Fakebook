@@ -12,9 +12,9 @@ const mapStateToProps = (state, ownProps) => {
     const user = ownProps.user;
     const currentUserId = state.session.current_user_id;
     const currentUser = state.entities.users[currentUserId];
-    let friendRequest = findFriendRequestByUserId(user.id, state.entities.friendRequests);
+    let friendRequest = findFriendRequestByUserId(user.id, currentUser.id, state.entities.friendRequests);
     friendRequest = friendRequest || {};
-
+    
     return {
         user,
         currentUser,

@@ -23,7 +23,7 @@ export default (state = {}, action) => {
                 newState = merge(newState, { [posts[i]]: false });
             }
 
-            return newState;
+            return { editModal: newState };
         default: 
             return oldState;
     }

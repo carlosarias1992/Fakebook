@@ -12,7 +12,7 @@ const initialState = {
     usernameValidation: '',
     month: today.getMonth(),
     day: today.getDate(),
-    year: today.getFullYear(),
+    year: today.getFullYear() - 25,
     gender: '',
     modal: false,
     usernameValidationDisplay: false,
@@ -334,7 +334,7 @@ class Signup extends React.Component {
                             {<UiUtil.dayOptions />}
                         </select>
                         <select
-                            value={year - 25}
+                            value={year}
                             onChange={this.handleInput("year")}
                         >
                             {<UiUtil.yearOptions />}

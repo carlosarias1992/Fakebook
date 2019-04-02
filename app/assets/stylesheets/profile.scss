@@ -17,7 +17,7 @@
 
 .profile-box {
     background-color: white;
-    padding: 5px;
+    padding: 5px 5px 2px 5px;
     border-radius: 3px;
     border: 1px solid #dddfe2;
     margin-bottom: 10px;
@@ -51,4 +51,31 @@
     background-size: 24px;
     width: 24px;
     height: 24px;
+}
+
+.friends-box {
+    margin-top: 5px;
+}
+
+.friends-box img {
+    border-radius: 0;
+    width: 100%;
+}
+
+.friends-box li {
+    position: relative;
+    width: 33.33%;
+}
+
+.friends-box span {
+    display: block;
+    color: white;
+    width: 100%;
+    background-image: linear-gradient(#ffffff00, #3e3e3eb3);
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    font-size: 13px;
+    padding: 5px;
+    box-sizing: border-box;
 }

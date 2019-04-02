@@ -165,14 +165,30 @@ export const autoGrowSelector = selector => {
     element.style.cssText = 'height:' + element.scrollHeight + 'px';
 }
 
-export const findFriendRequestByUserId = (id, friendRequests) => {
+export const findFriendRequestByUserId = (id, currentUserId, friendRequests) => {
     const keys = Object.keys(friendRequests);
-
+    
     for(let i = 0; i < keys.length; i++) {
-        if (parseInt(friendRequests[keys[i]].sender_id) === id) {
+        if (parseInt(friendRequests[keys[i]].sender_id) === id
+            && parseInt(friendRequests[keys[i]].receiver_id) === currentUserId) {
             return friendRequests[keys[i]];
-        } else if (parseInt(friendRequests[keys[i]].receiver_id) === id) {
+        } else if (parseInt(friendRequests[keys[i]].receiver_id) === id
+                    && parseInt(friendRequests[keys[i]].sender_id) === currentUserId) {
             return friendRequests[keys[i]];
         }
     }
+}
+
+export const findAllFriendRequestsByUserId = (id, allFriendRequests) => {
+    const keys = Object.keys(allFriendRequests);
+    const friendRequests = [];
+    
+    for(let i = 0; i < keys.length; i++) {
+        if (parseInt(allFriendRequests[keys[i]].sender_id) === id || 
+                parseInt(allFriendRequests[keys[i]].receiver_id) === id) {
+            friendRequests.push(allFriendRequests[keys[i]]);
+        } 
+    }
+
+    return friendRequests;
 }

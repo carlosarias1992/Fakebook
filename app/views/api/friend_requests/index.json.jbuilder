@@ -1,11 +1,5 @@
-@sent_requests.each do |friend_request|
+@friend_requests.each do |friend_request|
     json.set! friend_request.id do
         json.extract! friend_request, :id, :sender_id, :receiver_id, :status
     end 
 end 
-
-@received_requests.each do |friend_request|
-    json.set! friend_request.id do
-        json.extract! friend_request, :id, :sender_id, :receiver_id, :status
-    end 
-end
