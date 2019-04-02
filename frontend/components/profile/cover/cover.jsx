@@ -18,6 +18,10 @@ export default props => {
                     { user.id ? 
                         <div className="avatar-holder">
                             <AvatarContainer user={user}/>
+                            <div className="update-overlay">
+                                <i className="camera-icon"></i>
+                                Update
+                            </div>
                         </div> : null 
                     }
                     <Link to={"/users/" + user.id} className="name">

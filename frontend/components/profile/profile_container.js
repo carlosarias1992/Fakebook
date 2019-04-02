@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Profile from './profile';
 import { findFriendRequestByUserId } from '../../util/ui_util';
 import { fetchFriendRequests } from '../../actions/friend_request_actions';
+import { findAllFriendRequestsByUserId } from '../../util/ui_util';
 
 const mapStateToProps = (state, ownProps) => {
     const currentUserId = state.session.current_user_id;
@@ -11,12 +12,32 @@ const mapStateToProps = (state, ownProps) => {
     user = user || {};
     let friendRequest = findFriendRequestByUserId(user.id, currentUserId, state.entities.friendRequests);
     friendRequest = friendRequest || {};
-    const friends = friendRequest.status === "accepted";
+    const friendsBoolean = friendRequest.status === "accepted";
+
+    const { friendRequests } = state.entities;
+    const friendRequestsForUser = findAllFriendRequestsByUserId(user.id, friendRequests);
+
+    const acceptedFriendRequests = friendRequestsForUser.filter(friendRequest => {
+        return friendRequest.status === "accepted";
+    });
+
+    let friends = acceptedFriendRequests.map(acceptedFriendRequest => {
+        let friendId;
+
+        if (acceptedFriendRequest.sender_id !== user.id) {
+            friendId = acceptedFriendRequest.sender_id;
+        } else {
+            friendId = acceptedFriendRequest.receiver_id;
+        }
+
+        return state.entities.users[friendId];
+    });
     
     return {
         user,
-        friends,
-        currentUser
+        friendsBoolean,
+        currentUser,
+        friends
     };
 };
 

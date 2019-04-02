@@ -69,6 +69,7 @@
     width: 164px;
     height: 164px;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .cover-buttons button {
@@ -157,4 +158,44 @@
 .cover-dropdown li:hover {
     color: white;
     background-color: #3b5a99;
+}
+
+.avatar-holder:hover .update-overlay {
+    opacity: 1;
+}
+
+.update-overlay:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.update-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.78);
+    height: 77px;
+    width: 156px;
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 0 0 110px 110px;
+    font-size: 12px;
+    transition: 0.1s;
+    opacity: 0;
+}
+
+.update-overlay i {
+    margin-bottom: 3px;
+}
+
+.camera-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-2.png')) 0 -50px;    
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 16px;
+    opacity: 0.8;
 }

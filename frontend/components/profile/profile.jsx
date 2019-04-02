@@ -13,7 +13,8 @@ class Profile extends React.Component {
     }
 
     render() {
-        const { user, friends, currentUser } = this.props;
+        const { user, friendsBoolean, currentUser, friends } = this.props;
+        const numberOfFriends = Object.values(friends).length;
 
         return (
             <main>
@@ -32,18 +33,20 @@ class Profile extends React.Component {
                         <div className="profile-box">
                             <div className="profile-box-header">
                                 <i className="friends-box-icon"></i>
-                                Friends
+                                Friends · <span>{numberOfFriends}</span>
                             </div>
-                            <FriendsIndexContainer user={user}/>
+                            <FriendsIndexContainer user={user} friends={friends}/>
                         </div>
                         <Copyright />
                     </aside>
                     <div className="center-col">
                         {
-                            friends || user.id === currentUser.id ?
-                                <PostsFormContainer receiver={user} /> : null
+                            friendsBoolean || user.id === currentUser.id ?
+                                <>
+                                    <PostsFormContainer receiver={user} />
+                                    <ProfilePostsIndexContainer user={user} />
+                                </> : null
                         }
-                        <ProfilePostsIndexContainer user={user}/>
                         <EventsIndexItemContainer user={user} />
                     </div>
                 </section>
