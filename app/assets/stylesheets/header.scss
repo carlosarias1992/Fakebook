@@ -51,6 +51,14 @@ header {
     border: none;
 }
 
+.search-bar input[type="text"]:focus ~ .submit-button {
+    background-color: #4080ff;
+}
+
+.search-bar input[type="text"]:focus ~ .submit-button > .search-icon {
+    background: url(image-path('header-icons.png')) 0 -1460px;
+}
+
 .search-bar input[type="text"] {
     width: 100%;
 }
@@ -139,14 +147,14 @@ header {
 }
 
 .menu-icon {
-    background: url(image-path('header-icons.png')) -1px -1329px;    
+    background: url(image-path('header-icons.png')) -5px -850px;    
     background-repeat: no-repeat;
     width: 13px;
     height: 9px;
 }
 
 .white-menu-icon {
-    background: url(image-path('header-icons.png')) -1px -1329px;    
+    background: url(image-path('header-icons.png')) -5px -825px;    
     background-repeat: no-repeat;
     width: 13px;
     height: 9px;
@@ -210,7 +218,6 @@ header {
 }
 
 .friend-requests-dropdown {
-    display: none;
     position: absolute;
     background-color: white;
     top: 31px;
@@ -320,10 +327,6 @@ header {
 
 .dropdown::before {
     right: 9px;
-}
-
-.friend-requests-button:focus > .friend-requests-dropdown {
-    display: block;
 }
 
 .white-friend-requests-icon {

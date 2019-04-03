@@ -49,3 +49,8 @@ export const sendFriendRequest = id => dispatch => {
     return FriendRequestApiUtil.sendFriendRequest(id)
         .then(request => dispatch(receiveFriendRequest(request)));
 };
+
+export const seenFriendRequest = id => dispatch => {
+    return FriendRequestApiUtil.seenFriendRequest(id)
+        .then(request => dispatch(receiveFriendRequest(request)));
+};

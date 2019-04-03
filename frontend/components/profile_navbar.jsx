@@ -1,19 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarContainer from './avatar_container';
-import { toggleClass, addClass } from '../util/ui_util';
+import { addClass, removeClass } from '../util/ui_util';
 import FriendRequestIndexContainer from './profile/friend_request/friend_request_index_container';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
-        this.state = { dropdownElement: '' };
-    }
-
-    componentDidMount() {
-        const dropdownElement = document.querySelector(".dropdown");
-        this.setState({ dropdownElement });
     }
 
     logout() {
@@ -40,8 +34,16 @@ class ProfileNavbar extends React.Component {
                         </ul>
                     </li>
                     <button
-                        onClick={toggleClass(".dropdown", "hide")}
-                        onBlur={() => addClass(this.state.dropdownElement, "hide")}
+                        onClick={() => {
+                            document.querySelector(".dropdown").classList.toggle("hide");
+                            document.querySelector(".menu-icon").classList.toggle("white-menu-icon");
+                        }}
+                        onBlur={() => {
+                            const dropdownElement = document.querySelector(".dropdown");
+                            const menuIcon = document.querySelector(".menu-icon")
+                            addClass(dropdownElement, "hide");
+                            removeClass(menuIcon, "white-menu-icon");
+                        }}
                     >
                         <li className="menu-button">
                             <i className="menu-icon"></i>

@@ -21,6 +21,14 @@ export const denyFriendRequest = id => {
     });
 };
 
+export const seenFriendRequest = id => {
+    return $.ajax({
+        url: `api/friend_requests/${id}`,
+        method: 'PATCH',
+        data: { friend_request: { seen: true } }
+    });
+};
+
 export const sendFriendRequest = id => {
     return $.ajax({
         url: `api/friend_requests`,

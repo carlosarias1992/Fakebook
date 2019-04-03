@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import FriendRequestIndex from './friend_request_index';
 import { findAllFriendRequestsByUserId } from '../../../util/ui_util';
+import { seenFriendRequest } from '../../../actions/friend_request_actions';
 
 const mapStateToProps = state => {
     const currentUserId = state.session.current_user_id;
@@ -10,9 +11,20 @@ const mapStateToProps = state => {
         return friendRequest.status === "pending" && friendRequest.receiver_id === currentUserId;
     });
 
+    const unseenFriendRequests = pendingFriendRequests.filter(friendRequest => {
+        return friendRequest.seen === false;
+    });
+
     return {
-        pendingFriendRequests
+        pendingFriendRequests,
+        unseenFriendRequests
     };
 };
 
-export default connect(mapStateToProps)(FriendRequestIndex);
+const mapDispatchToProps = dispatch => {
+    return {
+        seenFriendRequest: id => dispatch(seenFriendRequest(id))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendRequestIndex);
