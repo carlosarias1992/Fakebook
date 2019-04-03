@@ -4,7 +4,7 @@ import { merge } from 'lodash';
 class UploadPicture extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { loaded: false, imageUrl: props.currentUser.avatar };
+        this.state = { imageUrl: props.currentUser.avatar };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -24,7 +24,7 @@ class UploadPicture extends React.Component {
         const file = element.files[0];
 
         reader.onloadend = () => {
-            this.setState({ imageUrl: reader.result, loaded: true });
+            this.setState({ imageUrl: reader.result });
         };
         
         if (file) {
@@ -40,6 +40,8 @@ class UploadPicture extends React.Component {
                 contentType: false,
                 processData: false
             });
+        } else {
+            this.setState({ imageUrl: this.props.currentUser.avatar });
         } 
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarContainer from './avatar_container';
 import { toggleClass, addClass } from '../util/ui_util';
+import FriendRequestIndexContainer from './profile/friend_request/friend_request_index_container';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
@@ -32,9 +33,7 @@ class ProfileNavbar extends React.Component {
                     <li><Link to="/feed">Home</Link></li>
                     <li>
                         <ul className="notifications-menu">
-                            <li className="notifications-button">
-                                <i className="friend-requests-icon"></i>
-                            </li>
+                            <FriendRequestIndexContainer />
                             <li className="notifications-button">
                                 <i className="notifications-icon"></i>
                             </li>

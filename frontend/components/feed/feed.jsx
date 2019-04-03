@@ -7,6 +7,10 @@ import PostIndexContainer from '../posts/post_index_container';
 import Copyright from '../copyright';
 
 class Feed extends React.Component {
+    componentDidMount() {
+        this.props.fetchFriendRequests();
+    }
+    
     render() {
         const { currentUser, posts } = this.props;
         const allPosts = Object.keys(posts);

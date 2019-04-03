@@ -86,9 +86,11 @@ export const removeClass = (element, className) => {
 }
 
 export const addClass = (element, className) => {
-    const allClasses = element.className.split(" ");
-    allClasses.push(className);
-    element.className = allClasses.join(" ");
+    if(!element.className.includes(className)) {
+        const allClasses = element.className.split(" ");
+        allClasses.push(className);
+        element.className = allClasses.join(" ");
+    }
 }
 
 export const errorModal = displayValue => {

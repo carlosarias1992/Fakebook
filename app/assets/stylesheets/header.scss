@@ -145,15 +145,20 @@ header {
     height: 9px;
 }
 
+.white-menu-icon {
+    background: url(image-path('header-icons.png')) -1px -1329px;    
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 9px;
+}
+
 .main-navbar .notifications-button:first-of-type {
     padding-left: 13px;
 }
 
 .main-navbar .notifications-button {
     padding: 0 13px 0 0;
-}
-
-.main-navbar .notifications-button:hover {
+    position: relative;
     cursor: pointer;
 }
 
@@ -169,11 +174,11 @@ header {
     color: #1e222a;
     width: 238px;
     position: absolute;
-    top: 50px;
+    top: 42px;
     right: 0;
     z-index: 1;
     border: 1px #bdbebf solid;
-    border-radius: 2.5px;
+    border-radius: 2px;
     padding: 5px 0;
     box-shadow: 0 2px 4px 2px #0909092e;
 }
@@ -202,6 +207,142 @@ header {
     background-repeat: no-repeat;
     width: 24px;
     height: 22px;
+}
+
+.friend-requests-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: 31px;
+    right: -20px;
+    z-index: 1;
+    height: fit-content;
+    width: 425px;
+    border: 1px #dddfe2 solid;
+    box-shadow: 0 2px 4px 2px #0909092e;
+    cursor: auto;
+}
+
+.friend-requests-dropdown .left-col, .friend-requests-dropdown .right-col {
+    display: flex;
+    width: fit-content;
+}
+
+.friend-requests-dropdown .dropdown-header {
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px 10px;
+}
+
+.friend-requests-dropdown li {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px #dddfe2 solid;
+    padding: 15px 11px;
+    height: fit-content;
+}
+
+.friend-requests-dropdown img {
+    width: 50px;
+    height: 50px;
+}
+
+.friend-requests-dropdown button {
+    white-space: nowrap;
+}
+
+.friend-requests-dropdown a {
+    margin: 0;
+    padding: 0;
+    color: #365898;
+    font-weight: bold;
+}
+
+.friend-requests-dropdown a:hover {
+    text-decoration: underline;
+    background-color: white;
+}
+
+.friend-requests-dropdown .right-col button {
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 9px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.friend-requests-dropdown .confirm-button {
+    background-color: #4167b2;
+    color: white;
+    margin-right: 4px;
+}
+
+.friend-requests-dropdown .confirm-button:hover {
+    background-color: #365898;
+}
+
+.friend-requests-dropdown .deny-button {
+    border: 1px #ccd0d5 solid;
+    background-color: #f5f6f7;
+    color: #4b4f56;
+}
+
+.friend-requests-dropdown .deny-button:hover {
+    background-color: #ebedf0;
+}
+
+.notifications-button span {
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    background-color: #fa3e3e;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+}
+
+.friend-requests-dropdown::before, .dropdown::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -9px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+.friend-requests-dropdown::before {
+    right: 35px;
+}
+
+.dropdown::before {
+    right: 9px;
+}
+
+.friend-requests-button:focus > .friend-requests-dropdown {
+    display: block;
+}
+
+.white-friend-requests-icon {
+    background: url(image-path('header-icons.png')) 0px -867px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
+.no-requests {
+    display: flex;
+    justify-content: center;
+    background-color: #f5f6f7;
+    color: #90949c;
+}
+
+.no-requests p {
+    width: 100%;
+    text-align: center;
 }
 
 
