@@ -36,10 +36,19 @@ class PostIndexItem extends React.Component {
                                             <Link to={"/users/" + this.props.author.id}>
                                                 {this.props.author.first_name + " " + this.props.author.last_name}
                                             </Link>
+                                            {
+                                                this.props.receiver && this.props.receiver.id !== this.props.author.id ? 
+                                                    <>
+                                                        <i className="right-arrow-icon"></i>
+                                                        <Link to={"/users/" + this.props.receiver.id}>
+                                                            {this.props.receiver.first_name + " " + this.props.receiver.last_name}
+                                                        </Link>
+                                                    </> : null
+                                            }
                                             <small>{getTimeString(created_at)}</small>
                                         </div>
 
-                                        {this.props.author.id === this.props.currentUserId ?
+                                        {this.props.author.id === this.props.currentUserId || (this.props.receiver && this.props.receiver.id === this.props.currentUserId) ?
                                             <>
                                                 <button
                                                     className="post-menu-button"
@@ -50,9 +59,12 @@ class PostIndexItem extends React.Component {
                                                 </button>
 
                                                 <ul className={"dropdown post-" + this.props.post.id + " hide"}>
-                                                    <li onMouseDown={this.showModal}>
-                                                        Edit Post
-                                                    </li>
+                                                    {
+                                                        this.props.author.id === this.props.currentUserId ?
+                                                            <li onMouseDown={this.showModal}>
+                                                                Edit Post
+                                                            </li> : null
+                                                    }
                                                     <li onMouseDown={() => this.props.deletePost(this.props.post.id)}>
                                                         Delete
                                                     </li>

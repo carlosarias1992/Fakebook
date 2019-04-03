@@ -12,13 +12,14 @@ const mapStateToProps = (state, ownProps) => {
     const postKeys = Object.keys(allPosts);
 
     for (let i = 0; i < postKeys.length; i++) {
-        if (allPosts[postKeys[i]].author_id === userId) {
+        if (allPosts[postKeys[i]].author_id === userId || allPosts[postKeys[i]].receiver_id === userId) {
             posts = merge(posts, { [postKeys[i]]: allPosts[postKeys[i]] });
         }
     }
-
+    
     return {
-        posts
+        posts,
+        receiver: user
     };
 };
 

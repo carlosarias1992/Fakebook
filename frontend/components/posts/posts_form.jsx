@@ -27,7 +27,12 @@ class PostsForm extends React.Component {
             let newPost;
 
             if (this.props.formType === "Create") {
-                newPost = { post: { content: this.state.content } };
+                newPost = { post: 
+                                { 
+                                    content: this.state.content,
+                                    receiver_id: this.props.receiver.id
+                                } 
+                            };
 
                 this.props.action(newPost)
                     .then(() => this.setState({ content: '' }));

@@ -96,3 +96,16 @@
     font-size: 14px;
     color: #90949f;
 }
+
+.post-header i {
+    margin: 0 5px;
+}
+
+.right-arrow-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -38px -414px;    
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 12px;
+}

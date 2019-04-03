@@ -7,10 +7,12 @@ const mapStateToProps = (state, ownProps) => {
     const { post } = ownProps;
     let { editModal } = state.entities.ui;
     const authorId = post.author_id;
+    const receiverId = post.receiver_id;
     const currentUserId = state.session.current_user_id;
     
     return {
         author: state.entities.users[authorId],
+        receiver: state.entities.users[receiverId],
         post,
         editModal,
         currentUserId

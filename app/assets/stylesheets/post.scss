@@ -122,8 +122,12 @@
 
 .post-header .dropdown {
     width: fit-content;
-    top: 13px;
+    top: 18px;
     right: -10px;
+}
+
+.post-header .dropdown::before {
+    display: none;
 }
 
 .post-header .dropdown li {
