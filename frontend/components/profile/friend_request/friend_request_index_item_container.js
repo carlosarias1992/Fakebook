@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import FriendRequestIndexItem from './friend_request_index_item';
 import {
     acceptFriendRequest,
-    denyFriendRequest
+    deleteFriendRequest
 } from '../../../actions/friend_request_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         acceptFriendRequest: id => dispatch(acceptFriendRequest(id)),
-        denyFriendRequest: id => dispatch(denyFriendRequest(id))
+        deleteFriendRequest: id => dispatch(deleteFriendRequest(id))
     };
 };
 
