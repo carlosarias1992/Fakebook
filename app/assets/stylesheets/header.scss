@@ -348,5 +348,37 @@ header {
     text-align: center;
 }
 
+.search-results {
+    position: absolute;
+    top: 34px;
+    left: 32px;
+    font-weight: bold;
+    font-size: 13px;
+    background-color: white;
+    z-index: 1;
+    width: 360px;
+    box-shadow: 0 2px 4px 2px #0909092e;
+    border-radius: 2px;
+}
+
+.search-results a {
+    color: #333;
+}
+
+.search-results a:hover {
+    color: #333;
+    text-decoration: none;
+    background-color: rgb(236, 241, 247);
+}
+
+.search-results li {
+    cursor: pointer;
+    padding: 6px 8px;
+}
+
+.search-results li:hover {
+    background-color: rgb(236, 241, 247);
+}
+
 
 

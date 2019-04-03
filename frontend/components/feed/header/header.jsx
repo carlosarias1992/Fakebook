@@ -1,25 +1,9 @@
 import React from 'react';
 import ProfileNavbarContainer from '../../profile_navbar_container';
 import { Link } from 'react-router-dom';
+import SearchContainer from '../../search/search_container';
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { search: '' };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-    }
-
-    handleInput(type) {
-        return e => {
-            const element = e.target;
-            this.setState({ [type]: element.value });
-        };
-    } 
-
     render() {
         return (
             <header className="flex-center">
@@ -28,17 +12,7 @@ class Header extends React.Component {
                         <Link to="/">
                             <span className="white-logo-icon"></span>
                         </Link>
-                        <form onSubmit={this.handleSubmit}>
-                            <input
-                                type="text"
-                                value={this.state.search}
-                                placeholder="Search"
-                                onChange={this.handleInput("search")}
-                            />
-                            <div className="submit-button">
-                                <input type="submit" value="" className="search-icon center" />
-                            </div>
-                        </form>
+                        <SearchContainer />
                     </div>
                     <ProfileNavbarContainer />
                 </div>
