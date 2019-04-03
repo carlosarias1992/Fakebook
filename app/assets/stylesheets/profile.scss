@@ -17,10 +17,11 @@
 
 .profile-box {
     background-color: white;
-    padding: 5px 5px 2px 5px;
+    padding: 5px 2.5px 2.5px 2.5px;
     border-radius: 3px;
     border: 1px solid #dddfe2;
     margin-bottom: 10px;
+    height: fit-content;
 }
 
 .profile-box-header {
@@ -57,15 +58,24 @@
     margin-top: 5px;
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .friends-box img {
     border-radius: 0;
     height: 100%;
     width: 100%;
 }
 
-.friends-box li {
+.friends-box .image-holder {
+    float: left;
     position: relative;
-    width: 33.33%;
+    width: 98.5px;
+    height: 98.5px;
+    margin: 2.5px;
 }
 
 .friends-box span {
@@ -74,7 +84,7 @@
     width: 100%;
     background-image: linear-gradient(#ffffff00, #3e3e3eb3);
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
     left: 0;
     font-size: 13px;
     padding: 5px;

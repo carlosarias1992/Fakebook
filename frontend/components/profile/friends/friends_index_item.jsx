@@ -6,7 +6,7 @@ export default props => {
     const { friend } = props;
 
     return (
-        <div>
+        <div className="image-holder">
             <AvatarContainer user={friend} />
             <Link to={"/users/" + friend.id}>
                 <span>
