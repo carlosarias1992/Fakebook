@@ -38,6 +38,7 @@ class Api::FriendRequestsController < ApplicationController
     
     def destroy 
         @friend_request = current_user.sent_friend_requests.find_by(id: params[:id])
+        @friend_request ||= current_user.received_friend_requests.find_by(id: params[:id])
 
         if @friend_request 
             if @friend_request.destroy
@@ -46,7 +47,7 @@ class Api::FriendRequestsController < ApplicationController
                 render json: { errors: @friend_request.errors.full_messages }
             end 
         else 
-            render json: { errors: ["You can't remove a friend request you did not send."]}
+            render json: { errors: @friend_request.errors.full_messages }
         end 
     end 
 

@@ -7,7 +7,7 @@ export default props => {
         sender,
         friendRequestId,
         acceptFriendRequest,
-        deleteFriendRequest 
+        denyFriendRequest 
     } = props;
 
     return (
@@ -22,7 +22,7 @@ export default props => {
                 <button className="confirm-button" onMouseDown={() => acceptFriendRequest(friendRequestId)}>
                     Confirm
                 </button>
-                <button className="deny-button" onMouseDown={() => deleteFriendRequest(friendRequestId)}>
+                <button className="deny-button" onMouseDown={() => denyFriendRequest(friendRequestId)}>
                     Delete Request
                 </button>
             </div>

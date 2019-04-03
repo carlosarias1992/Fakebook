@@ -61,12 +61,14 @@ class FriendRequest extends React.Component {
             if (friendRequest.status === "accepted") {
                 coverButton = friends;
             } else {
-                if (friendRequest.sender_id === currentUser.id && friendRequest.status !== "accepted") {
+                if (friendRequest.sender_id === currentUser.id && friendRequest.status === "pending") {
                     coverButton = requestSent;
-                } else if (friendRequest.sender_id === user.id && friendRequest.status !== "accepted") {
+                } else if (friendRequest.sender_id === user.id && friendRequest.status === "pending") {
                     coverButton = answerRequest;
+                } else {
+                    coverButton = addFriend;
                 }
-            }
+            } 
         } else {
             coverButton = addFriend;
         }

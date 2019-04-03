@@ -49,7 +49,7 @@ class FriendRequestIndex extends React.Component {
                     this.props.unseenFriendRequests.length > 0 ?
                         <>
                             <i className="white-friend-requests-icon"></i>
-                            <span>{this.props.pendingFriendRequests.length}</span>
+                            <span>{this.props.unseenFriendRequests.length}</span>
                         </> : <i className={iconClass}></i>
                 }
                 <ul className="friend-requests-dropdown hide">
