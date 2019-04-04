@@ -229,3 +229,51 @@
     height: 0;
     overflow: hidden;
 }
+
+.cover-upload-button {
+    background-color: rgba(0, 0, 0, 0.78);
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    border: 1px #d2d2d4 solid;
+    color: #d2d2d4;
+    font-size: 12px;
+    font-weight: bold;
+    width: fit-content;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 6px;
+    transition: 0.2s;
+    opacity: 0;
+    border-radius: 3px;
+}
+
+.cover-upload-button .camera-icon {
+    margin-right: 8px;
+    background: url(image-path('profile-icons-2.png')) -2px -53px;  
+    width: 17px;
+    height: 14px;
+}
+
+.cover-upload-button label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.cover-upload-button form {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.before-hover {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.cover:hover .cover-upload-button {
+    opacity: 1;
+}

@@ -3,6 +3,7 @@ import AvatarContainer from '../../avatar_container';
 import FriendRequestContainer from '../friend_request/friend_request_container';
 import { Link } from 'react-router-dom';
 import UploadPictureContainer from '../upload_picture/upload_picture_container';
+import UploadCoverContainer from './upload_cover_container';
 
 export default props => {
     const { user, currentUser } = props;
@@ -10,6 +11,10 @@ export default props => {
     return (
         <div className="flex-center">
             <div className="cover container">
+                { 
+                    user.id === currentUser.id ?
+                    <UploadCoverContainer/> : null
+                }
                 <ul className="cover-navbar">
                     <li>About</li>
                     <li>Friends</li>
