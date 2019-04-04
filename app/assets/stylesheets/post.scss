@@ -1,11 +1,13 @@
 .post {
     margin-bottom: 10px;
     border: 1px solid #dddfe2;
+    background-color: white;
 }
 
 .post hr {
     margin: 0;
     height: 7px;
+    border-bottom: 0.5px #eff0f1 solid;
 }
 
 .post small {
@@ -97,6 +99,8 @@
 
 .post .card-footer {
     border-top: 1px #eaebec solid;
+    display: flex;
+    align-items: center;
 }
 
 .post .card-footer img {

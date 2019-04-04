@@ -34,13 +34,18 @@
 }
 
 .card-body {
-    padding: 15px 15px 8px 15px;
+    padding: 15px 15px 3px 15px;
     background-color: white;
+    border-bottom: 1px #eff0f1 solid;
 }
 
 .body-input {
     display: flex;
     justify-content: flex-end;
+}
+
+.posts-form .card-body {
+  border-bottom: none;
 }
 
 .posts-form textarea {
@@ -68,10 +73,12 @@
     margin-top: 10px;
     margin-bottom: 8px;
     height: 0.5px;
+    border-bottom: 0.5px #eff0f1 solid;
 }
 
 .posts-form-buttons {
     display: flex;
+    padding-bottom: 5px;
 }
 
 .posts-form-buttons button {

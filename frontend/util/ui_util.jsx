@@ -194,3 +194,41 @@ export const findAllFriendRequestsByUserId = (id, allFriendRequests) => {
     
     return friendRequests;
 }
+
+export const getShortTimeString = created_at => {
+  const commentsDate = new Date(created_at);
+  const todaysDate = new Date();
+  const yearDifference = todaysDate.getFullYear() - commentsDate.getFullYear()
+  const monthDifference = todaysDate.getMonth() - commentsDate.getMonth()
+  const dayDifference = todaysDate.getDay() - commentsDate.getDay()
+  const hourDifference = todaysDate.getHours() - commentsDate.getHours()
+  const minuteDifference = todaysDate.getMinutes() - commentsDate.getMinutes()
+  const secondDifference = todaysDate.getSeconds() - commentsDate.getSeconds()
+
+  if (yearDifference !== 0) {
+    return `${yearDifference}y`;
+  } else {
+    if (monthDifference !== 0) {
+      return `${monthDifference}m`
+    } else {
+      if (dayDifference !== 0) {
+        return `${dayDifference}d`
+      } else {
+        if (hourDifference !== 0) {
+          return `${hourDifference}h`
+        } else {
+          if (minuteDifference !== 0) {
+            return `${minuteDifference}m`
+          } else {
+            if (secondDifference !== 0) {
+              return `${secondDifference}s`
+            } else {
+              return 'now';
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -5,3 +5,5 @@ if @post.created_at == @post.updated_at
 else
     json.updated true
 end 
+
+json.comments_id @post.comments.pluck(:id)

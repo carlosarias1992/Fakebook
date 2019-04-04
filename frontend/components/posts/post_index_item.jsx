@@ -3,6 +3,8 @@ import AvatarContainer from '../avatar_container';
 import { Link } from 'react-router-dom';
 import { getTimeString, toggleClass, addClass } from '../../util/ui_util';
 import EditFormContainer from './edit_form_container';
+import CommentFormContainer from '../comments/comment_form_container';
+import CommentIndex from '../comments/comment_index';
 
 class PostIndexItem extends React.Component {
     constructor(props) {
@@ -97,14 +99,10 @@ class PostIndexItem extends React.Component {
                             </button>
                         </div>
                     </div>
+                    <CommentIndex post={this.props.post} />
                     {
                         this.props.author ?
-                        <div className="card-footer">
-                            <AvatarContainer userId={this.props.author.id} />
-                            <textarea
-                                placeholder="Write a comment..."
-                            />
-                        </div> : null 
+                        <CommentFormContainer postId={this.props.post.id} /> : null 
                     }
                 </div>
                 {
