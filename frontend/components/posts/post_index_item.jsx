@@ -112,7 +112,10 @@ class PostIndexItem extends React.Component {
                         }
                         <div className="flex-space-between">
                           <LikesContainer type="post" likeable={this.props.post}/>
-                          <div className="number-of-comments">{this.props.numberOfComments}</div>
+                          { 
+                            parseInt(this.props.numberOfComments[0]) > 0 ? 
+                            <div className="number-of-comments">{this.props.numberOfComments}</div> : null
+                          }
                         </div>
                         <hr />
                         <div className="post-icons">
