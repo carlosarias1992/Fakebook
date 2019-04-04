@@ -359,6 +359,8 @@ header {
     width: 360px;
     box-shadow: 0 2px 4px 2px #0909092e;
     border-radius: 2px;
+    overflow-y: auto;
+    max-height: 300px;
 }
 
 .search-results a {

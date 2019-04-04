@@ -191,6 +191,6 @@ export const findAllFriendRequestsByUserId = (id, allFriendRequests) => {
             friendRequests.push(allFriendRequests[keys[i]]);
         } 
     }
-
+    
     return friendRequests;
 }

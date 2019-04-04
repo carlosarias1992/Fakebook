@@ -3,7 +3,7 @@ import HeaderContainer from './header/header_container';
 import PostsFormContainer from '../posts/posts_form_container';
 import AvatarContainer from '../avatar_container';
 import { NavLink } from 'react-router-dom';
-import PostIndexContainer from '../posts/post_index_container';
+import PostIndex from '../posts/post_index';
 import Copyright from '../copyright';
 
 class Feed extends React.Component {
@@ -13,6 +13,7 @@ class Feed extends React.Component {
     
     render() {
         const { currentUser, posts } = this.props;
+        
         const allPosts = Object.keys(posts);
         const linkTitle = `${currentUser.first_name} ${currentUser.last_name}`;
 
@@ -37,7 +38,7 @@ class Feed extends React.Component {
                             <PostsFormContainer />
 
                             {allPosts.length !== 0 ? 
-                                <PostIndexContainer /> 
+                                <PostIndex posts={posts} /> 
                                 :
                                 <div className="welcome">
                                     <h1>Welcome to Fakebook</h1>
