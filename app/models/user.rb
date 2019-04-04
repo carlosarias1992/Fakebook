@@ -7,6 +7,7 @@ class User < ApplicationRecord
     attr_reader :password 
 
     has_one_attached :avatar
+    has_one_attached :cover
     has_many :posts, foreign_key: :author_id, class_name: :Post, dependent: :destroy
 
     has_many :sent_friend_requests,

@@ -12,6 +12,10 @@ export default props => {
         <div className="flex-center">
             <div className="cover container">
                 { 
+                  user.id && user.cover ? 
+                    <img src={user.cover} alt="Cover picture" className="cover-image" /> : null
+                }
+                { 
                     user.id === currentUser.id ?
                     <UploadCoverContainer/> : null
                 }

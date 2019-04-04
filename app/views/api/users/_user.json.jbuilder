@@ -5,3 +5,9 @@ if user.avatar.attached?
 else 
     json.avatar nil
 end 
+
+if user.cover.attached? 
+    json.cover url_for(user.cover)
+else 
+    json.cover nil
+end 
