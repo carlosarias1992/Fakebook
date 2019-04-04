@@ -29,14 +29,14 @@ export default props => {
         }
 
         return (
-            <>
+          <div className="likes">
               {
                 props.likes.length > 0 ?
-                <div className="likes">
+                <>
                   <i className="liked-icon"></i> {likersToString}
-                </div> : null
+                </> : null
               }
-            </>
+          </div>
         )
     } else if (type === "comment") {
         return (
