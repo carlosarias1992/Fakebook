@@ -113,11 +113,14 @@
     resize: none;
     font-size: 12px;
     border: 1px #ccd0d5 solid;
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 7px 12px;
-    height: 15px;
-    width: 430px;
+    height: 30px;
+    width: 455px;
     outline: none;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .post .card-footer textarea::placeholder {

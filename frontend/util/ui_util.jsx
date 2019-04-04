@@ -157,13 +157,11 @@ export const getTimeString = created_at => {
 
 export const autoGrow = e => {
     const element = e.target;
-    element.style.cssText = 'height:auto';
     element.style.cssText = 'height:' + element.scrollHeight + 'px';
 }
 
 export const autoGrowSelector = selector => {
     const element = document.querySelector(selector);
-    element.style.cssText = 'height:auto';
     element.style.cssText = 'height:' + element.scrollHeight + 'px';
 }
 

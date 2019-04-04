@@ -1,5 +1,6 @@
 import React from 'react';
 import AvatarContainer from '../avatar_container';
+import { autoGrow } from '../../util/ui_util';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -49,12 +50,15 @@ class CommentForm extends React.Component {
   render() {
     return (
       <div className="card-footer">
-        <AvatarContainer userId={this.props.currentUser.id} />
+        <div className="avatar-wrapper">
+          <AvatarContainer userId={this.props.currentUser.id} />
+        </div>
         <form onSubmit={this.handleSubmit}>
           <textarea
             onKeyPress={this.handleEnter}
             placeholder="Write a comment..."
             onChange={this.handleInput("content")}
+            onKeyUp={autoGrow}
             value={this.state.content}
           />
         </form>
