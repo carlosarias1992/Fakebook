@@ -9,6 +9,7 @@ import Copyright from '../copyright';
 class Feed extends React.Component {
     componentDidMount() {
         this.props.fetchFriendRequests();
+        this.props.fetchLikes();
     }
     
     render() {

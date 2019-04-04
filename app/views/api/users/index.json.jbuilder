@@ -13,5 +13,8 @@
         else 
             json.cover nil
         end 
+
+        json.post_likes_id user.likes.where(likeable_type: "post").pluck(:id)
+        json.comment_likes_id user.likes.where(likeable_type: "comment").pluck(:id)
     end 
 end

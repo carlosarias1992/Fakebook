@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_012820) do
+ActiveRecord::Schema.define(version: 2019_04_04_171107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 2019_04_04_012820) do
     t.boolean "seen", default: false
     t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
     t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "likeable_type", null: false
+    t.integer "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_id"], name: "index_likes_on_likeable_id"
   end
 
   create_table "posts", force: :cascade do |t|

@@ -10,6 +10,7 @@ import Copyright from '../copyright';
 class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchFriendRequests();
+        this.props.fetchLikes();
     }
 
     render() {

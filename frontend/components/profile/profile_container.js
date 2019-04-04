@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import Profile from './profile';
 import { findFriendRequestByUserId } from '../../util/ui_util';
 import { fetchFriendRequests } from '../../actions/friend_request_actions';
+import { fetchLikes } from '../../actions/likes_actions';
 import { findAllFriendRequestsByUserId } from '../../util/ui_util';
 
 const mapStateToProps = (state, ownProps) => {
@@ -45,7 +46,8 @@ const mapDispatchToProps = dispatch => {
     const currentUser = window.currentUser || {};
     
     return {
-        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id))
+        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id)),
+        fetchLikes: () => dispatch(fetchLikes(currentUser.id))
     };
 };
 

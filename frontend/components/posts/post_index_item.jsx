@@ -5,12 +5,15 @@ import { getTimeString, toggleClass, addClass } from '../../util/ui_util';
 import EditFormContainer from './edit_form_container';
 import CommentFormContainer from '../comments/comment_form_container';
 import CommentIndex from '../comments/comment_index';
+import LikesContainer from '../likes/likes_container';
 
 class PostIndexItem extends React.Component {
     constructor(props) {
         super(props);
         this.showModal = this.showModal.bind(this);
         this.hideDropdown = this.hideDropdown.bind(this);
+        this.likePost = this.likePost.bind(this);
+        this.unlikePost = this.unlikePost.bind(this);
     }
     
     hideDropdown() {
@@ -20,6 +23,24 @@ class PostIndexItem extends React.Component {
 
     showModal() {
         this.props.showEditModal(this.props.post.id);
+    }
+
+    likePost() {
+        const like = {
+          like: {
+            likeable_type: "post",
+            likeable_id: this.props.post.id, 
+          }
+        };
+
+        this.props.createLike(like).then(() => {
+          this.props.fetchUser(this.props.currentUserId);
+        });
+    }
+
+    unlikePost() {
+        const likeId = this.props.likeForCurrentUser.id;
+        this.props.deleteLike(likeId);
     }
 
     render() {
@@ -89,11 +110,21 @@ class PostIndexItem extends React.Component {
                                 {this.props.post.content}
                             </p>
                         }
+                        <div className="flex-space-between">
+                          <LikesContainer type="post" likeable={this.props.post}/>
+                          <div className="number-of-comments">{this.props.numberOfComments}</div>
+                        </div>
                         <hr />
                         <div className="post-icons">
-                            <button>
-                                <i className="like-icon"></i> Like
-                            </button>
+                            {
+                                this.props.liked ?
+                                <button onClick={this.unlikePost} className="unlike-button">
+                                  <i className="blue-like-icon"></i> Like
+                                </button>  :
+                                <button onClick={this.likePost}>
+                                  <i className="like-icon"></i> Like
+                                </button>
+                            }
                             <button>
                                 <i className="comment-icon"></i> Comment
                             </button>

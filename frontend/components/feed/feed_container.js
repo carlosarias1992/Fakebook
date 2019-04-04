@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
 import { fetchFriendRequests } from '../../actions/friend_request_actions';
+import { fetchLikes } from '../../actions/likes_actions';
 import { findAllFriendRequestsByUserId } from '../../util/ui_util';
 import { merge } from 'lodash';
 
@@ -54,7 +55,8 @@ const mapDispatchToProps = dispatch => {
     const currentUser = window.currentUser || {};
 
     return {
-        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id))
+        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id)),
+        fetchLikes: () => dispatch(fetchLikes(currentUser.id))
     };
 };
 

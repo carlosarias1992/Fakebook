@@ -88,6 +88,19 @@
     height: 20px;
 }
 
+.post-icons .unlike-button {
+    color: #3578e5;
+}
+
+.blue-like-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons.png')) 0px -398px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
 .comment-icon {
     content: '';
     display: inline-block;

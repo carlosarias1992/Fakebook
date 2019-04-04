@@ -7,3 +7,4 @@ else
 end 
 
 json.comments_id @post.comments.pluck(:id)
+json.likes_id @post.likes.pluck(:id)

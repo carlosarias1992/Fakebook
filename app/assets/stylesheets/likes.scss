@@ -1,0 +1,47 @@
+.likes {
+  display: flex;
+  align-items: center;
+  color: #676e77;
+}
+
+.number-of-comments {
+  color: #676e77;
+  align-self: center;
+}
+
+.likes i {
+  margin-right: 4px;
+}
+
+.liked-icon {
+  content: '';
+  display: inline-block;
+  background: url(image-path('like-icons.png')) -48px -834px;   
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+.comment-likes {
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 1px;
+  box-shadow: 0 1px 3px 1px #0909092e;
+  position: absolute;
+  right: 0;
+}
+
+.post .comment-likes p {
+  font-size: 11px;
+  align-self: center;
+  margin: 0;
+  margin-right: 4px;
+}
+
+.comment-likes .liked-icon {
+  background: url(image-path('like-icons.png')) -65px -942px; 
+  width: 18px;
+  height: 18px;
+}

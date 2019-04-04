@@ -26,6 +26,7 @@
   border-radius: 16px;
   max-width: 405px;
   font-size: 13px;
+  position: relative;
 }
 
 .comment-footer {
@@ -50,4 +51,8 @@
 
 .avatar-wrapper {
   align-self: flex-start;
+}
+
+.bold {
+  font-weight: bold;
 }
