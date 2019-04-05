@@ -12,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         post: { 
             content: `Born on ${getTimeString(birthDate)}`,
-            created_at: user.birth_date 
+            created_at: user.birth_date,
+            photos: []
         },
         author: user,
         event: true

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PostsForm from './posts_form';
-import { createPost } from '../../actions/posts_actions';
+import { createPost, fetchPost } from '../../actions/posts_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const currentUserId = state.session.current_user_id;
@@ -20,7 +20,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchtoProps = dispatch => {
     return {
-        action: post => dispatch(createPost(post))
+        action: post => dispatch(createPost(post)),
+        fetchPost: id => dispatch(fetchPost(id))
     };
 };
 

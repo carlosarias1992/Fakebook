@@ -18,6 +18,7 @@ class PostsForm extends React.Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
+        this.handleInput = this.handleInput.bind(this);
     }
 
     handleSubmit(e) {
@@ -50,6 +51,28 @@ class PostsForm extends React.Component {
                 this.props.action(newPost)
                     .then(() => this.props.hideEditModal(this.props.post.id));
             }
+
+            submitButton.disabled = true;
+            addClass(footer, "hide");
+        }
+        
+        if (this.state.imageUrls.length !== 0) {
+            const formData = new FormData();
+
+            this.state.files.forEach(file => {
+                formData.append('post[photos]', file);
+            });
+
+            $.ajax({
+                url: `/api/posts`,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false
+            }).then(post => {
+                this.setState({ imageUrls: [], files: [] });
+                this.props.fetchPost(post.id);
+            });
 
             submitButton.disabled = true;
             addClass(footer, "hide");
@@ -102,9 +125,12 @@ class PostsForm extends React.Component {
                     this.setState({ [type]: element.value, className: 'large-font' });
                 }
             } else {
-                submitButton.disabled = true;
-                addClass(footer, "hide");
-                this.setState({ [type]: element.value });
+                if (this.state.imageUrls.length === 0) {
+                    submitButton.disabled = true;
+                    addClass(footer, "hide");
+                }
+
+                this.setState({ [type]: element.value, className: '' });
             }
 
         };
@@ -133,7 +159,7 @@ class PostsForm extends React.Component {
             imageUrls
         } = this.state;
 
-        const formPlaceholder = currentUser.id === receiver.id ? `What's on your mind, ${currentUser.first_name}?` : `Write something to ${receiver.first_name}...`;
+        let formPlaceholder = currentUser.id === receiver.id ? `What's on your mind, ${currentUser.first_name}?` : `Write something to ${receiver.first_name}...`;
         const formClass = formType === "Create" ? "posts-form" : "posts-form animateModal";
 
         const images = imageUrls.map((url, idx) => {
@@ -143,6 +169,11 @@ class PostsForm extends React.Component {
                 </div>
             );
         });
+
+        if (images.length > 0) {
+            formPlaceholder = 'Say something about these photos...';
+            if (images.length === 1) formPlaceholder = 'Say something about this photo...';
+        }
 
         const labelClass = images.length > 0 ? "uploaded" : "";
 

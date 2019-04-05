@@ -52,6 +52,10 @@ class PostIndexItem extends React.Component {
     render() {
         const created_at = new Date(this.props.post.created_at);
         
+        const images = this.props.post.photos.map((photoUrl, idx) => {
+            return <img src={photoUrl} key={idx} />;
+        });
+        
         return (
             <>
                 <div className="post">
@@ -108,13 +112,24 @@ class PostIndexItem extends React.Component {
                                 <div className="birthday-wrapper">
                                     <i className="birthday-icon"></i>
                                 </div>
-                                <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                                    {this.props.post.content}
-                                </p>
+                                {
+                                    this.props.post.content ?
+                                        <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
+                                            {this.props.post.content}
+                                        </p> : null
+                                }
                             </span> : 
-                            <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                                {this.props.post.content}
-                            </p>
+                            <>
+                                {
+                                    this.props.post.content ?
+                                        <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
+                                            {this.props.post.content}
+                                        </p> : 
+                                        <ul>
+                                            {images}
+                                        </ul>
+                                }
+                            </>
                         }
                         <div className="flex-space-between">
                           <LikesContainer type="post" likeable={this.props.post}/>

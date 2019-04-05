@@ -30,7 +30,7 @@
 .post-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     position: relative;
 }
 
@@ -142,8 +142,8 @@
 
 .post-header .dropdown {
     width: fit-content;
-    top: 18px;
-    right: -10px;
+    top: 30px;
+    right: 5px;
 }
 
 .post-header .dropdown::before {
@@ -159,8 +159,8 @@
     background: none;
     border: none;
     position: absolute;
-    right: -14px;
-    top: -8px;
+    right: -5px;
+    top: 6px;
     cursor: pointer;
 }
 
@@ -203,4 +203,36 @@
     background-repeat: no-repeat;
     width: 20px;
     height: 20px;
+}
+
+.post .card-body {
+    padding: 0;
+}
+
+.post .card-body .post-header {
+    padding: 15px 15px 0 15px;
+}
+
+.post .card-body ul {
+    overflow: hidden;
+    max-height: 500px;
+    margin-bottom: 6px;
+}
+
+.post .card-body ul img {
+    height: 100%;
+    width: 100%;
+}
+
+.post .flex-space-between {
+    padding: 0 13px;
+}
+
+.post hr {
+    width: 95%;
+    margin: 0 auto; 
+}
+
+.post .card-body p {
+    padding: 0 14px;
 }
