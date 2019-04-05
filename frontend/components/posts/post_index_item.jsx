@@ -122,9 +122,17 @@ class PostIndexItem extends React.Component {
                             <>
                                 {
                                     this.props.post.content ?
-                                        <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                                            {this.props.post.content}
-                                        </p> : 
+                                        <>
+                                            <p className={this.props.post.content.length < 95 && images.length === 0 ? "large-font" : ""}>
+                                                {this.props.post.content}
+                                            </p>
+                                            {
+                                                images.length > 0 ?
+                                                    <ul>
+                                                        {images}
+                                                    </ul> : null
+                                            }
+                                        </> : 
                                         <ul>
                                             {images}
                                         </ul>

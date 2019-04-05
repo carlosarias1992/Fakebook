@@ -37,9 +37,36 @@ class PostsForm extends React.Component {
                                     receiver_id: this.props.receiver.id
                                 } 
                             };
+                
+                if (this.state.imageUrls.length !== 0) {
+                    const formData2 = new FormData();
 
-                this.props.action(newPost)
-                    .then(() => this.setState({ content: '' }));
+                    this.state.files.forEach(file => {
+                        formData2.append('post[photos]', file);
+                    });
+
+                    formData2.append('post[content]', this.state.content);
+                    formData2.append('post[receiver_id]', this.props.receiver.id);
+
+                    $.ajax({
+                        url: `/api/posts/`,
+                        method: 'POST',
+                        data: formData2,
+                        contentType: false,
+                        processData: false
+                    }).then(post => {
+                        this.setState({ imageUrls: [], files: [], content: '' });
+                        this.props.fetchPost(post.id);
+                    }, response => console.log(response));
+
+                    submitButton.disabled = true;
+                    addClass(footer, "hide");
+                } else {
+                    this.props.action(newPost)
+                        .then(() => {
+                            this.setState({ content: '' });
+                        });
+                }
             } else {
                 newPost = { post: 
                                 { 
@@ -54,9 +81,7 @@ class PostsForm extends React.Component {
 
             submitButton.disabled = true;
             addClass(footer, "hide");
-        }
-        
-        if (this.state.imageUrls.length !== 0) {
+        } else if (this.state.imageUrls.length !== 0) {
             const formData = new FormData();
 
             this.state.files.forEach(file => {
