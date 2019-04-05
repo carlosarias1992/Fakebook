@@ -18,6 +18,27 @@ You can also enjoy all of Fakebook's features by trying out the demo login.
 
 ![news-feed-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/news-feed.png "News Feed")
 
+``` Javascript
+handleFileInput(e) {
+  const element = e.target;
+  const { imageUrls, files } = this.state;
+  const reader = new FileReader();
+
+  element.files.forEach(file => {
+    files.push(file);
+    reader.readAsDataURL(file);
+  });
+
+  reader.onloadend = () => {
+    imageUrls.push(reader.result);
+  };
+
+  this.setState({ imageUrls, files });
+}
+```
+
+![post-form-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/post-form.png "Post Form")
+
 ### Profile Pages
 
 ![profile-page-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/profile-page.png "Profile Page")
