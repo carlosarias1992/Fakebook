@@ -1,24 +1,42 @@
-# README
+# Fakebook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Fakebook is a faithful clone of Facebook. Fakebook is a social media application that makes it easy for everyone to share with family and friends over the internet by sharing pictures and posts. 
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+You can easily begin using Fakebook by signing up [here](https://fakebook-cam.herokuapp.com/#/). 
 
-* System dependencies
+![sign-up-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/sign-up.png "Sign Up")
 
-* Configuration
+You can also enjoy all of Fakebook's features by trying out the demo login. 
 
-* Database creation
+![demo-login-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/demo-login.png "Demo Login")
 
-* Database initialization
+## Features
 
-* How to run the test suite
+### News Feed
 
-* Services (job queues, cache servers, search engines, etc.)
+![news-feed-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/news-feed.png "News Feed")
 
-* Deployment instructions
+### Profile Pages
 
-* ...
+![profile-page-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/profile-page.png "Profile Page")
+
+## Technologies Used
+
+* Ruby on Rails
+* PostgreSQL
+* JavaScript (ES6)
+* React.js
+* Redux
+* AWS S3
+* HTML
+* CSS
+
+## Future Implementations
+
+* Real-time notifications
+* Comments on a comment
+* Photo albums
+* Mentions (tags)
+* Real-time messaging
