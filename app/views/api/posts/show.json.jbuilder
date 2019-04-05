@@ -8,3 +8,13 @@ end
 
 json.comments_id @post.comments.pluck(:id)
 json.likes_id @post.likes.pluck(:id)
+
+if @post.photos.attached? 
+    json.photos do 
+        @post.photos.map do |photo|
+            url_for(photo)
+        end 
+    end 
+else 
+    json.photos []
+end 

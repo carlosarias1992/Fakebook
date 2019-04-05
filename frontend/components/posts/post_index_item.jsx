@@ -14,6 +14,7 @@ class PostIndexItem extends React.Component {
         this.hideDropdown = this.hideDropdown.bind(this);
         this.likePost = this.likePost.bind(this);
         this.unlikePost = this.unlikePost.bind(this);
+        this.focusComment = this.focusComment.bind(this);
     }
     
     hideDropdown() {
@@ -41,6 +42,11 @@ class PostIndexItem extends React.Component {
     unlikePost() {
         const likeId = this.props.likeForCurrentUser.id;
         this.props.deleteLike(likeId);
+    }
+
+    focusComment() {
+        const textarea = document.querySelector(`.comment-form-${this.props.post.id}`);
+        textarea.focus();
     }
 
     render() {
@@ -128,7 +134,7 @@ class PostIndexItem extends React.Component {
                                   <i className="like-icon"></i> Like
                                 </button>
                             }
-                            <button>
+                            <button onClick={this.focusComment}>
                                 <i className="comment-icon"></i> Comment
                             </button>
                         </div>

@@ -56,6 +56,7 @@ class CommentForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <textarea
             onKeyPress={this.handleEnter}
+            className={"comment-form-" + this.props.postId}
             placeholder="Write a comment..."
             onChange={this.handleInput("content")}
             onKeyUp={autoGrow}

@@ -12,9 +12,12 @@ class PostsForm extends React.Component {
         super(props);
         this.state = { 
             content: props.content,
-            className: props.className
+            className: props.className,
+            imageUrls: [],
+            files: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFileInput = this.handleFileInput.bind(this);
     }
 
     handleSubmit(e) {
@@ -50,6 +53,29 @@ class PostsForm extends React.Component {
 
             submitButton.disabled = true;
             addClass(footer, "hide");
+        }
+    }
+
+    handleFileInput(e) {
+        const element = e.target;
+        const imageUrls = this.state.imageUrls;
+        const files = this.state.files;
+        const footer = document.querySelector(`.Create`);
+        const submitButton = footer.children[0];
+
+        const reader = new FileReader();
+        const file = element.files[0];
+        files.push(file);
+
+        reader.onloadend = () => {
+            imageUrls.push(reader.result);
+            removeClass(footer, "hide");
+            submitButton.disabled = false;
+            this.setState({ imageUrls, files });
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
         }
     }
 
@@ -103,11 +129,22 @@ class PostsForm extends React.Component {
 
         const { 
             content,
-            className
+            className,
+            imageUrls
         } = this.state;
 
         const formPlaceholder = currentUser.id === receiver.id ? `What's on your mind, ${currentUser.first_name}?` : `Write something to ${receiver.first_name}...`;
         const formClass = formType === "Create" ? "posts-form" : "posts-form animateModal";
+
+        const images = imageUrls.map((url, idx) => {
+            return (
+                <div className="image-holder" key={idx}>
+                    <img src={url} alt={"image-" + idx}/>
+                </div>
+            );
+        });
+
+        const labelClass = images.length > 0 ? "uploaded" : "";
 
         return (
             <form className={formClass} onSubmit={this.handleSubmit}>
@@ -132,11 +169,32 @@ class PostsForm extends React.Component {
                             onKeyPress={this.handleEnter}
                         />
                     </div>
+                    { 
+                        images.length > 0 ?
+                            <div className="image-previews">
+                                {images}
+                                <label htmlFor='imageUpload' className="add-image-button"> + 
+                                    <input
+                                        id="imageUpload"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={this.handleFileInput}
+                                    />
+                                </label>
+                            </div> : null
+                    }
                     <hr />
                     <div className="posts-form-buttons">
-                        <button>
-                            <i className="photos-icon"></i> Photo/Video
-                    </button>
+                        <label htmlFor='imageUpload' className={labelClass}>
+                            <i className="photos-icon"></i>
+                            Photo/Video
+                            <input
+                                id="imageUpload"
+                                type="file"
+                                accept="image/*"
+                                onChange={this.handleFileInput}
+                            />
+                        </label>
                     </div>
                 </div>
                 {formType === "Create" ?

@@ -73,6 +73,11 @@
     width: 100%;
 }
 
+.posts-form input[type="file"] {
+    width: 0;
+    border: none;
+}
+
 .posts-form hr {
     margin-top: 10px;
     margin-bottom: 8px;
@@ -85,7 +90,7 @@
     padding-bottom: 5px;
 }
 
-.posts-form-buttons button {
+.posts-form-buttons label {
     font-weight: bold;
     font-size: 12px;
     border-radius: 20px;
@@ -93,8 +98,10 @@
     background-color: #f5f6f7;
     border: none;
     display: flex;
+    cursor: pointer;
     align-items: center;
     color: #4b4f56;
+    width: 95px;
 }
 
 .posts-form-buttons button:hover {
@@ -178,4 +185,47 @@
 
 .close-icon:hover {
     background: url(image-path('navigation-icons.png')) -12px -216px;    
+}
+
+.image-previews {
+    margin-top: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.image-holder {
+    width: 97px;
+    height: 97px;
+    margin-right: 5px;
+    float: left;
+}
+
+.image-previews img {
+    height: 97px;
+    width: 97px;
+    border: none;
+}
+
+.add-image-button {
+    width: 97px;
+    height: 97px;
+    float: left;
+    border: 2px #dddfe2 solid;
+    border-style: dashed;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: #dddfe2;
+}
+
+.add-image-button:hover {
+    color: #cccccc;
+}
+
+.posts-form-buttons .uploaded {
+    background-color: #e4f0d5;
 }

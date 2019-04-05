@@ -55,8 +55,9 @@ class UploadPicture extends React.Component {
                         <input 
                             id="avatarUpload"
                             type="file" 
-                            accept="image/*"
+                            accept="images/*"
                             onChange={this.handleSubmit}
+                            multiple={true}
                         />
                         <input type="submit" value=""/>
                     </form>
