@@ -99,7 +99,7 @@ class Signup extends React.Component {
             if (value === "") {
                 UiUtil.addSignupErrorClass(element);
             } else {
-                if (type !== "gender") {
+                if (type !== "gender" && type !== "month" && type !== "day" && type !== "year") {
                     UiUtil.toggleErrorDisplay(element.parentElement, "hide");
                 }
                 UiUtil.removeSignupErrorClass(element);
@@ -320,34 +320,36 @@ class Signup extends React.Component {
                         />
                         <i className=""></i>
                     </div>
-                    <label className="birthday">Birthday<br />
-                        <select
-                            value={month}
-                            onChange={this.handleInput("month")}
-                        >
-                            {<UiUtil.monthOptions />}
-                        </select>
-                        <select
-                            value={day}
-                            onChange={this.handleInput("day")}
-                        >
-                            {<UiUtil.dayOptions />}
-                        </select>
-                        <select
-                            value={year}
-                            onChange={this.handleInput("year")}
-                        >
-                            {<UiUtil.yearOptions />}
-                        </select>
+                    <label className="birthday">Birthday
+                        <div>
+                            <select
+                                value={month}
+                                onChange={this.handleInput("month")}
+                            >
+                                {<UiUtil.monthOptions />}
+                            </select>
+                            <select
+                                value={day}
+                                onChange={this.handleInput("day")}
+                            >
+                                {<UiUtil.dayOptions />}
+                            </select>
+                            <select
+                                value={year}
+                                onChange={this.handleInput("year")}
+                            >
+                                {<UiUtil.yearOptions />}
+                            </select>
 
-                        <span
-                            className="why-birthday"
-                            onMouseEnter={this.revealModal}
-                            onMouseLeave={this.hideModal}
-                        >
-                            Why do I need to provide my birthday?
+                            <span
+                                className="why-birthday"
+                                onMouseEnter={this.revealModal}
+                                onMouseLeave={this.hideModal}
+                            >
+                                Why do I need to provide my birthday?
                             {signupModal}
-                        </span>
+                            </span>
+                        </div>
 
                     </label>
 
