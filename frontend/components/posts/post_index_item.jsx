@@ -15,6 +15,8 @@ class PostIndexItem extends React.Component {
         this.likePost = this.likePost.bind(this);
         this.unlikePost = this.unlikePost.bind(this);
         this.focusComment = this.focusComment.bind(this);
+        this.imageRow = this.imageRow.bind(this);
+        this.imageRowWithClass = this.imageRowWithClass.bind(this);
     }
     
     hideDropdown() {
@@ -49,12 +51,42 @@ class PostIndexItem extends React.Component {
         textarea.focus();
     }
 
+    imageRow(start) {
+        const { photos } = this.props.post;
+        const sliceEnd = start < 2 && (photos.length > 5) ? start + 3 : start + 2;
+
+        return this.props.post.photos.slice(start, sliceEnd).map((photoUrl, idx) => {
+            const imageClass = (photos.length == 1 || (photos.length == 3 && start !== 0)) ? " large-image-holder" : "";
+
+            return (
+                <div className={"post-image-holder" + imageClass} key={idx} >
+                    <img src={photoUrl} alt={"image-" + idx} />
+                </div>
+            );
+        });
+    }
+
+    imageRowWithClass(imageRow) {
+        if (this.props.post.photos.length == 1) {
+            return (
+                <div className="image-row large-image-row">
+                    {imageRow}
+                </div>
+            )
+        } else {
+            return (
+                <div className="image-row small-image-row">
+                    {imageRow}
+                </div>
+            )
+        }
+    }
+
     render() {
         const created_at = new Date(this.props.post.created_at);
-        
-        const images = this.props.post.photos.map((photoUrl, idx) => {
-            return <img src={photoUrl} key={idx} />;
-        });
+        const { photos } = this.props.post;
+        const firstImageRow = this.imageRow(0);
+        const secondImageRow = this.imageRow(2);
         
         return (
             <>
@@ -123,19 +155,33 @@ class PostIndexItem extends React.Component {
                                 {
                                     this.props.post.content ?
                                         <>
-                                            <p className={this.props.post.content.length < 95 && images.length === 0 ? "large-font" : ""}>
+                                            <p className={this.props.post.content.length < 95 && photos.length === 0 ? "large-font" : ""}>
                                                 {this.props.post.content}
                                             </p>
                                             {
-                                                images.length > 0 ?
-                                                    <ul>
-                                                        {images}
-                                                    </ul> : null
+                                                photos.length > 0 ?
+                                                    <div className="images">
+                                                        {
+                                                            photos.length > 2 ?
+                                                                <>{this.imageRowWithClass(secondImageRow)}</> : null
+                                                        }
+                                                        {
+                                                            photos.length > 0 ?
+                                                                <>{this.imageRowWithClass(firstImageRow)}</> : null
+                                                        }
+                                                    </div> : null
                                             }
                                         </> : 
-                                        <ul>
-                                            {images}
-                                        </ul>
+                                        <div className="images">
+                                            {
+                                                photos.length > 2 ?
+                                                    <>{this.imageRowWithClass(secondImageRow)}</> : null
+                                            }
+                                            {
+                                                photos.length > 0 ?
+                                                    <>{this.imageRowWithClass(firstImageRow)}</> : null
+                                            }
+                                        </div>
                                 }
                             </>
                         }

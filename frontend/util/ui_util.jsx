@@ -228,5 +228,9 @@ export const getShortTimeString = created_at => {
       }
     }
   }
+}
 
+export const scrollToFarLeft = (selector) => {
+    const element = document.querySelector(selector);
+    if (element) element.scrollLeft = element.scrollWidth;
 }

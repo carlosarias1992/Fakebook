@@ -191,24 +191,24 @@
     margin-top: 15px;
     overflow-x: auto;
     overflow-y: hidden;
-    white-space: nowrap;
+    display: flex;
 }
 
 .image-holder {
-    width: 97px;
+    min-width: 97px;
     height: 97px;
     margin-right: 5px;
-    float: left;
 }
 
 .image-previews img {
     height: 97px;
     width: 97px;
     border: none;
+    position: static;
 }
 
 .add-image-button {
-    width: 97px;
+    min-width: 97px;
     height: 97px;
     float: left;
     border: 2px #dddfe2 solid;

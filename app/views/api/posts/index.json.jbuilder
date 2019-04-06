@@ -12,13 +12,7 @@
         json.likes_id post.likes.pluck(:id)
 
         if post.photos.attached? 
-            urls = post.photos.map do |photo|
-                url_for(photo)
-            end 
-
-            json.photos do 
-                json.array! urls
-            end 
+            json.photos post.photos.map { |photo| url_for(photo) }
         else 
             json.photos []
         end 

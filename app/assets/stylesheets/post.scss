@@ -213,14 +213,49 @@
     padding: 15px 15px 0 15px;
 }
 
-.post .card-body ul {
+.post .card-body .images {
     overflow: hidden;
     max-height: 500px;
     margin-bottom: 6px;
+    display: flex;
+    flex-direction: column;
 }
 
-.post .card-body ul img {
-    height: 100%;
+.post .card-body .image-row {
+    display: flex;
+}
+
+.large-image-row {
+    height: 500px
+}
+
+.small-image-row {
+    max-height: 250px;
+}
+
+.post .card-body .small-image-row .post-image-holder {
+    margin-right: 4px;
+}
+
+.post .card-body .small-image-row .post-image-holder:last-of-type {
+    margin-right: 0;
+}
+
+.image-row.small-image-row:first-of-type {
+    margin-bottom: 4px;
+}
+
+.post .card-body .post-image-holder {
+    width: 50%;
+    overflow: hidden;
+    min-height: 50%;
+}
+
+.post .card-body .large-image-holder {
+    width: 100%;
+}
+
+.post .card-body .images img {
     width: 100%;
 }
 

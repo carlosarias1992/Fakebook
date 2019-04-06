@@ -5,7 +5,7 @@ class Api::PostsController < ApplicationController
     end 
 
     def show 
-        @post = Post.find_by(id: params[:id])
+        @post = Post.with_attached_photos.find_by(id: params[:id])
 
         if @post 
             render :show
@@ -51,6 +51,6 @@ class Api::PostsController < ApplicationController
     private 
 
     def post_params 
-        params.require(:post).permit(:content, :receiver_id, :photos)
+        params.require(:post).permit(:content, :receiver_id, photos: [])
     end 
 end 

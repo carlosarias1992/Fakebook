@@ -4,7 +4,8 @@ import {
     removeClass, 
     addClass, 
     autoGrow,
-    autoGrowSelector
+    autoGrowSelector,
+    scrollToFarLeft
 } from '../../util/ui_util';
 
 class PostsForm extends React.Component {
@@ -19,6 +20,17 @@ class PostsForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.readAndPreview = this.readAndPreview.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.formType === "Edit") {
+            autoGrowSelector(".modal textarea");
+        }
+    }
+
+    componentDidUpdate() {
+        scrollToFarLeft(".image-previews");
     }
 
     handleSubmit(e) {
@@ -39,19 +51,19 @@ class PostsForm extends React.Component {
                             };
                 
                 if (this.state.imageUrls.length !== 0) {
-                    const formData2 = new FormData();
+                    const formData = new FormData();
 
                     this.state.files.forEach(file => {
-                        formData2.append('post[photos]', file);
+                        formData.append('post[photos][]', file);
                     });
 
-                    formData2.append('post[content]', this.state.content);
-                    formData2.append('post[receiver_id]', this.props.receiver.id);
+                    formData.append('post[content]', this.state.content);
+                    formData.append('post[receiver_id]', this.props.receiver.id);
 
                     $.ajax({
                         url: `/api/posts/`,
                         method: 'POST',
-                        data: formData2,
+                        data: formData,
                         contentType: false,
                         processData: false
                     }).then(post => {
@@ -85,7 +97,7 @@ class PostsForm extends React.Component {
             const formData = new FormData();
 
             this.state.files.forEach(file => {
-                formData.append('post[photos]', file);
+                formData.append('post[photos][]', file);
             });
 
             $.ajax({
@@ -104,33 +116,33 @@ class PostsForm extends React.Component {
         }
     }
 
-    handleFileInput(e) {
-        const element = e.target;
-        const imageUrls = this.state.imageUrls;
-        const files = this.state.files;
-        const footer = document.querySelector(`.Create`);
-        const submitButton = footer.children[0];
-
+    readAndPreview(file) {
+        const { imageUrls } = this.state;
         const reader = new FileReader();
-        const file = element.files[0];
-        files.push(file);
+        reader.readAsDataURL(file);
 
         reader.onloadend = () => {
-            imageUrls.push(reader.result);
-            removeClass(footer, "hide");
-            submitButton.disabled = false;
-            this.setState({ imageUrls, files });
+            const imageUrl = reader.result;
+            imageUrls.push(imageUrl);
+            this.setState({ imageUrls });
         };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
     }
 
-    componentDidMount() {
-        if (this.props.formType === "Edit") {
-            autoGrowSelector(".modal textarea");
-        }
+    handleFileInput(e) {
+        const element = e.target;
+        const { files } = this.state;
+        const footer = document.querySelector(`.Create`);
+        const submitButton = footer.children[0];
+        
+        Array.from(element.files).forEach(file => {
+            files.push(file);
+            this.readAndPreview(file);
+        });
+
+        removeClass(footer, "hide");
+        submitButton.disabled = false;
+        element.value = "";
+        this.setState({ files });
     }
 
     handleInput(type) {
@@ -229,14 +241,7 @@ class PostsForm extends React.Component {
                         images.length > 0 ?
                             <div className="image-previews">
                                 {images}
-                                <label htmlFor='imageUpload' className="add-image-button"> + 
-                                    <input
-                                        id="imageUpload"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={this.handleFileInput}
-                                    />
-                                </label>
+                                <label htmlFor='imageUpload' className="add-image-button">+</label>
                             </div> : null
                     }
                     <hr />
@@ -247,7 +252,7 @@ class PostsForm extends React.Component {
                             <input
                                 id="imageUpload"
                                 type="file"
-                                accept="image/*"
+                                multiple
                                 onChange={this.handleFileInput}
                             />
                         </label>
