@@ -53,7 +53,12 @@ class PostIndexItem extends React.Component {
 
     imageRow(start) {
         const { photos } = this.props.post;
-        const sliceEnd = start < 2 && (photos.length > 5) ? start + 3 : start + 2;
+        let sliceEnd = start < 2 && photos.length > 4 ? start + 3 : start + 2;
+
+        if (photos.length > 4 && start === 2) {
+            start += 1;
+            sliceEnd += 1;
+        }
 
         return this.props.post.photos.slice(start, sliceEnd).map((photoUrl, idx) => {
             const imageClass = (photos.length == 1 || (photos.length == 3 && start !== 0)) ? " large-image-holder" : "";
