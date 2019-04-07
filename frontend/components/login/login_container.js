@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { login } from '../../../actions/session_actions';
+import { login } from '../../actions/session_actions';
 import Login from './login';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => {
     return {
-        className: "failed-login-form",
-        showErrors: true
+        className: "login-form"
     };
 };
-
+ 
 const mapDispatchToProps = dispatch => ({
     login: user => dispatch(login(user)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

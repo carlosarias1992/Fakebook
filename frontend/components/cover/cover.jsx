@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../../avatar_container';
+import AvatarContainer from '../avatar_container';
 import FriendRequestContainer from '../friend_request/friend_request_container';
 import { Link } from 'react-router-dom';
 import UploadPictureContainer from '../upload_picture/upload_picture_container';

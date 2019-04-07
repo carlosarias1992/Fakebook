@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../header/splash_header';
 import LoginFormContainer from './failed_login_form_container';
-import Footer from '../../footer';
+import Footer from '../footer';
 
 class FailedLogin extends React.Component {
     render() {

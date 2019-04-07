@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../../avatar_container';
+import AvatarContainer from '../avatar_container';
 import { Link } from 'react-router-dom';
 
 export default props => {

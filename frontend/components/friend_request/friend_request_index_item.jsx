@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../../avatar_container';
+import AvatarContainer from '../avatar_container';
 import { Link } from 'react-router-dom';
 
 export default props => {
@@ -7,7 +7,7 @@ export default props => {
         sender,
         friendRequestId,
         acceptFriendRequest,
-        denyFriendRequest 
+        deleteFriendRequest 
     } = props;
 
     return (
@@ -22,7 +22,7 @@ export default props => {
                 <button className="confirm-button" onMouseDown={() => acceptFriendRequest(friendRequestId)}>
                     Confirm
                 </button>
-                <button className="deny-button" onMouseDown={() => denyFriendRequest(friendRequestId)}>
+                <button className="deny-button" onMouseDown={() => deleteFriendRequest(friendRequestId)}>
                     Delete Request
                 </button>
             </div>

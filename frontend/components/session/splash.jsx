@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './header/splash_header';
-import SignupContainer from './signup/signup_container';
+import Header from '../header/splash_header';
+import SignupContainer from '../signup/signup_container';
 import Footer from '../footer';
 
 export default (props) => {

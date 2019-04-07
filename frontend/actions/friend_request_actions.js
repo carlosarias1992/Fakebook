@@ -35,11 +35,6 @@ export const acceptFriendRequest = id => dispatch => {
         .then(request => dispatch(receiveFriendRequest(request)));
 };
 
-export const denyFriendRequest = id => dispatch => {
-    return FriendRequestApiUtil.denyFriendRequest(id)
-        .then(request => dispatch(receiveFriendRequest(request)));
-};
-
 export const deleteFriendRequest = id => dispatch => {
     return FriendRequestApiUtil.deleteFriendRequest(id)
         .then(() => dispatch(removeFriendRequest(id)));

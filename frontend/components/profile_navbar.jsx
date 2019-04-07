@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AvatarContainer from './avatar_container';
 import { addClass, removeClass } from '../util/ui_util';
-import FriendRequestIndexContainer from './profile/friend_request/friend_request_index_container';
+import FriendRequestIndexContainer from './friend_request/friend_request_index_container';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {

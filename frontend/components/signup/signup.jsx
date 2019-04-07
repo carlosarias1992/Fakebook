@@ -1,5 +1,5 @@
 import React from 'react';
-import * as UiUtil from '../../../util/ui_util';
+import * as UiUtil from '../../util/ui_util';
 import { merge } from 'lodash';
 
 const today = new Date();

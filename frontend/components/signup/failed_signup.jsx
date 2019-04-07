@@ -1,7 +1,7 @@
 import React from 'react';
 import SignupFormContainer from './failed_signup_form_container';
 import Header from '../header/splash_header';
-import Footer from '../../footer';
+import Footer from '../footer';
 
 class FailedSignup extends React.Component {
     constructor(props) {

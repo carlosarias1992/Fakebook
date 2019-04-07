@@ -1,6 +1,6 @@
 import React from 'react';
 import FriendRequestIndexItemContainer from './friend_request_index_item_container';
-import { addClass } from '../../../util/ui_util';
+import { addClass } from '../../util/ui_util';
 
 class FriendRequestIndex extends React.Component {
     constructor(props) {

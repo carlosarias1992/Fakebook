@@ -2,8 +2,8 @@ import React from 'react';
 import SplashContainer from './session/splash_container';
 import FeedContainer from './feed/feed_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import FailedLoginContainer from './session/login/failed_login_container';
-import FailedSignup from './session/signup/failed_signup';
+import FailedLoginContainer from './login/failed_login_container';
+import FailedSignup from './signup/failed_signup';
 import ProfileContainer from './profile/profile_container';
 
 class App extends React.Component {

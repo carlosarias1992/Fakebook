@@ -13,14 +13,6 @@ export const acceptFriendRequest = id => {
     });
 };
 
-export const denyFriendRequest = id => {
-    return $.ajax({
-        url: `api/friend_requests/${id}`,
-        method: 'PATCH',
-        data: { friend_request: { status: 'denied' } }
-    });
-};
-
 export const seenFriendRequest = id => {
     return $.ajax({
         url: `api/friend_requests/${id}`,

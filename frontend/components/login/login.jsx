@@ -5,7 +5,7 @@ import {
     removeSignupErrorClass,
     toggleErrorDisplay,
     errorModal
-} from '../../../util/ui_util';
+} from '../../util/ui_util';
 
 class Login extends React.Component {
     constructor(props) {

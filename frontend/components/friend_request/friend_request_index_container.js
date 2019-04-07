@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import FriendRequestIndex from './friend_request_index';
-import { findAllFriendRequestsByUserId } from '../../../util/ui_util';
-import { seenFriendRequest } from '../../../actions/friend_request_actions';
+import { findAllFriendRequestsByUserId } from '../../util/ui_util';
+import { seenFriendRequest } from '../../actions/friend_request_actions';
 
 const mapStateToProps = state => {
     const currentUserId = state.session.current_user_id;
