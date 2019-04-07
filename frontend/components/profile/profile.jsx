@@ -5,6 +5,7 @@ import ProfilePostsIndexContainer from './profile_posts_index_container';
 import PostsFormContainer from '../posts/posts_form_container';
 import EventsIndexItemContainer from './events_index_item_container';
 import FriendsIndexContainer from '../friends/friends_index_container';
+import PhotosContainer from '../photos/photos_container';
 import Copyright from '../copyright';
 
 class Profile extends React.Component {
@@ -30,10 +31,11 @@ class Profile extends React.Component {
                                 <i className="photos-box-icon"></i>
                                 Photos
                             </div>
+                            <PhotosContainer user={user}/>
                         </div>
                         <div className="profile-box">
                             <div className="profile-box-header">
-                                <i className="friends-box-icon"></i>
+                                <i className="side-box-icon"></i>
                                 Friends &nbsp;
                                 { 
                                     numberOfFriends > 0 ? 

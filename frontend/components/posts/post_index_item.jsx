@@ -65,6 +65,11 @@ class PostIndexItem extends React.Component {
 
             return (
                 <div className={"post-image-holder" + imageClass} key={idx} >
+                    { 
+                        photos.length > 5 && idx === 2 ? 
+                        <div className="more-images-overlay">+{photos.length - 4}</div> : null
+                    }
+                    <div className="image-overlay"></div>
                     <img src={photoUrl} alt={"image-" + idx} />
                 </div>
             );
@@ -135,7 +140,11 @@ class PostIndexItem extends React.Component {
                                                                 Edit Post
                                                             </li> : null
                                                     }
-                                                    <li onMouseDown={() => this.props.deletePost(this.props.post.id)}>
+                                                    <li onMouseDown={() => {
+                                                        this.props.deletePost(this.props.post.id).then(() => {
+                                                            this.props.fetchUser(this.props.currentUserId);
+                                                        });
+                                                    }}>
                                                         Delete
                                                     </li>
                                                 </ul>

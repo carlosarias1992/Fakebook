@@ -14,6 +14,13 @@
             json.cover nil
         end 
 
+        attachments = []
+        user.posts.each do |post|
+            attachments.concat(post.photos.map { |photo| url_for(photo) })
+        end 
+
+        json.photos attachments
+
         json.post_likes_id user.likes.where(likeable_type: "post").pluck(:id)
         json.comment_likes_id user.likes.where(likeable_type: "comment").pluck(:id)
     end 

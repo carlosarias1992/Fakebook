@@ -250,6 +250,15 @@
     width: 50%;
     overflow: hidden;
     min-height: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.post .card-body .post-image-holder:hover .image-overlay {
+    background-color: rgba(1, 0, 0, 0.05);
+    position: absolute;
+    width: 100%;
+    padding-top: 100%;
 }
 
 .post .card-body .large-image-holder {
@@ -271,4 +280,16 @@
 
 .post .card-body p {
     padding: 0 14px;
+}
+
+.more-images-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 35px;
+    width: 173px;
+    height: 173px;
+    background-color: rgba(1, 0, 0, 0.45);
 }

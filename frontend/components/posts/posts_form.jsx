@@ -69,6 +69,7 @@ class PostsForm extends React.Component {
                     }).then(post => {
                         this.setState({ imageUrls: [], files: [], content: '' });
                         this.props.fetchPost(post.id);
+                        this.props.fetchUser(this.props.currentUser.id);
                     }, response => console.log(response));
 
                     submitButton.disabled = true;
@@ -109,6 +110,7 @@ class PostsForm extends React.Component {
             }).then(post => {
                 this.setState({ imageUrls: [], files: [] });
                 this.props.fetchPost(post.id);
+                this.props.fetchUser(this.props.currentUser.id);
             });
 
             submitButton.disabled = true;

@@ -198,7 +198,7 @@ export const getShortTimeString = created_at => {
   const todaysDate = new Date();
   const yearDifference = todaysDate.getFullYear() - commentsDate.getFullYear()
   const monthDifference = todaysDate.getMonth() - commentsDate.getMonth()
-  const dayDifference = todaysDate.getDay() - commentsDate.getDay()
+  const dayDifference = todaysDate.getDate() - commentsDate.getDate()
   const hourDifference = todaysDate.getHours() - commentsDate.getHours()
   const minuteDifference = todaysDate.getMinutes() - commentsDate.getMinutes()
   const secondDifference = todaysDate.getSeconds() - commentsDate.getSeconds()

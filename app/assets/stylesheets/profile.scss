@@ -54,7 +54,7 @@
     height: 24px;
 }
 
-.friends-box {
+.side-box {
     margin-top: 5px;
 }
 
@@ -64,13 +64,14 @@
   display: table;
 }
 
-.friends-box img {
+.side-box img {
     border-radius: 0;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 }
 
-.friends-box .image-holder {
+.side-box .image-holder {
     float: left;
     position: relative;
     width: 98.5px;
@@ -78,7 +79,7 @@
     margin: 2.5px;
 }
 
-.friends-box span {
+.side-box span {
     display: block;
     color: white;
     width: 100%;
