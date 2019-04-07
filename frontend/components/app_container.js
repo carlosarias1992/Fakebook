@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import app from './app';
+import App from './App';
 import { fetchUsers } from '../actions/user_actions';
 import { fetchPosts } from '../actions/posts_actions';
 import { fetchComments } from '../actions/comments_actions';
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
  
-export default connect(mapStateToProps, mapDispatchToProps)(app);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
