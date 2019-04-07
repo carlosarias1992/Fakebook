@@ -2,11 +2,10 @@ import { connect } from 'react-redux';
 import Photos from './photos';
 
 const mapStateToProps = (state, ownProps) => {
-    const user = ownProps.user || {};
-    const photos = state.entities.users[user.id].photos;
+    const user = ownProps.user;
 
     return {
-        photos
+        photos: user.photos
     };
 };
 
