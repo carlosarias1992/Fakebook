@@ -6,14 +6,13 @@ import PostsFormContainer from '../posts/posts_form_container';
 import EventsIndexItemContainer from './events_index_item_container';
 import FriendsIndexContainer from '../friends/friends_index_container';
 import PhotosContainer from '../photos/photos_container';
-import { scrollToTop } from '../../util/ui_util';
 import Copyright from '../copyright';
 
 class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchFriendRequests();
         this.props.fetchLikes();
-        scrollToTop("body");
+        scrollTo(0, 0);
     }
 
     render() {

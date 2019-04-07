@@ -234,8 +234,3 @@ export const scrollToFarRight = selector => {
     const element = document.querySelector(selector);
     if (element) element.scrollLeft = element.scrollWidth;
 }
-
-export const scrollToTop = selector => {
-    const element = document.querySelector(selector);
-    if (element) element.scrollTop = 0;
-}
