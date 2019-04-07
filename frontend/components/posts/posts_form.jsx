@@ -5,7 +5,7 @@ import {
     addClass, 
     autoGrow,
     autoGrowSelector,
-    scrollToFarLeft
+    scrollToFarRight
 } from '../../util/ui_util';
 
 class PostsForm extends React.Component {
@@ -30,7 +30,7 @@ class PostsForm extends React.Component {
     }
 
     componentDidUpdate() {
-        scrollToFarLeft(".image-previews");
+        scrollToFarRight(".image-previews");
     }
 
     handleSubmit(e) {
