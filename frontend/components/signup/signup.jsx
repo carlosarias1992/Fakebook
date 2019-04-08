@@ -129,6 +129,8 @@ class Signup extends React.Component {
             this.state.day
         );
 
+        const postContent = `Born on ${UiUtil.getTimeString(birth_date)}`;
+
         const {
             usernameValidationDisplay,
             gender,
@@ -177,7 +179,14 @@ class Signup extends React.Component {
         if (validSignup) {
             this.props.signup({ user })
                 .then(
-                    null,
+                    () => this.props.createPost({ 
+                        post: {
+                            event_date: birth_date,
+                            life_event: true,
+                            event_category: "birthday",
+                            content: postContent
+                        }
+                    }),
                     () => this.handleLoginError(allInputs.slice(2, 4))
                 );
         }

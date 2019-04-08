@@ -1,6 +1,6 @@
 @posts.each do |post|
     json.set! post.id do 
-        json.extract! post, :id, :content, :author_id, :created_at, :receiver_id
+        json.extract! post, :id, :content, :author_id, :created_at, :receiver_id, :life_event, :event_category, :event_date
 
         if post.created_at == post.updated_at
             json.updated false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_171107) do
+ActiveRecord::Schema.define(version: 2019_04_08_022234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,9 @@ ActiveRecord::Schema.define(version: 2019_04_04_171107) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "receiver_id"
+    t.boolean "life_event", default: false
+    t.datetime "event_date"
+    t.string "event_category"
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

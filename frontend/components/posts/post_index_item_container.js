@@ -3,6 +3,7 @@ import PostIndexItem from './post_index_item';
 import { deletePost } from '../../actions/posts_actions';
 import { showEditModal, hideEditModal } from '../../actions/ui_actions';
 import { createLike, deleteLike } from '../../actions/likes_actions';
+import { fetchUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { post } = ownProps;
@@ -30,6 +31,10 @@ const mapStateToProps = (state, ownProps) => {
         break;
       }
     }
+
+    if (post.life_event) {
+      post.created_at = post.event_date;
+    }
     
     return {
         author: state.entities.users[authorId],
@@ -40,7 +45,8 @@ const mapStateToProps = (state, ownProps) => {
         liked: currentUser.post_likes_id.includes(likeForCurrentUser.id),
         numberOfLikes: allLikes.length,
         likeForCurrentUser,
-        numberOfComments
+        numberOfComments,
+        event: post.life_event
     };
 };
 
@@ -50,7 +56,8 @@ const mapDispatchToProps = dispatch => {
         showEditModal: id => dispatch(showEditModal(id)),
         hideEditModal: id => dispatch(hideEditModal(id)),
         createLike: like => dispatch(createLike(like)),
-        deleteLike: id => dispatch(deleteLike(id))
+        deleteLike: id => dispatch(deleteLike(id)),
+        fetchUser: id => dispatch(fetchUser(id))
     };
 };
 

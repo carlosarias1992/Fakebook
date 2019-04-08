@@ -57,7 +57,6 @@ class Profile extends React.Component {
                                     <ProfilePostsIndexContainer user={user} />
                                 </> : null
                         }
-                        <EventsIndexItemContainer user={user} />
                     </div>
                 </section>
             </main>

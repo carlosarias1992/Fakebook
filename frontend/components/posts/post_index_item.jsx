@@ -152,7 +152,10 @@ class PostIndexItem extends React.Component {
                         {this.props.event ? 
                             <span className="event">
                                 <div className="birthday-wrapper">
-                                    <i className="birthday-icon"></i>
+                                    { 
+                                        this.props.post.event_category === "birthday" ?
+                                            <i className="birthday-icon"></i> : null
+                                    }
                                 </div>
                                 {
                                     this.props.post.content ?
