@@ -41,6 +41,7 @@ class PostsForm extends React.Component {
         const selector = this.props.formType === "Create" ? "Create" : `Edit-${this.props.post.id}`;
         const footer = document.querySelector(`.${selector}`);
         const submitButton = footer.children[0];
+        const overlayElement = document.querySelector(".overlay");
 
         if (this.state.content !== "") {
             let newPost;
@@ -65,18 +66,15 @@ class PostsForm extends React.Component {
 
                     this.props.createPhotoPost(formData).then(() => {
                         this.setState({ imageUrls: [], files: [], content: '' });
-                        const overlayElement = document.querySelector(".overlay");
-                        addClass(overlayElement, "hide");
                     });
 
+                    addClass(overlayElement, "hide");
                     submitButton.disabled = true;
                     addClass(footer, "hide");
                 } else {
                     this.props.action(newPost)
                         .then(() => {
                             this.setState({ content: '' });
-                            const overlayElement = document.querySelector(".overlay");
-                            addClass(overlayElement, "hide");
                         });
                 }
             } else {
@@ -91,6 +89,7 @@ class PostsForm extends React.Component {
                     .then(() => this.props.hideEditModal(this.props.post.id));
             }
 
+            addClass(overlayElement, "hide");
             submitButton.disabled = true;
             addClass(footer, "hide");
         } else if (this.state.imageUrls.length !== 0) {
@@ -104,6 +103,7 @@ class PostsForm extends React.Component {
                 this.setState({ imageUrls: [], files: [], content: '' });
             });
 
+            addClass(overlayElement, "hide");
             submitButton.disabled = true;
             addClass(footer, "hide");
         }
