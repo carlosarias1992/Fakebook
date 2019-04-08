@@ -1,7 +1,14 @@
+.comment:last-of-type {
+  padding-bottom: 10px;
+}
 .comment {
   background-color: white;
   display: flex;
-  margin: 10px;
+  padding: 10px 10px 0 10px;
+}
+
+.new-comment {
+  border-left: 2px #4080ff solid;
 }
 
 .comment a {
@@ -56,4 +63,48 @@
 .comment-footer .bold {
   font-weight: bold;
   color: #4080ff;
+}
+
+.edit-comment {
+  position: absolute;
+  top: 13px;
+  right: -25px;
+  background-color: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit-comment i {
+  cursor: pointer;
+}
+
+.edit-comment-icon {
+  content: '';
+  display: block;
+  background: url(image-path('post-icons-4.png')) -38px -517px;  
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 7px;
+}
+
+.edit-comment-icon:hover {
+  background: url(image-path('post-icons-4.png')) -12px -517px;    
+}
+
+.comment-body .dropdown {
+  width: fit-content;
+  right: -35px;
+  top: 30px;
+}
+
+.comment-body .dropdown::before {
+  display: none;
+}
+
+.comment-body .dropdown li {
+  color: #45484f;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 15px;
 }

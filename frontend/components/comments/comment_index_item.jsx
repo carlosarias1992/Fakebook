@@ -3,15 +3,17 @@ import AvatarContainer from '../avatar_container';
 import { Link } from 'react-router-dom';
 import { getShortTimeString } from '../../util/ui_util';
 import LikesContainer from '../likes/likes_container';
+import { addClass, removeClass } from '../../util/ui_util';
 
 class CommentIndexItem extends React.Component {
   constructor(props) {
     super(props);
-    this.likePost = this.likePost.bind(this);
-    this.unlikePost = this.unlikePost.bind(this);
+    this.state = { activeModal: {} };
+    this.likeComment = this.likeComment.bind(this);
+    this.unlikeComment = this.unlikeComment.bind(this);
   }
 
-  likePost() {
+  likeComment() {
     const like = {
       like: {
         likeable_type: "comment",
@@ -25,7 +27,7 @@ class CommentIndexItem extends React.Component {
     }, response => console.log(response));
   }
 
-  unlikePost() {
+  unlikeComment() {
     const likeId = this.props.likeForCurrentUser.id;
     this.props.deleteLike(likeId).then(() => {
       this.props.fetchComment(this.props.comment.id);
@@ -35,7 +37,19 @@ class CommentIndexItem extends React.Component {
 
   render() {
     return (
-      <div className="comment">
+      <div 
+        className="comment" 
+        onMouseEnter={() => {
+          const editButton = document.querySelector(`.edit-button-${this.props.comment.id}`);
+          removeClass(editButton, "hide");
+        }}
+        onMouseLeave={() => {
+          if (!this.state.activeModal[this.props.comment.id]) {
+            const editButton = document.querySelector(`.edit-button-${this.props.comment.id}`);
+            addClass(editButton, "hide");
+          }
+        }}
+        >
         {
           this.props.author ?
             <>
@@ -47,15 +61,34 @@ class CommentIndexItem extends React.Component {
                   </Link>
                   {this.props.comment.content}
                   <LikesContainer type="comment" likeable={this.props.comment} />
+                  <button 
+                    className={"hide edit-comment edit-button-" + this.props.comment.id}
+                    onClick={() => {
+                      document.querySelector(`.comment-${this.props.comment.id}`).classList.toggle("hide");
+                      this.setState({ activeModal: { [this.props.comment.id]: true } })
+                    }}
+                    onBlur={() => {
+                      const dropdownElement = document.querySelector(`.comment-${this.props.comment.id}`);
+                      addClass(dropdownElement, "hide");
+                      this.setState({ activeModal: { [this.props.comment.id]: false } })
+                    }}
+                    >
+                    <i className="edit-comment-icon"></i>
+                  </button>
+                  <ul className={"dropdown hide comment-" + this.props.comment.id}>
+                    <li>Edit...</li>
+                    <li onMouseDown={() => this.props.deleteComment(this.props.comment.id)}>Delete...</li>
+                  </ul>
                 </div>
                 <div className="comment-footer">
                   {
                     this.props.liked ? 
                       <>
-                        {getShortTimeString(this.props.comment.created_at)} · <button className="bold" onClick={this.unlikePost}>Like</button>
-                      </> :
+                        {getShortTimeString(this.props.comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
+                      </> 
+                    :
                       <>
-                        { getShortTimeString(this.props.comment.created_at)} · <button onClick={this.likePost}>Like</button>
+                        {getShortTimeString(this.props.comment.created_at)} · <button onClick={this.likeComment}>Like</button>
                       </>
                   }
                 </div>

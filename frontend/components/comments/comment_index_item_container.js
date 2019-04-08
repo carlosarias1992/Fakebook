@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import CommentIndexItem from './comment_index_item';
 import { createLike, deleteLike } from '../../actions/likes_actions';
-import { fetchComment } from '../../actions/comments_actions';
+import { fetchComment, deleteComment } from '../../actions/comments_actions';
 import { fetchUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -37,7 +37,8 @@ const mapDispatchToProps = dispatch => {
     createLike: like => dispatch(createLike(like)),
     deleteLike: id => dispatch(deleteLike(id)),
     fetchComment: id => dispatch(fetchComment(id)),
-    fetchUser: id => dispatch(fetchUser(id))
+    fetchUser: id => dispatch(fetchUser(id)),
+    deleteComment: id => dispatch(deleteComment(id))
   };
 };
 
