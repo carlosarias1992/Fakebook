@@ -36,7 +36,7 @@ class Profile extends React.Component {
                         </div>
                         <div className="profile-box">
                             <div className="profile-box-header">
-                                <i className="side-box-icon"></i>
+                                <i className="friends-box-icon"></i>
                                 Friends &nbsp;
                                 { 
                                     numberOfFriends > 0 ? 

@@ -17,7 +17,7 @@ export default (state = {}, action) => {
             newState = { [action.post.id]: action.post };
             return merge({}, oldState, newState);
         case REMOVE_POST:
-            return removeObject(action.postId, oldState);
+            return removeObject(action.post.id, oldState);
         default: 
             return oldState;
     }

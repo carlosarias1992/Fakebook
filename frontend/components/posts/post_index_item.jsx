@@ -140,11 +140,7 @@ class PostIndexItem extends React.Component {
                                                                 Edit Post
                                                             </li> : null
                                                     }
-                                                    <li onMouseDown={() => {
-                                                        this.props.deletePost(this.props.post.id).then(() => {
-                                                            this.props.fetchUser(this.props.currentUserId);
-                                                        });
-                                                    }}>
+                                                    <li onMouseDown={() => this.props.deletePost(this.props.post)}>
                                                         Delete
                                                     </li>
                                                 </ul>

@@ -42,7 +42,7 @@ class Api::PostsController < ApplicationController
     def destroy 
         @post = Post.find_by(id: params[:id])
         if @post.destroy 
-            render json: {}
+            render :show
         else 
             render json: { errors: ["You have no security clearance to delete this post"] }
         end 
