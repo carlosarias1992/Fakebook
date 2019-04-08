@@ -6,6 +6,8 @@
     border-radius: 4px;
     margin-bottom: 10px;
     transition: 0.2s;
+    position: relative;
+    z-index: 1;
 }
 
 .posts-form img {
@@ -262,4 +264,12 @@
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
+}
+
+.overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100%;
+    z-index: 1;
 }

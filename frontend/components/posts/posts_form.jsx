@@ -15,7 +15,7 @@ class PostsForm extends React.Component {
         super(props);
         this.state = { 
             content: props.content || "",
-            className: props.className,
+            textareaClass: props.className,
             imageUrls: [],
             files: []
         };
@@ -65,6 +65,8 @@ class PostsForm extends React.Component {
 
                     this.props.createPhotoPost(formData).then(() => {
                         this.setState({ imageUrls: [], files: [], content: '' });
+                        const overlayElement = document.querySelector(".overlay");
+                        addClass(overlayElement, "hide");
                     });
 
                     submitButton.disabled = true;
@@ -73,6 +75,8 @@ class PostsForm extends React.Component {
                     this.props.action(newPost)
                         .then(() => {
                             this.setState({ content: '' });
+                            const overlayElement = document.querySelector(".overlay");
+                            addClass(overlayElement, "hide");
                         });
                 }
             } else {
@@ -128,6 +132,8 @@ class PostsForm extends React.Component {
             this.readAndPreview(file);
         });
 
+        const overlayElement = document.querySelector(".overlay");
+        removeClass(overlayElement, "hide");
         removeClass(footer, "hide");
         submitButton.disabled = false;
         element.value = "";
@@ -136,9 +142,18 @@ class PostsForm extends React.Component {
 
     removePicture(idx) {
         const { files, imageUrls } = merge({}, this.state);
+        const footer = document.querySelector(`.Create`);
+        const submitButton = footer.children[0];
 
         this.setState( { files: removeFromArray(files, idx) });
         this.setState( { imageUrls: removeFromArray(imageUrls, idx) });
+
+        if (files.length - 1 === 0) {
+            const overlayElement = document.querySelector(".overlay");
+            addClass(overlayElement, "hide");
+            addClass(footer, "hide");
+            submitButton.disabled = true;
+        }
     }
 
     handleInput(type) {
@@ -152,10 +167,10 @@ class PostsForm extends React.Component {
                 removeClass(footer, "hide");
                 submitButton.disabled = false;
 
-                if (element.value.length > 95) {
-                    this.setState({ [type]: element.value, className: '' });
+                if (element.value.length > 95 || element.value.length === 0) {
+                    this.setState({ [type]: element.value, textareaClass: '' });
                 } else {
-                    this.setState({ [type]: element.value, className: 'large-font' });
+                    this.setState({ [type]: element.value, textareaClass: 'large-font' });
                 }
             } else {
                 if (this.state.imageUrls.length === 0) {
@@ -163,7 +178,7 @@ class PostsForm extends React.Component {
                     addClass(footer, "hide");
                 }
 
-                this.setState({ [type]: element.value, className: '' });
+                this.setState({ [type]: element.value, textareaClass: '' });
             }
 
         };
@@ -188,7 +203,7 @@ class PostsForm extends React.Component {
 
         const { 
             content,
-            className,
+            textareaClass,
             imageUrls
         } = this.state;
 
@@ -231,11 +246,23 @@ class PostsForm extends React.Component {
                         <textarea
                             type="text"
                             value={content}
-                            className={className}
+                            className={textareaClass}
                             placeholder={formPlaceholder}
                             onChange={this.handleInput("content")}
                             onKeyUp={autoGrow}
                             onKeyPress={this.handleEnter}
+                            onFocus={() => {
+                                if (formType === "Create") {
+                                    const overlayElement = document.querySelector(".overlay");
+                                    removeClass(overlayElement, "hide");
+                                }
+                            }}
+                            onBlur={() => {
+                                if (formType === "Create") {
+                                    const overlayElement = document.querySelector(".overlay");
+                                    addClass(overlayElement, "hide");
+                                }
+                            }}
                         />
                     </div>
                     { 

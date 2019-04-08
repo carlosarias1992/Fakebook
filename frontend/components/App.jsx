@@ -18,6 +18,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <div className="overlay hide"></div>
                 <AuthRoute exact path="/" component={SplashContainer} />
                 <ProtectedRoute path="/feed" component={FeedContainer} />
                 <ProtectedRoute path="/users/:userId" component={ProfileContainer} />
