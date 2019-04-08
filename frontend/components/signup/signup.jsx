@@ -142,11 +142,11 @@ class Signup extends React.Component {
         } = this.state;
 
         const user = {
-            first_name: first_name,
-            last_name: last_name,
-            username: username,
-            password: password,
-            gender: gender,
+            first_name: UiUtil.capitalize(first_name).trim(),
+            last_name: UiUtil.capitalize(last_name).trim(),
+            username,
+            password,
+            gender,
             birth_date
         };
 

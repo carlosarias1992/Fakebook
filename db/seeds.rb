@@ -18,6 +18,7 @@ User.create({
 })
 
 Post.create({
+  author_id: User.find_by(username: "test").id,
   content: "Born on April 7, 1992",
   event_date: birth_date, 
   event_category: "birthday", 

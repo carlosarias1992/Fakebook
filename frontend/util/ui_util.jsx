@@ -234,3 +234,7 @@ export const scrollToFarRight = selector => {
     const element = document.querySelector(selector);
     if (element) element.scrollLeft = element.scrollWidth;
 }
+
+export const capitalize = word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
