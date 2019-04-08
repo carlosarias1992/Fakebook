@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default props => {
-    const { currentUser } = props;
+    const { currentUser, className } = props;
     let avatar;
 
     if (currentUser.avatar !== null) {
@@ -12,7 +12,7 @@ export default props => {
     }
     
     return (  
-        <Link to={"/users/" + currentUser.id}>
+        <Link to={"/users/" + currentUser.id} className={className}>
             <img src={avatar} alt="Profile picture" className="avatar" />
             {props.message}
         </Link>
