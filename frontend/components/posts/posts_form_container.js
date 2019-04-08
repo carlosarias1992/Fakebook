@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import PostsForm from './posts_form';
-import { createPost, fetchPost } from '../../actions/posts_actions';
+import { 
+    createPost, 
+    fetchPost,
+    createPhotoPost
+} from '../../actions/posts_actions';
 import { fetchUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,7 +27,8 @@ const mapDispatchtoProps = dispatch => {
     return {
         action: post => dispatch(createPost(post)),
         fetchPost: id => dispatch(fetchPost(id)),
-        fetchUser: id => dispatch(fetchUser(id))
+        fetchUser: id => dispatch(fetchUser(id)),
+        createPhotoPost: post => dispatch(createPhotoPost(post))
     };
 };
 

@@ -24,10 +24,12 @@ export default (state = {}, action) => {
         case RECEIVE_POST: 
             updatedUserId = window.currentUser.id;
             updatedUser = oldState[updatedUserId];
-
-            action.post.photos.forEach(photo => {
-                updatedUser.photos.push(photo);
-            });
+            
+            if (action.newPost) {
+                action.post.photos.forEach(photo => {
+                    updatedUser.photos.push(photo);
+                });
+            }
 
             newState = { [updatedUser.id]: updatedUser };
             return merge({}, oldState, newState);

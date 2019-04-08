@@ -4,14 +4,15 @@ export const RECEIVE_POST = "RECEIVE_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 
-const receivePost = (post) => {
+const receivePost = (post, newPost) => {
     return {
         type: RECEIVE_POST,
-        post
+        post,
+        newPost
     };
 };
 
-const receivePosts = (posts) => {
+const receivePosts = posts => {
     return {
         type: RECEIVE_POSTS,
         posts
@@ -38,6 +39,11 @@ export const fetchPosts = () => dispatch => {
 export const createPost = post => dispatch => {
     return PostsApiUtil.createPost(post)
         .then(post => dispatch(receivePost(post)));
+};
+
+export const createPhotoPost = post => dispatch => {
+    return PostsApiUtil.createPhotoPost(post)
+        .then(post => dispatch(receivePost(post, true)));
 };
 
 export const updatePost = post => dispatch => {

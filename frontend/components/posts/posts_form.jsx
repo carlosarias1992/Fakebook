@@ -63,16 +63,9 @@ class PostsForm extends React.Component {
                     formData.append('post[content]', this.state.content);
                     formData.append('post[receiver_id]', this.props.receiver.id);
 
-                    $.ajax({
-                        url: `/api/posts/`,
-                        method: 'POST',
-                        data: formData,
-                        contentType: false,
-                        processData: false
-                    }).then(post => {
+                    this.props.createPhotoPost(formData).then(() => {
                         this.setState({ imageUrls: [], files: [], content: '' });
-                        this.props.fetchPost(post.id);
-                    }, response => console.log(response));
+                    });
 
                     submitButton.disabled = true;
                     addClass(footer, "hide");
@@ -103,15 +96,8 @@ class PostsForm extends React.Component {
                 formData.append('post[photos][]', file);
             });
 
-            $.ajax({
-                url: `/api/posts`,
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false
-            }).then(post => {
-                this.setState({ imageUrls: [], files: [] });
-                this.props.fetchPost(post.id);
+            this.props.createPhotoPost(formData).then(() => {
+                this.setState({ imageUrls: [], files: [], content: '' });
             });
 
             submitButton.disabled = true;

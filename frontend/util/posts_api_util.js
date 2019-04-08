@@ -20,6 +20,16 @@ export const createPost = post => {
     });
 };
 
+export const createPhotoPost = post => {
+    return $.ajax({
+        url: `/api/posts/`,
+        method: 'POST',
+        data: post,
+        contentType: false,
+        processData: false
+    });
+};
+
 export const updatePost = post => {
     return $.ajax({
         url: `/api/posts/${post.id}`,
