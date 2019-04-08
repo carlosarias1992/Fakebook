@@ -11,10 +11,11 @@ const receiveComments = comments => {
     };
 };
 
-const receiveComment = comment => {
+const receiveComment = (comment, newComment) => {
     return {
         type: RECEIVE_COMMENT, 
-        comment 
+        comment,
+        newComment
     };
 };
 
@@ -37,7 +38,7 @@ export const fetchComment = id => dispatch => {
 
 export const createComment = comment => dispatch => {
     return CommentsApiUtil.createComment(comment)
-        .then(newComment => dispatch(receiveComment(newComment)));
+        .then(newComment => dispatch(receiveComment(newComment, true)));
 };
 
 export const updateComment = comment => dispatch => {

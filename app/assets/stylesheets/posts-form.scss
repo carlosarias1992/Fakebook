@@ -195,6 +195,7 @@
 }
 
 .image-holder {
+    position: relative;
     min-width: 97px;
     height: 97px;
     margin-right: 5px;
@@ -228,4 +229,37 @@
 
 .posts-form-buttons .uploaded {
     background-color: #e4f0d5;
+}
+
+.posts-form .image-holder:hover .image-overlay {
+    opacity: 1;
+}
+
+.posts-form .image-overlay {
+    opacity: 0;
+    background-color: rgba(1, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+    padding-top: 100%;
+    transition: 0.4s;
+}
+
+.posts-form .image-overlay button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.white-close-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('navigation-icons.png')) -38px -216px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
 }

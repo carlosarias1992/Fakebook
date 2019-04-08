@@ -1,18 +1,20 @@
 import React from 'react';
+import { merge } from 'lodash';
 import AvatarContainer from '../avatar_container';
 import { 
     removeClass, 
     addClass, 
     autoGrow,
     autoGrowSelector,
-    scrollToFarRight
+    scrollToFarRight,
+    removeFromArray
 } from '../../util/ui_util';
 
 class PostsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            content: props.content,
+            content: props.content || "",
             className: props.className,
             imageUrls: [],
             files: []
@@ -21,6 +23,7 @@ class PostsForm extends React.Component {
         this.handleFileInput = this.handleFileInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.readAndPreview = this.readAndPreview.bind(this);
+        this.removePicture = this.removePicture.bind(this);
     }
 
     componentDidMount() {
@@ -145,6 +148,13 @@ class PostsForm extends React.Component {
         this.setState({ files });
     }
 
+    removePicture(idx) {
+        const { files, imageUrls } = merge({}, this.state);
+
+        this.setState( { files: removeFromArray(files, idx) });
+        this.setState( { imageUrls: removeFromArray(imageUrls, idx) });
+    }
+
     handleInput(type) {
         return (e) => {
             const element = e.target;
@@ -202,6 +212,11 @@ class PostsForm extends React.Component {
         const images = imageUrls.map((url, idx) => {
             return (
                 <div className="image-holder" key={idx}>
+                    <div className="image-overlay">
+                        <button onClick={() => this.removePicture(idx)}>
+                            <i className="white-close-icon"></i>
+                        </button>
+                    </div>
                     <img src={url} alt={"image-" + idx}/>
                 </div>
             );

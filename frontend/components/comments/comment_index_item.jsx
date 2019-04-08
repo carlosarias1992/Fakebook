@@ -43,67 +43,73 @@ class CommentIndexItem extends React.Component {
       deleteComment
     } = this.props;
 
-    return (
-      <div 
-        className="comment" 
-        onMouseEnter={() => {
-          const editButton = document.querySelector(`.edit-button-${comment.id}`);
-          removeClass(editButton, "hide");
-        }}
-        onMouseLeave={() => {
-          if (!this.state.activeModal[comment.id]) {
+    const newCommentClass = comment.newComment ? " new-comment" : "";
+
+    if (comment.content) {
+      return (
+        <div
+          className={"comment" + newCommentClass}
+          onMouseEnter={() => {
             const editButton = document.querySelector(`.edit-button-${comment.id}`);
-            addClass(editButton, "hide");
-          }
-        }}
+            removeClass(editButton, "hide");
+          }}
+          onMouseLeave={() => {
+            if (!this.state.activeModal[comment.id]) {
+              const editButton = document.querySelector(`.edit-button-${comment.id}`);
+              addClass(editButton, "hide");
+            }
+          }}
         >
-        {
-          author ?
-            <>
-              <AvatarContainer userId={comment.author_id} />
-              <div>
-                <div className="comment-body">
-                  <Link to={"/users/" + author.id}>
-                    {author.first_name} {author.last_name}
-                  </Link>
-                  {comment.content}
-                  <LikesContainer type="comment" likeable={comment} />
-                  <button 
-                    className={"hide edit-comment edit-button-" + comment.id}
-                    onClick={() => {
-                      document.querySelector(`.comment-${comment.id}`).classList.toggle("hide");
-                      this.setState({ activeModal: { [comment.id]: true } })
-                    }}
-                    onBlur={() => {
-                      const dropdownElement = document.querySelector(`.comment-${comment.id}`);
-                      addClass(dropdownElement, "hide");
-                      this.setState({ activeModal: { [comment.id]: false } })
-                    }}
+          {
+            author ?
+              <>
+                <AvatarContainer userId={comment.author_id} />
+                <div>
+                  <div className="comment-body">
+                    <Link to={"/users/" + author.id}>
+                      {author.first_name} {author.last_name}
+                    </Link>
+                    {comment.content}
+                    <LikesContainer type="comment" likeable={comment} />
+                    <button
+                      className={"hide edit-comment edit-button-" + comment.id}
+                      onClick={() => {
+                        document.querySelector(`.comment-${comment.id}`).classList.toggle("hide");
+                        this.setState({ activeModal: { [comment.id]: true } })
+                      }}
+                      onBlur={() => {
+                        const dropdownElement = document.querySelector(`.comment-${comment.id}`);
+                        addClass(dropdownElement, "hide");
+                        this.setState({ activeModal: { [comment.id]: false } })
+                      }}
                     >
-                    <i className="edit-comment-icon"></i>
-                  </button>
-                  <ul className={"dropdown hide comment-" + comment.id}>
-                    <li>Edit...</li>
-                    <li onMouseDown={() => deleteComment(comment.id)}>Delete...</li>
-                  </ul>
+                      <i className="edit-comment-icon"></i>
+                    </button>
+                    <ul className={"dropdown hide comment-" + comment.id}>
+                      <li>Edit...</li>
+                      <li onMouseDown={() => deleteComment(comment.id)}>Delete...</li>
+                    </ul>
+                  </div>
+                  <div className="comment-footer">
+                    {
+                      liked ?
+                        <>
+                          {getShortTimeString(comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
+                        </>
+                        :
+                        <>
+                          {getShortTimeString(comment.created_at)} · <button onClick={this.likeComment}>Like</button>
+                        </>
+                    }
+                  </div>
                 </div>
-                <div className="comment-footer">
-                  {
-                    liked ? 
-                      <>
-                        {getShortTimeString(comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
-                      </> 
-                    :
-                      <>
-                        {getShortTimeString(comment.created_at)} · <button onClick={this.likeComment}>Like</button>
-                      </>
-                  }
-                </div>
-              </div>
-            </> : null
-        }
-      </div>
-    )
+              </> : null
+          }
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
 

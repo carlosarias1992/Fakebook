@@ -238,3 +238,10 @@ export const scrollToFarRight = selector => {
 export const capitalize = word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
+export const removeFromArray = (array, idx) => {
+    const firstHalf = array.slice(0, idx);
+    const secondHalf = array.slice(idx + 1);
+    
+    return firstHalf.concat(secondHalf);
+}

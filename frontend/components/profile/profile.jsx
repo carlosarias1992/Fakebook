@@ -3,15 +3,15 @@ import HeaderContainer from '../feed/header/header_container';
 import CoverContainer from '../cover/cover_container';
 import ProfilePostsIndexContainer from './profile_posts_index_container';
 import PostsFormContainer from '../posts/posts_form_container';
-import EventsIndexItemContainer from './events_index_item_container';
 import FriendsIndexContainer from '../friends/friends_index_container';
 import PhotosContainer from '../photos/photos_container';
 import Copyright from '../copyright';
 
 class Profile extends React.Component {
     componentDidMount() {
-        this.props.fetchFriendRequests();
-        this.props.fetchLikes();
+        this.props.fetchFriendRequests().then(() => {
+            this.props.fetchLikes();
+        });
         scrollTo(0, 0);
     }
 
