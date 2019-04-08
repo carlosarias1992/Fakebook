@@ -36,59 +36,66 @@ class CommentIndexItem extends React.Component {
   }
 
   render() {
+    const {
+      comment,
+      author,
+      liked,
+      deleteComment
+    } = this.props;
+
     return (
       <div 
         className="comment" 
         onMouseEnter={() => {
-          const editButton = document.querySelector(`.edit-button-${this.props.comment.id}`);
+          const editButton = document.querySelector(`.edit-button-${comment.id}`);
           removeClass(editButton, "hide");
         }}
         onMouseLeave={() => {
-          if (!this.state.activeModal[this.props.comment.id]) {
-            const editButton = document.querySelector(`.edit-button-${this.props.comment.id}`);
+          if (!this.state.activeModal[comment.id]) {
+            const editButton = document.querySelector(`.edit-button-${comment.id}`);
             addClass(editButton, "hide");
           }
         }}
         >
         {
-          this.props.author ?
+          author ?
             <>
-              <AvatarContainer userId={this.props.comment.author_id} />
+              <AvatarContainer userId={comment.author_id} />
               <div>
                 <div className="comment-body">
-                  <Link to={"/users/" + this.props.author.id}>
-                    {this.props.author.first_name} {this.props.author.last_name}
+                  <Link to={"/users/" + author.id}>
+                    {author.first_name} {author.last_name}
                   </Link>
-                  {this.props.comment.content}
-                  <LikesContainer type="comment" likeable={this.props.comment} />
+                  {comment.content}
+                  <LikesContainer type="comment" likeable={comment} />
                   <button 
-                    className={"hide edit-comment edit-button-" + this.props.comment.id}
+                    className={"hide edit-comment edit-button-" + comment.id}
                     onClick={() => {
-                      document.querySelector(`.comment-${this.props.comment.id}`).classList.toggle("hide");
-                      this.setState({ activeModal: { [this.props.comment.id]: true } })
+                      document.querySelector(`.comment-${comment.id}`).classList.toggle("hide");
+                      this.setState({ activeModal: { [comment.id]: true } })
                     }}
                     onBlur={() => {
-                      const dropdownElement = document.querySelector(`.comment-${this.props.comment.id}`);
+                      const dropdownElement = document.querySelector(`.comment-${comment.id}`);
                       addClass(dropdownElement, "hide");
-                      this.setState({ activeModal: { [this.props.comment.id]: false } })
+                      this.setState({ activeModal: { [comment.id]: false } })
                     }}
                     >
                     <i className="edit-comment-icon"></i>
                   </button>
-                  <ul className={"dropdown hide comment-" + this.props.comment.id}>
+                  <ul className={"dropdown hide comment-" + comment.id}>
                     <li>Edit...</li>
-                    <li onMouseDown={() => this.props.deleteComment(this.props.comment.id)}>Delete...</li>
+                    <li onMouseDown={() => deleteComment(comment.id)}>Delete...</li>
                   </ul>
                 </div>
                 <div className="comment-footer">
                   {
-                    this.props.liked ? 
+                    liked ? 
                       <>
-                        {getShortTimeString(this.props.comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
+                        {getShortTimeString(comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
                       </> 
                     :
                       <>
-                        {getShortTimeString(this.props.comment.created_at)} · <button onClick={this.likeComment}>Like</button>
+                        {getShortTimeString(comment.created_at)} · <button onClick={this.likeComment}>Like</button>
                       </>
                   }
                 </div>
