@@ -16,3 +16,10 @@ User.create({
   birth_date: birth_date,
   gender: "F"
 })
+
+Post.create({
+  content: "Born on April 7, 1992",
+  event_date: birth_date, 
+  event_category: "birthday", 
+  life_event: true
+})
