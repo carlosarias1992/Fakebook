@@ -70,3 +70,25 @@ Post.create({
     life_event: true
   })
 end 
+
+user_ids = User.pluck(:id)
+
+40.times do 
+  random_user = User.find_by(id: user_ids.sample)
+
+  FriendRequest.create({
+    sender_id: User.find_by(username: "test").id, 
+    receiver_id: random_user.id,
+    status: "accepted",
+    seen: true
+  })
+
+  other_random_user = User.find_by(id: user_ids.sample)
+
+  FriendRequest.create({
+    sender_id: random_user.id, 
+    receiver_id: other_random_user.id,
+    status: "accepted",
+    seen: true
+  })
+end 
