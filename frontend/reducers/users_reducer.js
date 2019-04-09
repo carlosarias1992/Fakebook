@@ -9,7 +9,7 @@ import {
 export default (state = {}, action) => {
     const { user } = action;
     const oldState = Object.freeze(state);
-    let newState, updatedUserId, updatedUser;
+    let newState, updatedUser;
 
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
@@ -22,8 +22,7 @@ export default (state = {}, action) => {
             newState = { [user.id]: user };
             return merge({}, oldState, newState);
         case RECEIVE_POST: 
-            updatedUserId = window.currentUser.id;
-            updatedUser = oldState[updatedUserId];
+            updatedUser = oldState[action.post.author_id];
             
             if (action.newPost) {
                 action.post.photos.forEach(photo => {
@@ -34,8 +33,7 @@ export default (state = {}, action) => {
             newState = { [updatedUser.id]: updatedUser };
             return merge({}, oldState, newState);
         case REMOVE_POST:
-            updatedUserId = window.currentUser.id;
-            updatedUser = oldState[updatedUserId];
+            updatedUser = oldState[action.post.author_id];
 
             updatedUser.photos = updatedUser.photos.filter(photo => {
                 return !action.post.photos.includes(photo);
