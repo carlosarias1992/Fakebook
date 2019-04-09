@@ -86,8 +86,12 @@ class CommentIndexItem extends React.Component {
                       <i className="edit-comment-icon"></i>
                     </button>
                     <ul className={"dropdown hide comment-" + comment.id}>
-                      <li>Edit...</li>
-                      <li onMouseDown={() => deleteComment(comment.id)}>Delete...</li>
+                      <li>
+                        <i className="fas fa-pencil-alt"></i> Edit...
+                      </li>
+                      <li onMouseDown={() => deleteComment(comment.id)}>
+                        <i className="far fa-trash-alt"></i> Delete...
+                      </li>
                     </ul>
                   </div>
                   <div className="comment-footer">

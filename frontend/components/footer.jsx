@@ -12,8 +12,8 @@ export default (props) => {
                 <span className="copyright">
                     Fakebook by Carlos Arias-Miranda 2019. Inspired by
                     Facebook. Connect with me on
-                        <Link className="social-media" to="https://www.linkedin.com/in/carlos-arias-miranda-a98025172/">LinkedIn</Link> or
-                        <Link className="social-media" to="https://github.com/carlosarias1992">Github</Link>.
+                        <a className="social-media" target="_blank" href="https://www.linkedin.com/in/carlos-arias-miranda-a98025172/">LinkedIn</a> or
+                        <a className="social-media" target="_blank" href="https://github.com/carlosarias1992">Github</a>.
                     </span>
             </section>
         </footer>

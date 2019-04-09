@@ -37,14 +37,23 @@
     border: 1px #dddfe2 solid;
 }
 
-.feed aside li:first-of-type {
-    margin-bottom: 10px;
-}
-
 .feed .active {
     background-color: #f5f6f7;
     border: 1px #dddfe2 solid;
     font-weight: bold;
+}
+
+.feed aside hr {
+    margin-bottom: 5px;
+}
+
+.fa-github {
+    font-size: 20px;
+}
+
+.fa-linkedin {
+    font-size: 22px;
+    color: #0077b5;
 }
 
 .news-feed-icon {

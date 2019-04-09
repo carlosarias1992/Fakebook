@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderContainer from './header/header_container';
 import PostsFormContainer from '../posts/posts_form_container';
 import AvatarContainer from '../avatar_container';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PostIndex from '../posts/post_index';
 import PeopleYouMayKnowIndexContainer from '../people_you_may_know/people_you_may_know_index_container';
 import Copyright from '../copyright';
@@ -36,6 +36,17 @@ class Feed extends React.Component {
                                     <NavLink to="/feed" activeClassName="active">
                                         <i className="news-feed-icon"></i> News Feed
                                     </NavLink>
+                                </li>
+                                <hr />
+                                <li>
+                                    <a target="_blank" href="https://github.com/carlosarias1992">
+                                        <i className="fab fa-github"></i> Creator's Github
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.linkedin.com/in/carlos-arias-miranda-a98025172/">
+                                        <i className="fab fa-linkedin"></i> Creator's LinkedIn
+                                    </a>
                                 </li>
                             </ul>
                         </aside>
