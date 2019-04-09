@@ -34,6 +34,12 @@ class User < ApplicationRecord
         class_name: :Like,
         dependent: :destroy
 
+    has_many :rejections, 
+        primary_key: :id, 
+        foreign_key: :rejector_id, 
+        class_name: :Rejection, 
+        dependent: :destroy
+
     after_initialize :ensure_session_token 
 
     def self.find_by_credentials(username, password)

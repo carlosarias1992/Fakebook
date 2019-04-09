@@ -1,0 +1,1 @@
+json.extract! @rejection, :id, :rejector_id, :rejected_id

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_022234) do
+ActiveRecord::Schema.define(version: 2019_04_09_011449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 2019_04_08_022234) do
     t.datetime "event_date"
     t.string "event_category"
     t.index ["author_id"], name: "index_posts_on_author_id"
+  end
+
+  create_table "rejections", force: :cascade do |t|
+    t.integer "rejector_id", null: false
+    t.integer "rejected_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rejected_id"], name: "index_rejections_on_rejected_id"
+    t.index ["rejector_id", "rejected_id"], name: "index_rejections_on_rejector_id_and_rejected_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

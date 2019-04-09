@@ -13,12 +13,14 @@ import {
 class PostsForm extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = { 
             content: props.content || "",
             textareaClass: props.className,
             imageUrls: [],
             files: []
         };
+        
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFileInput = this.handleFileInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
@@ -86,21 +88,17 @@ class PostsForm extends React.Component {
 
             if (formType === "Create") {
                 newPost = { 
-                    post: { 
-                        content,
-                        receiver_id: receiver.id
-                    } 
+                    post: { content, receiver_id: receiver.id } 
                 };
                 
                 if (imageUrls.length !== 0) {
                     const formData = new FormData();
+                    formData.append('post[content]', content);
+                    formData.append('post[receiver_id]', receiver.id);
 
                     files.forEach(file => {
                         formData.append('post[photos][]', file);
                     });
-
-                    formData.append('post[content]', content);
-                    formData.append('post[receiver_id]', receiver.id);
 
                     this.props.createPhotoPost(formData).then(() => {
                         this.setState({ 
@@ -121,12 +119,7 @@ class PostsForm extends React.Component {
                         }));
                 }
             } else {
-                newPost = { 
-                    post: { 
-                        content: content, 
-                        id: this.props.post.id
-                    } 
-                };
+                newPost = { post: { content, id: post.id } };
                 
                 this.props.action(newPost)
                     .then(() => {
@@ -163,8 +156,7 @@ class PostsForm extends React.Component {
         reader.readAsDataURL(file);
 
         reader.onloadend = () => {
-            const imageUrl = reader.result;
-            imageUrls.push(imageUrl);
+            imageUrls.push(reader.result);
             files.push(file);
             this.setState({ imageUrls, files });
         };
