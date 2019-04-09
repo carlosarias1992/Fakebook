@@ -19,8 +19,10 @@ User.create({
   gender: "F"
 })
 
+demo_user = User.find_by(username: "test")
+
 Post.create({
-  author_id: User.find_by(username: "test").id,
+  author_id: demo_user.id,
   content: "Born on January 9, 1992",
   event_date: demo_user_birth_date, 
   event_category: "birthday", 
@@ -76,45 +78,33 @@ Post.create({
 end 
 
 user_ids = User.pluck(:id)
+user_ids.delete(demo_user.id)
 
-50.times do 
-  success = false 
+43.times do 
+  random_id = user_ids.sample
+  random_user = User.find_by(id: random_id)
+  user_ids.delete(random_id)
 
-  until success 
-    random_user = User.find_by(id: user_ids.sample)
+  FriendRequest.create!({
+    sender_id: demo_user.id, 
+    receiver_id: random_user.id,
+    status: "accepted",
+    seen: true
+  })
 
-    friend_request = FriendRequest.new({
-      sender_id: User.find_by(username: "test").id, 
-      receiver_id: random_user.id,
+  other_user_ids = User.pluck(:id)
+  other_user_ids.delete(random_user.id)
+
+  56.times do 
+    random_id = other_user_ids.sample
+    other_random_user = User.find_by(id: random_id)
+    other_user_ids.delete(random_id)
+
+    FriendRequest.create!({
+      sender_id: random_user.id, 
+      receiver_id: other_random_user.id,
       status: "accepted",
       seen: true
     })
-
-    if friend_request.save
-      success = true
-    else
-      success = false 
-    end 
-  end
-
-  50.times do 
-    success = false 
-
-    until success
-      other_random_user = User.find_by(id: user_ids.sample)
-
-      friend_request = FriendRequest.new({
-        sender_id: random_user.id, 
-        receiver_id: other_random_user.id,
-        status: "accepted",
-        seen: true
-      })
-
-      if friend_request.save 
-        success = true 
-      else 
-        success = false
-      end 
-    end 
   end 
 end 
