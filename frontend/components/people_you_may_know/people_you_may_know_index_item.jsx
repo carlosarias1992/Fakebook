@@ -5,7 +5,7 @@ import FriendRequestContainer from '../friend_request/friend_request_container';
 
 class PeopleYouMayKnowIndexItem extends React.Component {
     render() {
-        const { user } = this.props;
+        const { user, createRejection } = this.props;
 
         return (
             <div className="suggestion-item">
@@ -16,7 +16,9 @@ class PeopleYouMayKnowIndexItem extends React.Component {
                     </Link>
                     <div className="suggestion-buttons">
                         <FriendRequestContainer user={user} />
-                        <button>
+                        <button onClick={() => createRejection({
+                            rejected_id: user.id
+                        })}>
                             Remove
                         </button>
                     </div>

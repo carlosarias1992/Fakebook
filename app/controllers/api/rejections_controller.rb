@@ -1,7 +1,11 @@
 class Api::RejectionsController < ApplicationController
     def index 
-        @rejections = current_user.rejections 
-        render :index
+        if current_user
+            @rejections = current_user.rejections 
+            render :index
+        else 
+            render json: { errors: ['You must be logged in'] }
+        end 
     end 
 
     def show 
@@ -16,7 +20,7 @@ class Api::RejectionsController < ApplicationController
 
     def create
         @rejection = Rejection.new(rejection_params)
-        @rejection.rejected_id = current_user.id
+        @rejection.rejector_id = current_user.id
 
         if @rejection.save 
             render :show 
