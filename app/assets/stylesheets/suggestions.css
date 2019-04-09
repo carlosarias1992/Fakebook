@@ -1,0 +1,53 @@
+.suggestions {
+    background-color: white;
+    padding: 10px 13px;
+    border-radius: 3px;
+    border: 1px solid #dddfe2;
+    margin-bottom: 10px;
+}
+
+.suggestions h2 {
+    color: #6c7076;
+}
+
+.suggestion-item {
+    display: flex;
+    margin-top: 10px;
+}
+
+.suggestion-item img {
+    width: 55px;
+    height: 55px;
+}
+
+.suggestion-item a {
+    font-weight: bold;
+    color: #4f73b6;
+}
+
+.suggestion-buttons {
+    margin-top: 5px;
+    display: flex;
+}
+
+.suggestion-buttons i {
+    margin-right: 3px;
+}
+
+.suggestion-buttons button {
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px #ccd0d5 solid;
+    display: flex;
+    align-items: center;
+    background-color: #f5f6f7;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    color: #6c7076;
+}
+
+.suggestion-buttons button:hover {
+    background-color: #ebedf0;
+}

@@ -4,6 +4,7 @@ import PostsFormContainer from '../posts/posts_form_container';
 import AvatarContainer from '../avatar_container';
 import { NavLink } from 'react-router-dom';
 import PostIndex from '../posts/post_index';
+import PeopleYouMayKnowIndexContainer from '../people_you_may_know/people_you_may_know_index_container';
 import Copyright from '../copyright';
 
 class Feed extends React.Component {
@@ -11,6 +12,8 @@ class Feed extends React.Component {
         this.props.fetchFriendRequests().then(() => {
             this.props.fetchLikes();
         });
+
+        this.props.fetchRejections();
     }
     
     render() {
@@ -32,7 +35,7 @@ class Feed extends React.Component {
                                 <li>
                                     <NavLink to="/feed" activeClassName="active">
                                         <i className="news-feed-icon"></i> News Feed
-                                </NavLink>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </aside>
@@ -52,6 +55,7 @@ class Feed extends React.Component {
                             }
                         </div>
                         <div className="right-col">
+                            <PeopleYouMayKnowIndexContainer />
                             <Copyright />
                         </div>
                     </div>

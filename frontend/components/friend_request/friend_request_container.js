@@ -6,6 +6,7 @@ import {
     sendFriendRequest
 } from '../../actions/friend_request_actions';
 import { findFriendRequestByUserId } from '../../util/ui_util';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
     const user = ownProps.user;
@@ -29,4 +30,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendRequest);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FriendRequest));

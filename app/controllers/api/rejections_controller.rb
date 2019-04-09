@@ -1,4 +1,4 @@
-class RejectionsController < ApplicationController
+class Api::RejectionsController < ApplicationController
     def index 
         @rejections = current_user.rejections 
         render :index

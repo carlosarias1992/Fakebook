@@ -6,14 +6,22 @@ class FriendRequest extends React.Component {
     }
 
     render() {
-        const { friendRequest, user, currentUser } = this.props;
+        const { friendRequest, user, currentUser, history } = this.props;
+        const { pathname } = history.location;
         let coverButton;
-
+        
         const requestSent = [
             <div key={0}>
-                <button>
-                    <i className="add-friend-icon"></i> Friend Request Sent
-                </button>
+                {
+                    pathname === "/feed" ?
+                        <button>
+                            <i className="add-friend-icon"></i> Sent
+                        </button>
+                    : 
+                        <button>
+                            <i className="add-friend-icon"></i> Friend Request Sent
+                        </button>
+                }
                 <ul className="cover-dropdown">
                     <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
                         Cancel Request
