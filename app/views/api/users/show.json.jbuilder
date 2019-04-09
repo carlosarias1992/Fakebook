@@ -1,4 +1,4 @@
-json.extract! @user, :id, :username, :first_name, :last_name, :birth_date
+json.extract! @user, :id, :username, :first_name, :last_name, :birth_date, :gender
 
 if @user.avatar.attached? 
     json.avatar url_for(@user.avatar)
