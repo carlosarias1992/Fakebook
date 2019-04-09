@@ -19,7 +19,7 @@
             attachments.concat(post.photos.map { |photo| url_for(photo) })
         end 
 
-        json.photos attachments
+        json.photos attachments.reverse
 
         json.post_likes_id user.likes.where(likeable_type: "post").pluck(:id)
         json.comment_likes_id user.likes.where(likeable_type: "comment").pluck(:id)
@@ -28,6 +28,6 @@
         friends.concat(user.sent_friend_requests.where(status: "accepted").pluck(:receiver_id))
         friends.concat(user.received_friend_requests.where(status: "accepted").pluck(:sender_id))
 
-        json.friends_id friends
+        json.friends_id friends.sort
     end 
 end

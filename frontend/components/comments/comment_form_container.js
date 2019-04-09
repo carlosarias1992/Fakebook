@@ -10,13 +10,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUser,
     content: '',
-    postId: ownProps.postId
+    postId: ownProps.postId,
+    formType: "Create"
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createComment: comment => dispatch(createComment(comment)),
+    action: comment => dispatch(createComment(comment)),
     fetchPost: id => dispatch(fetchPost(id))
   };
 };

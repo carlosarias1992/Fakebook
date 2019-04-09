@@ -6,13 +6,13 @@ export default props => {
 
   if (props.post.comments_id) {
     comments = props.post.comments_id.map(commentId => {
-      return <CommentIndexItemContainer commentId={commentId} key={commentId} />;
+      return <CommentIndexItemContainer commentId={commentId} key={commentId} post={props.post}/>;
     });
   } else {
     comments = [];
   }
 
   return (
-    <div>{comments}</div>
+    <div className="comments">{comments}</div>
   )
 }

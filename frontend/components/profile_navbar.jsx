@@ -28,9 +28,9 @@ class ProfileNavbar extends React.Component {
                     <li>
                         <ul className="notifications-menu">
                             <FriendRequestIndexContainer />
-                            <li className="notifications-button">
+                            {/* <li className="notifications-button">
                                 <i className="notifications-icon"></i>
-                            </li>
+                            </li> */}
                         </ul>
                     </li>
                     <button

@@ -277,6 +277,7 @@ class PostsForm extends React.Component {
                         : 
                             <button 
                                 onClick={this.removeOverlay} 
+                                type="button"
                                 className="create-post-close-button hide"
                                 >
                                 <i className="close-icon"></i>

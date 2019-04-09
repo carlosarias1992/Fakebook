@@ -5,7 +5,7 @@ export default props => {
     let photos = [];
 
     if (props.photos) {
-        photos = props.photos.reverse().slice(0, 9).map((photoUrl, idx) => {
+        photos = props.photos.slice(0, 9).map((photoUrl, idx) => {
             return <PhotosIndex url={photoUrl} key={idx} idx={idx} />;
         });
     }

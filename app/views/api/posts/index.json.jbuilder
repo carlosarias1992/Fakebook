@@ -8,7 +8,7 @@
             json.updated true
         end 
 
-        json.comments_id post.comments.pluck(:id)
+        json.comments_id post.comments.pluck(:id).sort
         json.likes_id post.likes.pluck(:id)
 
         if post.photos.attached? 
