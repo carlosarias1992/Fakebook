@@ -16,14 +16,6 @@ export default (state = {}, action) => {
         case HIDE_EDIT_MODAL:
             newState = { editModal: { [action.id]: false } };
             return merge({}, oldState, newState);
-        case RECEIVE_POSTS:
-            const posts = Object.keys(action.posts);
-
-            for (let i = 0; i < posts.length; i++) {
-                newState = merge(newState, { [posts[i]]: false });
-            }
-
-            return { editModal: newState };
         default: 
             return oldState;
     }

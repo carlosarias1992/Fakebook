@@ -252,6 +252,9 @@
     min-height: 50%;
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: black;
 }
 
 .post .card-body .post-image-holder:hover .image-overlay {

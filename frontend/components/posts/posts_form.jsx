@@ -36,151 +36,187 @@ class PostsForm extends React.Component {
         scrollToFarRight(".image-previews");
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        const selector = this.props.formType === "Create" ? "Create" : `Edit-${this.props.post.id}`;
+    disableForm(selector) {
         const footer = document.querySelector(`.${selector}`);
         const submitButton = footer.children[0];
-        const overlayElement = document.querySelector(".overlay");
+        submitButton.disabled = true;
+        addClass(footer, "hide");
+    }
 
-        if (this.state.content !== "") {
+    enableForm(selector) {
+        const footer = document.querySelector(`.${selector}`);
+        const submitButton = footer.children[0];
+        removeClass(footer, "hide");
+        submitButton.disabled = false;
+    }
+
+    removeOverlay() {
+        const formButton = document.querySelector(".create-post-close-button");
+        addClass(formButton, "hide");
+        const overlayElement = document.querySelector(".overlay");
+        addClass(overlayElement, "hide");
+    }
+
+    showOverlay() {
+        const formButton = document.querySelector(".create-post-close-button");
+        removeClass(formButton, "hide");
+        const overlayElement = document.querySelector(".overlay");
+        removeClass(overlayElement, "hide");
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const {
+            formType,
+            post,
+            receiver
+        } = this.props;
+
+        const {
+            imageUrls,
+            files,
+            content
+        } = this.state;
+
+        const selector = formType === "Create" ? "Create" : `Edit-${post.id}`;
+
+        if (content !== "") {
             let newPost;
 
-            if (this.props.formType === "Create") {
-                newPost = { post: 
-                                { 
-                                    content: this.state.content,
-                                    receiver_id: this.props.receiver.id
-                                } 
-                            };
+            if (formType === "Create") {
+                newPost = { 
+                    post: { 
+                        content,
+                        receiver_id: receiver.id
+                    } 
+                };
                 
-                if (this.state.imageUrls.length !== 0) {
+                if (imageUrls.length !== 0) {
                     const formData = new FormData();
 
-                    this.state.files.forEach(file => {
+                    files.forEach(file => {
                         formData.append('post[photos][]', file);
                     });
 
-                    formData.append('post[content]', this.state.content);
-                    formData.append('post[receiver_id]', this.props.receiver.id);
+                    formData.append('post[content]', content);
+                    formData.append('post[receiver_id]', receiver.id);
 
                     this.props.createPhotoPost(formData).then(() => {
-                        this.setState({ imageUrls: [], files: [], content: '' });
+                        this.setState({ 
+                            imageUrls: [], 
+                            files: [], 
+                            content: '',
+                            textareaClass: '' 
+                        });
                     });
 
-                    addClass(overlayElement, "hide");
-                    submitButton.disabled = true;
-                    addClass(footer, "hide");
+                    this.removeOverlay();
+                    this.disableForm(selector);
                 } else {
                     this.props.action(newPost)
-                        .then(() => {
-                            this.setState({ content: '' });
-                        });
+                        .then(() => this.setState({ 
+                            content: '', 
+                            textareaClass: '' 
+                        }));
                 }
             } else {
-                newPost = { post: 
-                                { 
-                                    content: this.state.content, 
-                                    id: this.props.post.id
-                                } 
-                            };
+                newPost = { 
+                    post: { 
+                        content: content, 
+                        id: this.props.post.id
+                    } 
+                };
                 
                 this.props.action(newPost)
-                    .then(() => this.props.hideEditModal(this.props.post.id));
+                    .then(() => {
+                        this.props.hideEditModal(this.props.post.id);
+                    });
             }
 
-            addClass(overlayElement, "hide");
-            submitButton.disabled = true;
-            addClass(footer, "hide");
-        } else if (this.state.imageUrls.length !== 0) {
+            this.removeOverlay();
+            this.disableForm(selector);
+        } else if (imageUrls.length !== 0) {
             const formData = new FormData();
 
-            this.state.files.forEach(file => {
+            files.forEach(file => {
                 formData.append('post[photos][]', file);
             });
 
             this.props.createPhotoPost(formData).then(() => {
-                this.setState({ imageUrls: [], files: [], content: '' });
+                this.setState({ 
+                    imageUrls: [], 
+                    files: [], 
+                    content: '',
+                    textareaClass: ''
+                });
             });
 
-            addClass(overlayElement, "hide");
-            submitButton.disabled = true;
-            addClass(footer, "hide");
+            this.removeOverlay();
+            this.disableForm(selector);
         }
     }
 
     readAndPreview(file) {
-        const { imageUrls } = this.state;
+        const { imageUrls, files } = this.state;
         const reader = new FileReader();
         reader.readAsDataURL(file);
 
         reader.onloadend = () => {
             const imageUrl = reader.result;
             imageUrls.push(imageUrl);
-            this.setState({ imageUrls });
+            files.push(file);
+            this.setState({ imageUrls, files });
         };
     }
 
     handleFileInput(e) {
         const element = e.target;
-        const { files } = this.state;
-        const footer = document.querySelector(`.Create`);
-        const submitButton = footer.children[0];
-        
-        Array.from(element.files).forEach(file => {
-            files.push(file);
-            this.readAndPreview(file);
-        });
+        Array.from(element.files).forEach(file => this.readAndPreview(file));
 
-        const overlayElement = document.querySelector(".overlay");
-        removeClass(overlayElement, "hide");
-        removeClass(footer, "hide");
-        submitButton.disabled = false;
+        this.showOverlay();
+        this.enableForm('Create');
         element.value = "";
-        this.setState({ files });
     }
 
     removePicture(idx) {
         const { files, imageUrls } = merge({}, this.state);
-        const footer = document.querySelector(`.Create`);
-        const submitButton = footer.children[0];
 
-        this.setState( { files: removeFromArray(files, idx) });
-        this.setState( { imageUrls: removeFromArray(imageUrls, idx) });
+        this.setState({ 
+            files: removeFromArray(files, idx),
+            imageUrls: removeFromArray(imageUrls, idx)
+        });
 
         if (files.length - 1 === 0) {
-            const overlayElement = document.querySelector(".overlay");
-            addClass(overlayElement, "hide");
-            addClass(footer, "hide");
-            submitButton.disabled = true;
+            this.removeOverlay();
+            this.disableForm('Create');
         }
     }
 
     handleInput(type) {
         return (e) => {
             const element = e.target;
-            const selector = this.props.formType === "Create" ? "Create" : `Edit-${this.props.post.id}`;
-            const footer = document.querySelector(`.${selector}`);
-            const submitButton = footer.children[0];
+            const { formType, post } = this.props;
+            const selector = formType === "Create" ? "Create" : `Edit-${post.id}`;
             
             if (element.value !== "") {
-                removeClass(footer, "hide");
-                submitButton.disabled = false;
-
                 if (element.value.length > 95 || element.value.length === 0) {
                     this.setState({ [type]: element.value, textareaClass: '' });
                 } else {
-                    this.setState({ [type]: element.value, textareaClass: 'large-font' });
+                    this.setState({ 
+                        [type]: element.value, 
+                        textareaClass: 'large-font' 
+                    });
                 }
+
+                this.enableForm(selector);
             } else {
                 if (this.state.imageUrls.length === 0) {
-                    submitButton.disabled = true;
-                    addClass(footer, "hide");
+                    this.disableForm(selector);
                 }
 
                 this.setState({ [type]: element.value, textareaClass: '' });
             }
-
         };
     }
 
@@ -198,7 +234,8 @@ class PostsForm extends React.Component {
         const { 
             currentUser, 
             receiver,
-            formType 
+            formType,
+            post
         } = this.props;
 
         const { 
@@ -207,14 +244,20 @@ class PostsForm extends React.Component {
             imageUrls
         } = this.state;
 
-        let formPlaceholder = currentUser.id === receiver.id ? `What's on your mind, ${currentUser.first_name}?` : `Write something to ${receiver.first_name}...`;
-        const formClass = formType === "Create" ? "posts-form" : "posts-form animateModal";
-
+        let formPlaceholder; 
+        const formClass = formType === "Create" ? "posts-form" : "posts-form";
+        
+        if (currentUser.id === receiver.id) 
+            formPlaceholder = `What's on your mind, ${currentUser.first_name}?`;
+        else {
+            formPlaceholder = `Write something to ${receiver.first_name}...`;
+        }
+            
         const images = imageUrls.map((url, idx) => {
             return (
                 <div className="image-holder" key={idx}>
                     <div className="image-overlay">
-                        <button onClick={() => this.removePicture(idx)}>
+                        <button type="button" onClick={() => this.removePicture(idx)}>
                             <i className="white-close-icon"></i>
                         </button>
                     </div>
@@ -234,10 +277,18 @@ class PostsForm extends React.Component {
             <form className={formClass} onSubmit={this.handleSubmit}>
                 <div className="card-header">
                     {formType === "Create" ? "Create Post" : "Edit Post"}
-                    {formType === "Edit" ?
-                        <button onClick={() => this.props.hideEditModal(this.props.post.id)}>
-                            <i className="close-icon"></i>
-                        </button> : null
+                    {
+                        formType === "Edit" ?
+                            <button onClick={() => this.props.hideEditModal(post.id)}>
+                                <i className="close-icon"></i>
+                            </button> 
+                        : 
+                            <button 
+                                onClick={this.removeOverlay} 
+                                className="create-post-close-button hide"
+                                >
+                                <i className="close-icon"></i>
+                            </button>
                     }
                 </div>
                 <div className="card-body">
@@ -253,14 +304,12 @@ class PostsForm extends React.Component {
                             onKeyPress={this.handleEnter}
                             onFocus={() => {
                                 if (formType === "Create") {
-                                    const overlayElement = document.querySelector(".overlay");
-                                    removeClass(overlayElement, "hide");
+                                    this.showOverlay();
                                 }
                             }}
                             onBlur={() => {
                                 if (formType === "Create") {
-                                    const overlayElement = document.querySelector(".overlay");
-                                    addClass(overlayElement, "hide");
+                                    this.removeOverlay();
                                 }
                             }}
                         />
@@ -269,7 +318,9 @@ class PostsForm extends React.Component {
                         images.length > 0 ?
                             <div className="image-previews">
                                 {images}
-                                <label htmlFor='imageUpload' className="add-image-button">+</label>
+                                <label htmlFor='imageUpload' className="add-image-button">
+                                    +
+                                </label>
                             </div> : null
                     }
                     <hr />
