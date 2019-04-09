@@ -21,7 +21,7 @@ User.create({
 
 Post.create({
   author_id: User.find_by(username: "test").id,
-  content: "Born on January 10, 1992",
+  content: "Born on January 9, 1992",
   event_date: demo_user_birth_date, 
   event_category: "birthday", 
   life_event: true
@@ -32,7 +32,7 @@ Post.create({
   male_birth_date = Faker::Date.birthday(18, 65)
   male_birthday_string = "#{Date::MONTHNAMES[male_birth_date.month]} #{male_birth_date.day}, #{male_birth_date.year}"
   
-  User.create({
+  male_user = User.new({
     username: male_first_name.downcase, 
     password: "starwars",
     first_name: male_first_name, 
@@ -41,19 +41,21 @@ Post.create({
     gender: "M"
   })
 
-  Post.create({
-    author_id: User.find_by(username: male_first_name.downcase).id,
-    content: "Born on #{male_birthday_string}",
-    event_date: male_birth_date, 
-    event_category: "birthday", 
-    life_event: true
-  })
+  if male_user.save
+    Post.create({
+      author_id: User.find_by(username: male_first_name.downcase).id,
+      content: "Born on #{male_birthday_string}",
+      event_date: male_birth_date, 
+      event_category: "birthday", 
+      life_event: true
+    })
+  end
 
   female_first_name = Faker::Name.female_first_name
   female_birth_date = Faker::Date.birthday(18, 65)
   female_birthday_string = "#{Date::MONTHNAMES[female_birth_date.month]} #{female_birth_date.day}, #{female_birth_date.year}"
 
-  User.create({
+  female_user = User.create({
     username: female_first_name.downcase, 
     password: "starwars",
     first_name: female_first_name, 
@@ -62,35 +64,57 @@ Post.create({
     gender: "F"
   })
 
-  Post.create({
-    author_id: User.find_by(username: female_first_name.downcase).id,
-    content: "Born on #{female_birthday_string}",
-    event_date: female_birth_date, 
-    event_category: "birthday", 
-    life_event: true
-  })
+  if female_user.save 
+    Post.create({
+      author_id: User.find_by(username: female_first_name.downcase).id,
+      content: "Born on #{female_birthday_string}",
+      event_date: female_birth_date, 
+      event_category: "birthday", 
+      life_event: true
+    })
+  end 
 end 
 
 user_ids = User.pluck(:id)
 
 50.times do 
-  random_user = User.find_by(id: user_ids.sample)
+  success = false 
 
-  FriendRequest.create({
-    sender_id: User.find_by(username: "test").id, 
-    receiver_id: random_user.id,
-    status: "accepted",
-    seen: true
-  })
+  until success 
+    random_user = User.find_by(id: user_ids.sample)
 
-  50.times do 
-    other_random_user = User.find_by(id: user_ids.sample)
-
-    FriendRequest.create({
-      sender_id: random_user.id, 
-      receiver_id: other_random_user.id,
+    friend_request = FriendRequest.new({
+      sender_id: User.find_by(username: "test").id, 
+      receiver_id: random_user.id,
       status: "accepted",
       seen: true
     })
+
+    if friend_request.save
+      success = true
+    else
+      success = false 
+    end 
+  end
+
+  50.times do 
+    success = false 
+
+    until success
+      other_random_user = User.find_by(id: user_ids.sample)
+
+      friend_request = FriendRequest.new({
+        sender_id: random_user.id, 
+        receiver_id: other_random_user.id,
+        status: "accepted",
+        seen: true
+      })
+
+      if friend_request.save 
+        success = true 
+      else 
+        success = false
+      end 
+    end 
   end 
 end 
