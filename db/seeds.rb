@@ -29,7 +29,7 @@ Post.create({
   life_event: true
 })
 
-50.times do 
+27.times do 
   male_first_name = Faker::Name.male_first_name
   male_birth_date = Faker::Date.birthday(18, 65)
   male_birthday_string = "#{Date::MONTHNAMES[male_birth_date.month]} #{male_birth_date.day}, #{male_birth_date.year}"
@@ -80,7 +80,7 @@ end
 user_ids = User.pluck(:id)
 user_ids.delete(demo_user.id)
 
-36.times do 
+24.times do 
   random_id = user_ids.sample
   random_user = User.find_by(id: random_id)
   user_ids.delete(random_id)
@@ -96,7 +96,7 @@ user_ids.delete(demo_user.id)
   other_user_ids.delete(demo_user.id)
   other_user_ids.delete(random_user.id)
 
-  42.times do 
+  19.times do 
     random_id = other_user_ids.sample
     other_random_user = User.find_by(id: random_id)
     other_user_ids.delete(random_id)
