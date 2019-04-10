@@ -6,14 +6,15 @@ class FriendRequest extends React.Component {
     }
 
     render() {
-        const { friendRequest, user, currentUser, history } = this.props;
-        const { pathname } = history.location;
-        let coverButton;
+        const { 
+            friendRequest, user, currentUser, history,
+            deleteFriendRequest, sendFriendRequest, acceptFriendRequest 
+        } = this.props;
         
-        const requestSent = [
-            <div key={0}>
+        const requestSent = 
+            <div>
                 {
-                    pathname === "/feed" ?
+                    history.location.pathname === "/feed" ?
                         <button>
                             <i className="add-friend-icon"></i> Sent
                         </button>
@@ -23,69 +24,61 @@ class FriendRequest extends React.Component {
                         </button>
                 }
                 <ul className="cover-dropdown">
-                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                    <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
                         Cancel Request
                     </li>
                 </ul>
-            </div>
-        ];
+            </div>;
 
-        const addFriend = [
-            <button className="cursor" onClick={() => this.props.sendFriendRequest(user.id)} key={1}>
+        const addFriend = 
+            <button className="cursor" onClick={() => sendFriendRequest(user.id)} key={1}>
                 <i className="add-friend-icon"></i> Add Friend
-            </button>
-        ];
+            </button>;
 
-        const answerRequest = [
-            <div key={2}>
+        const answerRequest = 
+            <div>
                 <button>
                     <i className="add-friend-icon"></i> Respond to Friend Request
                 </button>
                 <ul className="cover-dropdown">
-                    <li onMouseDown={() => this.props.acceptFriendRequest(friendRequest.id)}>
+                    <li onMouseDown={() => acceptFriendRequest(friendRequest.id)}>
                         Confirm
                     </li>
-                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                    <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
                         Delete Request
                     </li>
                 </ul>
-            </div>
-        ];
+            </div>;
 
-        const friends = [
-            <div key={3}>
+        const friends = 
+            <div>
                 <button>
                     <i className="friends-icon"></i> Friends
                 </button>
                 <ul className="cover-dropdown">
-                    <li onMouseDown={() => this.props.deleteFriendRequest(friendRequest.id)}>
+                    <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
                         Unfriend
                     </li>
                 </ul>
-            </div>
-        ];
+            </div>;
 
         if (friendRequest.status) {
             if (friendRequest.status === "accepted") {
-                coverButton = friends;
+                return friends;
             } else {
-                if (friendRequest.sender_id === currentUser.id && friendRequest.status === "pending") {
-                    coverButton = requestSent;
-                } else if (friendRequest.sender_id === user.id && friendRequest.status === "pending") {
-                    coverButton = answerRequest;
+                if (friendRequest.sender_id === currentUser.id && 
+                    friendRequest.status === "pending") {
+                    return requestSent;
+                } else if (friendRequest.sender_id === user.id && 
+                    friendRequest.status === "pending") {
+                    return answerRequest;
                 } else {
-                    coverButton = addFriend;
+                    return addFriend;
                 }
             } 
         } else {
-            coverButton = addFriend;
+            return addFriend;
         }
-
-        return (
-            <>
-                {coverButton}
-            </>
-        )
     }
 }
 

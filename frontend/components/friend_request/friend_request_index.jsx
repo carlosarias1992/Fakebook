@@ -1,6 +1,6 @@
 import React from 'react';
 import FriendRequestIndexItemContainer from './friend_request_index_item_container';
-import { addClass } from '../../util/ui_util';
+import { addClass, toggleClass } from '../../util/ui_util';
 
 class FriendRequestIndex extends React.Component {
     constructor(props) {
@@ -10,14 +10,25 @@ class FriendRequestIndex extends React.Component {
     }
 
     handleSeenFriendRequests() {
-        this.props.unseenFriendRequests.forEach(friendRequest => {
-            this.props.seenFriendRequest(friendRequest.id);
+        const { unseenFriendRequests, seenFriendRequest } = this.props;
+
+        unseenFriendRequests.forEach(friendRequest => {
+            seenFriendRequest(friendRequest.id);
         });
     }
 
+    hideElement(selector) {
+        const element = document.querySelector(selector);
+        addClass(element, "hide");
+    }
+
     render() {
-        const iconClass = this.state.dropdown ? "white-friend-requests-icon" : "friend-requests-icon";
-        const pendingFriendRequests = this.props.pendingFriendRequests.map(friendRequest => {
+        const { dropdown } = this.state;
+        const { pendingFriendRequests, unseenFriendRequests } = this.props;
+
+        const iconClass = dropdown ? "white-friend-requests-icon" : "friend-requests-icon";
+
+        const allPendingFriendRequests = pendingFriendRequests.map(friendRequest => {
             return <FriendRequestIndexItemContainer friendRequest={friendRequest} key={friendRequest.id} />;
         });
 
@@ -27,39 +38,43 @@ class FriendRequestIndex extends React.Component {
                 tabIndex="0"
                 onClick={() => {
                     this.handleSeenFriendRequests();
-                    document.querySelector(".friend-requests-dropdown").classList.toggle("hide");
+                    toggleClass(".friend-requests-dropdown", "hide")();
 
-                    if (this.state.dropdown === true) {
+                    if (dropdown) {
                         this.setState({ dropdown: false });
                     } else {
                         this.setState({ dropdown: true });
                     }
 
-                    if (this.props.unseenFriendRequests === 0) {
-                        document.querySelector(".friend-requests-icon").classList.toggle("white-friend-requests-icon");
+                    if (unseenFriendRequests === 0) {
+                        toggleClass(".friend-requests-icon", "white-friend-requests-icon")();
                     } 
                 }}
                 onBlur={() => {
-                    const dropdownElement = document.querySelector(".friend-requests-dropdown");
+                    this.hideElement(".friend-requests-dropdown");
                     this.setState({ dropdown: false });
-                    addClass(dropdownElement, "hide");
                 }}
-            >
+                >
                 {
-                    this.props.unseenFriendRequests.length > 0 ?
+                    unseenFriendRequests.length > 0 ?
                         <>
                             <i className="white-friend-requests-icon"></i>
-                            <span>{this.props.unseenFriendRequests.length}</span>
-                        </> : <i className={iconClass}></i>
+                            <span>{unseenFriendRequests.length}</span>
+                        </> 
+                    : 
+                        <i className={iconClass}></i>
                 }
                 <ul className="friend-requests-dropdown hide">
                     <div className="dropdown-header">
                         Friend Requests
                     </div>
                     {
-                        pendingFriendRequests.length > 0 ?
-                            pendingFriendRequests :
-                            <li className="no-requests"><p>No new requests</p></li>
+                        allPendingFriendRequests.length > 0 ?
+                            allPendingFriendRequests 
+                        :
+                            <li className="no-requests">
+                                <p>No new requests</p>
+                            </li>
                     }
                 </ul>
             </li>

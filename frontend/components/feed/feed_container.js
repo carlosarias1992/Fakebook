@@ -14,7 +14,7 @@ const mapStateToProps = state => {
     const currentUser = getCurrentUser(state);
     const { friends_id } = currentUser;
     let feedPosts = {};
-
+    
     currentUser.posts_id.forEach(post_id => {
         const post = posts[post_id];
 

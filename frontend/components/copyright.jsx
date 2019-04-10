@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default props => {
+export default () => {
     return (
         <div className="copyright">
             <div className="languages">

@@ -1,20 +1,16 @@
 import { connect } from 'react-redux';
 import FriendRequestIndexItem from './friend_request_index_item';
+import { getUser } from '../../util/container_util';
 import {
     acceptFriendRequest,
     deleteFriendRequest
 } from '../../actions/friend_request_actions';
 
 const mapStateToProps = (state, ownProps) => {
-    const { users } = state.entities;
-    let { friendRequest } = ownProps;
-    let sender = users[friendRequest.sender_id];
-    sender = sender || {};
+    const { friendRequest } = ownProps;
+    const sender = getUser(state, friendRequest.sender_id);
 
-    return {
-        friendRequestId: friendRequest.id,
-        sender
-    };
+    return { friendRequest, sender };
 };
 
 const mapDispatchToProps = dispatch => {

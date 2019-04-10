@@ -1,25 +1,19 @@
 import { connect } from 'react-redux';
 import FriendRequest from './friend_request';
-import {
-    acceptFriendRequest,
-    deleteFriendRequest,
-    sendFriendRequest
-} from '../../actions/friend_request_actions';
 import { findFriendRequestByUserId } from '../../util/ui_util';
 import { withRouter } from 'react-router-dom';
+import { getCurrentUser } from '../../util/container_util';
+import { 
+    acceptFriendRequest, deleteFriendRequest, sendFriendRequest
+} from '../../actions/friend_request_actions';
 
 const mapStateToProps = (state, ownProps) => {
-    const user = ownProps.user;
-    const currentUserId = state.session.current_user_id;
-    const currentUser = state.entities.users[currentUserId];
-    let friendRequest = findFriendRequestByUserId(user.id, currentUser.id, state.entities.friendRequests);
-    friendRequest = friendRequest || {};
+    const { user } = ownProps;
+    const { friendRequests } = state.entities;
+    const currentUser = getCurrentUser(state);
+    const friendRequest = findFriendRequestByUserId(user.id, currentUser.id, friendRequests) || {};
     
-    return {
-        user,
-        currentUser,
-        friendRequest
-    };
+    return { user, currentUser, friendRequest };
 };
 
 const mapDispatchToProps = dispatch => {

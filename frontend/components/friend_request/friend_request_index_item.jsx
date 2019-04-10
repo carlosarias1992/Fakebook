@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default props => {
     const { 
-        sender,
-        friendRequestId,
-        acceptFriendRequest,
-        deleteFriendRequest 
+        sender, friendRequest, acceptFriendRequest, deleteFriendRequest 
     } = props;
 
     return (
@@ -19,10 +16,16 @@ export default props => {
                 </Link>
             </div>
             <div className="right-col">
-                <button className="confirm-button" onMouseDown={() => acceptFriendRequest(friendRequestId)}>
+                <button 
+                    className="confirm-button" 
+                    onMouseDown={() => acceptFriendRequest(friendRequest.id)}
+                    >
                     Confirm
                 </button>
-                <button className="deny-button" onMouseDown={() => deleteFriendRequest(friendRequestId)}>
+                <button 
+                    className="deny-button" 
+                    onMouseDown={() => deleteFriendRequest(friendRequest.id)}
+                    >
                     Delete Request
                 </button>
             </div>

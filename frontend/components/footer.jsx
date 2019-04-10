@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export default (props) => {
+export default () => {
     return (
         <footer className="flex-center main-footer">
             <section className="container">
