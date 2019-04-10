@@ -2,18 +2,21 @@ import React from 'react';
 import HeaderContainer from './header/header_container';
 import PostsFormContainer from '../posts/posts_form_container';
 import AvatarContainer from '../avatar_container';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PostIndex from '../posts/post_index';
 import PeopleYouMayKnowIndexContainer from '../people_you_may_know/people_you_may_know_index_container';
 import Copyright from '../copyright';
 
 class Feed extends React.Component {
     componentDidMount() {
-        this.props.fetchFriendRequests().then(() => {
-            this.props.fetchLikes();
-        });
-
+        this.props.fetchUsers();
+        this.props.fetchFriendRequests();
         this.props.fetchRejections();
+        this.props.fetchPosts().then(() => {
+            this.props.fetchComments().then(() => {
+                this.props.fetchLikes();
+            });
+        });
     }
     
     render() {

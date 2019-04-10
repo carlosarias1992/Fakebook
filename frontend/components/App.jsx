@@ -7,14 +7,6 @@ import FailedSignup from './signup/failed_signup';
 import ProfileContainer from './profile/profile_container';
 
 class App extends React.Component {
-    componentDidMount() {
-        this.props.fetchUsers().then(() => {
-            this.props.fetchPosts().then(() => {
-                this.props.fetchComments();
-            });
-        });
-    }
-
     render() {
         return (
             <div>

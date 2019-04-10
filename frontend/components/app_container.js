@@ -7,13 +7,5 @@ import { fetchComments } from '../actions/comments_actions';
 const mapStateToProps = state => ({
     currentUser: state.session.current_user_id
 });
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchPosts: () => dispatch(fetchPosts()),
-        fetchUsers: () => dispatch(fetchUsers()),
-        fetchComments: () => dispatch(fetchComments())
-    };
-};
  
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

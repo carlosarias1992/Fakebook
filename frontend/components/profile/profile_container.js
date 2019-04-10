@@ -4,6 +4,9 @@ import { findFriendRequestByUserId } from '../../util/ui_util';
 import { fetchFriendRequests } from '../../actions/friend_request_actions';
 import { fetchLikes } from '../../actions/likes_actions';
 import { findAllFriendRequestsByUserId } from '../../util/ui_util';
+import { fetchUsers } from '../../actions/user_actions';
+import { fetchPosts } from '../../actions/posts_actions';
+import { fetchComments } from '../../actions/comments_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const currentUserId = state.session.current_user_id;
@@ -47,7 +50,10 @@ const mapDispatchToProps = dispatch => {
     
     return {
         fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id)),
-        fetchLikes: () => dispatch(fetchLikes(currentUser.id))
+        fetchLikes: () => dispatch(fetchLikes(currentUser.id)),
+        fetchUsers: () => dispatch(fetchUsers()),
+        fetchPosts: () => dispatch(fetchPosts()),
+        fetchComments: () => dispatch(fetchComments())
     };
 };
 
