@@ -1,6 +1,6 @@
 import React from 'react';
 import { merge } from 'lodash';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { 
     removeClass, 
     addClass, 

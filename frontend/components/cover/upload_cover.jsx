@@ -10,38 +10,31 @@ class UploadCover extends React.Component {
 
   componentDidUpdate() {
     const { imageUrl } = this.state;
+    const { currentUser, receiveUser } = this.props;
 
-    if (imageUrl !== this.props.currentUser.cover) {
-      const user = merge(this.props.currentUser, { cover: imageUrl });
-      this.props.receiveUser(user);
+    if (imageUrl !== currentUser.cover) {
+      const user = merge(currentUser, { cover: imageUrl });
+      receiveUser(user);
     }
   }
 
   handleSubmit(e) {
+    const { currentUser, updateCoverPhoto } = this.props;
     const element = e.target;
 
     const reader = new FileReader();
+    reader.onloadend = () => this.setState({ imageUrl: reader.result }); 
+    
     const file = element.files[0];
-
-    reader.onloadend = () => {
-      this.setState({ imageUrl: reader.result });
-    };
-
     if (file) {
       reader.readAsDataURL(file);
 
-      const formData = new FormData();
-      formData.append('user[cover]', file);
+      const coverPicture = new FormData();
+      coverPicture.append('user[cover]', file);
 
-      $.ajax({
-        url: `/api/users/${this.props.currentUser.id}`,
-        method: 'PATCH',
-        data: formData,
-        contentType: false,
-        processData: false
-      });
+      updateCoverPhoto(coverPicture, currentUser.id);
     } else {
-      this.setState({ imageUrl: this.props.currentUser.avatar });
+      this.setState({ imageUrl: currentUser.avatar });
     }
   }
   

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AvatarContainer from './avatar_container';
-import { addClass, removeClass } from '../util/ui_util';
-import FriendRequestIndexContainer from './friend_request/friend_request_index_container';
+import AvatarContainer from '../avatar/avatar_container';
+import { addClass, removeClass } from '../../util/ui_util';
+import FriendRequestIndexContainer from '../friend_request/friend_request_index_container';
 
 class ProfileNavbar extends React.Component {
     constructor(props) {
@@ -22,21 +22,23 @@ class ProfileNavbar extends React.Component {
             <section className="profile-navbar">
                 <ul className="main-navbar">
                     <li>
-                        <AvatarContainer message={currentUser.first_name} className="avatar-link"/>
+                        <AvatarContainer 
+                            message={currentUser.first_name} 
+                            className="avatar-link"
+                            />
                     </li>
                     <li><Link to="/feed">Home</Link></li>
                     <li>
                         <ul className="notifications-menu">
                             <FriendRequestIndexContainer />
-                            {/* <li className="notifications-button">
-                                <i className="notifications-icon"></i>
-                            </li> */}
                         </ul>
                     </li>
                     <button
                         onClick={() => {
-                            document.querySelector(".dropdown").classList.toggle("hide");
-                            document.querySelector(".menu-icon").classList.toggle("white-menu-icon");
+                            document.querySelector(".dropdown")
+                                .classList.toggle("hide");
+                            document.querySelector(".menu-icon")
+                                .classList.toggle("white-menu-icon");
                         }}
                         onBlur={() => {
                             const dropdownElement = document.querySelector(".dropdown");

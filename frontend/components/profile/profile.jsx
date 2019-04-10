@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderContainer from '../feed/header/header_container';
+import HeaderContainer from '../feed_header/header_container';
 import CoverContainer from '../cover/cover_container';
 import ProfilePostsIndexContainer from './profile_posts_index_container';
 import PostsFormContainer from '../posts/posts_form_container';
@@ -10,9 +10,11 @@ import Copyright from '../copyright';
 class Profile extends React.Component {
     componentDidMount() {
         this.props.fetchFriendRequests();
-        this.props.fetchPosts().then(() => {
-            this.props.fetchComments().then(() => {
-                this.props.fetchLikes();
+        this.props.fetchUsers().then(() => {
+            this.props.fetchPosts().then(() => {
+                this.props.fetchComments().then(() => {
+                    this.props.fetchLikes();
+                });
             });
         });
         scrollTo(0, 0);

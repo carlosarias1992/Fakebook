@@ -2,19 +2,8 @@ import React from 'react';
 
 export const monthOptions = () => {
     const months = [
-        "Month", 
-        "Jan", 
-        "Feb", 
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
+        "Month", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
 
     const options = months.map((month, idx) => {

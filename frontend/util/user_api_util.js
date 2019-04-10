@@ -19,3 +19,13 @@ export const updateUser = user => {
         data: user
     });
 };
+
+export const updateCoverPhoto = (cover, userId) => {
+    return $.ajax({
+        url: `api/users/${userId}`,
+        method: 'PATCH',
+        data: cover,
+        contentType: false,
+        processData: false
+    });
+};

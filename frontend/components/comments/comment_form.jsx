@@ -1,11 +1,11 @@
 import React from 'react';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { autoGrow } from '../../util/ui_util';
 
 class CommentForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { content: props.content };
+    this.state = { content: props.comment.content || '' };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -30,19 +30,16 @@ class CommentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { content } = this.state;
-    const { postId, formType } = this.props;
-    const editedComment = this.props.comment || {};
+    const { postId, formType, comment } = this.props;
 
     if (content !== "") {
-      const comment = {
-        comment: {
-          content: content
-        },
+      const newComment = {
+        comment: { content },
         post_id: postId,
-        id: editedComment.id || null
+        id: comment.id || null
       };
 
-      this.props.action(comment).then(() => {
+      this.props.action(newComment).then(() => {
         this.setState({ content: '' });
         this.props.fetchPost(postId).then(() => {
           if (formType === "Update") {
@@ -54,19 +51,22 @@ class CommentForm extends React.Component {
   }
 
   render() {
+    const { currentUser, postId } = this.props;
+    const { content } = this.state;
+
     return (
       <div className="card-footer">
         <div className="avatar-wrapper">
-          <AvatarContainer userId={this.props.currentUser.id} />
+          <AvatarContainer userId={currentUser.id} />
         </div>
         <form onSubmit={this.handleSubmit}>
           <textarea
             onKeyPress={this.handleEnter}
-            className={"comment-form-" + this.props.postId}
+            className={"comment-form-" + postId}
             placeholder="Write a comment..."
             onChange={this.handleInput("content")}
             onKeyUp={autoGrow}
-            value={this.state.content}
+            value={content}
           />
         </form>
       </div>

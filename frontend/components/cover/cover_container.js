@@ -1,15 +1,12 @@
 import { connect } from 'react-redux';
 import Cover from './cover';
+import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
-    const currentUserId = state.session.current_user_id;
-    let currentUser = state.entities.users[currentUserId];
-    currentUser = currentUser || {};
+    const currentUser = getCurrentUser(state);
+    const { user } = ownProps;
     
-    return {
-        currentUser,
-        user: ownProps.user
-    };
+    return { currentUser, user };
 };
 
 export default connect(mapStateToProps)(Cover);

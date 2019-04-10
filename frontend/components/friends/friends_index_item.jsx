@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { Link } from 'react-router-dom';
 
 export default props => {
@@ -7,7 +7,7 @@ export default props => {
 
     return (
         <div className="image-holder">
-            <AvatarContainer user={friend} />
+            <AvatarContainer userId={friend.id} />
             <Link to={"/users/" + friend.id}>
                 <span>
                     {friend.first_name} {friend.last_name}

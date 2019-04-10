@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ProfileNavbar from './profile_navbar';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../actions/session_actions';
+import { logout } from '../../actions/session_actions';
 
 const mapStateToProps = state => {
     const currentUserId = state.session.current_user_id;

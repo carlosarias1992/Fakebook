@@ -1,7 +1,7 @@
 import React from 'react';
-import ProfileNavbarContainer from '../../profile_navbar_container';
+import ProfileNavbarContainer from '../profile_navbar/profile_navbar_container';
 import { Link } from 'react-router-dom';
-import SearchContainer from '../../search/search_container';
+import SearchContainer from '../search/search_container';
 
 class Header extends React.Component {
     render() {

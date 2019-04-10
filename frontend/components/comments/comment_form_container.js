@@ -2,17 +2,13 @@ import { connect } from 'react-redux';
 import CommentForm from './comment_form';
 import { createComment } from '../../actions/comments_actions';
 import { fetchPost } from '../../actions/posts_actions';
+import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
-  const currentUserId = state.session.current_user_id;
-  const currentUser = state.entities.users[currentUserId];
+  const currentUser = getCurrentUser(state);
+  const { postId } = ownProps;
 
-  return {
-    currentUser,
-    content: '',
-    postId: ownProps.postId,
-    formType: "Create"
-  };
+  return { currentUser, comment: {}, postId, formType: "Create" };
 };
 
 const mapDispatchToProps = dispatch => {

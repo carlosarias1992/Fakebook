@@ -1,9 +1,9 @@
 import React from 'react';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { Link } from 'react-router-dom';
 import { getShortTimeString } from '../../util/ui_util';
 import LikesContainer from '../likes/likes_container';
-import { addClass, removeClass } from '../../util/ui_util';
+import { addClass, removeClass, toggleClass } from '../../util/ui_util';
 import CommentEditFormContainer from './comment_edit_form_container';
 
 class CommentIndexItem extends React.Component {
@@ -15,54 +15,63 @@ class CommentIndexItem extends React.Component {
   }
 
   likeComment() {
+    const { 
+      comment, currentUser, fetchComment, fetchUser, createLike 
+    } = this.props;
+
     const like = {
-      like: {
-        likeable_type: "comment",
-        likeable_id: this.props.comment.id,
-      }
+        likeable_type: "comment", likeable_id: this.props.comment.id
     };
 
-    this.props.createLike(like).then(() => {
-      this.props.fetchComment(this.props.comment.id);
-      this.props.fetchUser(this.props.currentUserId);
-    }, response => console.log(response));
+    createLike({ like }).then(() => {
+      fetchComment(comment.id);
+      fetchUser(currentUser.id);
+    });
   }
 
   unlikeComment() {
-    const likeId = this.props.likeForCurrentUser.id;
-    this.props.deleteLike(likeId).then(() => {
-      this.props.fetchComment(this.props.comment.id);
-      this.props.fetchUser(this.props.currentUserId);
-    }, response => console.log(response));
+    const { 
+      likeForCurrentUser, deleteLike, fetchComment, 
+      fetchUser, comment, currentUser 
+    } = this.props;
+
+    deleteLike(likeForCurrentUser.id).then(() => {
+      fetchComment(comment.id);
+      fetchUser(currentUser.id);
+    });
+  }
+
+  hideElement(selector) {
+    const editButton = document.querySelector(selector);
+    addClass(editButton, "hide");
+  }
+
+  showElement(selector) {
+    const editButton = document.querySelector(selector);
+    removeClass(editButton, "hide");
   }
 
   render() {
     const {
-      comment,
-      author,
-      liked,
-      deleteComment,
-      post,
-      editForm
+      comment, author, liked, deleteComment, 
+      post, editForm, showCommentEditForm
     } = this.props;
 
     const newCommentClass = comment.newComment ? " new-comment" : "";
 
     if (editForm) {
-      return <CommentEditFormContainer commentId={comment.id} postId={post.id}/>;
+      return <CommentEditFormContainer comment={comment} postId={post.id}/>;
     } else {
       if (comment.content) {
         return (
           <div
             className={"comment" + newCommentClass}
             onMouseEnter={() => {
-              const editButton = document.querySelector(`.edit-button-${comment.id}`);
-              removeClass(editButton, "hide");
+              this.showElement(`.edit-button-${comment.id}`);
             }}
             onMouseLeave={() => {
               if (!this.state.activeDropdown[comment.id]) {
-                const editButton = document.querySelector(`.edit-button-${comment.id}`);
-                addClass(editButton, "hide");
+                this.hideElement(`.edit-button-${comment.id}`);
               }
             }}
           >
@@ -80,19 +89,18 @@ class CommentIndexItem extends React.Component {
                       <button
                         className={"hide edit-comment edit-button-" + comment.id}
                         onClick={() => {
-                          document.querySelector(`.comment-${comment.id}`).classList.toggle("hide");
+                          toggleClass(`.comment-${comment.id}`, "hide")();
                           this.setState({ activeDropdown: { [comment.id]: true } })
                         }}
                         onBlur={() => {
-                          const dropdownElement = document.querySelector(`.comment-${comment.id}`);
-                          addClass(dropdownElement, "hide");
+                          this.hideElement(`.comment-${comment.id}`);
                           this.setState({ activeDropdown: { [comment.id]: false } })
                         }}
                       >
                         <i className="edit-comment-icon"></i>
                       </button>
                       <ul className={"dropdown hide comment-" + comment.id}>
-                        <li onMouseDown={() => this.props.showCommentEditForm(comment.id)}>
+                        <li onMouseDown={() => showCommentEditForm(comment.id)}>
                           <i className="fas fa-pencil-alt"></i> Edit...
                         </li>
                         <li onMouseDown={() => deleteComment(comment.id)}>
@@ -104,11 +112,17 @@ class CommentIndexItem extends React.Component {
                       {
                         liked ?
                           <>
-                            {getShortTimeString(comment.created_at)} · <button className="bold" onClick={this.unlikeComment}>Like</button>
+                            {getShortTimeString(comment.created_at)} · 
+                            <button className="bold" onClick={this.unlikeComment}>
+                              Like
+                            </button>
                           </>
-                          :
+                        :
                           <>
-                            {getShortTimeString(comment.created_at)} · <button onClick={this.likeComment}>Like</button>
+                            {getShortTimeString(comment.created_at)} · 
+                            <button onClick={this.likeComment}>
+                              Like
+                            </button>
                           </>
                       }
                     </div>

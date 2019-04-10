@@ -4,33 +4,34 @@ import { createLike, deleteLike } from '../../actions/likes_actions';
 import { fetchComment, deleteComment } from '../../actions/comments_actions';
 import { fetchUser } from '../../actions/user_actions';
 import { showCommentEditForm } from '../../actions/ui_actions';
+import { getCurrentUser, getUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
+  const currentUser = getCurrentUser(state);
   const editForm = state.entities.ui.commentEditForm || {};
   const comment = state.entities.comments[ownProps.commentId] || {};
-  const author = state.entities.users[comment.author_id];
-  const currentUserId = state.session.current_user_id;
-  const currentUser = state.entities.users[currentUserId];
+  const author = getUser(state, comment.author_id);
 
-  const allLikes = state.entities.likes;
-  const allLikeKeys = Object.keys(allLikes);
-  let likeForCurrentUser = {};
+  const comment_likes = Object.values(state.entities.likes).filter(like => {
+    return like.likeable_type === "comment" && 
+      like.likeable_id === comment.id && like.user_id === currentUser.id;
+  });
 
-  for (let i = 0; i < allLikeKeys.length; i++) {
-    if (allLikes[allLikeKeys[i]].likeable_type === "comment" &&
-          allLikes[allLikeKeys[i]].user_id === currentUserId &&
-            allLikes[allLikeKeys[i]].likeable_id === comment.id) {
-      likeForCurrentUser = allLikes[allLikeKeys[i]];
-      break;
-    }
-  }
+  const comment_like_ids = comment_likes.map(comment_like => {
+    return comment_like.likeable_id;
+  });
+
+  const likeForCurrentUser = comment_likes.filter(comment_like => {
+    return comment_like.user_id === currentUser.id && 
+      comment_like.likeable_id === comment.id;
+  })[0];
   
   return {
     comment,
     author,
-    liked: currentUser.comment_likes_id.includes(likeForCurrentUser.id),
+    liked: comment_like_ids.includes(comment.id),
     likeForCurrentUser,
-    currentUserId,
+    currentUser,
     editForm: editForm[comment.id] || false
   };
 };

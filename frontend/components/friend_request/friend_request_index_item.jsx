@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { Link } from 'react-router-dom';
 
 export default props => {
@@ -13,7 +13,7 @@ export default props => {
     return (
         <li>
             <div className="left-col">
-                <AvatarContainer user={sender} />
+                <AvatarContainer userId={sender.id} />
                 <Link to={"/users/" + sender.id}>
                     {sender.first_name} {sender.last_name}
                 </Link>

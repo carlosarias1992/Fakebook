@@ -31,3 +31,8 @@ export const updateUser = user => dispatch => {
     return UserApiUtil.updateUser(user)
         .then(editedUser => dispatch(receiveUser(editedUser)));
 };
+
+export const updateCoverPhoto = (cover, userId) => dispatch => {
+    return UserApiUtil.updateCoverPhoto(cover, userId)
+        .then(editedUser => dispatch(receiveUser(editedUser)));
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import AvatarContainer from '../avatar_container';
+import AvatarContainer from '../avatar/avatar_container';
 import { Link } from 'react-router-dom';
 import { getTimeString, toggleClass, addClass } from '../../util/ui_util';
 import EditFormContainer from './edit_form_container';
