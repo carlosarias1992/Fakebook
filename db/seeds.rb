@@ -29,7 +29,7 @@ Post.create({
   life_event: true
 })
 
-75.times do 
+50.times do 
   male_first_name = Faker::Name.male_first_name
   male_birth_date = Faker::Date.birthday(18, 65)
   male_birthday_string = "#{Date::MONTHNAMES[male_birth_date.month]} #{male_birth_date.day}, #{male_birth_date.year}"
@@ -80,12 +80,12 @@ end
 user_ids = User.pluck(:id)
 user_ids.delete(demo_user.id)
 
-43.times do 
+36.times do 
   random_id = user_ids.sample
   random_user = User.find_by(id: random_id)
   user_ids.delete(random_id)
 
-  FriendRequest.create!({
+  FriendRequest.create({
     sender_id: demo_user.id, 
     receiver_id: random_user.id,
     status: "accepted",
@@ -93,14 +93,15 @@ user_ids.delete(demo_user.id)
   })
 
   other_user_ids = User.pluck(:id)
+  other_user_ids.delete(demo_user.id)
   other_user_ids.delete(random_user.id)
 
-  56.times do 
+  42.times do 
     random_id = other_user_ids.sample
     other_random_user = User.find_by(id: random_id)
     other_user_ids.delete(random_id)
 
-    FriendRequest.create!({
+    FriendRequest.create({
       sender_id: random_user.id, 
       receiver_id: other_random_user.id,
       status: "accepted",
