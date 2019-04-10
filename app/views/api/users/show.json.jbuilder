@@ -27,3 +27,5 @@ friends.concat(@user.sent_friend_requests.where(status: "accepted").pluck(:recei
 friends.concat(@user.received_friend_requests.where(status: "accepted").pluck(:sender_id))
 
 json.friends_id friends.sort
+
+json.posts_id @user.posts.pluck(:id)

@@ -21,9 +21,7 @@ class Feed extends React.Component {
     }
     
     render() {
-        const { currentUser, posts } = this.props;
-        
-        const allPosts = Object.keys(posts);
+        const { currentUser, feedPosts } = this.props;
         const linkTitle = `${currentUser.first_name} ${currentUser.last_name}`;
 
         return (
@@ -43,12 +41,18 @@ class Feed extends React.Component {
                                 </li>
                                 <hr />
                                 <li>
-                                    <a target="_blank" href="https://github.com/carlosarias1992">
+                                    <a 
+                                        target="_blank" 
+                                        href="https://github.com/carlosarias1992"
+                                        >
                                         <i className="fab fa-github"></i> Creator's Github
                                     </a>
                                 </li>
                                 <li>
-                                    <a target="_blank" href="https://www.linkedin.com/in/carlos-arias-miranda-a98025172/">
+                                    <a 
+                                        target="_blank" 
+                                        href="https://www.linkedin.com/in/carlos-arias-miranda-a98025172/"
+                                        >
                                         <i className="fab fa-linkedin"></i> Creator's LinkedIn
                                     </a>
                                 </li>
@@ -56,17 +60,17 @@ class Feed extends React.Component {
                         </aside>
                         <div className="center-col">
                             <PostsFormContainer />
-
-                            {allPosts.length !== 0 ? 
-                                <PostIndex posts={posts} /> 
+                            {
+                                Object.keys(feedPosts).length !== 0 ? 
+                                    <PostIndex posts={feedPosts} /> 
                                 :
-                                <div className="welcome">
-                                    <h1>Welcome to Fakebook</h1>
-                                    <h2>
-                                        Get started by adding friends. You'll 
-                                        see their videos, photos and posts here.
-                                    </h2>
-                                </div>
+                                    <div className="welcome">
+                                        <h1>Welcome to Fakebook</h1>
+                                        <h2>
+                                            Get started by adding friends. You'll 
+                                            see their videos, photos and posts here.
+                                        </h2>
+                                    </div>
                             }
                         </div>
                         <div className="right-col">

@@ -6,43 +6,44 @@ import { fetchRejections } from '../../actions/rejections_actions';
 import { fetchUsers } from '../../actions/user_actions';
 import { fetchPosts } from '../../actions/posts_actions';
 import { fetchComments } from '../../actions/comments_actions';
+import { getCurrentUser } from '../../util/container_util';
 import { merge } from 'lodash';
 
 const mapStateToProps = state => {
-    const currentUserId = state.session.current_user_id;
-    const currentUser = state.entities.users[currentUserId];
-    const friends = currentUser.friends_id || [];
+    const { posts, users } = state.entities;
+    const currentUser = getCurrentUser(state);
+    const { friends_id } = currentUser;
+    let feedPosts = {};
 
-    const allPosts = state.entities.posts;
-    const postKeys = Object.keys(allPosts);
-    let posts = {};
+    currentUser.posts_id.forEach(post_id => {
+        const post = posts[post_id];
 
-    for (let i = 0; i < postKeys.length; i++) {
-        if (!allPosts[postKeys[i]].event_category) {
-            if (friends.includes(allPosts[postKeys[i]].author_id) ||
-                friends.includes(allPosts[postKeys[i]].receiver_id)) {
-                posts = merge(posts, { [postKeys[i]]: allPosts[postKeys[i]] });
-            }
-
-            if (allPosts[postKeys[i]].author_id === currentUserId ||
-                allPosts[postKeys[i]].receiver_id === currentUserId) {
-                posts = merge(posts, { [postKeys[i]]: allPosts[postKeys[i]] });
-            }
+        if (post && !post.life_event) {
+            feedPosts = merge(feedPosts, { [post_id]: posts[post_id] });
         }
-    }
+    });
 
-    return {
-        currentUser,
-        posts
-    };
+    friends_id.forEach(friend_id => {
+        const friend = users[friend_id];
+
+        if (friend) {
+            friend.posts_id.forEach(post_id => {
+                const post = posts[post_id];
+
+                if (post && !post.life_event) {
+                    feedPosts = merge(feedPosts, { [post_id]: posts[post_id] });
+                }
+            });
+        }
+    });
+
+    return { currentUser, feedPosts };
 };
 
 const mapDispatchToProps = dispatch => {
-    const currentUser = window.currentUser || {};
-
     return {
-        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id)),
-        fetchLikes: () => dispatch(fetchLikes(currentUser.id)),
+        fetchFriendRequests: () => dispatch(fetchFriendRequests()),
+        fetchLikes: () => dispatch(fetchLikes()),
         fetchRejections: () => dispatch(fetchRejections()),
         fetchUsers: () => dispatch(fetchUsers()),
         fetchPosts: () => dispatch(fetchPosts()),

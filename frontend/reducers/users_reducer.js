@@ -40,6 +40,7 @@ export default (state = {}, action) => {
             return merge({}, oldState, sender, receiver);
         case RECEIVE_POST: 
             updatedUser = merge({}, oldState[action.post.author_id]);
+            updatedUser.posts_id.push(action.post.id);
             
             if (action.newPost) {
                 action.post.photos.forEach(photo => {

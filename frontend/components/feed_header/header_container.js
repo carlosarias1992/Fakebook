@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 import Header from './header';
+import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = state => {
-    const currentUserId = state.session.current_user_id;
-    const currentUser = state.entities.users[currentUserId];
-
-    return {
-        currentUser
-    };
+    return { currentUser: getCurrentUser(state) };
 };
 
 export default connect(mapStateToProps)(Header);
