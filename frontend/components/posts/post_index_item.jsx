@@ -20,7 +20,9 @@ class PostIndexItem extends React.Component {
     }
     
     hideDropdown() {
-        const dropdownElement = document.querySelector(`.post-${this.props.post.id}`);
+        const { post } = this.props;
+
+        const dropdownElement = document.querySelector(`.post-${post.id}`);
         addClass(dropdownElement, "hide");
     }
 
@@ -29,14 +31,8 @@ class PostIndexItem extends React.Component {
     }
 
     likePost() {
-        const like = {
-          like: {
-            likeable_type: "post",
-            likeable_id: this.props.post.id, 
-          }
-        };
-
-        this.props.createLike(like);
+        const like = { likeable_type: "post", likeable_id: this.props.post.id };
+        this.props.createLike({ like });
     }
 
     unlikePost() {
@@ -58,14 +54,20 @@ class PostIndexItem extends React.Component {
             sliceEnd += 1;
         }
 
-        return this.props.post.photos.slice(start, sliceEnd).map((photoUrl, idx) => {
-            const imageClass = (photos.length == 1 || (photos.length == 3 && start !== 0)) ? " large-image-holder" : "";
+        return photos.slice(start, sliceEnd).map((photoUrl, idx) => {
+            let imageClass = "";
+
+            if (photos.length == 1 || (photos.length == 3 && start !== 0)) {
+                imageClass = " large-image-holder";
+            }
 
             return (
                 <div className={"post-image-holder" + imageClass} key={idx} >
                     { 
                         photos.length > 5 && idx === 2 ? 
-                        <div className="more-images-overlay">+{photos.length - 4}</div> : null
+                            <div className="more-images-overlay">
+                                +{photos.length - 4}
+                            </div> : null
                     }
                     <div className="image-overlay"></div>
                     <img src={photoUrl} alt={"image-" + idx} />
@@ -75,7 +77,9 @@ class PostIndexItem extends React.Component {
     }
 
     imageRowWithClass(imageRow) {
-        if (this.props.post.photos.length == 1) {
+        const { post } = this.props;
+
+        if (post.photos.length == 1) {
             return (
                 <div className="image-row large-image-row">
                     {imageRow}
@@ -91,10 +95,18 @@ class PostIndexItem extends React.Component {
     }
 
     render() {
-        const created_at = new Date(this.props.post.created_at);
-        const { photos } = this.props.post;
+        const { 
+            author, post, receiver, currentUser, event, liked, editModal
+        } = this.props;
+        const created_at = new Date(post.created_at);
+        const { photos } = post;
         const firstImageRow = this.imageRow(0);
         const secondImageRow = this.imageRow(2);
+
+        let commentsString = "1 comment";
+        if (post.comments_id.length > 1) {
+            commentsString = `${post.comments_id.length} comments`;
+        }
         
         return (
             <>
@@ -102,43 +114,43 @@ class PostIndexItem extends React.Component {
                     <div className="card-body">
                         <div className="post-header">
                             {
-                                this.props.author ?
+                                author ?
                                     <>
-                                        <AvatarContainer userId={this.props.author.id} />
+                                        <AvatarContainer userId={author.id} />
                                         <div>
-                                            <Link to={"/users/" + this.props.author.id}>
-                                                {this.props.author.first_name + " " + this.props.author.last_name}
+                                            <Link to={"/users/" + author.id}>
+                                                {author.first_name + " " + author.last_name}
                                             </Link>
                                             {
-                                                this.props.receiver && this.props.receiver.id !== this.props.author.id ? 
+                                                receiver && receiver.id !== author.id ? 
                                                     <>
                                                         <i className="right-arrow-icon"></i>
-                                                        <Link to={"/users/" + this.props.receiver.id}>
-                                                            {this.props.receiver.first_name + " " + this.props.receiver.last_name}
+                                                        <Link to={"/users/" + receiver.id}>
+                                                            {receiver.first_name + " " + receiver.last_name}
                                                         </Link>
                                                     </> : null
                                             }
                                             <small>{getTimeString(created_at)}</small>
                                         </div>
 
-                                        {this.props.author.id === this.props.currentUserId || (this.props.receiver && this.props.receiver.id === this.props.currentUserId) ?
+                                        {author.id === currentUser.id || (receiver && receiver.id === currentUser.id) ?
                                             <>
                                                 <button
                                                     className="post-menu-button"
-                                                    onClick={toggleClass(`.post-${this.props.post.id}`, "hide")}
+                                                    onClick={toggleClass(`.post-${post.id}`, "hide")}
                                                     onBlur={this.hideDropdown}
                                                 >
                                                     <i className="post-menu-icon"></i>
                                                 </button>
 
-                                                <ul className={"dropdown post-" + this.props.post.id + " hide"}>
+                                                <ul className={"dropdown post-" + post.id + " hide"}>
                                                     {
-                                                        this.props.author.id === this.props.currentUserId ?
+                                                        author.id === currentUser.id ?
                                                             <li onMouseDown={this.showModal}>
                                                                 Edit Post
                                                             </li> : null
                                                     }
-                                                    <li onMouseDown={() => this.props.deletePost(this.props.post)}>
+                                                    <li onMouseDown={() => this.props.deletePost(post)}>
                                                         Delete
                                                     </li>
                                                 </ul>
@@ -147,27 +159,27 @@ class PostIndexItem extends React.Component {
                                     </> : null
                             }
                         </div>
-                        {this.props.event ? 
+                        {event ? 
                             <span className="event">
                                 <div className="birthday-wrapper">
                                     { 
-                                        this.props.post.event_category === "birthday" ?
+                                        post.event_category === "birthday" ?
                                             <i className="birthday-icon"></i> : null
                                     }
                                 </div>
                                 {
-                                    this.props.post.content ?
-                                        <p className={this.props.post.content.length < 95 ? "large-font" : ""}>
-                                            {this.props.post.content}
+                                    post.content ?
+                                        <p className={post.content.length < 95 ? "large-font" : ""}>
+                                            {post.content}
                                         </p> : null
                                 }
                             </span> : 
                             <>
                                 {
-                                    this.props.post.content ?
+                                    post.content ?
                                         <>
-                                            <p className={this.props.post.content.length < 95 && photos.length === 0 ? "large-font" : ""}>
-                                                {this.props.post.content}
+                                            <p className={post.content.length < 95 && photos.length === 0 ? "large-font" : ""}>
+                                                {post.content}
                                             </p>
                                             {
                                                 photos.length > 0 ?
@@ -197,16 +209,18 @@ class PostIndexItem extends React.Component {
                             </>
                         }
                         <div className="flex-space-between">
-                          <LikesContainer type="post" likeable={this.props.post}/>
-                          { 
-                            this.props.numberOfComments && parseInt(this.props.numberOfComments[0]) > 0 ? 
-                            <div className="number-of-comments">{this.props.numberOfComments}</div> : null
-                          }
+                            <LikesContainer type="post" likeable={post}/>
+                            { 
+                                post.comments_id.length > 0 ? 
+                                    <div className="number-of-comments">
+                                        {commentsString}
+                                    </div> : null
+                            }
                         </div>
                         <hr />
                         <div className="post-icons">
                             {
-                                this.props.liked ?
+                                liked ?
                                 <button onClick={this.unlikePost} className="unlike-button">
                                   <i className="blue-like-icon"></i> Like
                                 </button>  :
@@ -219,17 +233,17 @@ class PostIndexItem extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <CommentIndex post={this.props.post} />
+                    <CommentIndex post={post} />
                     {
-                        this.props.author ?
-                        <CommentFormContainer postId={this.props.post.id} /> : null 
+                        author ?
+                        <CommentFormContainer postId={post.id} /> : null 
                     }
                 </div>
                 {
-                    this.props.editModal && this.props.editModal[this.props.post.id] ? 
+                    editModal && editModal[post.id] ? 
                     <div className="modal">
                         <div className="modal-content">
-                            <EditFormContainer post={this.props.post}/>
+                            <EditFormContainer post={post}/>
                         </div>    
                     </div> : null
                 }

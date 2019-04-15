@@ -24,7 +24,7 @@ class Likes extends React.Component {
                     likersString += likerFullName + ", ";
                 } else if (i === 1) {
                     likersString += likerFullName;
-                    
+
                     if (likes.length === 3) {
                         likersString += `, and 1 other`;
                     } else {
@@ -40,28 +40,20 @@ class Likes extends React.Component {
     render() {
         const { likes, type } = this.props;
 
-        if (type === "post") {
+        if (type === "post" && likes.length > 0) {
             return (
                 <div className="likes">
-                    {
-                        likes.length > 0 ?
-                            <>
-                                <i className="liked-icon"></i> {this.likers()}
-                            </> : null
-                    }
+                    <i className="liked-icon"></i> {this.likers()}
                 </div>
             )
-        } else if (type === "comment") {
+        } else if (type === "comment" && likes.length > 0) {
             return (
-                <>
-                    {
-                        likes.length > 0 ?
-                            <div className="likes comment-likes">
-                                <i className="liked-icon"></i> <p>{likes.length}</p>
-                            </div> : null
-                    }
-                </>
+                <div className="likes comment-likes">
+                    <i className="liked-icon"></i> <p>{likes.length}</p>
+                </div>
             )
+        } else {
+            return null
         }
     }
 }

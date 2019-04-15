@@ -3,7 +3,6 @@ import PostIndexItem from './post_index_item';
 import { deletePost } from '../../actions/posts_actions';
 import { showEditModal, hideEditModal } from '../../actions/ui_actions';
 import { createLike, deleteLike } from '../../actions/likes_actions';
-import { fetchUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { post } = ownProps;
@@ -15,13 +14,6 @@ const mapStateToProps = (state, ownProps) => {
     const allLikes = state.entities.likes;
     const allLikeKeys = Object.keys(allLikes);
     let likeForCurrentUser = {};
-    let numberOfComments;
-
-    if (post.comments_id.length === 1) {
-      numberOfComments = `1 comment`;
-    } else {
-      numberOfComments = `${post.comments_id.length} comments`;
-    }
     
     for (let i = 0; i < allLikeKeys.length; i++){
       if (allLikes[allLikeKeys[i]].likeable_type === "post" && 
@@ -41,11 +33,10 @@ const mapStateToProps = (state, ownProps) => {
         receiver: state.entities.users[receiverId],
         post,
         editModal,
-        currentUserId,
+        currentUser,
         liked: currentUser.post_likes_id.includes(likeForCurrentUser.id),
         numberOfLikes: post.likes_id.length,
         likeForCurrentUser,
-        numberOfComments,
         event: post.life_event
     };
 };

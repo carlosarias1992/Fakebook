@@ -96,14 +96,17 @@ class Login extends React.Component {
             onFocusCallback = errorModal("show");
             onBlurCallback = errorModal("hide");
 
-            footer = <footer>
-                        <div className="or-container">
-                            <hr />
-                            <p>or</p>
-                            <hr />
-                        </div>
-                        <Link className="create-account" to="/signup">Create New Account</Link>
-                     </footer>;
+            footer = 
+                <footer>
+                    <div className="or-container">
+                        <hr />
+                        <p>or</p>
+                        <hr />
+                    </div>
+                    <Link className="create-account" to="/signup">
+                        Create New Account
+                    </Link>
+                </footer>;
         } else {
             usernameLabel = "Email or Phone";
             passwordLabel = "Password";

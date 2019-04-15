@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import PeopleYouMayKnowIndexItem from './people_you_may_know_index_item';
 import { 
-    fetchRejection,
-    createRejection
+    fetchRejection, createRejection
 } from '../../actions/rejections_actions';
 
 const mapDispatchToProps = dispatch => {

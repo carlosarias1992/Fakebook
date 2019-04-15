@@ -41,11 +41,9 @@ class CommentForm extends React.Component {
 
       this.props.action(newComment).then(() => {
         this.setState({ content: '' });
-        this.props.fetchPost(postId).then(() => {
-          if (formType === "Update") {
-            this.props.hideCommentEditForm(comment.id);
-          }
-        });
+        if (formType === "Update") {
+          this.props.hideCommentEditForm(comment.id);
+        }
       });
     }
   }

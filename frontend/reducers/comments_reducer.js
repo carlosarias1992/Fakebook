@@ -25,7 +25,7 @@ export default (state = {}, action) => {
         case RECEIVE_COMMENTS:
             return action.comments;
         case REMOVE_COMMENT:
-            return removeObject(action.id, oldState);
+            return removeObject(Object.values(action.comment)[0].id, oldState);
         case RECEIVE_LIKE:
             like = Object.values(action.like)[0];
             newState = merge({}, oldState);

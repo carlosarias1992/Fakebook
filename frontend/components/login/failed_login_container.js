@@ -3,9 +3,7 @@ import { login } from '../../actions/session_actions';
 import FailedLogin from './failed_login';
 
 const mapStateToProps = state => {
-    return {
-        className: "failed-login-form"
-    };
+    return { className: "failed-login-form" };
 };
 
 const mapDispatchToProps = dispatch => ({

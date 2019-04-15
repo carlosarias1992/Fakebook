@@ -45,7 +45,7 @@ class Api::CommentsController < ApplicationController
 
         if @comment 
             if @comment.destroy
-                render json: {}
+                render :show
             else 
                 render json: { errors: @comment.errors.full_messages }, status: 422
             end 

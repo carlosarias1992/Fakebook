@@ -4,9 +4,7 @@ import Login from './login';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => {
-    return {
-        className: "login-form"
-    };
+    return { className: "login-form" };
 };
  
 const mapDispatchToProps = dispatch => ({

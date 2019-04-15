@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/likes_actions';
+import { REMOVE_COMMENT, RECEIVE_COMMENT } from '../actions/comments_actions';
 import { 
     RECEIVE_POST,
     REMOVE_POST,
@@ -9,9 +10,7 @@ import { removeObject } from '../util/reducer_util';
 
 export default (state = {}, action) => {
     const oldState = Object.freeze(state);
-    let newState;
-    let like;
-    let post_id;
+    let newState, like, post_id, comment;
 
     switch(action.type) {
         case RECEIVE_POSTS:
@@ -49,6 +48,30 @@ export default (state = {}, action) => {
             return newState;
         case REMOVE_POST:
             return removeObject(action.post.id, oldState);
+        case RECEIVE_COMMENT:
+            comment = Object.values(action.comment)[0];
+            newState = merge({}, oldState);
+
+            post_id = comment.post_id;
+            if (!newState[post_id].comments_id.includes(comment.id)) {
+                newState[post_id].comments_id.push(comment.id);
+                newState = { [post_id]: { comments_id: newState[post_id].comments_id } };
+            }
+
+            return merge({}, oldState, newState);
+        case REMOVE_COMMENT:
+            comment = Object.values(action.comment)[0];
+            newState = merge({}, oldState);
+
+            post_id = comment.post_id;
+
+            const comments_id = newState[post_id].comments_id.filter(comment_id => {
+                return comment_id !== comment.id;
+            });
+
+            newState[post_id].comments_id = comments_id;
+
+            return newState;
         default: 
             return oldState;
     }

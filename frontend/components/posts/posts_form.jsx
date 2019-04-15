@@ -69,17 +69,8 @@ class PostsForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const {
-            formType,
-            post,
-            receiver
-        } = this.props;
-
-        const {
-            imageUrls,
-            files,
-            content
-        } = this.state;
+        const { formType, post, receiver } = this.props;
+        const { imageUrls, files, content } = this.state;
 
         const selector = formType === "Create" ? "Create" : `Edit-${post.id}`;
 
@@ -87,9 +78,7 @@ class PostsForm extends React.Component {
             let newPost;
 
             if (formType === "Create") {
-                newPost = { 
-                    post: { content, receiver_id: receiver.id } 
-                };
+                newPost = { post: { content, receiver_id: receiver.id } };
                 
                 if (imageUrls.length !== 0) {
                     const formData = new FormData();
@@ -102,29 +91,23 @@ class PostsForm extends React.Component {
 
                     this.props.createPhotoPost(formData).then(() => {
                         this.setState({ 
-                            imageUrls: [], 
-                            files: [], 
-                            content: '',
-                            textareaClass: '' 
+                            imageUrls: [], files: [], 
+                            content: '', textareaClass: '' 
                         });
                     });
 
                     this.removeOverlay();
                     this.disableForm(selector);
                 } else {
-                    this.props.action(newPost)
-                        .then(() => this.setState({ 
-                            content: '', 
-                            textareaClass: '' 
-                        }));
+                    this.props.action(newPost).then(() => this.setState({ 
+                        content: '', textareaClass: '' 
+                    }));
                 }
             } else {
                 newPost = { post: { content, id: post.id } };
                 
                 this.props.action(newPost)
-                    .then(() => {
-                        this.props.hideEditModal(this.props.post.id);
-                    });
+                    .then(() => this.props.hideEditModal(this.props.post.id));
             }
 
             this.removeOverlay();
@@ -138,10 +121,8 @@ class PostsForm extends React.Component {
 
             this.props.createPhotoPost(formData).then(() => {
                 this.setState({ 
-                    imageUrls: [], 
-                    files: [], 
-                    content: '',
-                    textareaClass: ''
+                    imageUrls: [], files: [], 
+                    content: '', textareaClass: ''
                 });
             });
 
@@ -223,18 +204,8 @@ class PostsForm extends React.Component {
     }
 
     render() {
-        const { 
-            currentUser, 
-            receiver,
-            formType,
-            post
-        } = this.props;
-
-        const { 
-            content,
-            textareaClass,
-            imageUrls
-        } = this.state;
+        const { currentUser, receiver, formType, post } = this.props;
+        const { content, textareaClass, imageUrls } = this.state;
 
         let formPlaceholder; 
         const formClass = formType === "Create" ? "posts-form" : "posts-form";
@@ -249,7 +220,9 @@ class PostsForm extends React.Component {
             return (
                 <div className="image-holder" key={idx}>
                     <div className="image-overlay">
-                        <button type="button" onClick={() => this.removePicture(idx)}>
+                        <button type="button" onClick={() => {
+                            this.removePicture(idx);
+                        }}>
                             <i className="white-close-icon"></i>
                         </button>
                     </div>
@@ -259,8 +232,11 @@ class PostsForm extends React.Component {
         });
 
         if (images.length > 0) {
-            formPlaceholder = 'Say something about these photos...';
-            if (images.length === 1) formPlaceholder = 'Say something about this photo...';
+            if (images.length === 1) {
+                formPlaceholder = 'Say something about this photo...';
+            } else {
+                formPlaceholder = 'Say something about these photos...';
+            }
         }
 
         const labelClass = images.length > 0 ? "uploaded" : "";
@@ -271,7 +247,9 @@ class PostsForm extends React.Component {
                     {formType === "Create" ? "Create Post" : "Edit Post"}
                     {
                         formType === "Edit" ?
-                            <button onClick={() => this.props.hideEditModal(post.id)}>
+                            <button onClick={() => {
+                                this.props.hideEditModal(post.id)
+                            }}>
                                 <i className="close-icon"></i>
                             </button> 
                         : 
@@ -311,7 +289,10 @@ class PostsForm extends React.Component {
                         images.length > 0 ?
                             <div className="image-previews">
                                 {images}
-                                <label htmlFor='imageUpload' className="add-image-button">
+                                <label 
+                                    htmlFor='imageUpload' 
+                                    className="add-image-button"
+                                    >
                                     +
                                 </label>
                             </div> : null
@@ -326,17 +307,19 @@ class PostsForm extends React.Component {
                                 type="file"
                                 multiple
                                 onChange={this.handleFileInput}
-                            />
+                                />
                         </label>
                     </div>
                 </div>
-                {formType === "Create" ?
-                    <div className="card-footer hide Create">
-                        <input type="submit" value="Share" disabled={true} />
-                    </div> : 
-                    <div className={"card-footer Edit-" + this.props.post.id}>
-                        <input type="submit" value="Save" disabled={false} />
-                    </div>
+                {
+                    formType === "Create" ?
+                        <div className="card-footer hide Create">
+                            <input type="submit" value="Share" disabled={true} />
+                        </div> 
+                    : 
+                        <div className={"card-footer Edit-" + this.props.post.id}>
+                            <input type="submit" value="Save" disabled={false} />
+                        </div>
                 }
             </form>
         );
