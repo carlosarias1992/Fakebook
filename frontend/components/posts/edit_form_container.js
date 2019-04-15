@@ -5,15 +5,15 @@ import { hideEditModal } from '../../actions/ui_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { post } = ownProps;
-    const className = post.content && post.content.length < 95 ? "large-font" : "";
+    const textareaClass = post.content && post.content.length < 95 ? "large-font" : "";
     const receiver = {};
     const currentUser = {};
 
     return {
         content: post.content,
-        post: post,
+        post,
         editModal: state.entities.ui.editModal,
-        className,
+        textareaClass,
         formType: "Edit",
         receiver,
         currentUser

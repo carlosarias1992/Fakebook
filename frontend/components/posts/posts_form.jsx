@@ -2,12 +2,8 @@ import React from 'react';
 import { merge } from 'lodash';
 import AvatarContainer from '../avatar/avatar_container';
 import { 
-    removeClass, 
-    addClass, 
-    autoGrow,
-    autoGrowSelector,
-    scrollToFarRight,
-    removeFromArray
+    removeClass, addClass, autoGrow, autoGrowSelector,
+    scrollToFarRight, removeFromArray
 } from '../../util/ui_util';
 
 class PostsForm extends React.Component {
@@ -16,7 +12,7 @@ class PostsForm extends React.Component {
 
         this.state = { 
             content: props.content || "",
-            textareaClass: props.className,
+            textareaClass: props.textareaClass,
             imageUrls: [],
             files: []
         };
