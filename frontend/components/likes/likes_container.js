@@ -4,9 +4,8 @@ import Likes from './likes';
 const mapStateToProps = (state, ownProps) => {
   const { type, likeable } = ownProps;
 
-  const allLikes = Object.values(state.entities.likes);
-  const allLikesForType = allLikes.filter(like => {
-    return like.likeable_type === type && like.likeable_id === likeable.id;
+  const allLikesForType = likeable.likes_id.map(like_id => {
+    return state.entities.likes[like_id] || {};
   });
 
   return {

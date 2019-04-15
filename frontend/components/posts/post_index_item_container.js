@@ -43,7 +43,7 @@ const mapStateToProps = (state, ownProps) => {
         editModal,
         currentUserId,
         liked: currentUser.post_likes_id.includes(likeForCurrentUser.id),
-        numberOfLikes: allLikes.length,
+        numberOfLikes: post.likes_id.length,
         likeForCurrentUser,
         numberOfComments,
         event: post.life_event

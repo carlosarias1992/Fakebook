@@ -2,6 +2,7 @@ import { merge } from 'lodash';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { REMOVE_POST, RECEIVE_POST } from '../actions/posts_actions';
 import { RECEIVE_FRIEND_REQUEST } from '../actions/friend_request_actions';
+import { REMOVE_LIKE, RECEIVE_LIKE } from '../actions/likes_actions';
 import {
     RECEIVE_USERS,
     RECEIVE_USER
@@ -10,7 +11,7 @@ import {
 export default (state = {}, action) => {
     const { user } = action;
     const oldState = Object.freeze(state);
-    let newState, updatedUser;
+    let newState, updatedUser, like, user_id;
 
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
@@ -59,6 +60,34 @@ export default (state = {}, action) => {
 
             newState = { [updatedUser.id]: updatedUser };
             return merge({}, oldState, newState);
+        case RECEIVE_LIKE:
+            like = Object.values(action.like)[0];
+            newState = merge({}, oldState);
+
+            if (like.likeable_type === "post") {
+                user_id = like.user_id;
+                newState[user_id].post_likes_id.push(like.id);
+                newState = { [user_id]: { post_likes_id: newState[user_id].post_likes_id } };
+            } else {
+                newState = {};
+            }
+
+            return merge({}, oldState, newState);
+        case REMOVE_LIKE:
+            like = Object.values(action.like)[0];
+            newState = merge({}, oldState);
+
+            if (like.likeable_type === "post") {
+                user_id = like.user_id;
+
+                const likes_id = newState[user_id].post_likes_id.filter(like_id => {
+                    return like_id !== like.id;
+                });
+
+                newState[user_id].post_likes_id = likes_id;
+            }
+
+            return newState;
         default: 
             return state;
     }

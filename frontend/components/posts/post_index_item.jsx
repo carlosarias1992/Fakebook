@@ -36,9 +36,7 @@ class PostIndexItem extends React.Component {
           }
         };
 
-        this.props.createLike(like).then(() => {
-          this.props.fetchUser(this.props.currentUserId);
-        });
+        this.props.createLike(like);
     }
 
     unlikePost() {

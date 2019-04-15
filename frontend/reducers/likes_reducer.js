@@ -15,7 +15,7 @@ export default (state = {}, action) => {
       case RECEIVE_LIKE:
         return merge({}, oldState, action.like);
       case REMOVE_LIKE:
-        return removeObject(action.id, oldState);
+        return removeObject(action.like.id, oldState);
       default: 
         return oldState;
     }

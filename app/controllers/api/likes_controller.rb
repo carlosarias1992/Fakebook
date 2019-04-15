@@ -29,7 +29,7 @@ class Api::LikesController < ApplicationController
     @like = Like.find_by(id: params[:id])
 
     if @like.destroy 
-      render json: {}
+      render :show
     else 
       render json: { errors: @like.errors.full_messages }, status: 422
     end 
