@@ -18,6 +18,7 @@ class Profile extends React.Component {
 
             this.props.fetchFriendRequests();
         });
+        
         scrollTo(0, 0);
     }
 

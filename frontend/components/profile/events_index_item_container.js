@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import PostIndexItem from '../posts/post_index_item';
 import { getTimeString } from '../../util/ui_util';
+import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
-    const currentUserId = state.session.current_user_id;
-    const currentUser = state.entities.users[currentUserId];
-    let user = ownProps.user;
-    user = user || currentUser;
+    const currentUser = getCurrentUser(state);
+    const author = ownProps.user || currentUser;
     const birthDate = new Date(user.birth_date);
     
     return {
@@ -15,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
             created_at: user.birth_date,
             photos: []
         },
-        author: user,
+        author,
         event: true
     };
 };

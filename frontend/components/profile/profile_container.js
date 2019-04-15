@@ -7,18 +7,15 @@ import { findAllFriendRequestsByUserId } from '../../util/ui_util';
 import { fetchUsers } from '../../actions/user_actions';
 import { fetchPosts } from '../../actions/posts_actions';
 import { fetchComments } from '../../actions/comments_actions';
+import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
-    const currentUserId = state.session.current_user_id;
-    const currentUser = state.entities.users[currentUserId];
-    const userId = ownProps.match.params.userId;
-    let user = state.entities.users[userId];
-    user = user || {};
-    let friendRequest = findFriendRequestByUserId(user.id, currentUserId, state.entities.friendRequests);
-    friendRequest = friendRequest || {};
+    const { userId } = ownProps.match.params;
+    const { users, friendRequests } = state.entities;
+    const currentUser = getCurrentUser(state);
+    const user = users[userId] || {};
+    const friendRequest = findFriendRequestByUserId(user.id, currentUser.id, friendRequests) || {};
     const friendsBoolean = friendRequest.status === "accepted";
-
-    const { friendRequests } = state.entities;
     const friendRequestsForUser = findAllFriendRequestsByUserId(user.id, friendRequests);
 
     const acceptedFriendRequests = friendRequestsForUser.filter(friendRequest => {
@@ -34,15 +31,10 @@ const mapStateToProps = (state, ownProps) => {
             friendId = acceptedFriendRequest.receiver_id;
         }
 
-        return state.entities.users[friendId];
+        return users[friendId];
     });
     
-    return {
-        user,
-        friendsBoolean,
-        currentUser,
-        friends
-    };
+    return { user, friendsBoolean, currentUser, friends };
 };
 
 const mapDispatchToProps = dispatch => {
