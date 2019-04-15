@@ -15,30 +15,18 @@ class CommentIndexItem extends React.Component {
   }
 
   likeComment() {
-    const { 
-      comment, currentUser, fetchComment, fetchUser, createLike 
-    } = this.props;
+    const { createLike } = this.props;
 
     const like = {
         likeable_type: "comment", likeable_id: this.props.comment.id
     };
 
-    createLike({ like }).then(() => {
-      fetchComment(comment.id);
-      fetchUser(currentUser.id);
-    });
+    createLike({ like });
   }
 
   unlikeComment() {
-    const { 
-      likeForCurrentUser, deleteLike, fetchComment, 
-      fetchUser, comment, currentUser 
-    } = this.props;
-
-    deleteLike(likeForCurrentUser.id).then(() => {
-      fetchComment(comment.id);
-      fetchUser(currentUser.id);
-    });
+    const { likeForCurrentUser, deleteLike } = this.props;
+    deleteLike(likeForCurrentUser.id);
   }
 
   hideElement(selector) {

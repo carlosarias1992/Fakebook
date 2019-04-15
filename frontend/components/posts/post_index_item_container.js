@@ -56,8 +56,7 @@ const mapDispatchToProps = dispatch => {
         showEditModal: id => dispatch(showEditModal(id)),
         hideEditModal: id => dispatch(hideEditModal(id)),
         createLike: like => dispatch(createLike(like)),
-        deleteLike: id => dispatch(deleteLike(id)),
-        fetchUser: id => dispatch(fetchUser(id))
+        deleteLike: id => dispatch(deleteLike(id))
     };
 };
 

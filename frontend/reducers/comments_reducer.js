@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import { removeObject } from '../util/reducer_util';
+import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/likes_actions';
 import { 
     RECEIVE_COMMENT, 
     RECEIVE_COMMENTS, 
@@ -8,7 +9,7 @@ import {
 
 export default (state = {}, action) => {
     const oldState = Object.freeze(state);
-    let newComment;
+    let newComment, like, comment_id, newState;
 
     switch(action.type) {
         case RECEIVE_COMMENT:
@@ -25,6 +26,34 @@ export default (state = {}, action) => {
             return action.comments;
         case REMOVE_COMMENT:
             return removeObject(action.id, oldState);
+        case RECEIVE_LIKE:
+            like = Object.values(action.like)[0];
+            newState = merge({}, oldState);
+
+            if (like.likeable_type === "comment") {
+                comment_id = like.likeable_id;
+                newState[comment_id].likes_id.push(like.id);
+                newState = { [comment_id]: { likes_id: newState[comment_id].likes_id } };
+            } else {
+                newState = {};
+            }
+
+            return merge({}, oldState, newState);
+        case REMOVE_LIKE:
+            like = Object.values(action.like)[0];
+            newState = merge({}, oldState);
+
+            if (like.likeable_type === "comment") {
+                comment_id = like.likeable_id;
+
+                const likes_id = newState[comment_id].likes_id.filter(like_id => {
+                    return like_id !== like.id;
+                });
+
+                newState[comment_id].likes_id = likes_id;
+            }
+
+            return newState;
         default: 
             return oldState;
     }

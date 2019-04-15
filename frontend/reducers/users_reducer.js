@@ -63,14 +63,15 @@ export default (state = {}, action) => {
         case RECEIVE_LIKE:
             like = Object.values(action.like)[0];
             newState = merge({}, oldState);
+            user_id = like.user_id;
 
             if (like.likeable_type === "post") {
-                user_id = like.user_id;
                 newState[user_id].post_likes_id.push(like.id);
                 newState = { [user_id]: { post_likes_id: newState[user_id].post_likes_id } };
-            } else {
-                newState = {};
-            }
+            } else if (like.likeable_type === "comment") {
+                newState[user_id].comment_likes_id.push(like.id);
+                newState = { [user_id]: { comment_likes_id: newState[user_id].comment_likes_id } };
+            } 
 
             return merge({}, oldState, newState);
         case REMOVE_LIKE:
@@ -85,6 +86,14 @@ export default (state = {}, action) => {
                 });
 
                 newState[user_id].post_likes_id = likes_id;
+            } else if (like.likeable_type === "comment") {
+                user_id = like.user_id;
+
+                const likes_id = newState[user_id].comment_likes_id.filter(like_id => {
+                    return like_id !== like.id;
+                });
+
+                newState[user_id].comment_likes_id = likes_id;
             }
 
             return newState;
