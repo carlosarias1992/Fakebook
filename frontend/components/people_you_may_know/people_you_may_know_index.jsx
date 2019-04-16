@@ -1,11 +1,10 @@
 import React from 'react';
 import PeopleYouMayKnowIndexItemContainer from './people_you_may_know_index_item_container';
-import { shuffle } from '../../util/ui_util';
 
 export default props => {
     const { suggestedUsers } = props;
 
-    const suggestions = shuffle(suggestedUsers).slice(0, 6).map(user => {
+    const suggestions = suggestedUsers.map(user => {
         return <PeopleYouMayKnowIndexItemContainer user={user} key={user.id} />;
     });
 

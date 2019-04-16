@@ -4,6 +4,11 @@ class Api::UsersController < ApplicationController
         render :index
     end 
 
+    def suggestion
+        @current_suggestions = params[:currentSuggestions]
+        render :suggestion
+    end 
+
     def update
         @user = User.find_by(id: params[:id])
 
@@ -39,6 +44,7 @@ class Api::UsersController < ApplicationController
 
     def user_params
         params.require(:user)
-            .permit(:username, :password, :gender, :birth_date, :first_name, :last_name, :avatar, :cover)
+            .permit(:username, :password, :gender, :birth_date, :first_name, 
+                :last_name, :avatar, :cover)
     end 
 end 
