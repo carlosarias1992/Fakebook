@@ -5,17 +5,3 @@ export const createRejection = rejection => {
         data: { rejection }
     });
 };
-
-export const fetchRejections = () => {
-    return $.ajax({
-        url: '/api/rejections',
-        method: 'GET'
-    });
-};
-
-export const fetchRejection = id => {
-    return $.ajax({
-        url: `/api/rejections/${id}`,
-        method: 'GET'
-    });
-};

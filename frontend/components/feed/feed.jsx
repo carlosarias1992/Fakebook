@@ -9,22 +9,15 @@ import Copyright from '../copyright';
 
 class Feed extends React.Component {
     componentDidMount() {
-        this.props.fetchRejections();
-        this.props.fetchUsers().then(() => {
-            this.props.fetchPosts().then(() => {
-                this.props.fetchComments().then(() => {
-                    this.props.fetchLikes();
-                });
-            });
-            
-            this.props.fetchFriendRequests();
-        });
+        if (!this.props.sessionDataReceived) {
+            this.props.fetchSessionData();
+        }
     }
     
     render() {
-        const { currentUser, feedPosts } = this.props;
+        const { currentUser, feedPosts, sessionDataReceived } = this.props;
         const linkTitle = `${currentUser.first_name} ${currentUser.last_name}`;
-
+        
         return (
             <main className="feed">
                 <HeaderContainer />

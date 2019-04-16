@@ -1,17 +1,14 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
 import { findFriendRequestByUserId } from '../../util/ui_util';
-import { fetchFriendRequests } from '../../actions/friend_request_actions';
-import { fetchLikes } from '../../actions/likes_actions';
 import { findAllFriendRequestsByUserId } from '../../util/ui_util';
-import { fetchUsers } from '../../actions/user_actions';
+import { fetchSessionData } from '../../actions/user_actions';
 import { fetchPosts } from '../../actions/posts_actions';
-import { fetchComments } from '../../actions/comments_actions';
 import { getCurrentUser } from '../../util/container_util';
 
 const mapStateToProps = (state, ownProps) => {
     const { userId } = ownProps.match.params;
-    const { users, friendRequests } = state.entities;
+    const { users, friendRequests, ui } = state.entities;
     const currentUser = getCurrentUser(state);
     const user = users[userId] || {};
     const friendRequest = findFriendRequestByUserId(user.id, currentUser.id, friendRequests) || {};
@@ -34,18 +31,16 @@ const mapStateToProps = (state, ownProps) => {
         return users[friendId];
     });
     
-    return { user, friendsBoolean, currentUser, friends };
+    return { 
+        user, friendsBoolean, currentUser, friends, 
+        sessionDataReceived: ui.sessionDataReceived
+     };
 };
 
 const mapDispatchToProps = dispatch => {
-    const currentUser = window.currentUser || {};
-    
     return {
-        fetchFriendRequests: () => dispatch(fetchFriendRequests(currentUser.id)),
-        fetchLikes: () => dispatch(fetchLikes(currentUser.id)),
-        fetchUsers: () => dispatch(fetchUsers()),
-        fetchPosts: () => dispatch(fetchPosts()),
-        fetchComments: () => dispatch(fetchComments())
+        fetchSessionData: () => dispatch(fetchSessionData()),
+        fetchPosts: () => dispatch(fetchPosts())
     };
 };
 

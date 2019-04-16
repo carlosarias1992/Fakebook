@@ -4,7 +4,7 @@ import SignupContainer from '../signup/signup_container';
 import Footer from '../footer';
 
 export default (props) => {
-  if (props.loggeIn) props.history.push("/feed");
+  if (props.loggedIn) props.history.push("/feed");
   
   return (
     <main className="white-background">

@@ -1,16 +1,12 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
-import { fetchFriendRequests } from '../../actions/friend_request_actions';
-import { fetchLikes } from '../../actions/likes_actions';
-import { fetchRejections } from '../../actions/rejections_actions';
-import { fetchUsers } from '../../actions/user_actions';
+import { fetchSessionData } from '../../actions/user_actions';
 import { fetchPosts } from '../../actions/posts_actions';
-import { fetchComments } from '../../actions/comments_actions';
 import { getCurrentUser } from '../../util/container_util';
 import { merge } from 'lodash';
 
 const mapStateToProps = state => {
-    const { posts, users } = state.entities;
+    const { posts, users, ui } = state.entities;
     const currentUser = getCurrentUser(state);
     const { friends_id } = currentUser;
     let feedPosts = {};
@@ -26,7 +22,7 @@ const mapStateToProps = state => {
     friends_id.forEach(friend_id => {
         const friend = users[friend_id];
 
-        if (friend) {
+        if (friend && friend.posts_id) {
             friend.posts_id.forEach(post_id => {
                 const post = posts[post_id];
 
@@ -37,17 +33,15 @@ const mapStateToProps = state => {
         }
     });
 
-    return { currentUser, feedPosts };
+    return { 
+        currentUser, feedPosts, sessionDataReceived: ui.sessionDataReceived 
+    };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchFriendRequests: () => dispatch(fetchFriendRequests()),
-        fetchLikes: () => dispatch(fetchLikes()),
-        fetchRejections: () => dispatch(fetchRejections()),
-        fetchUsers: () => dispatch(fetchUsers()),
-        fetchPosts: () => dispatch(fetchPosts()),
-        fetchComments: () => dispatch(fetchComments())
+        fetchSessionData: () => dispatch(fetchSessionData()),
+        fetchPosts: () => dispatch(fetchPosts())
     };
 };
 

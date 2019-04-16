@@ -4,7 +4,7 @@ import { REMOVE_POST, RECEIVE_POST } from '../actions/posts_actions';
 import { RECEIVE_FRIEND_REQUEST } from '../actions/friend_request_actions';
 import { REMOVE_LIKE, RECEIVE_LIKE } from '../actions/likes_actions';
 import {
-    RECEIVE_USERS,
+    RECEIVE_SESSION_DATA,
     RECEIVE_USER
 } from '../actions/user_actions';
 
@@ -17,7 +17,7 @@ export default (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             newState = { [user.id]: user };
             return merge({}, oldState, newState);
-        case RECEIVE_USERS:
+        case RECEIVE_SESSION_DATA:
             newState = action.users;
             return merge({}, oldState, newState);
         case RECEIVE_USER:

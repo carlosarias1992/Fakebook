@@ -9,16 +9,10 @@ import Copyright from '../copyright';
 
 class Profile extends React.Component {
     componentDidMount() {
-        this.props.fetchUsers().then(() => {
-            this.props.fetchPosts().then(() => {
-                this.props.fetchComments().then(() => {
-                    this.props.fetchLikes();
-                });
-            });
+        if (!this.props.sessionDataReceived) {
+            this.props.fetchSessionData();
+        }
 
-            this.props.fetchFriendRequests();
-        });
-        
         scrollTo(0, 0);
     }
 

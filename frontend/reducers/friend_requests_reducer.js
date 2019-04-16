@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { RECEIVE_SESSION_DATA } from '../actions/user_actions';
 import {
     RECEIVE_FRIEND_REQUEST,
     RECEIVE_FRIEND_REQUESTS,
@@ -11,6 +12,8 @@ export default (state = {}, action) => {
     let newState;
 
     switch(action.type) {
+        case RECEIVE_SESSION_DATA:
+            return action.friendRequests;
         case RECEIVE_FRIEND_REQUEST:
             newState = action.request;
             return merge({}, oldState, newState);

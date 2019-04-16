@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 import { removeObject } from '../util/reducer_util';
 import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/likes_actions';
+import { RECEIVE_SESSION_DATA } from '../actions/user_actions';
 import { 
     RECEIVE_COMMENT, 
     RECEIVE_COMMENTS, 
@@ -12,6 +13,8 @@ export default (state = {}, action) => {
     let newComment, like, comment_id, newState;
 
     switch(action.type) {
+        case RECEIVE_SESSION_DATA:
+            return action.comments;
         case RECEIVE_COMMENT:
             const oldComment = oldState[Object.keys(action.comment)[0]];
             if (oldComment && oldComment.newComment) {

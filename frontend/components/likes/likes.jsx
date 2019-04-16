@@ -53,7 +53,7 @@ class Likes extends React.Component {
                 </div>
             )
         } else {
-            return null
+            return <div></div>
         }
     }
 }

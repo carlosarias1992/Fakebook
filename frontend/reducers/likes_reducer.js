@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import { removeObject } from '../util/reducer_util';
+import { RECEIVE_SESSION_DATA } from '../actions/user_actions';
 import {
     RECEIVE_LIKE, 
     RECEIVE_LIKES,
@@ -10,6 +11,8 @@ export default (state = {}, action) => {
     const oldState = Object.freeze(state);
 
     switch(action.type) {
+      case RECEIVE_SESSION_DATA:
+        return action.likes;
       case RECEIVE_LIKES:
         return action.likes;
       case RECEIVE_LIKE:

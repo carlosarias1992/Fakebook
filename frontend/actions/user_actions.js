@@ -1,25 +1,30 @@
 import * as UserApiUtil from '../util/user_api_util';
 
-export const RECEIVE_USERS = "RECEIVE_USERS";
+export const RECEIVE_SESSION_DATA = "RECEIVE_SESSION_DATA";
 export const RECEIVE_USER = "RECEIVE_USER";
 
-const receiveUsers = users => {
+const receiveSessionData = ({ users, posts, comments, friendRequests, likes }) => {
     return {
-        type: RECEIVE_USERS,
-        users
+        type: RECEIVE_SESSION_DATA,
+        users,
+        posts,
+        comments,
+        friendRequests,
+        likes,
+        sessionDataReceived: true
     };
 };
 
-export const receiveUser = user => {
+const receiveUser = user => {
     return {
         type: RECEIVE_USER,
         user
     };
 };
 
-export const fetchUsers = () => dispatch => {
-    return UserApiUtil.fetchUsers()
-        .then(users => dispatch(receiveUsers(users)));
+export const fetchSessionData = () => dispatch => {
+    return UserApiUtil.fetchSessionData()
+        .then(payload => dispatch(receiveSessionData(payload)));
 };
 
 export const fetchUser = id => dispatch => {

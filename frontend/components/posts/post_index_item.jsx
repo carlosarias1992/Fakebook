@@ -156,7 +156,7 @@ class PostIndexItem extends React.Component {
     const { 
         author, post, receiver, currentUser, event, editModal
     } = this.props;
-
+    
     const { photos } = post;
     const created_at = new Date(post.created_at);
 
@@ -245,7 +245,7 @@ class PostIndexItem extends React.Component {
                 <LikesContainer type="post" likeable={post}/>
                 { 
                   post.comments_id.length > 0 ? 
-                    <div className="number-of-comments">
+                    <div className=" -of-comments">
                       {commentsString}
                     </div> : null
                 }

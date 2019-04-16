@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/likes_actions';
 import { REMOVE_COMMENT, RECEIVE_COMMENT } from '../actions/comments_actions';
+import { RECEIVE_SESSION_DATA } from '../actions/user_actions';
 import { 
     RECEIVE_POST,
     REMOVE_POST,
@@ -14,6 +15,8 @@ export default (state = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_POSTS:
+            return action.posts;
+        case RECEIVE_SESSION_DATA:
             return action.posts;
         case RECEIVE_POST:
             newState = { [action.post.id]: action.post };

@@ -5,7 +5,6 @@ import uiReducer from './ui_reducer';
 import commentsReducer from './comments_reducer';
 import friendRequestsReducer from './friend_requests_reducer';
 import likesReducer from './likes_reducer';
-import rejectionsReducer from './rejections_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
@@ -13,8 +12,7 @@ const entitiesReducer = combineReducers({
     ui: uiReducer,
     friendRequests: friendRequestsReducer,
     comments: commentsReducer,
-    likes: likesReducer,
-    rejections: rejectionsReducer
+    likes: likesReducer
 });
 
 export default entitiesReducer;

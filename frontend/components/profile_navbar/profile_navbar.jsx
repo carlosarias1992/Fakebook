@@ -5,18 +5,8 @@ import { addClass, removeClass } from '../../util/ui_util';
 import FriendRequestIndexContainer from '../friend_request/friend_request_index_container';
 
 class ProfileNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
-  logout() {
-    this.props.logout();
-    this.props.history.push("/");
-  }
-  
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, logout } = this.props;
     
     return (
       <section className="profile-navbar">
@@ -54,7 +44,7 @@ class ProfileNavbar extends React.Component {
             </li>
           </button>
           <ul className="dropdown hide">
-              <li onMouseDown={this.logout}>Log Out</li>
+              <li onMouseDown={logout}>Log Out</li>
           </ul>
         </ul>
       </section>
