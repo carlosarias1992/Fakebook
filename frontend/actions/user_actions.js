@@ -32,7 +32,7 @@ export const updateUser = user => dispatch => {
         .then(editedUser => dispatch(receiveUser(editedUser)));
 };
 
-export const updateCoverPhoto = (cover, userId) => dispatch => {
-    return UserApiUtil.updateCoverPhoto(cover, userId)
+export const updatePhoto = (photo, userId) => dispatch => {
+    return UserApiUtil.updatePhoto(photo, userId)
         .then(editedUser => dispatch(receiveUser(editedUser)));
 };

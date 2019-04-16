@@ -1,5 +1,4 @@
 import React from 'react';
-import { merge } from 'lodash';
 
 class UploadPicture extends React.Component {
     constructor(props) {
@@ -8,16 +7,8 @@ class UploadPicture extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidUpdate() {
-        const { imageUrl } = this.state;
-
-        if(imageUrl !== this.props.currentUser.avatar) {
-            const user = merge(this.props.currentUser, { avatar: imageUrl });
-            this.props.receiveUser(user);
-        }
-    }
-
     handleSubmit(e) {
+        const { currentUser, updatePhoto } = this.props;
         const element = e.target;
         
         const reader = new FileReader();
@@ -30,18 +21,12 @@ class UploadPicture extends React.Component {
         if (file) {
             reader.readAsDataURL(file);
             
-            const formData = new FormData();
-            formData.append('user[avatar]', file);
+            const avatar = new FormData();
+            avatar.append('user[avatar]', file);
 
-            $.ajax({
-                url: `/api/users/${this.props.currentUser.id}`,
-                method: 'PATCH',
-                data: formData,
-                contentType: false,
-                processData: false
-            });
+            updatePhoto(avatar, currentUser.id);
         } else {
-            this.setState({ imageUrl: this.props.currentUser.avatar });
+            this.setState({ imageUrl: currentUser.avatar });
         } 
     }
 

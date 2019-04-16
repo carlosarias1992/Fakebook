@@ -8,9 +8,7 @@ const demoUser = {
 };
 
 const mapStateToProps = state => {
-    return {
-        errors: state.errors.session.errors
-    };
+    return { errors: state.errors.session.errors };
 };
 
 const mapDispatchToProps = dispatch => {

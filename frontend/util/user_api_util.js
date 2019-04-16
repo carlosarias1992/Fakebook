@@ -20,11 +20,11 @@ export const updateUser = user => {
     });
 };
 
-export const updateCoverPhoto = (cover, userId) => {
+export const updatePhoto = (photo, userId) => {
     return $.ajax({
         url: `api/users/${userId}`,
         method: 'PATCH',
-        data: cover,
+        data: photo,
         contentType: false,
         processData: false
     });

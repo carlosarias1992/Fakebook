@@ -19,7 +19,7 @@ class UploadCover extends React.Component {
   }
 
   handleSubmit(e) {
-    const { currentUser, updateCoverPhoto } = this.props;
+    const { currentUser, updatePhoto } = this.props;
     const element = e.target;
 
     const reader = new FileReader();
@@ -32,7 +32,7 @@ class UploadCover extends React.Component {
       const coverPicture = new FormData();
       coverPicture.append('user[cover]', file);
 
-      updateCoverPhoto(coverPicture, currentUser.id);
+      updatePhoto(coverPicture, currentUser.id);
     } else {
       this.setState({ imageUrl: currentUser.avatar });
     }

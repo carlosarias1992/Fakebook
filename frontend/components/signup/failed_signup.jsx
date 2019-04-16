@@ -22,7 +22,7 @@ class FailedSignup extends React.Component {
                         type="submit"
                         value="Log Into Existing Account"
                         onClick={() => this.setState({ loginForm: true })}
-                    />
+                        />
                 </form>;
         }
 

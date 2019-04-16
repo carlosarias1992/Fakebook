@@ -99,9 +99,11 @@ class Signup extends React.Component {
             if (value === "") {
                 UiUtil.addSignupErrorClass(element);
             } else {
-                if (type !== "gender" && type !== "month" && type !== "day" && type !== "year") {
+                if (type !== "gender" && type !== "month" && type !== "day" && 
+                    type !== "year") {
                     UiUtil.toggleErrorDisplay(element.parentElement, "hide");
                 }
+                
                 UiUtil.removeSignupErrorClass(element);
             }
 
@@ -123,31 +125,18 @@ class Signup extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const birth_date = new Date(
-            this.state.year,
-            this.state.month,
-            this.state.day
-        );
-
-        const postContent = `Born on ${UiUtil.getTimeString(birth_date)}`;
-
-        const {
-            usernameValidationDisplay,
-            gender,
-            username,
-            usernameValidation,
-            first_name,
-            last_name,
-            password,
+        const { 
+            year, month, day, usernameValidationDisplay, gender, username,
+            usernameValidation, first_name, last_name, password
         } = this.state;
+
+        const birth_date = new Date(year, month, day);
+        const postContent = `Born on ${UiUtil.getTimeString(birth_date)}`;
 
         const user = {
             first_name: UiUtil.capitalize(first_name).trim(),
             last_name: UiUtil.capitalize(last_name).trim(),
-            username,
-            password,
-            gender,
-            birth_date
+            username, password, gender, birth_date
         };
 
         const allInputs = Array.from(e.target.querySelectorAll("input"));
@@ -177,16 +166,16 @@ class Signup extends React.Component {
         }
 
         if (validSignup) {
+            const post = {
+                event_date: birth_date,
+                life_event: true,
+                event_category: "birthday",
+                content: postContent
+            };
+
             this.props.signup({ user })
                 .then(
-                    () => this.props.createPost({ 
-                        post: {
-                            event_date: birth_date,
-                            life_event: true,
-                            event_category: "birthday",
-                            content: postContent
-                        }
-                    }),
+                    () => this.props.createPost({ post }),
                     () => this.handleLoginError(allInputs.slice(2, 4))
                 );
         }
@@ -196,18 +185,9 @@ class Signup extends React.Component {
 
     render() {
         const {
-            first_name,
-            last_name,
-            username,
-            password,
-            month,
-            day,
-            year,
-            gender,
-            errors,
-            usernameValidationDisplay,
-            usernameValidation,
-            usernameValidationModalMsg
+            first_name, last_name, username, password, month, day, year,
+            gender, errors, usernameValidationDisplay, usernameValidation,
+            usernameValidationModalMsg, modal
         } = this.state;
 
         const femaleChecked = gender === "F" ? true : false;
@@ -229,7 +209,7 @@ class Signup extends React.Component {
             </div>
         ];
 
-        signupModal = this.state.modal ? signupModal : null
+        signupModal = modal ? signupModal : null
 
         let formTitle, formClass;
         if (this.props.failedSignup) {
@@ -245,10 +225,11 @@ class Signup extends React.Component {
                 <h1>{formTitle}</h1>
                 <h3>It's free and always will be.</h3>
 
-                {errors && errors.length !== 0 ? 
-                    <div className="session-errors">
-                        {errors.join(", ")}
-                    </div> : null
+                {
+                    errors && errors.length !== 0 ? 
+                        <div className="session-errors">
+                            {errors.join(", ")}
+                        </div> : null
                 }
 
                 <form className="signup-form" onSubmit={this.handleSubmit}>
@@ -264,7 +245,7 @@ class Signup extends React.Component {
                             onChange={this.handleInput("first_name")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                        />
+                            />
                         <i className=""></i>
                     </div>
                     <div className="position-relative input">
@@ -279,7 +260,7 @@ class Signup extends React.Component {
                             onChange={this.handleInput("last_name")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                        />
+                            />
                         <i className=""></i>
                     </div>
                     <div className="position-relative">
@@ -295,25 +276,27 @@ class Signup extends React.Component {
                             onChange={this.handleInput("username")}
                             onFocus={UiUtil.errorModal("show")}
                             onBlur={UiUtil.errorModal("hide")}
-                        />
+                            />
                         <i className=""></i>
                     </div>
-                    {usernameValidationDisplay ? 
-                    <div className="position-relative">
-                        <div className="error-display hide">
-                            {usernameValidationModalMsg}
-                        </div>
-                        <input
-                            className=""
-                            type="text"
-                            placeholder="Re-enter email"
-                            value={usernameValidation}
-                            onChange={this.handleInput("usernameValidation")}
-                            onFocus={this.validationModal("show")}
-                            onBlur={this.validationModal("hide")}
-                        />
-                        <i className=""></i>
-                    </div> : null}
+                    {
+                        usernameValidationDisplay ? 
+                        <div className="position-relative">
+                            <div className="error-display hide">
+                                {usernameValidationModalMsg}
+                            </div>
+                            <input
+                                className=""
+                                type="text"
+                                placeholder="Re-enter email"
+                                value={usernameValidation}
+                                onChange={this.handleInput("usernameValidation")}
+                                onFocus={this.validationModal("show")}
+                                onBlur={this.validationModal("hide")}
+                                />
+                            <i className=""></i>
+                        </div> : null
+                    }
                     <div className="position-relative input">
                         <div className="error-display hide">
                             Enter a combination of at least six numbers,
@@ -334,19 +317,19 @@ class Signup extends React.Component {
                             <select
                                 value={month}
                                 onChange={this.handleInput("month")}
-                            >
+                                >
                                 {<UiUtil.monthOptions />}
                             </select>
                             <select
                                 value={day}
                                 onChange={this.handleInput("day")}
-                            >
+                                >
                                 {<UiUtil.dayOptions />}
                             </select>
                             <select
                                 value={year}
                                 onChange={this.handleInput("year")}
-                            >
+                                >
                                 {<UiUtil.yearOptions />}
                             </select>
 
@@ -354,9 +337,9 @@ class Signup extends React.Component {
                                 className="why-birthday"
                                 onMouseEnter={this.revealModal}
                                 onMouseLeave={this.hideModal}
-                            >
+                                >
                                 Why do I need to provide my birthday?
-                            {signupModal}
+                                {signupModal}
                             </span>
                         </div>
 
@@ -368,21 +351,22 @@ class Signup extends React.Component {
                             onChange={this.handleInput("gender")}
                             value="F"
                             checked={femaleChecked}
-                        />Female
+                            />Female
                         <input
                             type="radio"
                             onChange={this.handleInput("gender")}
                             value="M"
                             checked={maleChecked}
-                        />Male
+                            />Male
                         <i className="radio-error"></i>
                     </div>
 
                     <p className="fineprint">
                         By clicking Sign Up, you agree to our &nbsp;
                         <strong>Terms</strong>,&nbsp;<strong>Data Policy</strong>
-                        &nbsp; and <strong>Cookies Policy.</strong>&nbsp; You may receive
-                        SMS Notifications from us and can opt out any time.
+                        &nbsp; and <strong>Cookies Policy.</strong>&nbsp; You 
+                        may receive SMS Notifications from us and can opt out 
+                        any time.
                     </p>
 
                     <div className="signup-buttons">
@@ -391,7 +375,9 @@ class Signup extends React.Component {
                             onClick={this.props.demoLogin}
                             className="demo-button"
                             type="button"
-                        >Demo Login</button>
+                            >
+                            Demo Login
+                        </button>
                     </div>
                 </form>
             </section>

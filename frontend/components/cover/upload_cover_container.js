@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import UploadCover from './upload_cover';
 import { receiveUser } from '../../actions/user_actions';
 import { getCurrentUser } from '../../util/container_util';
-import { updateCoverPhoto } from '../../actions/user_actions';
-import cover from './cover';
+import { updatePhoto } from '../../actions/user_actions';
 
 const mapStateToProps = state => {
   return { currentUser: getCurrentUser(state) };
@@ -12,7 +11,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return { 
     receiveUser: user => dispatch(receiveUser(user)),
-    updateCoverPhoto: (cover, userId) => dispatch(updateCoverPhoto(cover, userId))
+    updatePhoto: (cover, userId) => dispatch(updatePhoto(cover, userId))
   };
 };
 
