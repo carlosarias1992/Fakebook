@@ -42,7 +42,7 @@ export default (state = {}, action) => {
             newState = action.users;
             return merge({}, oldState, newState);
         case RECEIVE_USER:
-            newState = { [user.id]: user };
+            newState = { [action.user.id]: action.user };
             return merge({}, oldState, newState);
         case RECEIVE_FRIEND_REQUEST:
             const { request } = action;

@@ -8,16 +8,6 @@ class UploadCover extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate() {
-    const { imageUrl } = this.state;
-    const { currentUser, receiveUser } = this.props;
-
-    if (imageUrl !== currentUser.cover) {
-      const user = merge(currentUser, { cover: imageUrl });
-      receiveUser(user);
-    }
-  }
-
   handleSubmit(e) {
     const { currentUser, updatePhoto } = this.props;
     const element = e.target;
