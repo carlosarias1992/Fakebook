@@ -245,7 +245,7 @@ class PostIndexItem extends React.Component {
                 <LikesContainer type="post" likeable={post}/>
                 { 
                   post.comments_id.length > 0 ? 
-                    <div className=" -of-comments">
+                    <div className="number-of-comments">
                       {commentsString}
                     </div> : null
                 }
