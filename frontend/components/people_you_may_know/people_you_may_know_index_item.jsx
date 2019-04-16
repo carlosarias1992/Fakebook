@@ -2,10 +2,13 @@ import React from 'react';
 import AvatarContainer from '../avatar/avatar_container';
 import { Link } from 'react-router-dom';
 import FriendRequestContainer from '../friend_request/friend_request_container';
+import { fetchSuggestion } from '../../actions/suggestions_actions';
 
 class PeopleYouMayKnowIndexItem extends React.Component {
     render() {
-        const { user, createRejection } = this.props;
+        const { 
+            user, createRejection, currentUser, fetchSuggestion 
+        } = this.props;
 
         return (
             <div className="suggestion-item">
@@ -16,9 +19,10 @@ class PeopleYouMayKnowIndexItem extends React.Component {
                     </Link>
                     <div className="suggestion-buttons">
                         <FriendRequestContainer user={user} />
-                        <button onClick={() => createRejection({
-                            rejected_id: user.id
-                        })}>
+                        <button onClick={() => {
+                            createRejection({ rejected_id: user.id });
+                            fetchSuggestion(currentUser);
+                        }}>
                             Remove
                         </button>
                     </div>

@@ -1,7 +1,7 @@
-export const fetchSuggestion = currentSuggestions => {
+export const fetchSuggestion = user => {
     return $.ajax({
         url: 'api/suggestion',
         method: 'POST',
-        data: { currentSuggestions }
+        data: { currentSuggestions: user.suggestion_ids }
     });
 };

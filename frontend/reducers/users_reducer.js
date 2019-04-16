@@ -3,6 +3,8 @@ import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { REMOVE_POST, RECEIVE_POST } from '../actions/posts_actions';
 import { RECEIVE_FRIEND_REQUEST } from '../actions/friend_request_actions';
 import { REMOVE_LIKE, RECEIVE_LIKE } from '../actions/likes_actions';
+import { RECEIVE_REJECTION } from '../actions/rejections_actions';
+import { RECEIVE_SUGGESTION } from '../actions/suggestions_actions';
 import {
     RECEIVE_SESSION_DATA,
     RECEIVE_USER
@@ -14,6 +16,25 @@ export default (state = {}, action) => {
     let newState, updatedUser, like, user_id;
 
     switch(action.type) {
+        case RECEIVE_SUGGESTION:
+            const { user, suggestion } = action;
+
+            newState = merge({}, oldState);
+            user.suggestion_ids.push(suggestion);
+            newState[user.id] = user;
+            return newState;
+        case RECEIVE_REJECTION:
+            newState = merge({}, oldState);
+            const { rejection } = action;
+            const currentUser = oldState[rejection.rejector_id];
+
+            const removedSuggestion = currentUser.suggestion_ids.filter(suggestion_id => {
+                return suggestion_id !== rejection.rejected_id;
+            });
+
+            currentUser.suggestion_ids = removedSuggestion;
+            newState[currentUser.id] = currentUser;
+            return newState;
         case RECEIVE_CURRENT_USER:
             newState = { [user.id]: user };
             return merge({}, oldState, newState);
