@@ -6,7 +6,14 @@ import UploadPictureContainer from '../upload_picture/upload_picture_container';
 import UploadCoverContainer from './upload_cover_container';
 
 export default props => {
-    const { user, currentUser } = props;
+    const { user, currentUser, showFriends, showTimeline, showPhotos } = props;
+    let numberOfFriends;
+
+    if (currentUser.friends_id.length > 0) {
+        numberOfFriends = `${currentUser.friends_id.length}`;
+    } else {
+        numberOfFriends = '';
+    }
     
     return (
         <div className="flex-center">
@@ -23,8 +30,14 @@ export default props => {
                         <UploadCoverContainer/> : null
                 }
                 <ul className="cover-navbar">
-                    <li>Friends</li>
-                    <li>Photos</li>
+                    <li onClick={showTimeline}>Timeline</li>
+                    <li onClick={showFriends}>
+                        Friends 
+                        <span className="friend-count">
+                            {numberOfFriends}
+                        </span>
+                    </li>
+                    <li onClick={showPhotos}>Photos</li>
                 </ul>
                 <div className="profile-picture">
                     <div className="avatar-holder">

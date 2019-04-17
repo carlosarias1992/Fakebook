@@ -33,7 +33,8 @@ const mapStateToProps = (state, ownProps) => {
     
     return { 
         user, friendsBoolean, currentUser, friends, 
-        sessionDataReceived: ui.sessionDataReceived
+        sessionDataReceived: ui.sessionDataReceived,
+        profileTab: ui.profileTab || "timeline"
      };
 };
 

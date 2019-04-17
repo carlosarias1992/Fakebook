@@ -4,7 +4,10 @@ import {
     SHOW_EDIT_MODAL,
     HIDE_EDIT_MODAL,
     SHOW_COMMENT_EDIT_FORM,
-    HIDE_COMMENT_EDIT_FORM
+    HIDE_COMMENT_EDIT_FORM,
+    SHOW_FRIENDS,
+    SHOW_PHOTOS,
+    SHOW_TIMELINE
 } from '../actions/ui_actions';
 
 export default (state = {}, action) => {
@@ -26,6 +29,12 @@ export default (state = {}, action) => {
         case HIDE_COMMENT_EDIT_FORM:
             newState = { commentEditForm: { [action.id]: false } };
             return merge({}, oldState, newState);
+        case SHOW_FRIENDS:
+            return merge({}, oldState, { profileTab: 'friends' });
+        case SHOW_TIMELINE:
+            return merge({}, oldState, { profileTab: 'timeline' });
+        case SHOW_PHOTOS:
+            return merge({}, oldState, { profileTab: 'photos' });
         default: 
             return oldState;
     }

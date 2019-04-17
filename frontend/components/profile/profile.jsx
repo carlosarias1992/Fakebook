@@ -17,7 +17,9 @@ class Profile extends React.Component {
     }
 
     render() {
-        const { user, friendsBoolean, currentUser, friends } = this.props;
+        const { 
+            user, friendsBoolean, currentUser, friends, profileTab 
+        } = this.props;
         const numberOfFriends = Object.values(friends).length;
 
         return (
@@ -27,38 +29,46 @@ class Profile extends React.Component {
                 </header>
                 <CoverContainer user={user}/>
                 <section className="profile-body flex-center">
-                    <aside>
-                        <div className="profile-box">
-                            <div className="profile-box-header">
-                                <i className="photos-box-icon"></i>
-                                Photos
-                            </div>
-                            <PhotosContainer user={user}/>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-box-header">
-                                <i className="friends-box-icon"></i>
-                                Friends &nbsp;
-                                { 
-                                    numberOfFriends > 0 ? 
-                                    <>
-                                        · <span>{numberOfFriends}</span> 
-                                    </> : null 
-                                }
-                            </div>
-                            <FriendsIndexContainer user={user} friends={friends}/>
-                        </div>
-                        <Copyright />
-                    </aside>
-                    <div className="center-col">
-                        {
-                            friendsBoolean || user.id === currentUser.id ?
-                                <>
-                                    <PostsFormContainer receiver={user} />
-                                    <ProfilePostsIndexContainer user={user} />
-                                </> : null
-                        }
-                    </div>
+                    {
+                        profileTab === "timeline" ?
+                            <>
+                                <aside>
+                                    <div className="profile-box">
+                                        <div className="profile-box-header">
+                                            <i className="photos-box-icon"></i>
+                                            Photos
+                                        </div>
+                                        <PhotosContainer user={user} />
+                                    </div>
+                                    <div className="profile-box">
+                                        <div className="profile-box-header">
+                                            <i className="friends-box-icon"></i>
+                                            Friends &nbsp;
+                                            {
+                                                numberOfFriends > 0 ?
+                                                    <>
+                                                        · <span>{numberOfFriends}</span>
+                                                    </> : null
+                                            }
+                                        </div>
+                                        <FriendsIndexContainer
+                                            user={user}
+                                            friends={friends}
+                                        />
+                                    </div>
+                                    <Copyright />
+                                </aside>
+                                <div className="center-col">
+                                    {
+                                        friendsBoolean || user.id === currentUser.id ?
+                                            <>
+                                                <PostsFormContainer receiver={user} />
+                                                <ProfilePostsIndexContainer user={user} />
+                                            </> : null
+                                    }
+                                </div>
+                            </> : null
+                    }
                 </section>
             </main>
         )
