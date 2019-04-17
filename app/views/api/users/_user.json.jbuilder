@@ -54,6 +54,6 @@ json.friends_id friends.map(&:id).sort
 json.posts_id user_posts.map(&:id)
 
 if current_user.id == user.id 
-    json.suggestion_ids user.suggestions(users, requests)
+    json.suggestion_ids suggestions
 end
 

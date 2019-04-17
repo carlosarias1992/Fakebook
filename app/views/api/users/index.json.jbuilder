@@ -18,9 +18,11 @@ end
 
 current_user_friend_ids = current_user_friends.map(&:id)
 
+current_user_suggestions = current_user.suggestions(@users, all_friend_requests)
+
 json.users do 
     @users.each do |user|
-        if current_user.suggestions(@users, all_friend_requests).include?(user.id) 
+        if current_user_suggestions.include?(user.id) 
             json.set! user.id do 
                 json.extract! user, :id, :first_name, :last_name, :gender
 
@@ -38,10 +40,11 @@ json.users do
     end
 
     current_user_friends.each do |friend|
-        if (!current_user.suggestions(@users, all_friend_requests).include?(friend.id)) 
+        if (!current_user_suggestions.include?(friend.id)) 
             json.set! friend.id do 
                 json.partial! 'api/users/user', { user: friend, likes: all_likes, 
-                    posts: all_posts, requests: all_friend_requests, users: @users }
+                    posts: all_posts, requests: all_friend_requests, 
+                    users: @users, suggestions: current_user_suggestions }
             end 
         end
     end

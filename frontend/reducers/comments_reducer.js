@@ -14,7 +14,7 @@ export default (state = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_SESSION_DATA:
-            return action.comments;
+            return action.comments || {};
         case RECEIVE_COMMENT:
             const oldComment = oldState[Object.keys(action.comment)[0]];
             if (oldComment && oldComment.newComment) {

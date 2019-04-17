@@ -23,7 +23,6 @@ export default props => {
                         <UploadCoverContainer/> : null
                 }
                 <ul className="cover-navbar">
-                    <li>About</li>
                     <li>Friends</li>
                     <li>Photos</li>
                 </ul>
@@ -41,12 +40,8 @@ export default props => {
                 </div>
                 <div className="cover-buttons">
                     {
-                        user.id === currentUser.id ?
-                            <button>
-                                <i className="edit-icon"></i> Edit Profile
-                            </button> 
-                        :
-                            <FriendRequestContainer user={user} />
+                        user.id !== currentUser.id ?
+                            <FriendRequestContainer user={user} /> : null
                     }
                 </div>
             </div>

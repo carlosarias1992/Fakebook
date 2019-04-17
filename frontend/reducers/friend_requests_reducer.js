@@ -13,7 +13,7 @@ export default (state = {}, action) => {
 
     switch(action.type) {
         case RECEIVE_SESSION_DATA:
-            return action.friendRequests;
+            return action.friendRequests || {};
         case RECEIVE_FRIEND_REQUEST:
             newState = action.request;
             return merge({}, oldState, newState);

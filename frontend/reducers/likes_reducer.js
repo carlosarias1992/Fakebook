@@ -12,7 +12,7 @@ export default (state = {}, action) => {
 
     switch(action.type) {
       case RECEIVE_SESSION_DATA:
-        return action.likes;
+        return action.likes || {};
       case RECEIVE_LIKES:
         return action.likes;
       case RECEIVE_LIKE:
