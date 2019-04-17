@@ -1,0 +1,311 @@
+.edit-comment-icon {
+  content: '';
+  display: block;
+  background: url(image-path('post-icons-4.png')) -38px -517px;  
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 7px;
+}
+
+.edit-comment-icon:hover {
+  background: url(image-path('post-icons-4.png')) -12px -517px;    
+}
+
+.edit-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons.png')) -115px -504px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+}
+
+.add-friend-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-3.png')) -35px -152px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+}
+
+.friends-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-3.png')) -448px -48px;    
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+}
+
+.camera-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-2.png')) 0 -50px;    
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+.cover-upload-button .camera-icon {
+    margin-right: 8px;
+    background: url(image-path('profile-icons-2.png')) -2px -53px;  
+    width: 17px;
+    height: 14px;
+}
+
+.news-feed-icon {
+    background: url(image-path('feed-icons.png')) 0px -759px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 19px;
+}
+
+.white-logo-icon {
+    display: inline-block;
+    background: url(image-path('header-icons.png')) 0 0;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+}
+
+.search-icon {
+    cursor: pointer;
+    background: url(image-path('header-icons.png')) 0 -1445px;
+    background-repeat: no-repeat;
+    width: 4px;
+    height: 14px;
+}
+
+.search-bar input[type="text"]:focus ~ .submit-button > .search-icon {
+    background: url(image-path('header-icons.png')) 0 -1460px;
+}
+
+.menu-icon {
+    background: url(image-path('header-icons.png')) -5px -850px;    
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 9px;
+}
+
+.white-menu-icon {
+    background: url(image-path('header-icons.png')) -5px -825px;    
+    background-repeat: no-repeat;
+    width: 13px;
+    height: 9px;
+}
+
+.notifications-icon {
+    background: url(image-path('header-icons.png')) 0px -793px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
+.friend-requests-icon {
+    background: url(image-path('header-icons.png')) 0px -892px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
+.white-friend-requests-icon {
+    background: url(image-path('header-icons.png')) 0px -867px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
+.liked-icon {
+  content: '';
+  display: inline-block;
+  background: url(image-path('like-icons.png')) -48px -834px;   
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+.comment-likes .liked-icon {
+  background: url(image-path('like-icons.png')) -65px -942px; 
+  width: 18px;
+  height: 18px;
+}
+
+.post-icons {
+    display: flex;
+    margin-top: 3px;
+}
+
+.post-icons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 7px 0 7px 0;
+    font-weight: bold;
+    font-size: 13px;
+    color: #606787;
+    cursor: pointer;
+}
+
+.post-icons button:hover {
+    background-color: rgba(242, 242, 242, 0.5);
+}
+
+.post-icons i {
+    margin-right: 5px;
+}
+
+.like-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons.png')) 0px -417px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.post-icons .unlike-button {
+    color: #3578e5;
+}
+
+.blue-like-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons.png')) 0px -398px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.comment-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -18px -354px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.post-menu-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -23px -287px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.post-menu-icon:hover {
+    background: url(image-path('post-icons-2.png')) 0 -310px; 
+}
+
+.birthday-icon {
+    content: '';
+    display: block;
+    background: url(image-path('event-icons.png')) 0 -37px;    
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.photos-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('feed-icons.png')) 0px -883px;    
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+}
+
+.close-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('navigation-icons.png')) -25px -216px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+}
+
+.close-icon:hover {
+    background: url(image-path('navigation-icons.png')) -12px -216px;    
+}
+
+.white-close-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('navigation-icons.png')) -38px -216px;    
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+}
+
+.friends-box-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('friends-icon.png')) 0 0;    
+    background-repeat: no-repeat;
+    background-size: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.photos-box-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-icons-2.png')) 0 0;    
+    background-repeat: no-repeat;
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.right-arrow-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('post-icons-2.png')) -38px -414px;    
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 12px;
+}
+
+.icon {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    margin-right: 20px;
+    background-repeat: no-repeat;
+    background-size: 55px 55px;
+}
+
+.icons {
+    margin-top: 38px;
+}
+
+.icons > li {
+    display: flex;
+    align-items: center;
+    margin-top: 26px;
+}
+
+.error-icon {
+    background: url(image-path('icons.png')) 0px 44px;
+    width: 22px;
+    height: 22px;
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+}
+
+.failed-login-form  .error-icon {
+    top: 8px;
+    right: 8px;
+}
+

@@ -17,25 +17,6 @@ header {
     margin: 0 7px 0 0;
 }
 
-.white-logo-icon {
-    display: inline-block;
-    background: url(image-path('header-icons.png')) 0 0;
-    background-size: 25px;
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 24px;
-    margin-right: 7px;
-}
-
-.search-icon {
-    cursor: pointer;
-    background: url(image-path('header-icons.png')) 0 -1445px;
-    background-repeat: no-repeat;
-    width: 4px;
-    height: 14px;
-}
-
-
 .search-bar form {
     overflow: hidden;
     border-radius: 3px;
@@ -53,10 +34,6 @@ header {
 
 .search-bar input[type="text"]:focus ~ .submit-button {
     background-color: #4080ff;
-}
-
-.search-bar input[type="text"]:focus ~ .submit-button > .search-icon {
-    background: url(image-path('header-icons.png')) 0 -1460px;
 }
 
 .search-bar input[type="text"] {
@@ -146,20 +123,6 @@ header {
     cursor: pointer;
 }
 
-.menu-icon {
-    background: url(image-path('header-icons.png')) -5px -850px;    
-    background-repeat: no-repeat;
-    width: 13px;
-    height: 9px;
-}
-
-.white-menu-icon {
-    background: url(image-path('header-icons.png')) -5px -825px;    
-    background-repeat: no-repeat;
-    width: 13px;
-    height: 9px;
-}
-
 .main-navbar .notifications-button:first-of-type {
     padding-left: 13px;
 }
@@ -168,13 +131,6 @@ header {
     padding: 0 13px 0 0;
     position: relative;
     cursor: pointer;
-}
-
-.notifications-icon {
-    background: url(image-path('header-icons.png')) 0px -793px;    
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 22px;
 }
 
 .dropdown {
@@ -208,13 +164,6 @@ header {
 
 .notifications-menu li {
     border: none;
-}
-
-.friend-requests-icon {
-    background: url(image-path('header-icons.png')) 0px -892px;    
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 22px;
 }
 
 .friend-requests-dropdown {
@@ -327,13 +276,6 @@ header {
 
 .dropdown::before {
     right: 9px;
-}
-
-.white-friend-requests-icon {
-    background: url(image-path('header-icons.png')) 0px -867px;    
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 22px;
 }
 
 .no-requests {

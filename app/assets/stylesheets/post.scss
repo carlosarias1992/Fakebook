@@ -52,64 +52,6 @@
     font-size: 22px;
 }
 
-.post-icons {
-    display: flex;
-    margin-top: 3px;
-}
-
-.post-icons button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 7px 0 7px 0;
-    font-weight: bold;
-    font-size: 13px;
-    color: #606787;
-    cursor: pointer;
-}
-
-.post-icons button:hover {
-    background-color: rgba(242, 242, 242, 0.5);
-}
-
-.post-icons i {
-    margin-right: 5px;
-}
-
-.like-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons.png')) 0px -417px;    
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-}
-
-.post-icons .unlike-button {
-    color: #3578e5;
-}
-
-.blue-like-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons.png')) 0px -398px;    
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-}
-
-.comment-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons-2.png')) -18px -354px;    
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-}
-
 .post .card-footer {
     border-top: none;
     display: flex;
@@ -164,19 +106,6 @@
     cursor: pointer;
 }
 
-.post-menu-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons-2.png')) -23px -287px;    
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
-}
-
-.post-menu-icon:hover {
-    background: url(image-path('post-icons-2.png')) 0 -310px; 
-}
-
 .post .event {
     display: inline-block;
     width: 100%;
@@ -194,15 +123,6 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 7px;
-}
-
-.birthday-icon {
-    content: '';
-    display: block;
-    background: url(image-path('event-icons.png')) 0 -37px;    
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
 }
 
 .post .card-body {

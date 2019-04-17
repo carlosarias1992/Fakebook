@@ -34,26 +34,6 @@
     margin-right: 8px;
 }
 
-.friends-box-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('friends-icon.png')) 0 0;    
-    background-repeat: no-repeat;
-    background-size: 22px;
-    width: 22px;
-    height: 22px;
-}
-
-.photos-box-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('profile-icons-2.png')) 0 0;    
-    background-repeat: no-repeat;
-    background-size: 24px;
-    width: 24px;
-    height: 24px;
-}
-
 .side-box {
     margin-top: 5px;
 }
@@ -100,13 +80,4 @@
 
 .post-header i {
     margin: 0 5px;
-}
-
-.right-arrow-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons-2.png')) -38px -414px;    
-    background-repeat: no-repeat;
-    width: 8px;
-    height: 12px;
 }

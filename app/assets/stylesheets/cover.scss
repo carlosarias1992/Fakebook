@@ -103,33 +103,6 @@
     background-color: #ebedf0;
 }
 
-.edit-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('profile-icons.png')) -115px -504px;    
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-}
-
-.add-friend-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('post-icons-3.png')) -35px -152px;    
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-}
-
-.friends-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('profile-icons-3.png')) -448px -48px;    
-    background-repeat: no-repeat;
-    width: 12px;
-    height: 12px;
-}
-
 .cover-dropdown {
     display: none;
     background-color: white;
@@ -210,16 +183,6 @@
     margin-bottom: 3px;
 }
 
-.camera-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('profile-icons-2.png')) 0 -50px;    
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 16px;
-    opacity: 0.8;
-}
-
 .update-overlay label {
     height: 100%;
     display: flex;
@@ -252,13 +215,6 @@
     transition: 0.2s;
     opacity: 0;
     border-radius: 3px;
-}
-
-.cover-upload-button .camera-icon {
-    margin-right: 8px;
-    background: url(image-path('profile-icons-2.png')) -2px -53px;  
-    width: 17px;
-    height: 14px;
 }
 
 .cover-upload-button label {

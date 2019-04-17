@@ -110,15 +110,6 @@
     cursor: pointer;
 }
 
-.photos-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('feed-icons.png')) 0px -883px;    
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 22px;
-}
-
 .posts-form input[type="submit"] {
     font-size: 12px;
     padding: 7px;
@@ -173,19 +164,6 @@
     background: none;
     border: none;
     cursor: pointer;
-}
-
-.close-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('navigation-icons.png')) -25px -216px;    
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-}
-
-.close-icon:hover {
-    background: url(image-path('navigation-icons.png')) -12px -216px;    
 }
 
 .image-previews {
@@ -254,15 +232,6 @@
     margin: 0;
     border: none;
     cursor: pointer;
-}
-
-.white-close-icon {
-    content: '';
-    display: inline-block;
-    background: url(image-path('navigation-icons.png')) -38px -216px;    
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
 }
 
 .overlay {

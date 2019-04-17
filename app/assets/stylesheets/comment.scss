@@ -85,19 +85,6 @@
   cursor: pointer;
 }
 
-.edit-comment-icon {
-  content: '';
-  display: block;
-  background: url(image-path('post-icons-4.png')) -38px -517px;  
-  background-repeat: no-repeat;
-  width: 14px;
-  height: 7px;
-}
-
-.edit-comment-icon:hover {
-  background: url(image-path('post-icons-4.png')) -12px -517px;    
-}
-
 .comment-body .dropdown {
   width: fit-content;
   right: -35px;

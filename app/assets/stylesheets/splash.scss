@@ -160,15 +160,6 @@ hr {
     margin-right: 6px;
 }
 
-.icon {
-    display: inline-block;
-    width: 55px;
-    height: 55px;
-    margin-right: 20px;
-    background-repeat: no-repeat;
-    background-size: 55px 55px;
-}
-
 .whats_new {
     background-image: url(image-path('whats_new.png'));
 }
@@ -179,16 +170,6 @@ hr {
 
 .find_more {
     background-image: url(image-path('find_more.png'));
-}
-
-.icons {
-    margin-top: 38px;
-}
-
-.icons > li {
-    display: flex;
-    align-items: center;
-    margin-top: 26px;
 }
 
 .signup {
@@ -471,17 +452,6 @@ hr {
 
 .signup .input-error {
     border: 1px #ed4630 solid;
-}
-
-.error-icon {
-    background: url(image-path('icons.png')) 0px 44px;
-    width: 22px;
-    height: 22px;
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 18px;
-    right: 10px;
 }
 
 .signup .position-relative {
