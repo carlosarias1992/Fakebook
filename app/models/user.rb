@@ -52,29 +52,40 @@ class User < ApplicationRecord
 
     def friends 
         friends = []
-
+        
         self.friend_requests.each do |friend_request|
             if (friend_request.sender_id === self.id) 
-                friends.push(friend_request.receiver)
+                friends.push(friend_request.receiver.id)
             else 
-                friends.push(friend_request.sender)
+                friends.push(friend_request.sender.id)
             end 
         end 
 
-        friends
+        User.where(id: friends).includes(:posts)
     end 
 
-    def suggestions
-        current_user_friends = self.friends
+    def suggestions(all_users, friend_requests)
+        current_user_friend_requests = friend_requests.select do |request|
+            (request.sender_id == self.id || request.receiver_id == self.id) &&
+            request.status == "accepted"
+        end 
+
+        current_user_friends = current_user_friend_requests.map do |request|
+            if request.sender_id == self.id 
+                request.receiver
+            else
+                request.sender
+            end 
+        end 
+        
         current_user_friend_ids = current_user_friends.map(&:id)
 
         rejections = self.rejections.map { |rejection| rejection.rejected_id }
         suggestions = []
         tries = 0
 
-        all_users = User.all.pluck(:id)
-        until suggestions.length === 7 || tries > 15
-            user_id = all_users.sample
+        until suggestions.length === 7 || tries > 25
+            user_id = all_users.map(&:id).sample
 
             unless (user_id == nil || suggestions.include?(user_id) || 
                 self.id === user_id || rejections.include?(user_id) || 
@@ -84,7 +95,7 @@ class User < ApplicationRecord
 
             tries += 1
         end 
-
+        
         suggestions
     end
 

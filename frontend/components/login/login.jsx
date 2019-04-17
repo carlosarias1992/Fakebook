@@ -86,13 +86,12 @@ class Login extends React.Component {
         const { className } = this.props;
         const { username, password } = this.state;
         let usernamePlaceholder, passwordPlaceholder;
-        let usernameLabel, passwordLabel, footer, forgotAccountClass;
+        let usernameLabel, passwordLabel, footer;
         let onBlurCallback, onFocusCallback;
 
         if (className === "failed-login-form") {
             usernamePlaceholder = "Email or Phone Number";
             passwordPlaceholder = "Password";
-            forgotAccountClass = "failed-forgot-account";
             onFocusCallback = errorModal("show");
             onBlurCallback = errorModal("hide");
 
@@ -110,7 +109,6 @@ class Login extends React.Component {
         } else {
             usernameLabel = "Email or Phone";
             passwordLabel = "Password";
-            forgotAccountClass = "forgot-account";
         }
 
         
@@ -152,9 +150,6 @@ class Login extends React.Component {
                             />
                             <i className=""></i>
                         </div>
-                        <Link to="/forgot-account">
-                            <span className={forgotAccountClass}>Forgot account?</span>
-                        </Link>
                     </label>
                     <input type="submit" value="Log In" />
                     {footer}

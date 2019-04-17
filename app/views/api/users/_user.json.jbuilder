@@ -13,22 +13,47 @@ else
 end 
 
 attachments = []
-user_posts = user.posts.with_attached_photos
-    .includes(:comments).includes(:likes)
+user_posts = posts.select { |post| post.author_id == user.id }
 user_posts.each do |post|
     attachments.concat(post.photos.map { |photo| url_for(photo) })
 end 
 
 json.photos attachments.reverse
 
-json.post_likes_id user.likes.where(likeable_type: "post").pluck(:id)
-json.comment_likes_id user.likes.where(likeable_type: "comment").pluck(:id)
+json.post_likes_id do 
+    post_likes = likes.select do |like| 
+        like.likeable_type == "post" && like.user_id == user.id
+    end
 
-json.friends_id user.friends.map(&:id).sort
+    json.array! post_likes.map(&:id)
+end 
 
-json.posts_id user_posts.pluck(:id)
+json.comment_likes_id do 
+    comment_likes = likes.select do |like|
+        like.likeable_type == "comment" && like.user_id == user.id
+    end 
+
+    json.array! comment_likes.map(&:id)
+end 
+
+user_friend_requests = requests.select do |request|
+    (request.sender_id == user.id || request.receiver_id == user.id) &&
+        request.status == "accepted"
+end 
+
+friends = user_friend_requests.map do |request|
+    if request.sender_id == user.id 
+        request.receiver
+    else
+        request.sender
+    end 
+end 
+
+json.friends_id friends.map(&:id).sort
+
+json.posts_id user_posts.map(&:id)
 
 if current_user.id == user.id 
-    json.suggestion_ids user.suggestions
+    json.suggestion_ids user.suggestions(users, requests)
 end
 

@@ -76,11 +76,11 @@
 }
 
 .or-container {
-    display: flex; 
+    display: flex;
     align-items: center;
     font-size: 14px;
-    margin-top: 27px;
-    margin-bottom: 10.5px;
+    margin-top: 10px;
+    margin-bottom: 15.5px;
 }
 
 .or-container hr {
