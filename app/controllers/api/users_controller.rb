@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
     def index 
-        @users = User.all
+        @users = User.with_attached_cover.with_attached_avatar.includes(:posts)
+            .includes(:comments).includes(:likes).includes(:rejections).all
         render :index
     end 
 

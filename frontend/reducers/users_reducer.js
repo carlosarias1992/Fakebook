@@ -11,7 +11,6 @@ import {
 } from '../actions/user_actions';
 
 export default (state = {}, action) => {
-    const { user } = action;
     const oldState = Object.freeze(state);
     let newState, updatedUser, like, user_id;
 
@@ -36,7 +35,7 @@ export default (state = {}, action) => {
             newState[currentUser.id] = currentUser;
             return newState;
         case RECEIVE_CURRENT_USER:
-            newState = { [user.id]: user };
+            newState = { [action.user.id]: action.user };
             return merge({}, oldState, newState);
         case RECEIVE_SESSION_DATA:
             newState = action.users;

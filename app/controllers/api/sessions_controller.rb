@@ -1,6 +1,8 @@
 class Api::SessionsController < ApplicationController
     def create 
-        @user = User.find_by_credentials(session_params[:username], session_params[:password])
+        @user = User.with_attached_cover.with_attached_avatar.includes(:posts)
+            .includes(:comments).includes(:likes).includes(:rejections)
+            .find_by_credentials(session_params[:username], session_params[:password])
 
         if @user && !logged_in?
             login(@user)

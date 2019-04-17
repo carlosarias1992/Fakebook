@@ -42,6 +42,52 @@ class User < ApplicationRecord
 
     after_initialize :ensure_session_token 
 
+    def friend_requests
+        friend_requests = []
+        friend_requests.concat(self.sent_friend_requests.includes(:receiver)
+            .where(status: "accepted"))
+        friend_requests.concat(self.received_friend_requests.includes(:sender)
+            .where(status: "accepted"))
+    end 
+
+    def friends 
+        friends = []
+
+        self.friend_requests.each do |friend_request|
+            if (friend_request.sender_id === self.id) 
+                friends.push(friend_request.receiver)
+            else 
+                friends.push(friend_request.sender)
+            end 
+        end 
+
+        friends
+    end 
+
+    def suggestions
+        current_user_friends = self.friends
+        current_user_friend_ids = current_user_friends.map(&:id)
+
+        rejections = self.rejections.map { |rejection| rejection.rejected_id }
+        suggestions = []
+        tries = 0
+
+        all_users = User.all.pluck(:id)
+        until suggestions.length === 7 || tries > 15
+            user_id = all_users.sample
+
+            unless (user_id == nil || suggestions.include?(user_id) || 
+                self.id === user_id || rejections.include?(user_id) || 
+                current_user_friend_ids.include?(user_id)) 
+                suggestions << user_id
+            end 
+
+            tries += 1
+        end 
+
+        suggestions
+    end
+
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
         user && user.is_password?(password) ? user : nil 
