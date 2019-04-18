@@ -5,6 +5,7 @@ import { findAllFriendRequestsByUserId } from '../../util/ui_util';
 import { fetchSessionData } from '../../actions/user_actions';
 import { fetchPosts } from '../../actions/posts_actions';
 import { getCurrentUser } from '../../util/container_util';
+import { showFriends, showPhotos } from '../../actions/ui_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { userId } = ownProps.match.params;
@@ -34,14 +35,16 @@ const mapStateToProps = (state, ownProps) => {
     return { 
         user, friendsBoolean, currentUser, friends, 
         sessionDataReceived: ui.sessionDataReceived,
-        profileTab: ui.profileTab || "timeline"
+        profileTab: ui.profileTab || "friends"
      };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchSessionData: () => dispatch(fetchSessionData()),
-        fetchPosts: () => dispatch(fetchPosts())
+        fetchPosts: () => dispatch(fetchPosts()),
+        showFriends: () => dispatch(showFriends()),
+        showPhotos: () => dispatch(showPhotos())
     };
 };
 

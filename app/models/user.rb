@@ -42,28 +42,6 @@ class User < ApplicationRecord
 
     after_initialize :ensure_session_token 
 
-    def friend_requests
-        friend_requests = []
-        friend_requests.concat(self.sent_friend_requests.includes(:receiver)
-            .where(status: "accepted"))
-        friend_requests.concat(self.received_friend_requests.includes(:sender)
-            .where(status: "accepted"))
-    end 
-
-    def friends 
-        friends = []
-        
-        self.friend_requests.each do |friend_request|
-            if (friend_request.sender_id === self.id) 
-                friends.push(friend_request.receiver.id)
-            else 
-                friends.push(friend_request.sender.id)
-            end 
-        end 
-
-        User.where(id: friends).includes(:posts)
-    end 
-
     def suggestions(all_users, friend_requests)
         current_user_friend_requests = friend_requests.select do |request|
             (request.sender_id == self.id || request.receiver_id == self.id) &&

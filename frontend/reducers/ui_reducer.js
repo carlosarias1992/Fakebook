@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_SESSION_DATA } from '../actions/user_actions';
+import { LOGOUT_CURRENT_USER } from '../actions/session_actions';
 import { 
     SHOW_EDIT_MODAL,
     HIDE_EDIT_MODAL,
@@ -17,6 +18,8 @@ export default (state = {}, action) => {
     switch(action.type) {
         case RECEIVE_SESSION_DATA:
             return { sessionDataReceived: action.sessionDataReceived };
+        case LOGOUT_CURRENT_USER:
+            return {};
         case SHOW_EDIT_MODAL:
             newState = { editModal: { [action.id]: true } };
             return merge({}, oldState, newState);

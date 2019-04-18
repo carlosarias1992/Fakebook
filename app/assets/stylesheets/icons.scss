@@ -309,3 +309,12 @@
     right: 8px;
 }
 
+.profile-friends-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-friends-icon.png')) 0 0;    
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 22px;
+}
+

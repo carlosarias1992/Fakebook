@@ -6,6 +6,7 @@ import PostsFormContainer from '../posts/posts_form_container';
 import FriendsIndexContainer from '../friends/friends_index_container';
 import PhotosContainer from '../photos/photos_container';
 import Copyright from '../copyright';
+import ProfileFriendIndex from '../profile_friends/profile_friend_index';
 
 class Profile extends React.Component {
     componentDidMount() {
@@ -18,7 +19,8 @@ class Profile extends React.Component {
 
     render() {
         const { 
-            user, friendsBoolean, currentUser, friends, profileTab 
+            user, friendsBoolean, currentUser, friends, profileTab, 
+            showFriends, showPhotos
         } = this.props;
         const numberOfFriends = Object.values(friends).length;
 
@@ -36,14 +38,18 @@ class Profile extends React.Component {
                                     <div className="profile-box">
                                         <div className="profile-box-header">
                                             <i className="photos-box-icon"></i>
-                                            Photos
+                                            <p onClick={showPhotos}>
+                                                Photos
+                                            </p>
                                         </div>
                                         <PhotosContainer user={user} />
                                     </div>
                                     <div className="profile-box">
                                         <div className="profile-box-header">
                                             <i className="friends-box-icon"></i>
-                                            Friends &nbsp;
+                                            <p onClick={showFriends}>
+                                                Friends
+                                            </p> &nbsp;
                                             {
                                                 numberOfFriends > 0 ?
                                                     <>
@@ -68,6 +74,10 @@ class Profile extends React.Component {
                                     }
                                 </div>
                             </> : null
+                    }
+                    {
+                        profileTab === "friends" ?
+                            <ProfileFriendIndex friends={friends} /> : null 
                     }
                 </section>
             </main>
