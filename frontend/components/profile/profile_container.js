@@ -14,23 +14,13 @@ const mapStateToProps = (state, ownProps) => {
     const user = users[userId] || {};
     const friendRequest = findFriendRequestByUserId(user.id, currentUser.id, friendRequests) || {};
     const friendsBoolean = friendRequest.status === "accepted";
-    const friendRequestsForUser = findAllFriendRequestsByUserId(user.id, friendRequests);
-
-    const acceptedFriendRequests = friendRequestsForUser.filter(friendRequest => {
-        return friendRequest.status === "accepted";
-    });
-
-    let friends = acceptedFriendRequests.map(acceptedFriendRequest => {
-        let friendId;
-
-        if (acceptedFriendRequest.sender_id !== user.id) {
-            friendId = acceptedFriendRequest.sender_id;
-        } else {
-            friendId = acceptedFriendRequest.receiver_id;
-        }
-
-        return users[friendId];
-    });
+    
+    let friends = [];
+    if (user.friends_id) {
+        friends = user.friends_id.map(friend_id => {
+            return users[friend_id];
+        });
+    }
     
     return { 
         user, friendsBoolean, currentUser, friends, 

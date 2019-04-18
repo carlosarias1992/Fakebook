@@ -9,8 +9,8 @@ export default props => {
     const { user, currentUser, showFriends, showTimeline, showPhotos } = props;
     let numberOfFriends;
 
-    if (currentUser.friends_id.length > 0) {
-        numberOfFriends = `${currentUser.friends_id.length}`;
+    if (user.friends_id && user.friends_id.length > 0) {
+        numberOfFriends = `${user.friends_id.length}`;
     } else {
         numberOfFriends = '';
     }
