@@ -9,7 +9,7 @@ export default props => {
         <div className="profile-friend-item">
             <AvatarContainer userId={friend.id} />
             <div>
-                <Link to={"users/" + friend.id}>
+                <Link to={"/users/" + friend.id}>
                     {friend.first_name} {friend.last_name}
                 </Link>
                 <p>

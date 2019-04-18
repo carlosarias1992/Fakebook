@@ -11,7 +11,12 @@ export default props => {
             <div className="profile-section-header">
                 <i className="profile-friends-icon"></i> Friends
             </div>
-            {friends}
+            {
+                friends.length > 0 ? 
+                    friends
+                : 
+                    <div className="no-data-message">No friends to show</div>
+            }
         </div>
     )
 }

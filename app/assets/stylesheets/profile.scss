@@ -151,7 +151,15 @@
 .profile-photo-item {
     float: left;
     margin: 0 0 4px 4px;
-    height: 205px;
-    width: 205px;
+    height: 206px;
+    width: 206px;
     border: 1px #d3d6da solid;
+}
+
+.no-data-message {
+    text-align: center;
+    margin: 80px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #bbb;
 }

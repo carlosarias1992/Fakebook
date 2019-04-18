@@ -11,7 +11,12 @@ export default props => {
             <div className="profile-section-header profile-photos-header">
                 <i className="profile-photos-icon"></i> Photos
             </div>
-            <div>{photos}</div>
+            {
+                photos.length > 0 ?
+                    photos
+                : 
+                    <div className="no-data-message">No photos to show</div>
+            }
         </div>
     )
 }
