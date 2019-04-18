@@ -26,15 +26,45 @@ json.users do
             json.set! user.id do 
                 json.extract! user, :id, :first_name, :last_name, :gender
 
+                user_friend_requests = all_friend_requests.select do |request|
+                    (request.sender_id == user.id || request.receiver_id == user.id) &&
+                    request.status == "accepted"
+                end 
+
+                user_friend_request_ids = user_friend_requests.map do |request|
+                    if request.sender_id == user.id 
+                        request.receiver_id
+                    else
+                        request.sender_id
+                    end 
+                end 
+
                 if user.avatar.attached? 
                     json.avatar url_for(user.avatar);
                 else 
                     json.avatar nil
                 end 
+
+                json.friends_id user_friend_request_ids
             end
         else
             json.set! user.id do 
-                json.extract! user, :id, :first_name, :last_name
+                json.extract! user, :id, :first_name, :last_name, :gender
+
+                user_friend_requests = all_friend_requests.select do |request|
+                    (request.sender_id == user.id || request.receiver_id == user.id) &&
+                    request.status == "accepted"
+                end 
+
+                user_friend_request_ids = user_friend_requests.map do |request|
+                    if request.sender_id == user.id 
+                        request.receiver_id
+                    else
+                        request.sender_id
+                    end 
+                end 
+
+                json.friends_id user_friend_request_ids
             end
         end 
     end

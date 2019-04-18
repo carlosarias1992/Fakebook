@@ -101,11 +101,15 @@ user_ids.delete(demo_user.id)
     other_random_user = User.find_by(id: random_id)
     other_user_ids.delete(random_id)
 
-    FriendRequest.create({
-      sender_id: random_user.id, 
-      receiver_id: other_random_user.id,
-      status: "accepted",
-      seen: true
-    })
+    sent_friend_request = FriendRequest.find_by(sender_id: other_random_user.id)
+
+    unless sent_friend_request
+      FriendRequest.create({
+        sender_id: random_user.id, 
+        receiver_id: other_random_user.id,
+        status: "accepted",
+        seen: true
+      })
+    end
   end 
 end 
