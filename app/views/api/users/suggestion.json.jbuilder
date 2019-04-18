@@ -1,18 +1,22 @@
 friend_requests = FriendRequest.includes(:sender).includes(:receiver)
-        .where("(sender_id = #{current_user.id} OR receiver_id = #{current_user.id}) AND status = 'accepted'")
+    .where("(sender_id = #{current_user.id} OR receiver_id = #{current_user.id}) AND status = 'accepted'")
+
+sent_friend_requests = FriendRequest.includes(:receiver)
+    .where("sender_id = #{current_user.id} AND status = 'pending'").pluck(:receiver_id)
 
 current_user_friend_requests = friend_requests.select do |request|
-    (request.sender_id == self.id || request.receiver_id == self.id) &&
-    request.status == "accepted"
+    request.sender_id == current_user.id || request.receiver_id == current_user.id
 end 
 
 current_user_friends = current_user_friend_requests.map do |request|
-    if request.sender_id == self.id 
+    if request.sender_id == current_user.id 
         request.receiver
     else
         request.sender
     end 
 end 
+
+current_user_friend_ids = current_user_friends.map(&:id)
 
 found_suggestion = false
 tries = 0
@@ -22,13 +26,14 @@ tries = 0
 end 
 
 rejections = current_user.rejections.map { |rejection| rejection.rejected_id }
+users = User.all.pluck(:id)
 
 until found_suggestion
-    user_id = User.all.pluck(:id).sample
+    user_id = users.sample
     
-    unless (user_id == nil || current_user_friends.include?(user_id) || 
+    unless (user_id == nil || current_user_friend_ids.include?(user_id) || 
         @current_suggestions.include?(user_id) || current_user.id === user_id || 
-        tries > 25 || rejections.include?(user_id)) 
+        tries > 25 || rejections.include?(user_id) || sent_friend_requests.include?(user_id)) 
         found_suggestion = true
     end 
 

@@ -8,7 +8,8 @@ class FriendRequest extends React.Component {
     render() {
         const { 
             friendRequest, user, currentUser, history,
-            deleteFriendRequest, sendFriendRequest, acceptFriendRequest 
+            deleteFriendRequest, sendFriendRequest, acceptFriendRequest,
+            fetchSuggestion 
         } = this.props;
         
         const requestSent = 
@@ -31,7 +32,16 @@ class FriendRequest extends React.Component {
             </div>;
 
         const addFriend = 
-            <button className="cursor" onClick={() => sendFriendRequest(user.id)} key={1}>
+            <button className="cursor" onClick={() => {
+                sendFriendRequest(user.id).then(response => {
+                    const receiver_id = Object.values(response.request)[0].receiver_id
+                    currentUser.suggestion_ids = currentUser.suggestion_ids.filter(suggestion => {
+                        return suggestion !== receiver_id;
+                    })
+
+                    fetchSuggestion(currentUser);
+                })
+            }}>
                 <i className="add-friend-icon"></i> Add Friend
             </button>;
 

@@ -3,6 +3,7 @@ import FriendRequest from './friend_request';
 import { findFriendRequestByUserId } from '../../util/ui_util';
 import { withRouter } from 'react-router-dom';
 import { getCurrentUser } from '../../util/container_util';
+import { fetchSuggestion } from '../../actions/suggestions_actions';
 import { 
     acceptFriendRequest, deleteFriendRequest, sendFriendRequest
 } from '../../actions/friend_request_actions';
@@ -20,7 +21,8 @@ const mapDispatchToProps = dispatch => {
     return {
         acceptFriendRequest: id => dispatch(acceptFriendRequest(id)),
         deleteFriendRequest: id => dispatch(deleteFriendRequest(id)),
-        sendFriendRequest: id => dispatch(sendFriendRequest(id))
+        sendFriendRequest: id => dispatch(sendFriendRequest(id)),
+        fetchSuggestion: user => dispatch(fetchSuggestion(user))
     };
 };
 

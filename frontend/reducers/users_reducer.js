@@ -45,6 +45,7 @@ export default (state = {}, action) => {
             return merge({}, oldState, newState);
         case RECEIVE_FRIEND_REQUEST:
             const { request } = action;
+            newState = merge({}, oldState);
             const requestValue = Object.values(request)[0];
             const senderFriends = merge({}, oldState[requestValue.sender_id]).friends_id;
             const receiverFriends = merge({}, oldState[requestValue.receiver_id]).friends_id;
@@ -57,8 +58,11 @@ export default (state = {}, action) => {
                 receiverFriends.push(requestValue.sender_id);
                 receiver = { [requestValue.receiver_id]: { friends_id: receiverFriends } };
             } 
+            
+            newState[requestValue.sender_id].suggestion_ids = newState[requestValue.sender_id]
+                .suggestion_ids.filter(suggestion => suggestion !== requestValue.receiver_id);
 
-            return merge({}, oldState, sender, receiver);
+            return merge({}, sender, receiver, newState);
         case RECEIVE_POST: 
             updatedUser = merge({}, oldState[action.post.author_id]);
             updatedUser.posts_id.push(action.post.id);
