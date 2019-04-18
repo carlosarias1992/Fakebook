@@ -7,8 +7,8 @@ export default props => {
     });
 
     return (
-        <div className="profile-friends">
-            <div className="profile-friends-header">
+        <div className="profile-section">
+            <div className="profile-section-header">
                 <i className="profile-friends-icon"></i> Friends
             </div>
             {friends}

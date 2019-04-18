@@ -7,6 +7,7 @@ import FriendsIndexContainer from '../friends/friends_index_container';
 import PhotosContainer from '../photos/photos_container';
 import Copyright from '../copyright';
 import ProfileFriendIndex from '../profile_friends/profile_friend_index';
+import ProfilePhotosIndex from '../profile_photos/profile_photos_index';
 
 class Profile extends React.Component {
     componentDidMount() {
@@ -78,6 +79,10 @@ class Profile extends React.Component {
                     {
                         profileTab === "friends" ?
                             <ProfileFriendIndex friends={friends} /> : null 
+                    }
+                    {
+                        profileTab === "photos" ?
+                            <ProfilePhotosIndex photos={user.photos} /> : null
                     }
                 </section>
             </main>

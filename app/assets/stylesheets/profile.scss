@@ -82,7 +82,7 @@
     margin: 0 5px;
 }
 
-.profile-friends {
+.profile-section {
     background-color: white;
     width: 100%;
     border: 1px #d3d6db solid;
@@ -113,9 +113,9 @@
     font-size: 15px;
 }
 
-.profile-friends-header {
+.profile-section-header {
     background-color: #f5f6f7;
-    border-bottom: 1px #e9ebee solid;
+    border-bottom: 1px #d3d6da solid;
     margin-bottom: 14px;
     display: flex;
     align-items: center;
@@ -125,7 +125,7 @@
     font-weight: bold;
 }
 
-.profile-friends-header i {
+.profile-section-header i {
     margin-right: 10px;
 }
 
@@ -138,4 +138,20 @@
 .profile-box p:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.profile-photos-header {
+    margin-bottom: 4px;
+}
+
+.profile-photo-item img {
+    width: 100%;
+}
+
+.profile-photo-item {
+    float: left;
+    margin: 0 0 4px 4px;
+    height: 205px;
+    width: 205px;
+    border: 1px #d3d6da solid;
 }

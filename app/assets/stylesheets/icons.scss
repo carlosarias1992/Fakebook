@@ -318,3 +318,12 @@
     height: 22px;
 }
 
+.profile-photos-icon {
+    content: '';
+    display: inline-block;
+    background: url(image-path('profile-photos-icon.png')) 0 0;    
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 22px;
+}
+
