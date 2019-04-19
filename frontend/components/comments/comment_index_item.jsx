@@ -55,10 +55,12 @@ class CommentIndexItem extends React.Component {
           <div
             className={"comment" + newCommentClass}
             onMouseEnter={() => {
-              this.showElement(`.edit-button-${comment.id}`);
+              if (currentUser.id === author.id) {
+                this.showElement(`.edit-button-${comment.id}`);
+              }
             }}
             onMouseLeave={() => {
-              if (!this.state.activeDropdown[comment.id]) {
+              if (!this.state.activeDropdown[comment.id] && currentUser.id === author.id) {
                 this.hideElement(`.edit-button-${comment.id}`);
               }
             }}
