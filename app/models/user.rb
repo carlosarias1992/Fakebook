@@ -61,6 +61,12 @@ class User < ApplicationRecord
         end 
 
         sent_friend_request_ids = sent_friend_requests.map(&:receiver_id)
+
+        received_friend_requests = friend_requests.select do |request|
+            request.receiver_id == self.id && request.status == "pending"
+        end 
+
+        received_friend_request_ids = received_friend_requests.map(&:sender_id)
         
         current_user_friend_ids = current_user_friends.map(&:id)
 
@@ -73,7 +79,8 @@ class User < ApplicationRecord
 
             unless (user_id == nil || suggestions.include?(user_id) || 
                 self.id === user_id || rejections.include?(user_id) || 
-                current_user_friend_ids.include?(user_id) || sent_friend_request_ids.include?(user_id)) 
+                current_user_friend_ids.include?(user_id) || sent_friend_request_ids.include?(user_id) ||
+                received_friend_request_ids.include?(user_id)) 
                 suggestions << user_id
             end 
 
