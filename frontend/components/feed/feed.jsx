@@ -50,6 +50,14 @@ class Feed extends React.Component {
                                         <i className="fab fa-linkedin"></i> Creator's LinkedIn
                                     </a>
                                 </li>
+                                <li>
+                                    <a
+                                        target="_blank"
+                                        href="http://carlos-arias.me"
+                                    >
+                                        <i className="fas fa-laptop"></i> Creator's Website
+                                    </a>
+                                </li>
                             </ul>
                         </aside>
                         <div className="center-col">
