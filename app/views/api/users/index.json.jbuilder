@@ -22,7 +22,7 @@ current_user_suggestions = current_user.suggestions(@users, all_friend_requests)
 
 json.users do 
     @users.each do |user|
-        if current_user_suggestions.include?(user.id) 
+        unless current_user_friend_ids.include?(user.id)
             json.set! user.id do 
                 json.extract! user, :id, :first_name, :last_name, :gender
 
@@ -47,36 +47,15 @@ json.users do
 
                 json.friends_id user_friend_request_ids
             end
-        else
-            json.set! user.id do 
-                json.extract! user, :id, :first_name, :last_name, :gender
-
-                user_friend_requests = all_friend_requests.select do |request|
-                    (request.sender_id == user.id || request.receiver_id == user.id) &&
-                    request.status == "accepted"
-                end 
-
-                user_friend_request_ids = user_friend_requests.map do |request|
-                    if request.sender_id == user.id 
-                        request.receiver_id
-                    else
-                        request.sender_id
-                    end 
-                end 
-
-                json.friends_id user_friend_request_ids
-            end
-        end 
+        end
     end
 
     current_user_friends.each do |friend|
-        if (!current_user_suggestions.include?(friend.id)) 
-            json.set! friend.id do 
-                json.partial! 'api/users/user', { user: friend, likes: all_likes, 
-                    posts: all_posts, requests: all_friend_requests, 
-                    users: @users, suggestions: current_user_suggestions }
-            end 
-        end
+        json.set! friend.id do 
+            json.partial! 'api/users/user', { user: friend, likes: all_likes, 
+                posts: all_posts, requests: all_friend_requests, 
+                users: @users, suggestions: current_user_suggestions }
+        end 
     end
 end
 
