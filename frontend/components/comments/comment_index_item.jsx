@@ -42,7 +42,7 @@ class CommentIndexItem extends React.Component {
   render() {
     const {
       comment, author, liked, deleteComment, 
-      post, editForm, showCommentEditForm
+      post, editForm, showCommentEditForm, currentUser
     } = this.props;
 
     const newCommentClass = comment.newComment ? " new-comment" : "";
@@ -74,27 +74,32 @@ class CommentIndexItem extends React.Component {
                       </Link>
                       {comment.content}
                       <LikesContainer type="comment" likeable={comment} />
-                      <button
-                        className={"hide edit-comment edit-button-" + comment.id}
-                        onClick={() => {
-                          toggleClass(`.comment-${comment.id}`, "hide")();
-                          this.setState({ activeDropdown: { [comment.id]: true } })
-                        }}
-                        onBlur={() => {
-                          this.hideElement(`.comment-${comment.id}`);
-                          this.setState({ activeDropdown: { [comment.id]: false } })
-                        }}
-                      >
-                        <i className="edit-comment-icon"></i>
-                      </button>
-                      <ul className={"dropdown hide comment-" + comment.id}>
-                        <li onMouseDown={() => showCommentEditForm(comment.id)}>
-                          <i className="fas fa-pencil-alt"></i> Edit...
-                        </li>
-                        <li onMouseDown={() => deleteComment(comment.id)}>
-                          <i className="far fa-trash-alt"></i> Delete...
-                        </li>
-                      </ul>
+                      {
+                        currentUser.id === author.id ?
+                          <>
+                            <button
+                              className={"hide edit-comment edit-button-" + comment.id}
+                              onClick={() => {
+                                toggleClass(`.comment-${comment.id}`, "hide")();
+                                this.setState({ activeDropdown: { [comment.id]: true } })
+                              }}
+                              onBlur={() => {
+                                this.hideElement(`.comment-${comment.id}`);
+                                this.setState({ activeDropdown: { [comment.id]: false } })
+                              }}
+                            >
+                              <i className="edit-comment-icon"></i>
+                            </button>
+                            <ul className={"dropdown hide comment-" + comment.id}>
+                              <li onMouseDown={() => showCommentEditForm(comment.id)}>
+                                <i className="fas fa-pencil-alt"></i> Edit...
+                              </li>
+                              <li onMouseDown={() => deleteComment(comment.id)}>
+                                <i className="far fa-trash-alt"></i> Delete...
+                              </li>
+                            </ul>
+                          </> : null
+                      }
                     </div>
                     <div className="comment-footer">
                       {

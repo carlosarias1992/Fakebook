@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import CommentIndexItem from './comment_index_item';
 import { createLike, deleteLike } from '../../actions/likes_actions';
-import { fetchComment, deleteComment } from '../../actions/comments_actions';
-import { fetchUser } from '../../actions/user_actions';
 import { showCommentEditForm } from '../../actions/ui_actions';
 import { getCurrentUser, getUser } from '../../util/container_util';
+import { deleteComment } from '../../actions/comments_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const currentUser = getCurrentUser(state);
