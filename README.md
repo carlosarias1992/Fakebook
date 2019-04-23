@@ -2,6 +2,18 @@
 
 Fakebook is a faithful clone of Facebook. Fakebook is a social media application that makes it easy for everyone to share with family and friends over the internet by sharing pictures and posts. 
 
+## Technologies Used
+
+* Ruby on Rails
+* PostgreSQL
+* JavaScript (ES6)
+* React.js
+* Redux
+* AWS S3
+* HTML
+* CSS
+* Heroku
+
 ## Getting Started
 
 You can easily begin using Fakebook by signing up [here](https://fakebook-cam.herokuapp.com/#/). 
@@ -58,18 +70,6 @@ removeFile(idx) {
 ![profile-page-screenshot](https://github.com/carlosarias1992/Fakebook/raw/master/app/assets/images/profile-page.png "Profile Page")
 
 This features packs in more functionalities than it seems at first. The profile page component must be generic enough to not only display the current's users info, but also all the other users as well. Some internal features to these components will change depending on several factors. For example, if the current user visits another user's profile page and the two users are not already friends, an "Add Friend" button will be displayed, so that the current user can send a friend request to the profile page's owner. This button must not appear if the users are already friends or if the profile page belongs to the current user. Another important thing worth mentioning is that in order to improve server loading speed, we cannot fetch all information pertaining to all of our users in the database in the first request. Therefore, when the current user visits another user's profile page, the information for that specific user must be fetched before the page is rendered. This was accomplished by saving an attribute in our Redux store which allowed us to know if the user's information had already been fetched, and if not, we could fetch the user through our `UserApiUtil`.
-
-## Technologies Used
-
-* Ruby on Rails
-* PostgreSQL
-* JavaScript (ES6)
-* React.js
-* Redux
-* AWS S3
-* HTML
-* CSS
-* Heroku
 
 ## Future Implementations
 
