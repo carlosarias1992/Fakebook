@@ -20,5 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const store = configureStore(savedSession);
 
+    /*TESTING*/
+    window.store = store;
+
     ReactDOM.render(<Root store={store} />, root);
 });

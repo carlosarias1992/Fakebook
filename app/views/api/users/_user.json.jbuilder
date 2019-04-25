@@ -49,7 +49,7 @@ friends = user_friend_requests.map do |request|
     end 
 end 
 
-json.friends_id friends.map(&:id).sort
+json.friends_id friends.map(&:id)
 
 json.posts_id user_posts.map(&:id)
 

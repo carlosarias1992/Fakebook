@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
     
     let friends = [];
     if (user.friends_id && Object.values(users).length > 1) {
-        friends = user.friends_id.map(friend_id => {
+        friends = user.friends_id.sort().map(friend_id => {
             return users[friend_id];
         });
     }

@@ -72,15 +72,23 @@ end
 current_user_friend_post_ids = current_user_friend_posts.map(&:id)
 
 json.posts do
-    current_user_posts.each do |post|
-        json.set! post.id do
-            json.partial! 'api/users/post', post: post
-        end 
-    end 
+    # Improve site efficiency 
     
-    current_user_friend_posts.each do |post|
-        json.set! post.id do
-            json.partial! 'api/users/post', post: post
+    # current_user_posts.each do |post|
+    #     json.set! post.id do
+    #         json.partial! 'api/users/post', post: post
+    #     end 
+    # end 
+    
+    # current_user_friend_posts.each do |post|
+    #     json.set! post.id do
+    #         json.partial! 'api/users/post', post: post
+    #     end 
+    # end 
+
+    all_posts.each do |post|
+        json.set! post.id do 
+            json.partial! 'api/users/post', post: post 
         end 
     end 
 end 
