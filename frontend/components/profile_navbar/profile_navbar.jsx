@@ -6,7 +6,7 @@ import FriendRequestIndexContainer from '../friend_request/friend_request_index_
 
 class ProfileNavbar extends React.Component {
   render() {
-    const { currentUser, logout } = this.props;
+    const { currentUser, logout, showTimeline } = this.props;
     
     return (
       <section className="profile-navbar">
@@ -18,7 +18,9 @@ class ProfileNavbar extends React.Component {
               />
           </li>
           <li>
-            <Link to="/feed">Home</Link>
+            <Link to="/feed" onClick={showTimeline}>
+              Home
+            </Link>
           </li>
           <li>
             <ul className="notifications-menu">
