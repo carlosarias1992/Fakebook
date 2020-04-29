@@ -126,6 +126,10 @@ GEM
     formatador (0.2.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.10.8)
     guard (2.15.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -301,6 +305,8 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   faker!
+  graphiql-rails
+  graphql (~> 1.10)
   guard (>= 2.2.2)
   guard-livereload
   jbuilder (~> 2.5)
