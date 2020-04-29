@@ -36,13 +36,13 @@ class ProfileNavbar extends React.Component {
             }}
             onBlur={() => {
               const dropdownElement = document.querySelector(".dropdown");
-              const menuIcon = document.querySelector(".menu-icon")
+              const menuIcon = document.querySelector(".menu-icon");
               addClass(dropdownElement, "hide");
               removeClass(menuIcon, "white-menu-icon");
             }}
             >
             <li className="menu-button">
-              <i className="menu-icon"></i>
+              <i className="menu-icon"/>
             </li>
           </button>
           <ul className="dropdown hide">
