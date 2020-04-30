@@ -1,23 +1,35 @@
 import React from "react";
 import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
-export default (props) => {
+const QueryDefinition = gql`
+  query UserQuery($id: ID!) {
+    user(id: $id) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
+
+const renderFriendRequestRow = (props) => {
+  if (props.loading) return null;
+
   const {
-    sender,
+    data: { user },
     friendRequest,
     acceptFriendRequest,
     deleteFriendRequest,
   } = props;
 
-  if (!sender) return null;
-
   return (
     <li>
       <div className="left-col">
-        <AvatarContainer userId={sender.id} />
-        <Link to={"/users/" + sender.id}>
-          {sender.first_name} {sender.last_name}
+        <AvatarContainer userId={user.id} />
+        <Link to={"/users/" + user.id}>
+          {user.firstName} {user.lastName}
         </Link>
       </div>
       <div className="right-col">
@@ -37,3 +49,17 @@ export default (props) => {
     </li>
   );
 };
+
+const FriendRequestRow = (props) => {
+  const vars = { id: props.friendRequest.senderId };
+
+  return (
+    <Query query={QueryDefinition} variables={vars}>
+      {({ data, loading }) =>
+        renderFriendRequestRow({ data, loading, ...props })
+      }
+    </Query>
+  );
+};
+
+export default FriendRequestRow;

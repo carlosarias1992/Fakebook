@@ -1,17 +1,9 @@
 import { connect } from "react-redux";
 import FriendRequestIndexItem from "./friend_request_index_item";
-import { getUser } from "../../util/container_util";
 import {
   acceptFriendRequest,
   deleteFriendRequest,
 } from "../../actions/friend_request_actions";
-
-const mapStateToProps = (state, ownProps) => {
-  const { friendRequest } = ownProps;
-  const sender = getUser(state, parseInt(friendRequest.senderId));
-
-  return { friendRequest, sender };
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -20,7 +12,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FriendRequestIndexItem);
+export default connect(null, mapDispatchToProps)(FriendRequestIndexItem);
