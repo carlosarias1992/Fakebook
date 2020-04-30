@@ -1,19 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
 
-const QueryDefinition = gql`
-  query UserQuery($id: ID!) {
-    user(id: $id) {
-      id
-      gender
-      avatarUrl
-    }
-  }
-`;
-
-const renderAvatar = (props) => {
+const Avatar = (props) => {
   if (props.loading) return null;
 
   const {
@@ -45,18 +33,6 @@ const renderAvatar = (props) => {
       </Link>
     );
   }
-};
-
-const Avatar = (props) => {
-  if (!props.userId) return null;
-
-  const vars = { id: props.userId };
-
-  return (
-    <Query query={QueryDefinition} variables={vars}>
-      {({ data, loading }) => renderAvatar({ data, loading, ...props })}
-    </Query>
-  );
 };
 
 export default Avatar;

@@ -1,27 +1,12 @@
 import React from "react";
 import FriendRequestIndexItemContainer from "./friend_request_index_item_container";
 import { addClass, toggleClass } from "../../util/ui_util";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-
-const QueryDefinition = gql`
-  query FriendRequestQuery($userId: ID!) {
-    friendRequests(userId: $userId) {
-      id
-      senderId
-      receiverId
-      status
-      seen
-    }
-  }
-`;
 
 class FriendRequestIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = { dropdown: false };
     this.handleSeenFriendRequests = this.handleSeenFriendRequests.bind(this);
-    this.renderBody = this.renderBody.bind(this);
   }
 
   handleSeenFriendRequests(unseenFriendRequests) {
@@ -37,9 +22,9 @@ class FriendRequestIndex extends React.Component {
     addClass(element, "hide");
   }
 
-  renderBody(props) {
+  render() {
     const { dropdown } = this.state;
-    const { data, loading } = props;
+    const { data, loading, userId } = this.props;
 
     if (loading) return null;
 
@@ -47,7 +32,7 @@ class FriendRequestIndex extends React.Component {
       (friendRequest) => {
         return (
           friendRequest.status === "pending" &&
-          parseInt(friendRequest.receiverId) === currentUser.id
+          parseInt(friendRequest.receiverId) === userId
         );
       }
     );
@@ -118,19 +103,6 @@ class FriendRequestIndex extends React.Component {
           )}
         </ul>
       </li>
-    );
-  }
-
-  render() {
-    const { currentUser } = this.props;
-    const userId = { userId: currentUser.id };
-
-    return (
-      <Query query={QueryDefinition} variables={userId} pollInterval={5000}>
-        {({ data, loading }) =>
-          this.renderBody({ data, loading, ...this.props })
-        }
-      </Query>
     );
   }
 }

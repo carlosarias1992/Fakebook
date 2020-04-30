@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
-import { getCurrentUser, getUser } from "../../util/container_util";
+import { compose } from "recompose";
+import { getCurrentUser } from "../../util/container_util";
+import { UserQuery } from "../../graphql/queries";
 import Avatar from "./avatar";
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,4 +16,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Avatar);
+export default compose(connect(mapStateToProps), UserQuery)(Avatar);

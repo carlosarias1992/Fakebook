@@ -1,20 +1,8 @@
 import React from "react";
 import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
 
-const QueryDefinition = gql`
-  query UserQuery($id: ID!) {
-    user(id: $id) {
-      id
-      firstName
-      lastName
-    }
-  }
-`;
-
-const renderFriendRequestRow = (props) => {
+const FriendRequestRow = (props) => {
   if (props.loading) return null;
 
   const {
@@ -47,18 +35,6 @@ const renderFriendRequestRow = (props) => {
         </button>
       </div>
     </li>
-  );
-};
-
-const FriendRequestRow = (props) => {
-  const vars = { id: props.friendRequest.senderId };
-
-  return (
-    <Query query={QueryDefinition} variables={vars}>
-      {({ data, loading }) =>
-        renderFriendRequestRow({ data, loading, ...props })
-      }
-    </Query>
   );
 };
 
