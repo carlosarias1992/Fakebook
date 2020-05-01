@@ -4,7 +4,7 @@ import FriendRequestIndex from "./friend_request_index";
 import { seenFriendRequest } from "../../actions/friend_request_actions";
 import { getCurrentUser } from "../../util/container_util";
 import { UserQuery } from "../../graphql/queries";
-import FriendRequestsQuery from "../../graphql/queries/FriendRequestsQuery";
+import { FriendRequestsQuery } from "../../graphql/queries";
 
 const mapStateToProps = (state) => {
   const currentUser = getCurrentUser(state);

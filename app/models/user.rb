@@ -90,6 +90,20 @@ class User < ApplicationRecord
         suggestions
     end
 
+    def friends
+        accepted_friend_requests = FriendRequest
+                                       .where("(sender_id=#{id} or receiver_id=#{id}) and status='accepted'")
+                                       .preload(:sender, :receiver)
+
+        accepted_friend_requests.map do |friend_request|
+            if friend_request.receiver == self
+                friend_request.sender
+            else
+                friend_request.receiver
+            end
+        end
+    end
+
     def self.find_by_credentials(username, password)
         user = User.find_by(username: username)
         user && user.is_password?(password) ? user : nil 

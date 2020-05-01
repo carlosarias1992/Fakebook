@@ -1,10 +1,10 @@
-import React from 'react';
-import AvatarContainer from '../avatar/avatar_container';
-import { Link } from 'react-router-dom';
-import { getShortTimeString } from '../../util/ui_util';
-import LikesContainer from '../likes/likes_container';
-import { addClass, removeClass, toggleClass } from '../../util/ui_util';
-import CommentEditFormContainer from './comment_edit_form_container';
+import React from "react";
+import AvatarContainer from "../avatar/avatar_container";
+import { Link } from "react-router-dom";
+import { getShortTimeString } from "../../util/ui_util";
+import Likes from "../likes/likes";
+import { addClass, removeClass, toggleClass } from "../../util/ui_util";
+import CommentEditFormContainer from "./comment_edit_form_container";
 
 class CommentIndexItem extends React.Component {
   constructor(props) {
@@ -18,7 +18,8 @@ class CommentIndexItem extends React.Component {
     const { createLike } = this.props;
 
     const like = {
-        likeable_type: "comment", likeable_id: this.props.comment.id
+      likeable_type: "comment",
+      likeable_id: this.props.comment.id,
     };
 
     createLike({ like });
@@ -41,93 +42,104 @@ class CommentIndexItem extends React.Component {
 
   render() {
     const {
-      comment, author, liked, deleteComment, 
-      post, editForm, showCommentEditForm, currentUser
+      comment,
+      liked,
+      deleteComment,
+      post,
+      editForm,
+      showCommentEditForm,
+      currentUser,
     } = this.props;
 
     const newCommentClass = comment.newComment ? " new-comment" : "";
 
     if (editForm) {
-      return <CommentEditFormContainer comment={comment} postId={post.id}/>;
+      return <CommentEditFormContainer comment={comment} postId={post.id} />;
     } else {
       if (comment.content) {
         return (
           <div
             className={"comment" + newCommentClass}
             onMouseEnter={() => {
-              if (currentUser.id === author.id) {
+              if (currentUser.id === comment.author.id) {
                 this.showElement(`.edit-button-${comment.id}`);
               }
             }}
             onMouseLeave={() => {
-              if (!this.state.activeDropdown[comment.id] && currentUser.id === author.id) {
+              if (
+                !this.state.activeDropdown[comment.id] &&
+                currentUser.id === comment.author.id
+              ) {
                 this.hideElement(`.edit-button-${comment.id}`);
               }
             }}
           >
-            {
-              author ?
-                <>
-                  <AvatarContainer userId={comment.author_id} />
-                  <div>
-                    <div className="comment-body">
-                      <Link to={"/users/" + author.id}>
-                        {author.first_name} {author.last_name}
-                      </Link>
-                      {comment.content}
-                      <LikesContainer type="comment" likeable={comment} />
-                      {
-                        currentUser.id === author.id ?
-                          <>
-                            <button
-                              className={"hide edit-comment edit-button-" + comment.id}
-                              onClick={() => {
-                                toggleClass(`.comment-${comment.id}`, "hide")();
-                                this.setState({ activeDropdown: { [comment.id]: true } })
-                              }}
-                              onBlur={() => {
-                                this.hideElement(`.comment-${comment.id}`);
-                                this.setState({ activeDropdown: { [comment.id]: false } })
-                              }}
-                            >
-                              <i className="edit-comment-icon"></i>
-                            </button>
-                            <ul className={"dropdown hide comment-" + comment.id}>
-                              <li onMouseDown={() => showCommentEditForm(comment.id)}>
-                                <i className="fas fa-pencil-alt"></i> Edit...
-                              </li>
-                              <li onMouseDown={() => deleteComment(comment.id)}>
-                                <i className="far fa-trash-alt"></i> Delete...
-                              </li>
-                            </ul>
-                          </> : null
-                      }
-                    </div>
-                    <div className="comment-footer">
-                      {
-                        liked ?
-                          <>
-                            {getShortTimeString(comment.created_at)} · 
-                            <button className="bold" onClick={this.unlikeComment}>
-                              Like
-                            </button>
-                          </>
-                        :
-                          <>
-                            {getShortTimeString(comment.created_at)} · 
-                            <button onClick={this.likeComment}>
-                              Like
-                            </button>
-                          </>
-                      }
-                    </div>
+            {comment.author && (
+              <>
+                <AvatarContainer userId={comment.author.id} />
+                <div>
+                  <div className="comment-body">
+                    <Link to={"/users/" + comment.author.id}>
+                      {comment.author.firstName} {comment.author.lastName}
+                    </Link>
+                    {comment.content}
+                    <Likes type="comment" likeable={comment} />
+                    {currentUser.id === comment.author.id ? (
+                      <>
+                        <button
+                          className={
+                            "hide edit-comment edit-button-" + comment.id
+                          }
+                          onClick={() => {
+                            toggleClass(`.comment-${comment.id}`, "hide")();
+                            this.setState({
+                              activeDropdown: { [comment.id]: true },
+                            });
+                          }}
+                          onBlur={() => {
+                            this.hideElement(`.comment-${comment.id}`);
+                            this.setState({
+                              activeDropdown: { [comment.id]: false },
+                            });
+                          }}
+                        >
+                          <i className="edit-comment-icon" />
+                        </button>
+                        <ul className={"dropdown hide comment-" + comment.id}>
+                          <li
+                            onMouseDown={() => showCommentEditForm(comment.id)}
+                          >
+                            <i className="fas fa-pencil-alt" /> Edit...
+                          </li>
+                          <li onMouseDown={() => deleteComment(comment.id)}>
+                            <i className="far fa-trash-alt" /> Delete...
+                          </li>
+                        </ul>
+                      </>
+                    ) : null}
                   </div>
-                </> : null
-            }
+                  <div className="comment-footer">
+                    {liked ? (
+                      <>
+                        {getShortTimeString(comment.createdAt)} ·
+                        <button className="bold" onClick={this.unlikeComment}>
+                          Like
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {getShortTimeString(comment.createdAt)} ·
+                        <button onClick={this.likeComment}>Like</button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        )
+        );
       } else {
-        return null
+        return null;
       }
     }
   }

@@ -1,3 +1,5 @@
+require 'types/mutation_type'
+
 class FakebookSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
