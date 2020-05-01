@@ -1,13 +1,11 @@
 import { Query } from "react-apollo";
 import React from "react";
-import { UserQueryDefinition } from "../definitions/queries";
+import { CurrentUserQueryDefinition } from "../definitions/queries";
 
-const UserQuery = (WrappedComponent) => {
+const CurrentUserQuery = (WrappedComponent) => {
   return function QueryHoC(props) {
-    const vars = { id: props.userId };
-
     return (
-      <Query query={UserQueryDefinition} variables={vars}>
+      <Query query={CurrentUserQueryDefinition}>
         {({ data, loading }) => (
           <WrappedComponent {...props} data={data} loading={loading} />
         )}
@@ -16,4 +14,4 @@ const UserQuery = (WrappedComponent) => {
   };
 };
 
-export default UserQuery;
+export default CurrentUserQuery;

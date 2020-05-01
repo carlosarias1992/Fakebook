@@ -1,0 +1,23 @@
+#import '../../fragments/PostFragment.graphql'
+#import '../../fragments/UserFragment.graphql'
+#import '../../fragments/CommentFragment.graphql'
+
+query ProfilePostsQuery($userId: ID!) {
+    profilePosts(userId: $userId) {
+        ...PostFragment
+        likes {
+            liker {
+                ...UserFragment
+            }
+        }
+        receiver {
+            ...UserFragment
+        }
+        author {
+            ...UserFragment
+        }
+        comments {
+            ...CommentFragment
+        }
+    }
+}

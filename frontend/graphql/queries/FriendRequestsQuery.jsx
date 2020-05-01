@@ -1,25 +1,17 @@
 import { Query } from "react-apollo";
-import gql from "graphql-tag";
 import React from "react";
-
-const QueryDefinition = gql`
-  query FriendRequestQuery($userId: ID!) {
-    friendRequests(userId: $userId) {
-      id
-      senderId
-      receiverId
-      status
-      seen
-    }
-  }
-`;
+import { FriendRequestsQueryDefinition } from "../definitions/queries";
 
 const FriendRequestsQuery = (WrappedComponent) => {
   return function QueryHoC(props) {
     const vars = { userId: props.userId };
 
     return (
-      <Query query={QueryDefinition} variables={vars} pollInterval={5000}>
+      <Query
+        query={FriendRequestsQueryDefinition}
+        variables={vars}
+        pollInterval={5000}
+      >
         {({ data, loading }) => (
           <WrappedComponent {...props} data={data} loading={loading} />
         )}

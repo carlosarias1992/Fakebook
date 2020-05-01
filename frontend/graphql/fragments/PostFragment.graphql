@@ -1,0 +1,9 @@
+fragment PostFragment on Post {
+    id
+    content
+    lifeEvent
+    eventDate
+    createdAt
+    eventCategory
+    photos
+}

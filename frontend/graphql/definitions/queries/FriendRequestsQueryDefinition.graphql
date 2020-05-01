@@ -1,0 +1,9 @@
+query FriendRequestQuery($userId: ID!) {
+    friendRequests(userId: $userId) {
+        id
+        senderId
+        receiverId
+        status
+        seen
+    }
+}

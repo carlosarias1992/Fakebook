@@ -21,7 +21,12 @@ module.exports = {
                         presets: ['@babel/env', '@babel/react'],
                         plugins: ['@babel/plugin-transform-runtime'],
                     }
-                },
+                }
+            },
+            {
+                test: /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                loader: "graphql-tag/loader"
             }
         ]
     },
