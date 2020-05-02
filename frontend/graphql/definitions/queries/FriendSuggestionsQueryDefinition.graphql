@@ -1,0 +1,7 @@
+#import '../../fragments/UserFragment.graphql'
+
+query FriendSuggestionsQuery($userId: ID!) {
+    friendSuggestions(userId: $userId) {
+        ...UserFragment
+    }
+}

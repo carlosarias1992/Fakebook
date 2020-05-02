@@ -1,19 +1,15 @@
-import { connect } from 'react-redux';
-import PeopleYouMayKnowIndex from './people_you_may_know_index';
-import { getCurrentUser } from '../../util/container_util';
+import { connect } from "react-redux";
+import { compose } from "recompose";
+import PeopleYouMayKnowIndex from "./people_you_may_know_index";
+import { getCurrentUser } from "../../util/container_util";
+import { FriendSuggestionsQuery } from "../../graphql/queries";
 
-const mapStateToProps = state => {
-    const { users } = state.entities;
-    const currentUser = getCurrentUser(state);
-    let suggestedUsers = [];
-    
-    if (Object.keys(users).length > 1) {
-        suggestedUsers = currentUser.suggestion_ids.map(suggestion_id => {
-            return users[suggestion_id];
-        });
-    }
-
-    return { suggestedUsers };
+const mapStateToProps = (state) => {
+  const currentUser = getCurrentUser(state);
+  return { userId: parseInt(currentUser.id) };
 };
 
-export default connect(mapStateToProps)(PeopleYouMayKnowIndex);
+export default compose(
+  connect(mapStateToProps),
+  FriendSuggestionsQuery
+)(PeopleYouMayKnowIndex);

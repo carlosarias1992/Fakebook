@@ -13,7 +13,6 @@
                 requests: FriendRequest.includes(:sender).includes(:receiver).all,
                 likes: Like.where("(likeable_type = 'post' AND user_id = #{current_user.id}) OR (likeable_type = 'comment' AND user_id = #{current_user.id})"),
                 users: users,
-                suggestions: current_user.suggestions(users, requests)
             }
         ).html_safe %>
     </script>

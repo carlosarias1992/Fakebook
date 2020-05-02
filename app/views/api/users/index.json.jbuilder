@@ -1,162 +1,148 @@
+# frozen_string_literal: true
+
 all_posts = Post.with_attached_photos.includes(:comments).includes(:likes).all
 all_comments = Comment.includes(:likes).all
-all_likes = Like.all 
+all_likes = Like.all
 all_friend_requests = FriendRequest.includes(:sender).includes(:receiver).all
 
 current_user_friend_requests = all_friend_requests.select do |request|
-    (request.sender_id == current_user.id || request.receiver_id == current_user.id) &&
-    request.status == "accepted"
-end 
+  (request.sender_id == current_user.id || request.receiver_id == current_user.id) &&
+    request.status == 'accepted'
+end
 
 current_user_friends = current_user_friend_requests.map do |request|
-    if request.sender_id == current_user.id 
-        request.receiver
-    else
-        request.sender
-    end 
-end 
+  if request.sender_id == current_user.id
+    request.receiver
+  else
+    request.sender
+  end
+end
 
 current_user_friend_ids = current_user_friends.map(&:id)
 
-current_user_suggestions = current_user.suggestions(@users, all_friend_requests)
+json.users do
+  @users.each do |user|
+    next if current_user_friend_ids.include?(user.id)
 
-json.users do 
-    @users.each do |user|
-        unless current_user_friend_ids.include?(user.id)
-            json.set! user.id do 
-                json.extract! user, :id, :first_name, :last_name, :gender
+    json.set! user.id do
+      json.extract! user, :id, :first_name, :last_name, :gender
 
-                user_friend_requests = all_friend_requests.select do |request|
-                    (request.sender_id == user.id || request.receiver_id == user.id) &&
-                    request.status == "accepted"
-                end 
+      user_friend_requests = all_friend_requests.select do |request|
+        (request.sender_id == user.id || request.receiver_id == user.id) &&
+          request.status == 'accepted'
+      end
 
-                user_friend_request_ids = user_friend_requests.map do |request|
-                    if request.sender_id == user.id 
-                        request.receiver_id
-                    else
-                        request.sender_id
-                    end 
-                end 
+      user_friend_request_ids = user_friend_requests.map do |request|
+        if request.sender_id == user.id
+          request.receiver_id
+        else
+          request.sender_id
+          end
+      end
 
-                if user.avatar.attached? 
-                    json.avatar url_for(user.avatar);
-                else 
-                    json.avatar nil
-                end 
+      if user.avatar.attached?
+        json.avatar url_for(user.avatar)
+      else
+        json.avatar nil
+      end
 
-                json.friends_id user_friend_request_ids
-            end
-        end
+      json.friends_id user_friend_request_ids
     end
+  end
 
-    current_user_friends.each do |friend|
-        json.set! friend.id do 
-            json.partial! 'api/users/user', { user: friend, likes: all_likes, 
-                posts: all_posts, requests: all_friend_requests, 
-                users: @users, suggestions: current_user_suggestions }
-        end 
+  current_user_friends.each do |friend|
+    json.set! friend.id do
+      json.partial! 'api/users/user', user: friend, likes: all_likes,
+                                      posts: all_posts, requests: all_friend_requests,
+                                      users: @users
     end
+  end
 end
 
 current_user_posts = all_posts.select do |post|
-    post.author_id == current_user.id
-end 
+  post.author_id == current_user.id
+end
 
 current_user_post_ids = current_user_posts.map(&:id)
 
 current_user_friend_posts = all_posts.select do |post|
-    current_user_friend_ids.include?(post.author_id)
-end 
+  current_user_friend_ids.include?(post.author_id)
+end
 
 current_user_friend_post_ids = current_user_friend_posts.map(&:id)
 
 json.posts do
-    # Improve site efficiency 
-    
-    # current_user_posts.each do |post|
-    #     json.set! post.id do
-    #         json.partial! 'api/users/post', post: post
-    #     end 
-    # end 
-    
-    # current_user_friend_posts.each do |post|
-    #     json.set! post.id do
-    #         json.partial! 'api/users/post', post: post
-    #     end 
-    # end 
-
-    all_posts.each do |post|
-        json.set! post.id do 
-            json.partial! 'api/users/post', post: post 
-        end 
-    end 
-end 
+  all_posts.each do |post|
+    json.set! post.id do
+      json.partial! 'api/users/post', post: post
+    end
+  end
+end
 
 current_user_comments = all_comments.select do |comment|
-    current_user_post_ids.include?(comment.post_id)
-end 
+  current_user_post_ids.include?(comment.post_id)
+end
 
 current_user_comment_ids = current_user_comments.map(&:id)
 
 current_user_friend_comments = all_comments.select do |comment|
-    current_user_friend_post_ids.include?(comment.post_id)
-end 
+  current_user_friend_post_ids.include?(comment.post_id)
+end
 
 current_user_friend_comment_ids = current_user_friend_comments.map(&:id)
 
-json.comments do 
-    current_user_comments.each do |comment|
-        json.partial! 'api/users/comments', comment: comment
-    end 
+json.comments do
+  current_user_comments.each do |comment|
+    json.partial! 'api/users/comments', comment: comment
+  end
 
-    current_user_friend_comments.each do |comment| 
-        json.partial! 'api/users/comments', comment: comment
-    end 
-end 
+  current_user_friend_comments.each do |comment|
+    json.partial! 'api/users/comments', comment: comment
+  end
+end
 
 current_user_friend_requests = all_friend_requests.select do |request|
-    request.sender_id == current_user.id || request.receiver_id == current_user.id
-end 
+  request.sender_id == current_user.id || request.receiver_id == current_user.id
+end
 
-json.friendRequests do 
-    current_user_friend_requests.each do |friend_request|
-        json.set! friend_request.id do 
-            json.extract! friend_request, :id, :sender_id, :receiver_id, :status, :seen
-        end 
-    end 
-end 
+json.friendRequests do
+  current_user_friend_requests.each do |friend_request|
+    json.set! friend_request.id do
+      json.extract! friend_request, :id, :sender_id, :receiver_id, :status, :seen
+    end
+  end
+end
 
 current_user_post_likes = all_likes.select do |like|
-    like.likeable_type === "post" && current_user_post_ids.include?(like.likeable_id)
-end 
+  like.likeable_type == 'post' && current_user_post_ids.include?(like.likeable_id)
+end
 
 current_user_comment_likes = all_likes.select do |like|
-    like.likeable_type === "comment" && current_user_comment_ids.include?(like.likeable_id)
-end 
+  like.likeable_type == 'comment' && current_user_comment_ids.include?(like.likeable_id)
+end
 
 current_user_friend_post_likes = all_likes.select do |like|
-    like.likeable_type === "post" && current_user_friend_post_ids.include?(like.likeable_id)
+  like.likeable_type == 'post' && current_user_friend_post_ids.include?(like.likeable_id)
 end
 
 current_user_friend_comment_likes = all_likes.select do |like|
-    like.likeable_type === "comment" && current_user_friend_comment_ids.include?(like.likeable_id)
-end 
+  like.likeable_type == 'comment' && current_user_friend_comment_ids.include?(like.likeable_id)
+end
 
-json.likes do 
-    current_user_post_likes.each do |post_like|
-        json.partial! 'api/users/post_likes', post_like: post_like
-    end 
+json.likes do
+  current_user_post_likes.each do |post_like|
+    json.partial! 'api/users/post_likes', post_like: post_like
+  end
 
-    current_user_comment_likes.each do |comment_like|
-        json.partial! 'api/users/comment_likes', comment_like: comment_like
-    end
+  current_user_comment_likes.each do |comment_like|
+    json.partial! 'api/users/comment_likes', comment_like: comment_like
+  end
 
-    current_user_friend_post_likes.each do |post_like|
-        json.partial! 'api/users/post_likes', post_like: post_like
-    end 
+  current_user_friend_post_likes.each do |post_like|
+    json.partial! 'api/users/post_likes', post_like: post_like
+  end
 
-    current_user_friend_comment_likes.each do |comment_like|
-        json.partial! 'api/users/comment_likes', comment_like: comment_like
-    end
-end 
+  current_user_friend_comment_likes.each do |comment_like|
+    json.partial! 'api/users/comment_likes', comment_like: comment_like
+  end
+end

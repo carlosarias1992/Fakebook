@@ -1,17 +1,13 @@
 import { Query } from "react-apollo";
 import React from "react";
-import { FriendRequestsQueryDefinition } from "../definitions/queries";
+import { FriendSuggestionsQueryDefinition } from "../definitions/queries";
 
-const FriendRequestsQuery = (WrappedComponent) => {
+const FriendSuggestionsQuery = (WrappedComponent) => {
   return function QueryHoC(props) {
     const vars = { userId: props.userId };
 
     return (
-      <Query
-        query={FriendRequestsQueryDefinition}
-        variables={vars}
-        pollInterval={10000}
-      >
+      <Query query={FriendSuggestionsQueryDefinition} variables={vars}>
         {({ data, loading }) => (
           <WrappedComponent {...props} data={data} loading={loading} />
         )}
@@ -20,4 +16,4 @@ const FriendRequestsQuery = (WrappedComponent) => {
   };
 };
 
-export default FriendRequestsQuery;
+export default FriendSuggestionsQuery;

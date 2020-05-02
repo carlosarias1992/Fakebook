@@ -1,51 +1,48 @@
+# frozen_string_literal: true
+
 class Api::UsersController < ApplicationController
-    def index 
-        @users = User.with_attached_cover.with_attached_avatar.includes(:posts)
-            .includes(:comments).includes(:likes).includes(:rejections).all
-        render :index
-    end 
+  def index
+    @users = User.with_attached_cover.with_attached_avatar.includes(:posts)
+                 .includes(:comments).includes(:likes).includes(:rejections).all
+    render :index
+  end
 
-    def suggestion
-        @current_suggestions = params[:currentSuggestions]
-        render :suggestion
-    end 
+  def update
+    @user = User.find_by(id: params[:id])
 
-    def update
-        @user = User.find_by(id: params[:id])
+    if @user.update(user_params)
+      render :show
+    else
+      render json: { errors: @user.errors.full_messages }, status: 422
+    end
+  end
 
-        if @user.update(user_params)
-            render :show
-        else
-            render json: { errors: @user.errors.full_messages }, status: 422
-        end 
-    end 
+  def show
+    @user = User.find_by(id: params[:id])
 
-    def show 
-        @user = User.find_by(id: params[:id])
+    if @user
+      render :show
+    else
+      render json: { errors: ['User does not exist'] }
+    end
+  end
 
-        if @user 
-            render :show
-        else 
-            render json: { errors: ["User does not exist"] }
-        end 
-    end 
+  def create
+    @user = User.new(user_params)
 
-    def create 
-        @user = User.new(user_params)
+    if @user.save
+      login(@user)
+      render :show
+    else
+      render json: { errors: @user.errors.full_messages }, status: 422
+    end
+  end
 
-        if @user.save
-            login(@user)
-            render :show
-        else
-            render json: { errors: @user.errors.full_messages }, status: 422
-        end 
-    end 
+  private
 
-    private 
-
-    def user_params
-        params.require(:user)
-            .permit(:username, :password, :gender, :birth_date, :first_name, 
-                :last_name, :avatar, :cover)
-    end 
-end 
+  def user_params
+    params.require(:user)
+          .permit(:username, :password, :gender, :birth_date, :first_name,
+                  :last_name, :avatar, :cover)
+  end
+end
