@@ -1,25 +1,53 @@
 import React from "react";
+import { Mutation } from "react-apollo";
+import {
+  LikeMutationDefinition,
+  UnlikeMutationDefinition,
+} from "../../graphql/definitions/mutations";
 
 function renderLikeButton(props) {
-  const { currentUser, post, likePost, unlikePost } = props;
+  const { currentUser, post } = props;
 
-  const isLikedByCurrentUser = Boolean(
-    post.likes.find(
-      (like) => parseInt(like.liker.id) === parseInt(currentUser.id)
-    )
+  const currentUserLike = post.likes.find(
+    (like) => parseInt(like.liker.id) === parseInt(currentUser.id)
   );
 
-  if (isLikedByCurrentUser) {
+  if (Boolean(currentUserLike)) {
     return (
-      <button onClick={unlikePost} className="unlike-button">
-        <i className="blue-like-icon" /> Like
-      </button>
+      <Mutation
+        mutation={UnlikeMutationDefinition}
+        refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
+      >
+        {(unlikePost) => (
+          <button
+            onClick={() =>
+              unlikePost({ variables: { id: currentUserLike.id } })
+            }
+            className="unlike-button"
+          >
+            <i className="blue-like-icon" /> Like
+          </button>
+        )}
+      </Mutation>
     );
   } else {
     return (
-      <button onClick={likePost}>
-        <i className="like-icon" /> Like
-      </button>
+      <Mutation
+        mutation={LikeMutationDefinition}
+        refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
+      >
+        {(likePost) => (
+          <button
+            onClick={() =>
+              likePost({
+                variables: { likeableId: post.id, likeableType: "post" },
+              })
+            }
+          >
+            <i className="like-icon" /> Like
+          </button>
+        )}
+      </Mutation>
     );
   }
 }

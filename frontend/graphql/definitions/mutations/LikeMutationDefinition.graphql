@@ -1,0 +1,7 @@
+mutation Like($likeableId: ID!, $likeableType: String!){
+    like(likeableId: $likeableId, likeableType: $likeableType) {
+        like {
+            id
+        }
+    }
+}

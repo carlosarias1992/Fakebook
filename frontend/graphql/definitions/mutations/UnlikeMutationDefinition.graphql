@@ -1,0 +1,5 @@
+mutation Unlike($id: ID!){
+    unlike(id: $id) {
+        id
+    }
+}
