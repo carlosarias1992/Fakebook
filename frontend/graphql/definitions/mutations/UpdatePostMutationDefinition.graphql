@@ -1,0 +1,12 @@
+#import '../../fragments/UserFragment.graphql'
+
+mutation UpdatePost($id: ID!, $content: String!, $photos: [Boolean!]){
+    updatePost(id: $id, content: $content, photos: $photos) {
+        post {
+            content
+            author {
+                ...UserFragment
+            }
+        }
+    }
+}

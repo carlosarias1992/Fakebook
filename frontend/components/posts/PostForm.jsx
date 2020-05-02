@@ -2,7 +2,10 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import { merge } from "lodash";
 import AvatarContainer from "../avatar/avatar_container";
-import { CreatePostMutationDefinition } from "../../graphql/definitions/mutations";
+import {
+  CreatePostMutationDefinition,
+  UpdatePostMutationDefinition,
+} from "../../graphql/definitions/mutations";
 import {
   removeClass,
   addClass,
@@ -68,7 +71,7 @@ class PostForm extends React.Component {
     removeClass(overlayElement, "hide");
   }
 
-  handleSubmit(e, createPost) {
+  handleSubmit(e, mutate) {
     e.preventDefault();
 
     const { formType, post, receiver } = this.props;
@@ -100,7 +103,7 @@ class PostForm extends React.Component {
           //   });
           // });
 
-          createPost({
+          mutate({
             variables: {
               content,
               receiver: receiver && receiver.id,
@@ -125,7 +128,7 @@ class PostForm extends React.Component {
           //   })
           // );
 
-          createPost({
+          mutate({
             variables: {
               content,
               receiver: receiver && receiver.id,
@@ -141,11 +144,11 @@ class PostForm extends React.Component {
       } else {
         newPost = { post: { content, id: post.id } };
 
-        createPost({
+        mutate({
           variables: {
+            id: post.id,
             content,
-            receiver: receiver && receiver.id,
-            photos: [],
+            // photos: [],
           },
         }).then(() => this.props.hideEditModal(this.props.post.id));
       }
@@ -168,7 +171,7 @@ class PostForm extends React.Component {
       //   });
       // });
 
-      createPost({
+      mutate({
         variables: {
           content,
           receiver: receiver && receiver.id,
@@ -301,15 +304,20 @@ class PostForm extends React.Component {
 
     const labelClass = images.length > 0 ? "uploaded" : "";
 
+    const mutation =
+      formType === "Create"
+        ? CreatePostMutationDefinition
+        : UpdatePostMutationDefinition;
+
     return (
       <Mutation
-        mutation={CreatePostMutationDefinition}
+        mutation={mutation}
         refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
       >
-        {(createPost) => (
+        {(mutate) => (
           <form
             className={formClass}
-            onSubmit={(e) => this.handleSubmit(e, createPost)}
+            onSubmit={(e) => this.handleSubmit(e, mutate)}
           >
             <div className="card-header">
               {formType === "Create" ? "Create Post" : "Edit Post"}
