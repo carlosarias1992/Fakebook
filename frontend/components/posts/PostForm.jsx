@@ -1,6 +1,8 @@
 import React from "react";
+import { Mutation } from "react-apollo";
 import { merge } from "lodash";
 import AvatarContainer from "../avatar/avatar_container";
+import { CreatePostMutationDefinition } from "../../graphql/definitions/mutations";
 import {
   removeClass,
   addClass,
@@ -10,7 +12,7 @@ import {
   removeFromArray,
 } from "../../util/ui_util";
 
-class PostsForm extends React.Component {
+class PostForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -66,7 +68,7 @@ class PostsForm extends React.Component {
     removeClass(overlayElement, "hide");
   }
 
-  handleSubmit(e) {
+  handleSubmit(e, createPost) {
     e.preventDefault();
 
     const { formType, post, receiver } = this.props;
@@ -81,15 +83,30 @@ class PostsForm extends React.Component {
         newPost = { post: { content, receiver_id: receiver.id } };
 
         if (imageUrls.length !== 0) {
-          const formData = new FormData();
-          formData.append("post[content]", content);
-          formData.append("post[receiver_id]", receiver.id);
+          // const formData = new FormData();
+          // formData.append("post[content]", content);
+          // formData.append("post[receiver_id]", receiver.id);
+          //
+          // files.forEach((file) => {
+          //   formData.append("post[photos][]", file);
+          // });
 
-          files.forEach((file) => {
-            formData.append("post[photos][]", file);
-          });
+          // this.props.createPhotoPost(formData).then(() => {
+          //   this.setState({
+          //     imageUrls: [],
+          //     files: [],
+          //     content: "",
+          //     textareaClass: "",
+          //   });
+          // });
 
-          this.props.createPhotoPost(formData).then(() => {
+          createPost({
+            variables: {
+              content,
+              receiver: receiver && receiver.id,
+              photos: files,
+            },
+          }).then(() => {
             this.setState({
               imageUrls: [],
               files: [],
@@ -101,7 +118,20 @@ class PostsForm extends React.Component {
           this.removeOverlay();
           this.disableForm(selector);
         } else {
-          this.props.action(newPost).then(() =>
+          // this.props.action(newPost).then(() =>
+          //   this.setState({
+          //     content: "",
+          //     textareaClass: "",
+          //   })
+          // );
+
+          createPost({
+            variables: {
+              content,
+              receiver: receiver && receiver.id,
+              photos: [],
+            },
+          }).then(() =>
             this.setState({
               content: "",
               textareaClass: "",
@@ -111,9 +141,13 @@ class PostsForm extends React.Component {
       } else {
         newPost = { post: { content, id: post.id } };
 
-        this.props
-          .action(newPost)
-          .then(() => this.props.hideEditModal(this.props.post.id));
+        createPost({
+          variables: {
+            content,
+            receiver: receiver && receiver.id,
+            photos: [],
+          },
+        }).then(() => this.props.hideEditModal(this.props.post.id));
       }
 
       this.removeOverlay();
@@ -125,7 +159,22 @@ class PostsForm extends React.Component {
         formData.append("post[photos][]", file);
       });
 
-      this.props.createPhotoPost(formData).then(() => {
+      // this.props.createPhotoPost(formData).then(() => {
+      //   this.setState({
+      //     imageUrls: [],
+      //     files: [],
+      //     content: "",
+      //     textareaClass: "",
+      //   });
+      // });
+
+      createPost({
+        variables: {
+          content,
+          receiver: receiver && receiver.id,
+          photos: files,
+        },
+      }).then(() => {
         this.setState({
           imageUrls: [],
           files: [],
@@ -234,7 +283,7 @@ class PostsForm extends React.Component {
                 this.removePicture(idx);
               }}
             >
-              <i className="white-close-icon"></i>
+              <i className="white-close-icon" />
             </button>
           </div>
           <img src={url} alt={"image-" + idx} />
@@ -253,84 +302,94 @@ class PostsForm extends React.Component {
     const labelClass = images.length > 0 ? "uploaded" : "";
 
     return (
-      <form className={formClass} onSubmit={this.handleSubmit}>
-        <div className="card-header">
-          {formType === "Create" ? "Create Post" : "Edit Post"}
-          {formType === "Edit" ? (
-            <button
-              onClick={() => {
-                this.props.hideEditModal(post.id);
-              }}
-            >
-              <i className="close-icon" />
-            </button>
-          ) : (
-            <button
-              onClick={this.removeOverlay}
-              type="button"
-              className="create-post-close-button hide"
-            >
-              <i className="close-icon" />
-            </button>
-          )}
-        </div>
-        <div className="card-body">
-          <AvatarContainer />
-          <div className="body-input">
-            <textarea
-              type="text"
-              value={content}
-              className={textareaClass}
-              placeholder={formPlaceholder}
-              onChange={this.handleInput("content")}
-              onKeyUp={autoGrow}
-              onKeyPress={this.handleEnter}
-              onFocus={() => {
-                if (formType === "Create") {
-                  this.showOverlay();
-                }
-              }}
-              onBlur={() => {
-                if (formType === "Create") {
-                  this.removeOverlay();
-                }
-              }}
-            />
-          </div>
-          {images.length > 0 ? (
-            <div className="image-previews">
-              {images}
-              <label htmlFor="imageUpload" className="add-image-button">
-                +
-              </label>
+      <Mutation
+        mutation={CreatePostMutationDefinition}
+        refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
+      >
+        {(createPost) => (
+          <form
+            className={formClass}
+            onSubmit={(e) => this.handleSubmit(e, createPost)}
+          >
+            <div className="card-header">
+              {formType === "Create" ? "Create Post" : "Edit Post"}
+              {formType === "Edit" ? (
+                <button
+                  onClick={() => {
+                    this.props.hideEditModal(post.id);
+                  }}
+                >
+                  <i className="close-icon" />
+                </button>
+              ) : (
+                <button
+                  onClick={this.removeOverlay}
+                  type="button"
+                  className="create-post-close-button hide"
+                >
+                  <i className="close-icon" />
+                </button>
+              )}
             </div>
-          ) : null}
-          <hr />
-          <div className="posts-form-buttons">
-            <label htmlFor="imageUpload" className={labelClass}>
-              <i className="photos-icon" />
-              Photo/Video
-              <input
-                id="imageUpload"
-                type="file"
-                multiple
-                onChange={this.handleFileInput}
-              />
-            </label>
-          </div>
-        </div>
-        {formType === "Create" ? (
-          <div className="card-footer hide Create">
-            <input type="submit" value="Share" disabled={true} />
-          </div>
-        ) : (
-          <div className={"card-footer Edit-" + this.props.post.id}>
-            <input type="submit" value="Save" disabled={false} />
-          </div>
+            <div className="card-body">
+              <AvatarContainer />
+              <div className="body-input">
+                <textarea
+                  type="text"
+                  value={content}
+                  className={textareaClass}
+                  placeholder={formPlaceholder}
+                  onChange={this.handleInput("content")}
+                  onKeyUp={autoGrow}
+                  onKeyPress={this.handleEnter}
+                  onFocus={() => {
+                    if (formType === "Create") {
+                      this.showOverlay();
+                    }
+                  }}
+                  onBlur={() => {
+                    if (formType === "Create") {
+                      this.removeOverlay();
+                    }
+                  }}
+                />
+              </div>
+              {images.length > 0 ? (
+                <div className="image-previews">
+                  {images}
+                  <label htmlFor="imageUpload" className="add-image-button">
+                    +
+                  </label>
+                </div>
+              ) : null}
+              <hr />
+              <div className="posts-form-buttons">
+                <label htmlFor="imageUpload" className={labelClass}>
+                  <i className="photos-icon" />
+                  Photo/Video
+                  <input
+                    id="imageUpload"
+                    type="file"
+                    multiple
+                    onChange={this.handleFileInput}
+                  />
+                </label>
+              </div>
+            </div>
+            {formType === "Create" ? (
+              <div className="card-footer hide Create">
+                <input type="submit" value="Share" disabled={true} />
+              </div>
+            ) : (
+              <div className={"card-footer Edit-" + this.props.post.id}>
+                <input type="submit" value="Save" disabled={false} />
+              </div>
+            )}
+          </form>
         )}
-      </form>
+      </Mutation>
     );
   }
 }
 
-export default PostsForm;
+export default PostForm;

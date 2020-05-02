@@ -1,9 +1,9 @@
 import React from "react";
 import HeaderContainer from "../feed_header/header_container";
-import PostsFormContainer from "../posts/posts_form_container";
+import CreatePostForm from "../posts/CreatePostFormContainer";
 import AvatarContainer from "../avatar/avatar_container";
 import { NavLink } from "react-router-dom";
-import PostIndex from "../posts/post_index";
+import Posts from "../posts/Posts";
 import PeopleYouMayKnowIndexContainer from "../people_you_may_know/people_you_may_know_index_container";
 import Copyright from "../copyright";
 
@@ -58,9 +58,9 @@ class Feed extends React.Component {
               </ul>
             </aside>
             <div className="center-col">
-              <PostsFormContainer />
+              <CreatePostForm />
               {data.feedPosts.length !== 0 ? (
-                <PostIndex data={data} />
+                <Posts data={data} />
               ) : (
                 <div className="welcome">
                   <h1>Welcome to Fakebook</h1>

@@ -4,10 +4,11 @@ module Mutations
   class CreatePostMutation < Mutations::BaseMutation
     argument :content, String, required: true
     argument :receiver_id, ID, required: false
+    argument :photos, [Boolean], required: false
 
     field :post, Types::PostType, null: false
 
-    def resolve(content:, receiver_id: nil)
+    def resolve(content:, receiver_id: nil, photos: [])
       check_authentication!
 
       current_user = context[:current_user]
@@ -15,7 +16,8 @@ module Mutations
       post = Post.new(
         content: content,
         receiver_id: receiver_id,
-        author_id: current_user.id
+        author_id: current_user.id,
+        photos: photos
       )
 
       if post.save

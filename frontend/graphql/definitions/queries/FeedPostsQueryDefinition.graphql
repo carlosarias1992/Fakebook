@@ -6,6 +6,7 @@ query FeedPostsQuery($userId: ID!) {
     feedPosts(userId: $userId) {
         ...PostFragment
         likes {
+            id
             liker {
                 ...UserFragment
             }

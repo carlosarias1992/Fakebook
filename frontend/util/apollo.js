@@ -3,6 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink, Observable } from "apollo-link";
+import { createUploadLink } from "apollo-upload-client";
 
 const setTokenForOperation = async (operation) =>
   operation.setContext({
@@ -49,19 +50,16 @@ const createErrorLink = () =>
     }
   });
 
-const createHttpLink = () =>
-  new HttpLink({
-    uri: "/graphql",
-    credentials: "include",
-  });
-
 export const createClient = () => {
   return new ApolloClient({
     connectToDevTools: true,
     link: ApolloLink.from([
       createErrorLink(),
       createLinkWithToken(),
-      createHttpLink(),
+      createUploadLink({
+        uri: "/graphql",
+        credentials: "include",
+      }),
     ]),
     cache: new InMemoryCache(),
   });

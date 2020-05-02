@@ -10,7 +10,7 @@ const FeedPostsQuery = (WrappedComponent) => {
       <Query
         query={ProfilePostsQueryDefinition}
         variables={vars}
-        pollInterval={5000}
+        pollInterval={30000}
       >
         {({ data, loading }) => (
           <WrappedComponent {...props} data={data} loading={loading} />

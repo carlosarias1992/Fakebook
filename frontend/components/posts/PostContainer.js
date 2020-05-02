@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import PostIndexItem from "./post_index_item";
+import Post from "./Post";
 import { deletePost } from "../../actions/posts_actions";
 import { showEditModal, hideEditModal } from "../../actions/ui_actions";
 import { createLike, deleteLike } from "../../actions/likes_actions";
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostIndexItem);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

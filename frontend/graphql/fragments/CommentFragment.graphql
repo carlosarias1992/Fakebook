@@ -8,6 +8,7 @@ fragment CommentFragment on Comment {
         ...UserFragment
     }
     likes {
+        id
         liker {
             ...UserFragment
         }

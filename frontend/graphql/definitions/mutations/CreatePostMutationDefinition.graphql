@@ -1,0 +1,12 @@
+#import '../../fragments/UserFragment.graphql'
+
+mutation CreatePost($content: String!, $receiverId: ID, $photos: [Boolean!]!){
+    createPost(content: $content, receiverId: $receiverId, photos: $photos) {
+        post {
+            content
+            author {
+                ...UserFragment
+            }
+        }
+    }
+}
