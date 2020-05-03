@@ -1,0 +1,9 @@
+#import '../../fragments/FriendRequestFragment.graphql'
+
+mutation SendFriendRequest($receiverId: ID!){
+    sendFriendRequest(receiverId: $receiverId) {
+        friendRequest {
+            ...FriendRequestFragment
+        }
+    }
+}

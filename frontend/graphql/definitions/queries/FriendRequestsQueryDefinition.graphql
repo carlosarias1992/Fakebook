@@ -1,6 +1,6 @@
 #import '../../fragments/FriendRequestFragment.graphql'
 
-query FriendRequestQuery($userId: ID!) {
+query FriendRequestsQuery($userId: ID!) {
     friendRequests(userId: $userId) {
         ...FriendRequestFragment
     }

@@ -1,7 +1,10 @@
 import React from "react";
 import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
-import { AcceptFriendRequestMutationDefinition } from "../../graphql/definitions/mutations";
+import {
+  AcceptFriendRequestMutationDefinition,
+  RejectFriendRequestMutationDefinition,
+} from "../../graphql/definitions/mutations";
 import { Mutation } from "react-apollo";
 
 const FriendRequest = (props) => {
@@ -23,7 +26,7 @@ const FriendRequest = (props) => {
       <div className="right-col">
         <Mutation
           mutation={AcceptFriendRequestMutationDefinition}
-          refetchQueries={["FriendRequestsQuery"]}
+          refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
         >
           {(acceptFriendRequest) => (
             <button
@@ -39,8 +42,8 @@ const FriendRequest = (props) => {
           )}
         </Mutation>
         <Mutation
-          mutation={AcceptFriendRequestMutationDefinition}
-          refetchQueries={["FriendRequestsQuery"]}
+          mutation={RejectFriendRequestMutationDefinition}
+          refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
         >
           {(rejectFriendRequest) => (
             <button

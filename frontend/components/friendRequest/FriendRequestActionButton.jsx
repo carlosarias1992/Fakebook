@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  RejectFriendRequestMutationDefinition,
+  AcceptFriendRequestMutationDefinition,
+  SendFriendRequestMutationDefinition,
+} from "../../graphql/definitions/mutations";
+import { Mutation } from "react-apollo";
 
 class FriendRequestActionButton extends React.Component {
   constructor(props) {
@@ -6,16 +12,25 @@ class FriendRequestActionButton extends React.Component {
   }
 
   render() {
+    if (this.props.loading) return null;
+
     const {
-      friendRequest,
+      data: { friendRequests },
       user,
-      currentUser,
       history,
       deleteFriendRequest,
-      sendFriendRequest,
-      acceptFriendRequest,
-      fetchSuggestion,
+      currentUser,
     } = this.props;
+
+    const friendRequest =
+      friendRequests &&
+      friendRequests.find(
+        ({ senderId, receiverId }) =>
+          (parseInt(senderId) === parseInt(user.id) &&
+            parseInt(receiverId) === parseInt(currentUser.id)) ||
+          (parseInt(receiverId) === parseInt(user.id) &&
+            parseInt(senderId) === parseInt(currentUser.id))
+      );
 
     const requestSent = (
       <div>
@@ -37,23 +52,21 @@ class FriendRequestActionButton extends React.Component {
     );
 
     const addFriend = (
-      <button
-        className="cursor"
-        onClick={() => {
-          sendFriendRequest(user.id).then((response) => {
-            const receiver_id = Object.values(response.request)[0].receiver_id;
-            currentUser.suggestion_ids = currentUser.suggestion_ids.filter(
-              (suggestion) => {
-                return suggestion !== receiver_id;
-              }
-            );
-
-            fetchSuggestion(currentUser);
-          });
-        }}
+      <Mutation
+        mutation={SendFriendRequestMutationDefinition}
+        refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
       >
-        <i className="add-friend-icon" /> Add Friend
-      </button>
+        {(sendFriendRequest) => (
+          <button
+            className="cursor"
+            onClick={() => {
+              sendFriendRequest({ variables: { receiverId: user.id } });
+            }}
+          >
+            <i className="add-friend-icon" /> Add Friend
+          </button>
+        )}
+      </Mutation>
     );
 
     const answerRequest = (
@@ -62,12 +75,34 @@ class FriendRequestActionButton extends React.Component {
           <i className="add-friend-icon" /> Respond to Friend Request
         </button>
         <ul className="cover-dropdown">
-          <li onMouseDown={() => acceptFriendRequest(friendRequest.id)}>
-            Confirm
-          </li>
-          <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
-            Delete Request
-          </li>
+          <Mutation
+            mutation={AcceptFriendRequestMutationDefinition}
+            refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
+          >
+            {(acceptFriendRequest) => (
+              <li
+                onMouseDown={() =>
+                  acceptFriendRequest({ variables: { id: friendRequest.id } })
+                }
+              >
+                Confirm
+              </li>
+            )}
+          </Mutation>
+          <Mutation
+            mutation={RejectFriendRequestMutationDefinition}
+            refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
+          >
+            {(rejectFriendRequest) => (
+              <li
+                onMouseDown={() =>
+                  rejectFriendRequest({ variables: { id: friendRequest.id } })
+                }
+              >
+                Delete Request
+              </li>
+            )}
+          </Mutation>
         </ul>
       </div>
     );
@@ -85,17 +120,17 @@ class FriendRequestActionButton extends React.Component {
       </div>
     );
 
-    if (friendRequest.status) {
+    if (friendRequest && friendRequest.status) {
       if (friendRequest.status === "accepted") {
         return friends;
       } else {
         if (
-          friendRequest.sender_id === currentUser.id &&
+          parseInt(friendRequest.senderId) === parseInt(currentUser.id) &&
           friendRequest.status === "pending"
         ) {
           return requestSent;
         } else if (
-          friendRequest.sender_id === user.id &&
+          parseInt(friendRequest.senderId) === parseInt(user.id) &&
           friendRequest.status === "pending"
         ) {
           return answerRequest;

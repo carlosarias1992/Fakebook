@@ -4,7 +4,7 @@ import CreatePostForm from "../posts/CreatePostFormContainer";
 import AvatarContainer from "../avatar/avatar_container";
 import { NavLink } from "react-router-dom";
 import Posts from "../posts/Posts";
-import PeopleYouMayKnowIndexContainer from "../people_you_may_know/people_you_may_know_index_container";
+import PeopleYouMayKnow from "../peopleYouMayKnow/PeopleYouMayKnowContainer";
 import Copyright from "../copyright";
 
 class Feed extends React.Component {
@@ -72,7 +72,7 @@ class Feed extends React.Component {
               )}
             </div>
             <div className="right-col">
-              <PeopleYouMayKnowIndexContainer />
+              <PeopleYouMayKnow />
               <Copyright />
             </div>
           </div>

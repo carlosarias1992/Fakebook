@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import PeopleYouMayKnowIndexItem from "./people_you_may_know_index_item";
+import FriendSuggestion from "./FriendSuggestion";
 import { createRejection } from "../../actions/rejections_actions";
 import { getCurrentUser } from "../../util/container_util";
 
@@ -14,7 +14,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PeopleYouMayKnowIndexItem);
+export default connect(mapStateToProps, mapDispatchToProps)(FriendSuggestion);

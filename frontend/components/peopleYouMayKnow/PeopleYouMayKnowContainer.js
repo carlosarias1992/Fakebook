@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { compose } from "recompose";
-import PeopleYouMayKnowIndex from "./people_you_may_know_index";
+import PeopleYouMayKnow from "./PeopleYouMayKnow";
 import { getCurrentUser } from "../../util/container_util";
 import { FriendSuggestionsQuery } from "../../graphql/queries";
 
@@ -12,4 +12,4 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   FriendSuggestionsQuery
-)(PeopleYouMayKnowIndex);
+)(PeopleYouMayKnow);

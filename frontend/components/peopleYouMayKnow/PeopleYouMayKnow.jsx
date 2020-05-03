@@ -1,5 +1,5 @@
 import React from "react";
-import PeopleYouMayKnowIndexItemContainer from "./people_you_may_know_index_item_container";
+import FriendSuggestion from "./FriendSuggestionContainer";
 
 export default (props) => {
   if (props.loading) return null;
@@ -9,7 +9,7 @@ export default (props) => {
   } = props;
 
   const suggestions = friendSuggestions.map((user) => {
-    return <PeopleYouMayKnowIndexItemContainer user={user} key={user.id} />;
+    return <FriendSuggestion user={user} key={user.id} />;
   });
 
   if (suggestions.length > 0) {

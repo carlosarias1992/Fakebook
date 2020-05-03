@@ -3,7 +3,7 @@ import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
 import FriendRequestActionButton from "../friendRequest/FriendRequestActionButtonContainer";
 
-class PeopleYouMayKnowIndexItem extends React.Component {
+class FriendSuggestion extends React.Component {
   render() {
     const { user, createRejection } = this.props;
 
@@ -30,4 +30,4 @@ class PeopleYouMayKnowIndexItem extends React.Component {
   }
 }
 
-export default PeopleYouMayKnowIndexItem;
+export default FriendSuggestion;
