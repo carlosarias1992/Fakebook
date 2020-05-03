@@ -11,5 +11,6 @@ module Types
     field :update_comment, mutation: Mutations::UpdateCommentMutation
     field :delete_post, mutation: Mutations::DeletePostMutation
     field :delete_comment, mutation: Mutations::DeleteCommentMutation
+    field :accept_friend_request, mutation: Mutations::AcceptFriendRequestMutation
   end
 end

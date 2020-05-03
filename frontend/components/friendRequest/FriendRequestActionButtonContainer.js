@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import FriendRequest from "./friend_request";
+import FriendRequestActionButton from "./FriendRequestActionButton";
 import { findFriendRequestByUserId } from "../../util/ui_util";
 import { withRouter } from "react-router-dom";
 import { getCurrentUser } from "../../util/container_util";
@@ -28,5 +28,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(FriendRequest)
+  connect(mapStateToProps, mapDispatchToProps)(FriendRequestActionButton)
 );

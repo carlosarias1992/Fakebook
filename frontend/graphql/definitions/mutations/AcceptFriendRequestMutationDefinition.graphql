@@ -1,0 +1,9 @@
+#import '../../fragments/FriendRequestFragment.graphql'
+
+mutation AcceptFriendRequest($id: ID!){
+    acceptFriendRequest(id: $id) {
+        friendRequest {
+            ...FriendRequestFragment
+        }
+    }
+}

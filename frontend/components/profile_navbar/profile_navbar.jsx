@@ -1,21 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import AvatarContainer from '../avatar/avatar_container';
-import { addClass, removeClass } from '../../util/ui_util';
-import FriendRequestIndexContainer from '../friend_request/friend_request_index_container';
+import React from "react";
+import { Link } from "react-router-dom";
+import AvatarContainer from "../avatar/avatar_container";
+import { addClass, removeClass } from "../../util/ui_util";
+import FriendRequests from "../friendRequest/FriendRequestsContainer";
 
 class ProfileNavbar extends React.Component {
   render() {
     const { currentUser, logout, showTimeline } = this.props;
-    
+
     return (
       <section className="profile-navbar">
         <ul className="main-navbar">
           <li>
-            <AvatarContainer 
-              message={currentUser.first_name} 
+            <AvatarContainer
+              message={currentUser.first_name}
               className="avatar-link"
-              />
+            />
           </li>
           <li>
             <Link to="/feed" onClick={showTimeline}>
@@ -24,14 +24,14 @@ class ProfileNavbar extends React.Component {
           </li>
           <li>
             <ul className="notifications-menu">
-              <FriendRequestIndexContainer />
+              <FriendRequests />
             </ul>
           </li>
           <button
             onClick={() => {
-              document.querySelector(".dropdown")
-                .classList.toggle("hide");
-              document.querySelector(".menu-icon")
+              document.querySelector(".dropdown").classList.toggle("hide");
+              document
+                .querySelector(".menu-icon")
                 .classList.toggle("white-menu-icon");
             }}
             onBlur={() => {
@@ -40,13 +40,13 @@ class ProfileNavbar extends React.Component {
               addClass(dropdownElement, "hide");
               removeClass(menuIcon, "white-menu-icon");
             }}
-            >
+          >
             <li className="menu-button">
-              <i className="menu-icon"/>
+              <i className="menu-icon" />
             </li>
           </button>
           <ul className="dropdown hide">
-              <li onMouseDown={logout}>Log Out</li>
+            <li onMouseDown={logout}>Log Out</li>
           </ul>
         </ul>
       </section>

@@ -1,8 +1,8 @@
 import React from "react";
-import FriendRequestIndexItemContainer from "./friend_request_index_item_container";
+import FriendRequest from "./FriendRequestContainer";
 import { addClass, toggleClass } from "../../util/ui_util";
 
-class FriendRequestIndex extends React.Component {
+class FriendRequests extends React.Component {
   constructor(props) {
     super(props);
     this.state = { dropdown: false };
@@ -50,10 +50,7 @@ class FriendRequestIndex extends React.Component {
     const allPendingFriendRequests = pendingFriendRequests.map(
       (friendRequest) => {
         return (
-          <FriendRequestIndexItemContainer
-            friendRequest={friendRequest}
-            key={friendRequest.id}
-          />
+          <FriendRequest friendRequest={friendRequest} key={friendRequest.id} />
         );
       }
     );
@@ -107,4 +104,4 @@ class FriendRequestIndex extends React.Component {
   }
 }
 
-export default FriendRequestIndex;
+export default FriendRequests;

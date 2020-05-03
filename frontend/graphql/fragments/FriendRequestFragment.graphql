@@ -1,0 +1,7 @@
+fragment FriendRequestFragment on FriendRequest {
+    id
+    senderId
+    receiverId
+    status
+    seen
+}

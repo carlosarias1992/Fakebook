@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { compose } from "recompose";
-import FriendRequestIndex from "./friend_request_index";
+import FriendRequests from "./FriendRequests";
 import { seenFriendRequest } from "../../actions/friend_request_actions";
 import { getCurrentUser } from "../../util/container_util";
 import { UserQuery } from "../../graphql/queries";
@@ -19,4 +19,4 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   UserQuery,
   FriendRequestsQuery
-)(FriendRequestIndex);
+)(FriendRequests);

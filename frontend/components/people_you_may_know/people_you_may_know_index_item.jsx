@@ -1,7 +1,7 @@
 import React from "react";
 import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
-import FriendRequestContainer from "../friend_request/friend_request_container";
+import FriendRequestActionButton from "../friendRequest/FriendRequestActionButtonContainer";
 
 class PeopleYouMayKnowIndexItem extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class PeopleYouMayKnowIndexItem extends React.Component {
             {user.firstName} {user.lastName}
           </Link>
           <div className="suggestion-buttons">
-            <FriendRequestContainer user={user} />
+            <FriendRequestActionButton user={user} />
             <button
               onClick={() => {
                 createRejection({ rejected_id: user.id });
