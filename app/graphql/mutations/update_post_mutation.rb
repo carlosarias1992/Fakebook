@@ -11,7 +11,9 @@ module Mutations
     def resolve(id:, content:, photos: nil)
       check_authentication!
 
-      post = Post.find(id)
+      current_user = context[:current_user]
+
+      post = current_user.posts.find(id)
       post.content = content
       post.photos = photos if photos
 

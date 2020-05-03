@@ -9,5 +9,6 @@ module Types
     field :unlike, mutation: Mutations::UnlikeMutation
     field :create_comment, mutation: Mutations::CreateCommentMutation
     field :update_comment, mutation: Mutations::UpdateCommentMutation
+    field :delete_post, mutation: Mutations::DeletePostMutation
   end
 end

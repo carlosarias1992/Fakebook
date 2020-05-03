@@ -10,7 +10,9 @@ module Mutations
     def resolve(id:, content:)
       check_authentication!
 
-      comment = Comment.find(id)
+      current_user = context[:current_user]
+
+      comment = current_user.comments.find(id)
       comment.content = content
 
       if comment.save

@@ -1,5 +1,8 @@
 import React from "react";
 import { toggleClass } from "../../util/ui_util";
+import { LikeMutationDefinition } from "../../graphql/definitions/mutations";
+import { Mutation } from "react-apollo";
+import { DeletePostMutationDefinition } from "../../graphql/definitions/mutations";
 
 const Options = (props) => {
   const { post, currentUser, deletePost, hideDropdown, showModal } = props;
@@ -22,7 +25,18 @@ const Options = (props) => {
             {parseInt(post.author.id) === parseInt(currentUser.id) && (
               <li onMouseDown={showModal}>Edit Post</li>
             )}
-            <li onMouseDown={() => deletePost(post)}>Delete</li>
+            <Mutation
+              mutation={DeletePostMutationDefinition}
+              refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
+            >
+              {(deletePost) => (
+                <li
+                  onMouseDown={() => deletePost({ variables: { id: post.id } })}
+                >
+                  Delete
+                </li>
+              )}
+            </Mutation>
           </ul>
         </>
       )}

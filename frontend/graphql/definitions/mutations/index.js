@@ -5,3 +5,4 @@ export { default as LikeMutationDefinition } from "./LikeMutationDefinition.grap
 export { default as UnlikeMutationDefinition } from "./UnlikeMutationDefinition.graphql";
 export { default as CreateCommentMutationDefinition } from "./CreateCommentMutationDefinition.graphql";
 export { default as UpdateCommentMutationDefinition } from "./UpdateCommentMutationDefinition.graphql";
+export { default as DeletePostMutationDefinition } from "./DeletePostMutationDefinition.graphql";
