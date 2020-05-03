@@ -51,16 +51,20 @@ const createErrorLink = () =>
   });
 
 export const createClient = () => {
+  const options = {
+    uri: "/graphql",
+    credentials: "include",
+  };
+
+  const httpLink = ApolloLink.split(
+    (operation) => operation.getContext().hasUpload,
+    createUploadLink(options),
+    new HttpLink(options)
+  );
+
   return new ApolloClient({
     connectToDevTools: true,
-    link: ApolloLink.from([
-      createErrorLink(),
-      createLinkWithToken(),
-      createUploadLink({
-        uri: "/graphql",
-        credentials: "include",
-      }),
-    ]),
+    link: ApolloLink.from([createErrorLink(), createLinkWithToken(), httpLink]),
     cache: new InMemoryCache(),
   });
 };

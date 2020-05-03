@@ -1,6 +1,6 @@
 #import '../../fragments/UserFragment.graphql'
 
-mutation UpdatePost($id: ID!, $content: String!, $photos: [Boolean!]){
+mutation UpdatePost($id: ID!, $content: String!, $photos: [File!]){
     updatePost(id: $id, content: $content, photos: $photos) {
         post {
             content

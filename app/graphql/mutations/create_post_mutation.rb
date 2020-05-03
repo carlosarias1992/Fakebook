@@ -4,11 +4,11 @@ module Mutations
   class CreatePostMutation < Mutations::BaseMutation
     argument :content, String, required: true
     argument :receiver_id, ID, required: false
-    argument :photos, [Boolean], required: false
+    argument :photos, [Types::File], required: true
 
     field :post, Types::PostType, null: false
 
-    def resolve(content:, receiver_id: nil, photos: [])
+    def resolve(content:, photos:, receiver_id: nil)
       check_authentication!
 
       current_user = context[:current_user]

@@ -55,6 +55,9 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    apollo_upload_server (2.0.0.beta.1)
+      graphql (~> 1.7)
+      rails (>= 4.2)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -268,6 +271,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  apollo_upload_server (= 2.0.0.beta.1)
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   better_errors

@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 module Types
   class PostType < Types::BaseObject
+    include Rails.application.routes.url_helpers
+
     field :id, ID, null: false
     field :content, String, null: false
     field :life_event, Boolean, null: true
@@ -9,12 +13,12 @@ module Types
     field :receiver, Types::UserType, null: true
     field :comments, [Types::CommentType], null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :photos, [String], null: false
+    field :photos, [Types::File], null: false
     field :likes, [Types::LikeType], null: false
 
     def photos
       if object.photos.attached?
-        object.photos.map { |photo| url_for(photo) }
+        object.photos.map { |photo| rails_blob_path(photo, only_path: true) }
       else
         []
       end

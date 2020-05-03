@@ -80,29 +80,8 @@ class PostForm extends React.Component {
     const selector = formType === "Create" ? "Create" : `Edit-${post.id}`;
 
     if (content !== "") {
-      let newPost;
-
       if (formType === "Create") {
-        newPost = { post: { content, receiver_id: receiver.id } };
-
         if (imageUrls.length !== 0) {
-          // const formData = new FormData();
-          // formData.append("post[content]", content);
-          // formData.append("post[receiver_id]", receiver.id);
-          //
-          // files.forEach((file) => {
-          //   formData.append("post[photos][]", file);
-          // });
-
-          // this.props.createPhotoPost(formData).then(() => {
-          //   this.setState({
-          //     imageUrls: [],
-          //     files: [],
-          //     content: "",
-          //     textareaClass: "",
-          //   });
-          // });
-
           mutate({
             variables: {
               content,
@@ -121,13 +100,6 @@ class PostForm extends React.Component {
           this.removeOverlay();
           this.disableForm(selector);
         } else {
-          // this.props.action(newPost).then(() =>
-          //   this.setState({
-          //     content: "",
-          //     textareaClass: "",
-          //   })
-          // );
-
           mutate({
             variables: {
               content,
@@ -142,8 +114,6 @@ class PostForm extends React.Component {
           );
         }
       } else {
-        newPost = { post: { content, id: post.id } };
-
         mutate({
           variables: {
             id: post.id,
@@ -156,21 +126,6 @@ class PostForm extends React.Component {
       this.removeOverlay();
       this.disableForm(selector);
     } else if (imageUrls.length !== 0) {
-      const formData = new FormData();
-
-      files.forEach((file) => {
-        formData.append("post[photos][]", file);
-      });
-
-      // this.props.createPhotoPost(formData).then(() => {
-      //   this.setState({
-      //     imageUrls: [],
-      //     files: [],
-      //     content: "",
-      //     textareaClass: "",
-      //   });
-      // });
-
       mutate({
         variables: {
           content,
@@ -312,6 +267,7 @@ class PostForm extends React.Component {
     return (
       <Mutation
         mutation={mutation}
+        context={{ hasUpload: true }}
         refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
       >
         {(mutate) => (
