@@ -2,10 +2,12 @@ import React from "react";
 import AvatarContainer from "../avatar/avatar_container";
 import { Link } from "react-router-dom";
 import FriendRequestActionButton from "../friendRequest/FriendRequestActionButtonContainer";
+import { RejectFriendSuggestionMutationDefinition } from "../../graphql/definitions/mutations";
+import { Mutation } from "react-apollo";
 
 class FriendSuggestion extends React.Component {
   render() {
-    const { user, createRejection } = this.props;
+    const { user } = this.props;
 
     return (
       <div className="suggestion-item">
@@ -16,13 +18,22 @@ class FriendSuggestion extends React.Component {
           </Link>
           <div className="suggestion-buttons">
             <FriendRequestActionButton user={user} />
-            <button
-              onClick={() => {
-                createRejection({ rejected_id: user.id });
-              }}
+            <Mutation
+              mutation={RejectFriendSuggestionMutationDefinition}
+              refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
             >
-              Remove
-            </button>
+              {(rejectFriendSuggestionMutationDefinition) => (
+                <button
+                  onClick={() => {
+                    rejectFriendSuggestionMutationDefinition({
+                      variables: { rejectedId: user.id },
+                    });
+                  }}
+                >
+                  Remove
+                </button>
+              )}
+            </Mutation>
           </div>
         </div>
       </div>

@@ -59,7 +59,7 @@ module Types
 
     def friend_suggestions(user_id:)
       user = User.find(user_id)
-      suggestions_blacklist = [user.id, *user.friends.map(&:id)]
+      suggestions_blacklist = [user.id, *user.friends.map(&:id), *user.rejections.map(&:rejected_id)]
       max_suggestions = 6
 
       class << self

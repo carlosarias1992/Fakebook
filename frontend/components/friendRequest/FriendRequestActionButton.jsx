@@ -3,7 +3,7 @@ import {
   RejectFriendRequestMutationDefinition,
   AcceptFriendRequestMutationDefinition,
   SendFriendRequestMutationDefinition,
-  DeleteFriendRequestMutationDefinition,
+  CancelFriendRequestMutationDefinition,
 } from "../../graphql/definitions/mutations";
 import { Mutation } from "react-apollo";
 
@@ -45,13 +45,13 @@ class FriendRequestActionButton extends React.Component {
         )}
         <ul className="cover-dropdown">
           <Mutation
-            mutation={DeleteFriendRequestMutationDefinition}
+            mutation={CancelFriendRequestMutationDefinition}
             refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
           >
-            {(deleteFriendRequest) => (
+            {(cancelFriendRequest) => (
               <li
                 onMouseDown={() =>
-                  deleteFriendRequest({ variables: { id: friendRequest.id } })
+                  cancelFriendRequest({ variables: { id: friendRequest.id } })
                 }
               >
                 Cancel Request
@@ -125,13 +125,13 @@ class FriendRequestActionButton extends React.Component {
         </button>
         <ul className="cover-dropdown">
           <Mutation
-            mutation={DeleteFriendRequestMutationDefinition}
+            mutation={CancelFriendRequestMutationDefinition}
             refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
           >
-            {(deleteFriendRequest) => (
+            {(cancelFriendRequest) => (
               <li
                 onMouseDown={() =>
-                  deleteFriendRequest({ variables: { id: friendRequest.id } })
+                  cancelFriendRequest({ variables: { id: friendRequest.id } })
                 }
               >
                 Unfriend

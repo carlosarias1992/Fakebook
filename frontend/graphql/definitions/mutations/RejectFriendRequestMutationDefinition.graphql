@@ -1,9 +1,5 @@
-#import '../../fragments/FriendRequestFragment.graphql'
-
 mutation RejectFriendRequest($id: ID!){
     rejectFriendRequest(id: $id) {
-        friendRequest {
-            ...FriendRequestFragment
-        }
+        id
     }
 }

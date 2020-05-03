@@ -1,0 +1,5 @@
+mutation CancelFriendRequestMutationDefinition($id: ID!){
+    cancelFriendRequest(id: $id) {
+        id
+    }
+}

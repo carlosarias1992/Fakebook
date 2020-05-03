@@ -1,5 +1,0 @@
-mutation DeleteFriendRequestMutationDefinition($id: ID!){
-    deleteFriendRequest(id: $id) {
-        id
-    }
-}

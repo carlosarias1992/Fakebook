@@ -1,0 +1,7 @@
+mutation RejectFriendSuggestion($rejectedId: ID!){
+    rejectFriendSuggestion(rejectedId: $rejectedId) {
+        rejection {
+            id
+        }
+    }
+}
