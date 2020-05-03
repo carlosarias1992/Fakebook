@@ -1,5 +1,7 @@
 import React from "react";
 import { toggleClass } from "../../util/ui_util";
+import { DeleteCommentMutationDefinition } from "../../graphql/definitions/mutations";
+import { Mutation } from "react-apollo";
 
 const Options = (props) => {
   const {
@@ -7,7 +9,6 @@ const Options = (props) => {
     comment,
     hideElement,
     showCommentEditForm,
-    deleteComment,
     openDropdown,
     closeDropdown,
   } = props;
@@ -33,9 +34,20 @@ const Options = (props) => {
             <li onMouseDown={() => showCommentEditForm(comment.id)}>
               <i className="fas fa-pencil-alt" /> Edit...
             </li>
-            <li onMouseDown={() => deleteComment(comment.id)}>
-              <i className="far fa-trash-alt" /> Delete...
-            </li>
+            <Mutation
+              mutation={DeleteCommentMutationDefinition}
+              refetchQueries={["FeedPostsQuery", "ProfilePostsQuery"]}
+            >
+              {(deleteComment) => (
+                <li
+                  onMouseDown={() =>
+                    deleteComment({ variables: { id: comment.id } })
+                  }
+                >
+                  <i className="far fa-trash-alt" /> Delete...
+                </li>
+              )}
+            </Mutation>
           </ul>
         </>
       )}

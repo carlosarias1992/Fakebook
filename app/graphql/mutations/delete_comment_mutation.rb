@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class DeletePostMutation < Mutations::BaseMutation
+  class DeleteCommentMutation < Mutations::BaseMutation
     argument :id, ID, required: true
 
     field :id, ID, null: true
@@ -10,11 +10,11 @@ module Mutations
       check_authentication!
 
       current_user = context[:current_user]
-      post = current_user.posts.find(id)
-      if post.destroy
+      comment = current_user.comments.find(id)
+      if comment.destroy
         { id: id }
       else
-        { errors: post.errors }
+        { errors: comment.errors }
       end
     end
   end

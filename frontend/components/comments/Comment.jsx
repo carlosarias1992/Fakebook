@@ -42,7 +42,6 @@ class CommentIndexItem extends React.Component {
 
     const {
       comment,
-      deleteComment,
       post,
       editForm,
       showCommentEditForm,
@@ -87,7 +86,6 @@ class CommentIndexItem extends React.Component {
                       comment={comment}
                       showCommentEditForm={showCommentEditForm}
                       hideElement={this.hideElement}
-                      deleteComment={deleteComment}
                       openDropdown={this.openDropdown}
                       closeDropdown={this.closeDropdown}
                     />

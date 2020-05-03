@@ -3,7 +3,6 @@ import { compose } from "recompose";
 import Comment from "./Comment";
 import { createLike, deleteLike } from "../../actions/likes_actions";
 import { showCommentEditForm } from "../../actions/ui_actions";
-import { deleteComment } from "../../actions/comments_actions";
 import { CurrentUserQuery } from "../../graphql/queries";
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createLike: (like) => dispatch(createLike(like)),
     deleteLike: (id) => dispatch(deleteLike(id)),
-    deleteComment: (id) => dispatch(deleteComment(id)),
     showCommentEditForm: (id) => dispatch(showCommentEditForm(id)),
   };
 };

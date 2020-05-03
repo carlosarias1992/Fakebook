@@ -12,8 +12,6 @@ class Post extends React.Component {
     super(props);
     this.showModal = this.showModal.bind(this);
     this.hideDropdown = this.hideDropdown.bind(this);
-    this.likePost = this.likePost.bind(this);
-    this.unlikePost = this.unlikePost.bind(this);
   }
 
   hideDropdown() {
@@ -27,21 +25,8 @@ class Post extends React.Component {
     this.props.showEditModal(this.props.post.id);
   }
 
-  likePost() {
-    const like = { likeable_type: "post", likeable_id: this.props.post.id };
-    this.props.createLike({ like });
-  }
-
-  unlikePost() {
-    const { post, currentUser } = this.props;
-    const like = post.likes.find(
-      (like) => parseInt(like.liker.id) === parseInt(currentUser.id)
-    );
-    this.props.deleteLike(like.id);
-  }
-
   render() {
-    const { post, editModal } = this.props;
+    const { post, editModal, currentUser } = this.props;
 
     return (
       <>
@@ -54,11 +39,7 @@ class Post extends React.Component {
             />
             <PostBody post={post} />
             <PostStatistics post={post} />
-            <ActionButtons
-              {...this.props}
-              likePost={this.likePost}
-              unlikePost={this.unlikePost}
-            />
+            <ActionButtons post={post} currentUser={currentUser} />
           </div>
           <Comments post={post} />
         </div>

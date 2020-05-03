@@ -1,11 +1,10 @@
 import React from "react";
 import { toggleClass } from "../../util/ui_util";
-import { LikeMutationDefinition } from "../../graphql/definitions/mutations";
 import { Mutation } from "react-apollo";
 import { DeletePostMutationDefinition } from "../../graphql/definitions/mutations";
 
 const Options = (props) => {
-  const { post, currentUser, deletePost, hideDropdown, showModal } = props;
+  const { post, currentUser, hideDropdown, showModal } = props;
 
   return (
     <>
