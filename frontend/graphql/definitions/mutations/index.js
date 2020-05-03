@@ -8,3 +8,4 @@ export { default as UpdateCommentMutationDefinition } from "./UpdateCommentMutat
 export { default as DeletePostMutationDefinition } from "./DeletePostMutationDefinition.graphql";
 export { default as DeleteCommentMutationDefinition } from "./DeleteCommentMutationDefinition.graphql";
 export { default as AcceptFriendRequestMutationDefinition } from "./AcceptFriendRequestMutationDefinition.graphql";
+export { default as RejectFriendRequestMutationDefinition } from "./RejectFriendRequestMutationDefinition.graphql";

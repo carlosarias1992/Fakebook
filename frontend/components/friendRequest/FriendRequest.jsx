@@ -10,7 +10,6 @@ const FriendRequest = (props) => {
   const {
     data: { user },
     friendRequest,
-    deleteFriendRequest,
   } = props;
 
   return (
@@ -39,12 +38,23 @@ const FriendRequest = (props) => {
             </button>
           )}
         </Mutation>
-        <button
-          className="deny-button"
-          onMouseDown={() => deleteFriendRequest(friendRequest.id)}
+        <Mutation
+          mutation={AcceptFriendRequestMutationDefinition}
+          refetchQueries={["FriendRequestsQuery"]}
         >
-          Delete Request
-        </button>
+          {(rejectFriendRequest) => (
+            <button
+              className="deny-button"
+              onMouseDown={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                rejectFriendRequest({ variables: { id: friendRequest.id } });
+              }}
+            >
+              Delete Request
+            </button>
+          )}
+        </Mutation>
       </div>
     </li>
   );
