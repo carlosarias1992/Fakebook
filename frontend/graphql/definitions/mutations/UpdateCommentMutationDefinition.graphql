@@ -1,0 +1,12 @@
+#import '../../fragments/UserFragment.graphql'
+
+mutation UpdateComment($id: ID!, $content: String!){
+    updateComment(id: $id, content: $content) {
+        comment {
+            content
+            author {
+                ...UserFragment
+            }
+        }
+    }
+}

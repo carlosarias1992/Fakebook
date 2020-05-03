@@ -1,16 +1,16 @@
-import CommentIndex from "../comments/comment_index";
-import CommentFormContainer from "../comments/comment_form_container";
+import Comments from "../comments/Comments";
+import CommentForm from "../comments/CreateCommentFormContainer";
 import React from "react";
 
-const Comments = (props) => {
+const CommentsSection = (props) => {
   const { post } = props;
 
   return (
     <>
-      <CommentIndex post={post} />
-      {post.author && <CommentFormContainer postId={post.id} />}
+      <Comments post={post} />
+      {post.author && <CommentForm postId={post.id} />}
     </>
   );
 };
 
-export default Comments;
+export default CommentsSection;

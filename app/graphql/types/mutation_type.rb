@@ -7,5 +7,7 @@ module Types
     field :update_post, mutation: Mutations::UpdatePostMutation
     field :like, mutation: Mutations::LikeMutation
     field :unlike, mutation: Mutations::UnlikeMutation
+    field :create_comment, mutation: Mutations::CreateCommentMutation
+    field :update_comment, mutation: Mutations::UpdateCommentMutation
   end
 end
