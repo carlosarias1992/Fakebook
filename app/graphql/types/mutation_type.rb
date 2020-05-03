@@ -14,5 +14,6 @@ module Types
     field :accept_friend_request, mutation: Mutations::AcceptFriendRequestMutation
     field :reject_friend_request, mutation: Mutations::RejectFriendRequestMutation
     field :send_friend_request, mutation: Mutations::SendFriendRequestMutation
+    field :delete_friend_request, mutation: Mutations::DeleteFriendRequestMutation
   end
 end

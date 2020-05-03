@@ -3,6 +3,7 @@ import {
   RejectFriendRequestMutationDefinition,
   AcceptFriendRequestMutationDefinition,
   SendFriendRequestMutationDefinition,
+  DeleteFriendRequestMutationDefinition,
 } from "../../graphql/definitions/mutations";
 import { Mutation } from "react-apollo";
 
@@ -18,7 +19,6 @@ class FriendRequestActionButton extends React.Component {
       data: { friendRequests },
       user,
       history,
-      deleteFriendRequest,
       currentUser,
     } = this.props;
 
@@ -44,9 +44,20 @@ class FriendRequestActionButton extends React.Component {
           </button>
         )}
         <ul className="cover-dropdown">
-          <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
-            Cancel Request
-          </li>
+          <Mutation
+            mutation={DeleteFriendRequestMutationDefinition}
+            refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
+          >
+            {(deleteFriendRequest) => (
+              <li
+                onMouseDown={() =>
+                  deleteFriendRequest({ variables: { id: friendRequest.id } })
+                }
+              >
+                Cancel Request
+              </li>
+            )}
+          </Mutation>
         </ul>
       </div>
     );
@@ -113,9 +124,20 @@ class FriendRequestActionButton extends React.Component {
           <i className="friends-icon" /> Friends
         </button>
         <ul className="cover-dropdown">
-          <li onMouseDown={() => deleteFriendRequest(friendRequest.id)}>
-            Unfriend
-          </li>
+          <Mutation
+            mutation={DeleteFriendRequestMutationDefinition}
+            refetchQueries={["FriendRequestsQuery", "FriendSuggestionsQuery"]}
+          >
+            {(deleteFriendRequest) => (
+              <li
+                onMouseDown={() =>
+                  deleteFriendRequest({ variables: { id: friendRequest.id } })
+                }
+              >
+                Unfriend
+              </li>
+            )}
+          </Mutation>
         </ul>
       </div>
     );
